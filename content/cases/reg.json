@@ -28,20 +28,20 @@
     "round": "seed",
     "order": 2,
     "section": "REG",
-    "topic": "Section 83(b)",
+    "topic": "Founder stock elections",
     "from": "Dev, CTO",
-    "message": "I just bought my 4,000,000 founder shares at $0.001 each, which is what they're worth today. They vest over four years. Our lawyer said something about an 83(b) election?",
-    "question": "When must Dev file the election?",
+    "message": "I just bought my 4,000,000 founder shares at $0.001 each, which is exactly what they are worth today. They vest over four years, and if this works they could be worth $20 a share by then. Our lawyer says I can choose to be taxed on the shares now, when I buy them, instead of as they vest. Is that smart?",
+    "question": "What does Dev gain by choosing to be taxed now?",
     "type": "mcq",
     "options": [
-      "With his tax return for the year of grant",
-      "Within 30 days of each vesting date",
-      "Within 30 days of the share transfer",
-      "Within 75 days of the share transfer"
+      "Nothing. He pays the same tax either way, just sooner",
+      "He owes no tax today, and later growth is taxed as capital gain when he sells",
+      "He never pays tax on the shares at all",
+      "He gets a deduction now for the price he paid"
     ],
-    "answer": 2,
-    "explanation": "The election is due within 30 days of the transfer and cannot be extended. Dev is taxed now on value minus price paid, which is $0. Without it, he has ordinary income at every vesting date on the shares' value at that time.",
-    "takeaway": "83(b): taxed at grant on FMV less amount paid. Later growth is capital gain. If the shares are forfeited, no deduction for tax already paid.",
+    "answer": 1,
+    "explanation": "Today the shares are worth exactly what Dev paid, so there is no bargain element and nothing to tax. If he waits, each batch is taxed as ordinary income at its value on the day it vests, possibly $20 a share, before he has sold anything. Choosing to be taxed now means all of the growth waits until he sells and is taxed as capital gain. (This is the Section 83(b) election, which must be filed within 30 days of the purchase.)",
+    "takeaway": "Restricted stock: income is value minus what was paid, measured when the shares vest. The election moves that measurement to the purchase date. It pays off when the value is low now and expected to rise. The risk: if the shares are forfeited, tax already paid is not refunded.",
     "review": {
       "reviewedBy": null,
       "currentAsOf": null
@@ -52,20 +52,20 @@
     "round": "series-a",
     "order": 7,
     "section": "REG",
-    "topic": "Stock options",
+    "topic": "Employee stock options",
     "from": "Lena, staff engineer",
-    "message": "I'm exercising 10,000 nonqualified options today. Exercise price is $1 and the 409A value is $9 a share. HR says payroll needs something from finance.",
-    "question": "What is the tax result on the exercise date?",
+    "message": "I am exercising 10,000 of my stock options today. They are standard employee options, not the special incentive kind. I pay the $1 exercise price, and the shares are worth $9 each. That $8 a share difference is basically part of my pay, right? HR says payroll needs something from finance.",
+    "question": "How is Lena's $80,000 discount treated on the day she exercises?",
     "type": "mcq",
     "options": [
-      "No income until she sells the shares",
-      "$80,000 of long-term capital gain for Lena",
-      "$80,000 of ordinary income for Lena, and Kestrel deducts $80,000",
-      "$90,000 of ordinary income for Lena, and no deduction for Kestrel"
+      "Nothing happens until she sells the shares",
+      "It is a capital gain for Lena, because she now owns stock",
+      "It is pay: ordinary income for Lena, with withholding, and a matching deduction for Kestrel",
+      "It is a tax-free gift from the company"
     ],
     "answer": 2,
-    "explanation": "For a nonqualified option, the spread at exercise, (9 - 1) x 10,000 = $80,000, is wages to the employee, subject to withholding. The company deducts the same amount. Her basis in the shares becomes $9.",
-    "takeaway": "ISO contrast: no regular tax at exercise (the spread is an AMT item) and no company deduction unless there is a disqualifying disposition.",
+    "explanation": "Lena receives $80,000 of value, (9 - 1) x 10,000, because she works for Kestrel. That is compensation, like a bonus paid in stock: ordinary income to her, run through payroll with withholding, and deductible by Kestrel as wages. Her basis in the shares becomes $9, so only growth after today is capital gain.",
+    "takeaway": "Follow the economics: value an employee receives for working is compensation when it is received, and the employer's deduction matches the employee's income. Incentive stock options are the exception: no regular tax at exercise and usually no company deduction.",
     "review": {
       "reviewedBy": null,
       "currentAsOf": null

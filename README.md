@@ -7,7 +7,7 @@ Open `dist/index.html` in a browser. It is one self-contained file.
 
 ## Layout
 - `content/cases/far.json`, `aud.json`, `reg.json` – the cases. **Edit these to add or fix questions.**
-- `content/cases/tcp.json` – TCP discipline cases, parked: checked but not in the core game yet
+- `content/cases/tcp.json`, `bar.json` – discipline-section cases (TCP, BAR), parked: checked but not in the core game yet
 - `content/outline/` – the AICPA blueprint content areas and topics for each section. Every case's `studyArea` must match one ("Area III · Revenue Recognition"), and REVIEW.md shows which topics still have no cases
 - `web/template.html` – the game screens and logic
 - `scripts/build.mjs` – checks every case, then builds `dist/index.html`

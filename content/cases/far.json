@@ -29,26 +29,6 @@
     }
   },
   {
-    "id": "far-002",
-    "round": "series-a",
-    "order": 5,
-    "section": "FAR",
-    "topic": "Stock compensation",
-    "studyArea": "Area II · Equity",
-    "from": "Maya, CEO",
-    "message": "We granted 120,000 options to the new engineering hires on January 1. The valuation firm puts fair value at $5 per option on the grant date. They vest at the end of four years of service.",
-    "question": "How much compensation expense does Kestrel record in year 1?",
-    "type": "num",
-    "answer": 150000,
-    "tolerance": 0,
-    "explanation": "Total cost is 120,000 x $5 = $600,000, measured at grant-date fair value and spread straight-line over the four-year service period: $150,000 a year. Debit Compensation Expense, credit APIC (stock options).",
-    "takeaway": "ASC 718: equity awards are measured once, at grant date. Later changes in the share price do not change the expense.",
-    "review": {
-      "reviewedBy": null,
-      "currentAsOf": null
-    }
-  },
-  {
     "id": "far-003",
     "round": "series-a",
     "order": 6,
@@ -83,6 +63,26 @@
     "tolerance": 0,
     "explanation": "Allocate the transaction price by relative standalone selling price. Implementation is 90,000 of 360,000, or 25%, so it gets $300,000 x 25% = $75,000. The subscription gets $225,000.",
     "takeaway": "ASC 606 step 4: the discount is spread proportionally across obligations unless evidence shows it belongs to specific ones.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "far-005",
+    "round": "series-a",
+    "order": 5,
+    "section": "FAR",
+    "topic": "Loss contingencies",
+    "studyArea": "Area III · Contingencies and Commitments",
+    "from": "Maya, CEO",
+    "message": "Bad news before year-end. A former contractor is suing us, claiming our model was trained on code he wrote. Our lawyers think we will probably lose. Their estimate of the damages is anywhere from $200,000 to $500,000, and they say no amount in that range is more likely than any other. The financial statements are due to the auditors next week.",
+    "question": "How much should Kestrel accrue for the lawsuit at year-end?",
+    "type": "num",
+    "answer": 200000,
+    "tolerance": 0,
+    "explanation": "A loss contingency is accrued when a loss is probable and the amount can be reasonably estimated. Both tests are met. When the estimate is a range and no amount in it is a better estimate than any other, US GAAP requires accruing the minimum: $200,000 (debit Litigation Loss, credit Accrued Litigation Liability). The reasonably possible additional loss of up to $300,000 is disclosed in the notes.",
+    "takeaway": "Probable and estimable: accrue. Best estimate in a range: accrue it. No best estimate: accrue the low end and disclose the rest. Reasonably possible: disclose only. Remote: nothing. Gain contingencies are never accrued.",
     "review": {
       "reviewedBy": null,
       "currentAsOf": null

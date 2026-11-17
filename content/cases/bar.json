@@ -1,0 +1,22 @@
+[
+  {
+    "id": "bar-001",
+    "round": "series-a",
+    "order": 5,
+    "section": "BAR",
+    "topic": "Stock compensation",
+    "studyArea": "Area II · Stock compensation (share-based payments)",
+    "from": "Maya, CEO",
+    "message": "We granted 120,000 options to the new engineering hires on January 1. The valuation firm puts fair value at $5 per option on the grant date. They vest at the end of four years of service.",
+    "question": "How much compensation expense does Kestrel record in year 1?",
+    "type": "num",
+    "answer": 150000,
+    "tolerance": 0,
+    "explanation": "Total cost is 120,000 x $5 = $600,000, measured at grant-date fair value and spread straight-line over the four-year service period: $150,000 a year. Debit Compensation Expense, credit APIC (stock options).",
+    "takeaway": "ASC 718: equity awards are measured once, at grant date. Later changes in the share price do not change the expense.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  }
+]

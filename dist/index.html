@@ -220,17 +220,17 @@ const CASES = [
   "ans": 1
  },
  {
-  "id": "far-002",
+  "id": "far-005",
   "r": 1,
   "sec": "FAR",
-  "topic": "Stock compensation",
+  "topic": "Loss contingencies",
   "from": "Maya, CEO",
-  "msg": "We granted 120,000 options to the new engineering hires on January 1. The valuation firm puts fair value at $5 per option on the grant date. They vest at the end of four years of service.",
-  "q": "How much compensation expense does Kestrel record in year 1?",
+  "msg": "Bad news before year-end. A former contractor is suing us, claiming our model was trained on code he wrote. Our lawyers think we will probably lose. Their estimate of the damages is anywhere from $200,000 to $500,000, and they say no amount in that range is more likely than any other. The financial statements are due to the auditors next week.",
+  "q": "How much should Kestrel accrue for the lawsuit at year-end?",
   "type": "num",
-  "why": "Total cost is 120,000 x $5 = $600,000, measured at grant-date fair value and spread straight-line over the four-year service period: $150,000 a year. Debit Compensation Expense, credit APIC (stock options).",
-  "tip": "ASC 718: equity awards are measured once, at grant date. Later changes in the share price do not change the expense.",
-  "ans": 150000,
+  "why": "A loss contingency is accrued when a loss is probable and the amount can be reasonably estimated. Both tests are met. When the estimate is a range and no amount in it is a better estimate than any other, US GAAP requires accruing the minimum: $200,000 (debit Litigation Loss, credit Accrued Litigation Liability). The reasonably possible additional loss of up to $300,000 is disclosed in the notes.",
+  "tip": "Probable and estimable: accrue. Best estimate in a range: accrue it. No best estimate: accrue the low end and disclose the rest. Reasonably possible: disclose only. Remote: nothing. Gain contingencies are never accrued.",
+  "ans": 200000,
   "tol": 0
  },
  {

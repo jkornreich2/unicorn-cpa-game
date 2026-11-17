@@ -15,7 +15,7 @@ import { dirname, join } from "node:path";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ROUNDS = ["seed", "series-a", "ipo"];
 const SECTIONS = ["FAR", "AUD", "REG"];      // core sections: these make up the game
-const PARKED = ["TCP"];                        // discipline sections: checked, but not in the game yet
+const PARKED = ["TCP", "BAR"];                 // discipline sections: checked, but not in the game yet
 const TYPES = ["mcq", "num", "je"];
 const REQUIRED = ["id", "round", "order", "section", "topic", "from", "message", "question", "type", "explanation", "takeaway"];
 

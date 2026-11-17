@@ -213,7 +213,7 @@ Accounts offered: Cash, Accounts Receivable, Subscription Revenue, Deferred Reve
 
 *Dev, CTO:*
 
-> I just bought my 4,000,000 founder shares at $0.001 each, which is exactly what they are worth today. They vest over four years, and if this works they could be worth $20 a share by then. Our lawyer says I can choose to be taxed on the shares now, when I buy them, instead of as they vest. Is that smart?
+> Today is the grant date for my founder shares. The company is issuing me 4,000,000 shares, and I am paying $0.001 a share. An independent valuation firm valued the common stock at exactly $0.001 a share as of today, so the value is clearly established. The shares vest over four years, and if this works they could be worth $20 a share by then. Our lawyer says I can choose to be taxed on the shares now, at grant, instead of as they vest. Is that smart?
 
 **Question:** What does Dev gain by choosing to be taxed now?
 
@@ -222,9 +222,9 @@ Accounts offered: Cash, Accounts Receivable, Subscription Revenue, Deferred Reve
 - [ ] He never pays tax on the shares at all
 - [ ] He gets a deduction now for the price he paid
 
-**Explanation shown to player:** Today the shares are worth exactly what Dev paid, so there is no bargain element and nothing to tax. If he waits, each batch is taxed as ordinary income at its value on the day it vests, possibly $20 a share, before he has sold anything. Choosing to be taxed now means all of the growth waits until he sells and is taxed as capital gain. (This is the Section 83(b) election, which must be filed within 30 days of the purchase.)
+**Explanation shown to player:** At the grant date the shares have an established value equal to what Dev paid, so there is no bargain element and nothing to tax. If he waits, each batch is taxed as ordinary income at its value on the day it vests, possibly $20 a share, before he has sold anything. Choosing to be taxed at grant means all of the growth waits until he sells and is taxed as capital gain. (This is the Section 83(b) election, which must be filed within 30 days of the grant.)
 
-**Exam takeaway:** Restricted stock: income is value minus what was paid, measured when the shares vest. The election moves that measurement to the purchase date. It pays off when the value is low now and expected to rise. The risk: if the shares are forfeited, tax already paid is not refunded.
+**Exam takeaway:** Restricted stock: income is fair market value minus what was paid, measured when the shares vest. The election moves that measurement to the grant date, which needs a supportable value on that date. It pays off when the value is low at grant and expected to rise. The risk: if the shares are forfeited, tax already paid is not refunded.
 
 ---
 

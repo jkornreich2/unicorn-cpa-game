@@ -5,6 +5,7 @@
 // Source of truth:
 //   content/cases/far.json, aud.json, reg.json   the cases (edit these)
 //   web/template.html                            the game screens and logic
+//   web/models.js                                the building models, rebuilt from the SketchUp designs
 //   web/hq.js                                    the 3D headquarters scene
 // Output:
 //   dist/index.html                              one self-contained page to play or publish
@@ -110,7 +111,7 @@ const marker = "/*__CASES__*/[]";
 if (!template.includes(marker)) { console.error(`web/template.html is missing ${marker}`); process.exit(1); }
 const json = JSON.stringify(game, null, 1).replace(/</g, "\\u003c");
 const hqMarker = "/*__HQ__*/";
-const hq = readFileSync(join(root, "web/hq.js"), "utf8").replace(/<\/script/gi, "<\\/script");
+const hq = ["web/models.js", "web/hq.js"].map((f) => readFileSync(join(root, f), "utf8")).join("\n").replace(/<\/script/gi, "<\\/script");
 if (!template.includes(hqMarker)) { console.error(`web/template.html is missing ${hqMarker}`); process.exit(1); }
 mkdirSync(join(root, "dist"), { recursive: true });
 writeFileSync(join(root, "dist/index.html"), template.replace(marker, () => json).replace(hqMarker, () => hq));

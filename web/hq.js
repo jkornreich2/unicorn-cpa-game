@@ -248,6 +248,13 @@ window.HQ = (() => {
     grp.visible = false; scene.add(grp); return grp;
   })();
   const caps = [roofCap, loftCap];
+  if (window.HQModels) {
+    [0, 1].forEach((i) => {
+      const detailed = window.HQModels.roof(i);
+      detailed.visible = false; scene.add(detailed);
+      scene.remove(caps[i]); caps[i] = detailed;
+    });
+  }
 
   const spire = (() => {
     const grp = new THREE.Group();
@@ -267,7 +274,7 @@ window.HQ = (() => {
   };
 
   const placeFloor = (r, g, animate) => {
-    const st = STY[r], grp = makeFloor(st, g), y = topY;
+    const st = STY[r], grp = window.HQModels && window.HQModels.has(r) ? window.HQModels.floor(r, g) : makeFloor(st, g), y = topY;
     building.add(grp);
     const f = { grp, r, g, y, h: st.h, w: st.w, start: animate && !reduce ? performance.now() : -1e9, landed: !animate || reduce };
     grp.position.y = f.landed ? y : y + 6;
@@ -279,6 +286,8 @@ window.HQ = (() => {
   // ---------- Neighborhood ----------
   const hood = [];   // { grp, minRound, maxRound, s }
   const addHood = (grp, minRound, maxRound) => { grp.scale.y = 0.001; grp.visible = false; scene.add(grp); hood.push({ grp, minRound, maxRound, s: 0 }); };
+  // The garage yard from the SketchUp design: driveway, path, canopy, planter, gravel garden, palms, fences (Seed only)
+  if (window.HQModels) addHood(window.HQModels.site(), 0, 0);
   const spots = (() => {
     const r = rng(23), out = [];
     while (out.length < 26) {
@@ -472,7 +481,7 @@ window.HQ = (() => {
       const w = add(new THREE.CylinderGeometry(0.21, 0.21, 0.12, 18), tire, x, 0.21, z); w.rotation.z = Math.PI / 2;
       const h = add(new THREE.CylinderGeometry(0.1, 0.1, 0.012, 16), cream, x + Math.sign(x) * 0.066, 0.21, z); h.rotation.z = Math.PI / 2;
     });
-    T.position.set(-1.8, 0, 4.35);
+    T.position.set(-1.8, 0, 4.2);
     addHood(T, 0, 0);
   }
 

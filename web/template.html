@@ -132,6 +132,16 @@ ol.how{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .hq.walking .hqjoy{display:block}
 @media (hover:hover) and (pointer:fine){.hq.walking .hqjoy{opacity:.55}}
 .find h2{font-size:22px}
+.hqmap{display:none;position:absolute;right:12px;bottom:12px;width:132px;height:132px;border-radius:12px;border:1px solid rgba(255,255,255,.2)}
+.hq.walking .hqmap{display:block}
+@media (max-width:420px){.hqmap{width:104px;height:104px}}
+.cap{display:block;margin-top:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.cap b{color:var(--good);font-size:12px;letter-spacing:0}
+.upg{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:12px 0;border-top:1px solid var(--edge)}
+.upg h3{font-size:16px}
+.upg p{font-size:14px;color:var(--dim)}
+.upg .btn{flex:none;min-height:42px;padding:8px 14px}
+.upg .owned{font-family:var(--mono);font-size:12px;color:var(--good)}
 .keys{display:flex;flex-wrap:wrap;gap:6px;font-size:13px;color:var(--dim)}
 .keys kbd{font-family:var(--mono);font-size:11.5px;border:1px solid var(--edge);border-bottom-width:2px;border-radius:5px;padding:1px 6px;color:var(--text)}
 @media (max-width:380px){.val{font-size:28px}h1{font-size:31px}.chips{grid-template-columns:1fr}.stages span{padding:4px 6px}}
@@ -150,10 +160,11 @@ ol.how{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
   </section>
   <section class="ticker" aria-label="Company status">
     <div><small>Valuation</small><div class="val" id="val">$6.0M</div></div>
-    <div class="trust"><small>Board trust <span class="mono" id="trustN">70</span></small><div class="bar"><b id="trustB" style="width:70%"></b></div></div>
+    <div class="trust"><small>Board trust <span class="mono" id="trustN">70</span></small><div class="bar"><b id="trustB" style="width:70%"></b></div><span class="cap">Capital <b id="capN">$0K</b></span></div>
   </section>
   <nav class="tabs" role="tablist">
     <button role="tab" id="tab-play" data-act="tab" data-v="play">Desk</button>
+    <button role="tab" id="tab-hq" data-act="tab" data-v="hq">HQ upgrades</button>
     <button role="tab" id="tab-score" data-act="tab" data-v="score">Scorecard</button>
   </nav>
   <main id="view"></main>
@@ -174,7 +185,7 @@ const UNICORN_AT = Math.round(MAX * 5 / 6);
 const roundMax = (r) => CASES.filter(c => c.r === r).length * 100;
 
 let S;
-const fresh = () => ({phase:"intro",tab:"play",i:0,pts:[],tries:0,solved:false,pick:null,dr:null,cr:null,active:"dr",note:null,trust:70,world:false,arrived:-1});
+const fresh = () => ({phase:"intro",tab:"play",i:0,pts:[],tries:0,solved:false,pick:null,dr:null,cr:null,active:"dr",note:null,trust:70,world:false,arrived:-1,owned:[]});
 const $ = (id) => document.getElementById(id);
 const sum = (a) => a.reduce((x, y) => x + y, 0);
 const ptsIn = (r) => sum(CASES.map((c, k) => c.r === r ? (S.pts[k] || 0) : 0));
@@ -186,6 +197,17 @@ function valuation(){
   if (r === 1) return 40 + 0.15 * ptsIn(1);
   return 300 + 0.7 * total();
 }
+const UPGRADES = [
+  {id:"bikes", name:"Company bike fleet", cost:150, blurb:"Four bright bikes on a rack out front. Founders who bike in show up sharper."},
+  {id:"mural", name:"Painted mural", cost:200, blurb:"A huge mural on the side of the ground floor. Recruiters love posing in front of it."},
+  {id:"foodtruck", name:"Taco Friday truck", cost:250, blurb:"A food truck at the curb every Friday. Morale goes up, the burn rate barely moves."},
+  {id:"neon", name:"Neon rooftop sign", cost:300, blurb:"A bigger, glowing Kestrel sign on the roof. You can see it from the freeway."},
+  {id:"solar", name:"Solar carport", cost:400, blurb:"Solar panels over the back lot. Good for the planet and the ESG slide in your deck."},
+  {id:"annex", name:"Server annex", cost:500, blurb:"Your own compute next to HQ, with a blue glow that says you mean business."}
+];
+const EARN = {100: 250, 50: 100, 0: 0};               // capital in $K earned per case result
+const capital = () => sum(S.pts.map(p => EARN[p] || 0)) - sum(UPGRADES.filter(u => S.owned.includes(u.id)).map(u => u.cost));
+const fmtCap = (k) => k >= 1000 ? "$" + (k / 1000).toFixed(2) + "M" : "$" + k + "K";
 const fmtVal = (m) => m >= 1000 ? "$" + (m / 1000).toFixed(2) + "B" : "$" + m.toFixed(1) + "M";
 const usd = (n) => "$" + n.toLocaleString("en-US");
 
@@ -196,7 +218,8 @@ function chrome(){
   $("trustN").textContent = S.trust;
   $("trustB").style.width = S.trust + "%";
   $("trustB").style.setProperty("--c", S.trust >= 60 ? "var(--good)" : S.trust >= 35 ? "var(--aud)" : "var(--bad)");
-  ["play","score"].forEach(v => $("tab-" + v).setAttribute("aria-selected", String(S.tab === v)));
+  ["play","hq","score"].forEach(v => $("tab-" + v).setAttribute("aria-selected", String(S.tab === v)));
+  $("capN").textContent = fmtCap(capital());
 }
 
 function answerUI(c){
@@ -240,7 +263,7 @@ function viewPlay(){
   }
   let after = "";
   if (S.solved) after = `
-    <div class="verdict ${got ? "good" : "bad"}">${got === 100 ? "Correct. +100" : got ? "Correct on the second try. +50" : "Missed. +0"}</div>
+    <div class="verdict ${got ? "good" : "bad"}">${got === 100 ? "Correct. +100 · +$250K capital" : got ? "Correct on the second try. +50 · +$100K capital" : "Missed. +0"}</div>
     <div class="fb ${got ? "good" : "bad"}"><b>Why:</b> ${c.why}</div>
     <div class="fb tip"><b>Exam takeaway:</b> ${c.tip}</div>
     <div class="row"><button class="btn" data-act="next">${S.i + 1 < CASES.length && CASES[S.i + 1].r === c.r ? "Next case" : c.r === 2 ? "Ring the bell" : "Close the " + ROUNDS[c.r].name + " round"}</button></div>`;
@@ -303,11 +326,24 @@ function hqState(){
   for (let k = 0; k < CASES.length && S.pts[k] !== undefined; k++) floors.push({r: CASES[k].r, g: S.pts[k] === 100 ? 2 : S.pts[k] ? 1 : 0});
   const next = S.phase === "done" || floors.length >= CASES.length ? null : CASES[floors.length].r;
   const target = S.phase === "play" && !S.solved && S.i < CASES.length ? CASES[S.i].from.split(",")[0] : null;
-  return {floors, next, round: round(), done: S.phase === "done", world: !!S.world, target, targetKey: S.i};
+  return {floors, next, round: round(), done: S.phase === "done", world: !!S.world, target, targetKey: S.i, upgrades: S.owned.slice()};
 }
+function viewHQ(){
+  const cap = capital();
+  return `<section class="panel"><div class="headrow"><h2>Spend capital on HQ</h2><span class="mono" style="color:var(--good)">${fmtCap(cap)}</span></div>
+    <p class="dim">Every case you get right earns capital: $250K on the first try, $100K on the second. Upgrades appear on Kestrel's lot in the 3D view, stay through every round, and each one adds 3 points of board trust.</p>
+    <div class="list">${UPGRADES.map(u => {
+      const owned = S.owned.includes(u.id), short = u.cost - cap;
+      const action = owned ? `<span class="owned">Owned</span>`
+        : short > 0 ? `<button class="btn ghost" disabled>Need ${fmtCap(short)} more</button>`
+        : `<button class="btn" data-act="buy" data-v="${u.id}">Buy · ${fmtCap(u.cost)}</button>`;
+      return `<div class="upg"><div><h3>${u.name}</h3><p>${u.blurb}</p></div>${action}</div>`;
+    }).join("")}</div></section>`;
+}
+
 function render(){
   chrome();
-  $("view").innerHTML = S.tab === "score" ? viewScore() : viewPlay();
+  $("view").innerHTML = S.tab === "score" ? viewScore() : S.tab === "hq" ? viewHQ() : viewPlay();
   try { window.HQ && window.HQ.update(hqState()); } catch (e) { console.error(e); }
 }
 
@@ -329,6 +365,10 @@ function act(a, d){
   else if (a === "again") { const w = S.world; S = fresh(); S.phase = "play"; S.world = w; }
   else if (a === "startWorld") { S.phase = "play"; S.world = true; S.tab = "play"; }
   else if (a === "world") { S.world = !S.world; if (S.world && S.phase === "intro") S.phase = "play"; }
+  else if (a === "buy") {
+    const u = UPGRADES.find(x => x.id === d.v);
+    if (u && !S.owned.includes(u.id) && capital() >= u.cost) { S.owned.push(u.id); S.trust = Math.min(100, S.trust + 3); }
+  }
   else if (a === "teleport") { if (window.HQ && window.HQ.teleport) window.HQ.teleport(); return; }
   else if (a === "open") S.phase = "play";
   else if (a === "mcq" && !S.solved) { S.pick = +d.v; grade(S.pick === c.ans, c); }

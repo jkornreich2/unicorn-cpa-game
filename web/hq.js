@@ -576,6 +576,74 @@ window.HQ = (() => {
     scene.add(g); addRect(10.9, 17.1, 11.9, 16.1);
   }
 
+  // ---------- HQ upgrades, bought with capital (shown when owned) ----------
+  const UPG = {};
+  const own = (id, g) => { g.visible = false; scene.add(g); UPG[id] = g; return g; };
+  {   // Solar carport behind HQ
+    const g = own("solar", new THREE.Group()), post = M(0x9aa3ad, { metalness: 0.6, roughness: 0.4 });
+    const posts = [[-3.6, -8.0], [3.6, -8.0], [-3.6, -5.2], [3.6, -5.2]];
+    posts.forEach(([x, z]) => { piece(g, new THREE.CylinderGeometry(0.06, 0.06, 1.7, 8), post, x, 0.85, z); addCircle(x, z, 0.15, () => g.visible); });
+    const panels = new THREE.Group(), pm = M(0x1b2a4a, { metalness: 0.5, roughness: 0.25, emissive: 0x0a1430, emissiveIntensity: 0.4 });
+    for (let i = 0; i < 8; i++) for (let j = 0; j < 3; j++) piece(panels, new THREE.BoxGeometry(0.9, 0.04, 0.92), pm, -3.5 + i * 1.0, 0, -0.95 + j * 0.95);
+    panels.position.set(0, 1.75, -6.6); panels.rotation.x = 0.18; g.add(panels);
+  }
+  {   // Taco Friday food truck at the curb
+    const g = own("foodtruck", new THREE.Group()), teal = M(0x2fb7a4, { roughness: 0.5 });
+    piece(g, new THREE.BoxGeometry(2.4, 1.1, 1.0), teal, 7.6, 0.75, 6.45);
+    piece(g, new THREE.BoxGeometry(0.8, 0.8, 0.98), M(0xf3efe6), 9.2, 0.6, 6.45);
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.45), new THREE.MeshBasicMaterial({ color: 0xffc98a })); win.position.set(7.6, 0.9, 6.96); g.add(win);
+    const awn = piece(g, new THREE.BoxGeometry(1.6, 0.04, 0.5), M(0xffc857), 7.6, 1.2, 7.15); awn.rotation.x = 0.3;
+    const sg = label("TACO FRIDAY", "", 1.8, 0.32, "#1b1d22", "#ffc857"); sg.position.set(7.6, 1.42, 6.96); g.add(sg);
+    [[6.8, 6.0], [6.8, 6.9], [8.9, 6.0], [8.9, 6.9]].forEach(([x, z]) => { const w = piece(g, new THREE.CylinderGeometry(0.17, 0.17, 0.12, 14), M(0x161618), x, 0.17, z); w.rotation.x = Math.PI / 2; });
+    addRect(6.35, 9.65, 5.9, 7.0, () => g.visible);
+  }
+  {   // Company bikes on a rack out front
+    const g = own("bikes", new THREE.Group()), rack = M(0x9aa3ad, { metalness: 0.6 });
+    piece(g, new THREE.BoxGeometry(1.8, 0.05, 0.05), rack, 6.0, 0.4, 5.4);
+    [0xff7a59, 0x5cc8ff, 0xffc857, 0x58d6a0].forEach((col, i) => {
+      const x = 5.3 + i * 0.45, fm = M(col, { roughness: 0.4 });
+      [-0.28, 0.28].forEach((dz) => { const w = piece(g, new THREE.TorusGeometry(0.16, 0.018, 6, 18), M(0x161618), x, 0.18, 5.4 + dz); w.rotation.y = Math.PI / 2; });
+      const tube = piece(g, new THREE.BoxGeometry(0.03, 0.03, 0.56), fm, x, 0.32, 5.4);
+      const seat = piece(g, new THREE.BoxGeometry(0.04, 0.22, 0.04), fm, x, 0.38, 5.3);
+    });
+    addRect(5.0, 7.0, 5.0, 5.8, () => g.visible);
+  }
+  {   // Server annex beside HQ
+    const g = own("annex", new THREE.Group());
+    piece(g, new THREE.BoxGeometry(2.6, 1.3, 2.4), M(0x23272e, { metalness: 0.5, roughness: 0.45 }), 6.9, 0.65, -1.4);
+    for (let k = 0; k < 9; k++) piece(g, new THREE.BoxGeometry(0.04, 1.2, 0.02), M(0x30353d), 5.75 + k * 0.29, 0.65, -0.19);
+    const led = new THREE.Mesh(new THREE.PlaneGeometry(2.3, 0.05), new THREE.MeshBasicMaterial({ color: 0x5cc8ff })); led.position.set(6.9, 1.18, -0.17); g.add(led);
+    const sg = label("KESTREL COMPUTE", "", 1.7, 0.24, "#23272e", "#5cc8ff"); sg.position.set(6.9, 0.95, -0.17); g.add(sg);
+    addRect(5.55, 8.25, -2.65, -0.15, () => g.visible);
+  }
+  {   // Mural on the side of the ground floor (positioned in update)
+    const t = canvasTex((c, w, h) => {
+      const gr = c.createLinearGradient(0, 0, w, h); gr.addColorStop(0, "#ff7a59"); gr.addColorStop(0.5, "#c58bff"); gr.addColorStop(1, "#5cc8ff");
+      c.fillStyle = gr; c.fillRect(0, 0, w, h);
+      const r = rng(77), cols = ["#ffc857", "#58d6a0", "#eef0f6", "#1b1d22"];
+      for (let i = 0; i < 14; i++) { c.fillStyle = cols[i % 4]; c.globalAlpha = 0.85; c.beginPath(); c.arc(r() * w, r() * h, 10 + r() * 40, 0, 7); c.fill(); }
+      c.globalAlpha = 1; c.fillStyle = "#1b1d22"; c.font = "800 96px 'Bricolage Grotesque', sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("BUILD.", w / 2, h / 2);
+    }, 512, 256);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 1.3), new THREE.MeshStandardMaterial({ map: t, roughness: 0.9 }));
+    m.rotation.y = -Math.PI / 2; own("mural", m);
+  }
+  const neonLight = new THREE.PointLight(0xff7a59, 0, 9);
+
+  // ---------- San Francisco streetscape (Series A and IPO) ----------
+  {
+    const g = new THREE.Group(), pole = M(0x2b3550, { metalness: 0.5 }), lamp = new THREE.MeshBasicMaterial({ color: 0xffe2a8 });
+    for (let x = -40; x <= 40; x += 8) [5.7, 10.3].forEach((z, k) => {
+      if (Math.abs(x - 14) < 4 && k === 1) return;
+      piece(g, new THREE.CylinderGeometry(0.05, 0.07, 2.6, 8), pole, x, 1.3, z);
+      const arm = piece(g, new THREE.BoxGeometry(0.04, 0.04, 0.5), pole, x, 2.55, z + (k ? -0.25 : 0.25));
+      const l = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 8), lamp); l.position.set(x, 2.5, z + (k ? -0.48 : 0.48)); g.add(l);
+      addCircle(x, z, 0.12, () => g.visible);
+    });
+    const stripe = new THREE.MeshBasicMaterial({ color: 0xe9e6dd });
+    [-12, 12].forEach((cx) => { for (let k = 0; k < 6; k++) { const s2 = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 3.6), stripe); s2.rotation.x = -Math.PI / 2; s2.position.set(cx - 0.9 + k * 0.36, 0.025, 8); g.add(s2); } });
+    addHood(g, 1, 9);
+  }
+
   // Characters who bring you cases. Keyed by the first name in each case's "from" field.
   const CHARS = {
     Maya: { x: 2.4, z: 4.0, color: 0xff7a59, role: "CEO", place: "Kestrel HQ" },
@@ -647,7 +715,36 @@ window.HQ = (() => {
     if (!c) return;
     player.x = c.x; player.z = c.z + (c.fromStreet ? -1.3 : 1.3); player.yaw = c.fromStreet ? Math.PI : 0; player.pitch = -0.08;
   }
-  const whereIs = (name) => (CHARS[name] ? CHARS[name].place : "Kestrel HQ");
+  const whereIs = (name) => {
+    if ((name === "Maya" || name === "Dev") && round >= 1) return round >= 2 ? "Kestrel's tower" : "Kestrel HQ in SoMa";
+    return CHARS[name] ? CHARS[name].place : "Kestrel HQ";
+  };
+
+  // ---------- Minimap (walking mode) ----------
+  const map = mkEl("canvas", "hqmap"); map.width = map.height = 264; map.setAttribute("aria-hidden", "true");
+  const mctx = map.getContext("2d");
+  const MX0 = -45, MZ0 = -40, MS = 264 / 90, MOY = (264 - 72 * MS) / 2;
+  const mp = (x, z) => [(x - MX0) * MS, (z - MZ0) * MS + MOY];
+  const drawMap = (now) => {
+    mctx.clearRect(0, 0, 264, 264);
+    mctx.fillStyle = "rgba(9,12,21,.82)"; mctx.fillRect(0, 0, 264, 264);
+    const [, sy0] = mp(0, 6), [, sy1] = mp(0, 10);
+    mctx.fillStyle = "#2a3142"; mctx.fillRect(0, sy0, 264, sy1 - sy0);
+    colliders.forEach((c) => {
+      if (!c.when()) return;
+      if (c.t === 0) { const [a, b] = mp(c.x0, c.z0), [d, e] = mp(c.x1, c.z1); mctx.fillStyle = "#56607a"; mctx.fillRect(a, b, d - a, e - b); }
+      else if (c.r > 0.6) { const [a, b] = mp(c.x, c.z); mctx.fillStyle = "#3d475c"; mctx.beginPath(); mctx.arc(a, b, c.r * MS, 0, 7); mctx.fill(); }
+    });
+    Object.keys(CHARS).forEach((n) => {
+      const c = CHARS[n], [a, b] = mp(c.x, c.z);
+      mctx.fillStyle = "#" + c.color.toString(16).padStart(6, "0"); mctx.beginPath(); mctx.arc(a, b, n === target ? 7 : 4, 0, 7); mctx.fill();
+      if (n === target) { mctx.strokeStyle = "#ff7a59"; mctx.lineWidth = 3; mctx.beginPath(); mctx.arc(a, b, 10 + (reduce ? 0 : (now / 90) % 12), 0, 7); mctx.stroke(); }
+    });
+    const [px, pz] = mp(player.x, player.z), dx = -Math.sin(player.yaw), dz = -Math.cos(player.yaw);
+    mctx.save(); mctx.translate(px, pz); mctx.rotate(Math.atan2(dz, dx));
+    mctx.fillStyle = "#eef0f6"; mctx.beginPath(); mctx.moveTo(11, 0); mctx.lineTo(-7, 7); mctx.lineTo(-3, 0); mctx.lineTo(-7, -7); mctx.closePath(); mctx.fill();
+    mctx.restore();
+  };
 
   // ---------- Camera and input ----------
   let theta = 0.6, thetaGoal = 0.6, lastInput = -1e9;
@@ -718,6 +815,17 @@ window.HQ = (() => {
       cam.fov = worldMode ? 68 : 38; cam.updateProjectionMatrix();
       if (worldMode) cv.focus({ preventScroll: true });
     }
+    const ups = st.upgrades || [];
+    Object.keys(UPG).forEach((k) => (UPG[k].visible = ups.includes(k)));
+    if (floors.length) {
+      const b = STY[floors[0].r];
+      UPG.mural.position.set(-b.w / 2 - 0.015, b.h * 0.48, -0.4);
+      UPG.mural.scale.set(Math.min(1, (b.d - 1) / 3.6), Math.min(1, b.h * 0.75 / 1.3), 1);
+    } else UPG.mural.visible = false;
+    if (!neonLight.parent) sign.add(neonLight);
+    neonLight.position.set(0, 0.95, 0.6);
+    neonLight.intensity = ups.includes("neon") ? 1.6 : 0;
+    sign.scale.setScalar(ups.includes("neon") ? 1.25 : 1);
     target = st.target || null; targetKey = st.targetKey;
     if (target === null) arrivedKey = null;
     Object.keys(CHARS).forEach((n) => (CHARS[n].grp.visible = worldMode || n === target));
@@ -816,6 +924,7 @@ window.HQ = (() => {
         guide.hidden = false;
         if (dist < 1.7 && arrivedKey !== targetKey) { arrivedKey = targetKey; window.onHQArrive && window.onHQArrive(targetKey); }
       } else guide.hidden = true;
+      drawMap(now);
       R.render(scene, cam);
       requestAnimationFrame(tick);
       return;

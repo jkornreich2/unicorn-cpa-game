@@ -1286,7 +1286,9 @@ window.HQ = (() => {
   };
 
   // ---------- Minimap (walking mode) ----------
-  const map = mkEl("canvas", "hqmap"); map.width = map.height = 264; map.setAttribute("aria-hidden", "true");
+  const SHOW_MAP = false;   // minimap is switched off for now; set true to bring it back
+  const map = document.createElement("canvas"); map.className = "hqmap"; map.width = map.height = 264; map.setAttribute("aria-hidden", "true");
+  if (SHOW_MAP) host.appendChild(map);
   const mctx = map.getContext("2d");
   const MX0 = -45, MZ0 = -40, MS = 264 / 90, MOY = (264 - 72 * MS) / 2;
   const mp = (x, z) => [(x - MX0) * MS, (z - MZ0) * MS + MOY];
@@ -1489,7 +1491,7 @@ window.HQ = (() => {
         guide.hidden = false;
         if (dist < 1.7 && arrivedKey !== targetKey) { arrivedKey = targetKey; window.onHQArrive && window.onHQArrive(targetKey); }
       } else guide.hidden = true;
-      drawMap(now);
+      if (SHOW_MAP) drawMap(now);
       R.render(scene, cam);
       requestAnimationFrame(tick);
       return;

@@ -8,13 +8,14 @@
 // Output:
 //   dist/index.html                              one self-contained page to play or publish
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ROUNDS = ["seed", "series-a", "ipo"];
-const SECTIONS = ["FAR", "AUD", "REG"];
+const SECTIONS = ["FAR", "AUD", "REG"];      // core sections: these make up the game
+const PARKED = ["TCP"];                        // discipline sections: checked, but not in the game yet
 const TYPES = ["mcq", "num", "je"];
 const REQUIRED = ["id", "round", "order", "section", "topic", "from", "message", "question", "type", "explanation", "takeaway"];
 
@@ -22,8 +23,20 @@ const errors = [];
 const cases = [];
 const ids = new Set();
 
-for (const section of SECTIONS) {
+// Outlines: content/outline/<section>.json lists the study modules. When a section has one,
+// every case in it must carry a studyArea of the form "Area · Module" that matches it.
+const outlines = {};
+for (const s of [...SECTIONS, ...PARKED]) {
+  const p = join(root, `content/outline/${s.toLowerCase()}.json`);
+  if (!existsSync(p)) continue;
+  const o = JSON.parse(readFileSync(p, "utf8"));
+  outlines[s] = new Set(o.areas.flatMap((a) => a.modules.map((m) => `${a.area} · ${m}`)));
+}
+
+const parked = [];
+for (const section of [...SECTIONS, ...PARKED]) {
   const file = `content/cases/${section.toLowerCase()}.json`;
+  if (PARKED.includes(section) && !existsSync(join(root, file))) continue;
   let list;
   try {
     list = JSON.parse(readFileSync(join(root, file), "utf8"));
@@ -41,6 +54,8 @@ for (const section of SECTIONS) {
     ids.add(c.id);
     if (c.section !== section) bad(`section is "${c.section}" but this file is for ${section}`);
     if (!ROUNDS.includes(c.round)) bad(`round must be one of ${ROUNDS.join(", ")}`);
+    if (outlines[section] && !outlines[section].has(c.studyArea))
+      bad(`studyArea "${c.studyArea || ""}" is not a module in content/outline/${section.toLowerCase()}.json`);
     if (!TYPES.includes(c.type)) bad(`type must be one of ${TYPES.join(", ")}`);
     if (c.type === "mcq") {
       if (!Array.isArray(c.options) || c.options.length < 2) bad("needs at least 2 options");
@@ -60,7 +75,7 @@ for (const section of SECTIONS) {
       }
       if (c.debit === c.credit) bad("debit and credit must be different accounts");
     }
-    cases.push(c);
+    (PARKED.includes(section) ? parked : cases).push(c);
   });
 }
 
@@ -76,6 +91,7 @@ cases.sort((a, b) => ROUNDS.indexOf(a.round) - ROUNDS.indexOf(b.round) || a.orde
 const counts = SECTIONS.map((s) => `${s} ${cases.filter((c) => c.section === s).length}`).join(", ");
 const unreviewed = cases.filter((c) => !c.review?.reviewedBy).length;
 console.log(`All ${cases.length} cases pass (${counts}). ${unreviewed} not yet reviewed by a CPA.`);
+if (parked.length) console.log(`${parked.length} parked case(s) also pass (${PARKED.join(", ")}); not included in the game.`);
 if (process.argv.includes("--check")) process.exit(0);
 
 // Convert to the compact shape the game code reads.

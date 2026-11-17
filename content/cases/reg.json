@@ -5,6 +5,7 @@
     "order": 1,
     "section": "REG",
     "topic": "Entity choice",
+    "studyArea": "Entity Taxation · S Corporation Overview",
     "from": "Maya, CEO",
     "message": "Northlight wants to lead our seed. Their fund has pension plans and foreign investors as limited partners, and they want preferred stock. We're still an LLC taxed as a partnership. What do we become?",
     "question": "Which entity fits a venture-backed company?",
@@ -24,59 +25,12 @@
     }
   },
   {
-    "id": "reg-002",
-    "round": "seed",
-    "order": 2,
-    "section": "REG",
-    "topic": "Founder stock elections",
-    "from": "Dev, CTO",
-    "message": "Today is the grant date for my founder shares. The company is issuing me 4,000,000 shares, and I am paying $0.001 a share. An independent valuation firm valued the common stock at exactly $0.001 a share as of today, so the value is clearly established. The shares vest over four years, and if this works they could be worth $20 a share by then. Our lawyer says I can choose to be taxed on the shares now, at grant, instead of as they vest. Is that smart?",
-    "question": "What does Dev gain by choosing to be taxed now?",
-    "type": "mcq",
-    "options": [
-      "Nothing. He pays the same tax either way, just sooner",
-      "He owes no tax today, and later growth is taxed as capital gain when he sells",
-      "He never pays tax on the shares at all",
-      "He gets a deduction now for the price he paid"
-    ],
-    "answer": 1,
-    "explanation": "At the grant date the shares have an established value equal to what Dev paid, so there is no bargain element and nothing to tax. If he waits, each batch is taxed as ordinary income at its value on the day it vests, possibly $20 a share, before he has sold anything. Choosing to be taxed at grant means all of the growth waits until he sells and is taxed as capital gain. (This is the Section 83(b) election, which must be filed within 30 days of the grant.)",
-    "takeaway": "Restricted stock: income is fair market value minus what was paid, measured when the shares vest. The election moves that measurement to the grant date, which needs a supportable value on that date. It pays off when the value is low at grant and expected to rise. The risk: if the shares are forfeited, tax already paid is not refunded.",
-    "review": {
-      "reviewedBy": null,
-      "currentAsOf": null
-    }
-  },
-  {
-    "id": "reg-003",
-    "round": "series-a",
-    "order": 7,
-    "section": "REG",
-    "topic": "Employee stock options",
-    "from": "Lena, staff engineer",
-    "message": "I am exercising 10,000 of my stock options today. They are standard employee options, not the special incentive kind. I pay the $1 exercise price, and the shares are worth $9 each. That $8 a share difference is basically part of my pay, right? HR says payroll needs something from finance.",
-    "question": "How is Lena's $80,000 discount treated on the day she exercises?",
-    "type": "mcq",
-    "options": [
-      "Nothing happens until she sells the shares",
-      "It is a capital gain for Lena, because she now owns stock",
-      "It is pay: ordinary income for Lena, with withholding, and a matching deduction for Kestrel",
-      "It is a tax-free gift from the company"
-    ],
-    "answer": 2,
-    "explanation": "Lena receives $80,000 of value, (9 - 1) x 10,000, because she works for Kestrel. That is compensation, like a bonus paid in stock: ordinary income to her, run through payroll with withholding, and deductible by Kestrel as wages. Her basis in the shares becomes $9, so only growth after today is capital gain.",
-    "takeaway": "Follow the economics: value an employee receives for working is compensation when it is received, and the employer's deduction matches the employee's income. Incentive stock options are the exception: no regular tax at exercise and usually no company deduction.",
-    "review": {
-      "reviewedBy": null,
-      "currentAsOf": null
-    }
-  },
-  {
     "id": "reg-004",
     "round": "ipo",
     "order": 11,
     "section": "REG",
     "topic": "Net operating losses",
+    "studyArea": "Entity Taxation · Calculating Loss Limitations for C Corporations",
     "from": "Maya, CEO",
     "message": "We finally made money. Taxable income before any loss deduction is $2,000,000, and we're carrying $5,000,000 of net operating losses from the last few years. So no tax, right?",
     "question": "What is Kestrel's federal income tax for the year?",
@@ -85,6 +39,51 @@
     "tolerance": 0,
     "explanation": "Losses from years after 2017 can offset only 80% of taxable income: $1,600,000. That leaves $400,000 taxed at 21%, which is $84,000. The remaining $3,400,000 carries forward indefinitely.",
     "takeaway": "Post-2017 NOLs: no carryback, unlimited carryforward, 80% of taxable income cap.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "reg-005",
+    "round": "seed",
+    "order": 2,
+    "section": "REG",
+    "topic": "Self-employment tax",
+    "studyArea": "Individual Taxation · Adjustments",
+    "from": "Dev, CTO",
+    "message": "Before Kestrel, I spent last year consulting on my own as a sole proprietor. I netted $100,000 and paid $14,130 of self-employment tax on top of income tax. Friends with regular jobs only have half that much taken out of their paychecks, and their employers pay the other half and deduct it. Can I deduct any of mine on my personal return?",
+    "question": "How does Dev treat the self-employment tax on his individual return?",
+    "type": "mcq",
+    "options": [
+      "He cannot deduct any of it, because it is a personal tax",
+      "He deducts half, $7,065, as an adjustment to income",
+      "He deducts all $14,130 as an itemized deduction",
+      "He deducts half, $7,065, as an itemized deduction"
+    ],
+    "answer": 1,
+    "explanation": "Self-employment tax covers both the employee and the employer shares of Social Security and Medicare. An employer deducts its half as a business expense, so a self-employed person gets the same treatment for the employer-equivalent half: $14,130 / 2 = $7,065, deducted as an adjustment to income. Because it is above the line, it lowers AGI whether or not Dev itemizes.",
+    "takeaway": "Treat the self-employed person as both employer and employee. The employer half is an adjustment to income. The employee half is not deductible, just as an employee cannot deduct FICA withheld from a paycheck.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "reg-006",
+    "round": "series-a",
+    "order": 7,
+    "section": "REG",
+    "topic": "Basis of business property",
+    "studyArea": "Property Transactions · Basis and Holding Period of Assets",
+    "from": "Dev, CTO",
+    "message": "We bought our first GPU server cluster. The price was $400,000, plus $32,000 of sales tax, $8,000 of freight to get it here, and $15,000 for the electricians and installers who got it running. We also bought a $20,000 one-year support contract. What is our tax basis in the cluster?",
+    "question": "What is Kestrel's depreciable basis in the server cluster?",
+    "type": "num",
+    "answer": 455000,
+    "tolerance": 0,
+    "explanation": "Basis is the cost of acquiring the asset and getting it ready for its intended use: $400,000 price + $32,000 sales tax + $8,000 freight + $15,000 installation = $455,000. The support contract pays for a year of service after the cluster is running, so it is a separate operating cost and does not go into basis.",
+    "takeaway": "Basis = everything paid to acquire an asset and make it ready to use. Costs that keep it running afterward, like repairs, maintenance or support, are expenses. Basis is the starting point for depreciation and for gain or loss when the asset is sold.",
     "review": {
       "reviewedBy": null,
       "currentAsOf": null

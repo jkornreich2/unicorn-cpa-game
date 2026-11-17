@@ -7,6 +7,8 @@ Open `dist/index.html` in a browser. It is one self-contained file.
 
 ## Layout
 - `content/cases/far.json`, `aud.json`, `reg.json` – the cases. **Edit these to add or fix questions.**
+- `content/cases/tcp.json` – TCP discipline cases, parked: checked but not in the core game yet
+- `content/outline/` – the study outline for each section. Every case's `studyArea` must match an entry, and REVIEW.md shows which areas still have no cases
 - `web/template.html` – the game screens and logic
 - `scripts/build.mjs` – checks every case, then builds `dist/index.html`
 - `REVIEW.md` – every case with its answer, for CPA review (generated)

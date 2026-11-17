@@ -1,0 +1,12 @@
+{
+  "section": "FAR",
+  "source": "Unit list from the reviewer's FAR study course, November 2026",
+  "areas": [
+    { "area": "F1", "modules": ["Financial Reporting"] },
+    { "area": "F2", "modules": ["Financial Reporting and Disclosures"] },
+    { "area": "F3", "modules": ["Assets and Related Topics"] },
+    { "area": "F4", "modules": ["Liabilities"] },
+    { "area": "F5", "modules": ["Investments, Statement of Cash Flows, and Income Taxes"] },
+    { "area": "F6", "modules": ["NFP Accounting and Governmental Accounting"] }
+  ]
+}

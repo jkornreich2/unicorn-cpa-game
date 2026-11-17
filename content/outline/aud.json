@@ -1,0 +1,12 @@
+{
+  "section": "AUD",
+  "source": "Unit list from the reviewer's AUD study course, November 2026",
+  "areas": [
+    { "area": "A1", "modules": ["Audit Reports"] },
+    { "area": "A2", "modules": ["Engagement Quality and Acceptance, Planning, and Internal Control"] },
+    { "area": "A3", "modules": ["Risk, Evidence, and Sampling"] },
+    { "area": "A4", "modules": ["Performing Further Procedures, Forming Conclusions, and Communications"] },
+    { "area": "A5", "modules": ["Integrated Audits, Attestation Engagements, Compliance, and Government Audits"] },
+    { "area": "A6", "modules": ["Accounting and Review Service Engagements, Interim Reviews, and Ethics and Professional Responsibilities"] }
+  ]
+}

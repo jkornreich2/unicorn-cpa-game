@@ -1,0 +1,18 @@
+{
+  "section": "REG",
+  "source": "Module list from the reviewer's REG study course, November 2026",
+  "areas": [
+    { "area": "Individual Taxation", "modules": [
+      "Filing Requirements and Filing Status", "Gross Income: Part 1", "Gross Income: Part 2", "Adjustments",
+      "Standard Deduction and Itemized Deductions", "QBI Deduction and Additional Deductions", "Tax Computations and Credits" ] },
+    { "area": "Property Transactions", "modules": [
+      "Basis and Holding Period of Assets", "Gains and Losses", "Cost Recovery" ] },
+    { "area": "Entity Taxation", "modules": [
+      "C Corporation Overview", "Differences Between Book and Tax", "C Corporation Tax Computations and Credits",
+      "Calculating Loss Limitations for C Corporations", "S Corporation Overview", "Partnership Overview",
+      "Tax-Exempt Organization Overview", "State and Local Tax Issues" ] },
+    { "area": "Business Law", "modules": [
+      "Contracts: Part 1", "Contracts: Part 2", "Contracts: Part 3", "Agency", "Suretyship", "Secured Transactions",
+      "Bankruptcy: Part 1", "Bankruptcy: Part 2", "Federal Laws and Regulations", "Business Structures: Part 1", "Business Structures: Part 2" ] }
+  ]
+}

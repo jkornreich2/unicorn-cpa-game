@@ -16,6 +16,15 @@ an AI generator or an artist) should follow this spec so the pieces stack and gl
 - Real-world meters. The game rescales each floor to its footprint, so exact size
   matters less than consistent proportions.
 
+## File layout
+Each building style is one file with three top-level groups, found by name in the game:
+
+| Group | What it is | Where the game puts it |
+|---|---|---|
+| `Floor_<Style>` (e.g. `Floor_Garage`) | One story, flat top at story height | Stacked once per answered case |
+| `Roof_<Style>` | The pitched roof cap | On top of the highest floor only |
+| `Site_<Style>` | Driveway, path, canopy, planter | At ground level only |
+
 ## Material names (required)
 SketchUp's glTF export drops emissive light, so the game adds window glow itself.
 It finds the glass by material name:
@@ -23,14 +32,15 @@ It finds the glass by material name:
 | Material name | Use | What the game does |
 |---|---|---|
 | `Window` | Every window pane | Lights it warm (correct), dim (second try) or red (missed) |
-| `Trim` | Floor slabs, cornices, frames | Leaves as is |
+| `Screen`, `Bulb`, `Neon` | Monitors, lights, LED strips | Glows at all times |
+| `Trim`, `Black_Metal` | Slabs, frames, mullions | Leaves as is |
 | anything else | Walls, roof, details | Leaves as is |
 
 ## Floor modules (one story each, must stack)
 
 | File | Round | Footprint (W x D) | Story height | Look |
 |---|---|---|---|---|
-| `floor-garage.glb` | Seed | 14.4 m x 11.2 m | 3.6 m | Suburban wood-sided garage: roll-up door open on the front, 3 windows per side, flat top so the next floor can sit on it |
+| `floor-garage-modern.glb` | Seed | 14.4 m x 11.2 m | 3.6 m | Modern startup garage: black board-and-batten, cedar entry, full-glass garage door, ribbon windows; standing-seam roof with glazed gable |
 | `floor-loft.glb` | Series A | 12.8 m x 10.8 m | 3.1 m | Red-brick industrial loft: 5 tall divided windows per long side, stone sill band, thin cornice slab on top |
 | `floor-tower.glb` | IPO | 10 m x 10 m | 2.7 m | Glass curtain wall: 8 full-height panes per side with slim mullions, dark spandrel slab on top |
 

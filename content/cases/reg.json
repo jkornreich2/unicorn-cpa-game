@@ -65,8 +65,8 @@
     "explanation": "Self-employment tax covers both the employee and the employer shares of Social Security and Medicare. An employer deducts its half as a business expense, so a self-employed person gets the same treatment for the employer-equivalent half: $14,130 / 2 = $7,065, deducted as an adjustment to income. Because it is above the line, it lowers AGI whether or not Dev itemizes.",
     "takeaway": "Treat the self-employed person as both employer and employee. The employer half is an adjustment to income. The employee half is not deductible, just as an employee cannot deduct FICA withheld from a paycheck.",
     "review": {
-      "reviewedBy": null,
-      "currentAsOf": null
+      "reviewedBy": "Jordan Kornreich, CPA",
+      "currentAsOf": "2026-11-17"
     }
   },
   {
@@ -85,8 +85,8 @@
     "explanation": "Basis is the cost of acquiring the asset and getting it ready for its intended use: $400,000 price + $32,000 sales tax + $8,000 freight + $15,000 installation = $455,000. The support contract pays for a year of service after the cluster is running, so it is a separate operating cost and does not go into basis.",
     "takeaway": "Basis = everything paid to acquire an asset and make it ready to use. Costs that keep it running afterward, like repairs, maintenance or support, are expenses. Basis is the starting point for depreciation and for gain or loss when the asset is sold.",
     "review": {
-      "reviewedBy": null,
-      "currentAsOf": null
+      "reviewedBy": "Jordan Kornreich, CPA",
+      "currentAsOf": "2026-11-17"
     }
   }
 ]

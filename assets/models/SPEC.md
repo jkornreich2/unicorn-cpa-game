@@ -41,7 +41,7 @@ It finds the glass by material name:
 | File | Round | Footprint (W x D) | Story height | Look |
 |---|---|---|---|---|
 | `floor-garage-modern.glb` | Seed | 14.4 m x 11.2 m | 3.6 m | Modern startup garage: black board-and-batten, cedar entry, full-glass garage door, ribbon windows; standing-seam roof with glazed gable |
-| `floor-loft.glb` | Series A | 12.8 m x 10.8 m | 3.1 m | Red-brick industrial loft: 5 tall divided windows per long side, stone sill band, thin cornice slab on top |
+| `floor-loft-san-francisco.glb` | Series A | 12.8 m x 10.8 m | 3.1 m | Built: red running-bond brick, black steel factory windows (5 front/back, 4 sides) with limestone sills and lintels, limestone cornice; roof cap with parapet, timber deck, string lights, skylights |
 | `floor-tower.glb` | IPO | 10 m x 10 m | 2.7 m | Glass curtain wall: 8 full-height panes per side with slim mullions, dark spandrel slab on top |
 
 Each module should be a single story with a flat top at exactly its story height, so

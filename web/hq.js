@@ -113,7 +113,7 @@ window.HQ = (() => {
   };
   const STY = [
     { name: "The garage · Palo Alto", w: 7.2, d: 5.6, h: 1.8, wall: "#2a2c30", frame: "#17181b", cols: 3, win: 0xffc98a, seed: 3, batten: true },
-    { name: "The loft", w: 6.4, d: 5.4, h: 1.55, wall: "#6b3328", frame: "#3a1e17", cols: 5, brick: true, win: 0xffd58a, seed: 5 },
+    { name: "The loft · San Francisco", w: 6.4, d: 5.4, h: 1.55, wall: "#7a3528", frame: "#1b1c1f", cols: 5, brick: true, win: 0xffd58a, seed: 5 },
     { name: "The tower", w: 5, d: 5, h: 1.35, wall: "#1b2c47", frame: "#2c4166", cols: 8, glass: true, win: 0xaee0ff, seed: 9 }
   ];
   const facade = (ctx, w, h, st, mode) => {
@@ -126,7 +126,12 @@ window.HQ = (() => {
       const on = mode === "full" || (mode === "sparse" && r() < 0.4);
       ctx.fillStyle = mode === "map" ? (st.glass ? "#0d1830" : "#141a28") : on ? "#fff" : "#000";
       ctx.fillRect(x, wy, ww, wh);
-      if (mode === "map") { ctx.fillStyle = st.frame; ctx.fillRect(x + ww / 2 - 1, wy, 2, wh); ctx.fillRect(x, wy + wh / 2 - 1, ww, 2); }
+      if (mode === "map" && st.brick) {
+        ctx.fillStyle = st.frame;
+        for (let k = 1; k < 3; k++) ctx.fillRect(x + (ww * k) / 3 - 1, wy, 2, wh);
+        for (let k = 1; k < 4; k++) ctx.fillRect(x, wy + (wh * k) / 4 - 1, ww, 2);
+        ctx.fillStyle = "#d6ccb8"; ctx.fillRect(x - 3, wy - 5, ww + 6, 4); ctx.fillRect(x - 2, wy + wh, ww + 4, 3);
+      } else if (mode === "map") { ctx.fillStyle = st.frame; ctx.fillRect(x + ww / 2 - 1, wy, 2, wh); ctx.fillRect(x, wy + wh / 2 - 1, ww, 2); }
     }
   };
   STY.forEach((s) => {
@@ -211,6 +216,38 @@ window.HQ = (() => {
     grp.userData.glass = glass; grp.userData.rise = rise;
     grp.visible = false; scene.add(grp); return grp;
   })();
+
+  const loftCap = (() => {
+    const st = STY[1], grp = new THREE.Group(), t = 0.15, ph = 0.45;
+    const brickM = new THREE.MeshStandardMaterial({ color: 0x7a3528, roughness: 0.9 });
+    const stone = new THREE.MeshStandardMaterial({ color: 0xd6ccb8, roughness: 0.8 });
+    const put = (geo, mat, x, y, z) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; grp.add(m); return m; };
+    [[0, st.d / 2 - t / 2, st.w, t], [0, -st.d / 2 + t / 2, st.w, t]].forEach(([x, z, w, d]) => {
+      put(new THREE.BoxGeometry(w, ph, d), brickM, x, ph / 2, z); put(new THREE.BoxGeometry(w + 0.04, 0.05, d + 0.04), stone, x, ph + 0.025, z);
+    });
+    [-1, 1].forEach((sx) => {
+      put(new THREE.BoxGeometry(t, ph, st.d - 2 * t), brickM, sx * (st.w / 2 - t / 2), ph / 2, 0);
+      put(new THREE.BoxGeometry(t + 0.04, 0.05, st.d - 2 * t), stone, sx * (st.w / 2 - t / 2), ph + 0.025, 0);
+    });
+    put(new THREE.BoxGeometry(st.w - 2 * t, 0.02, st.d - 2 * t), new THREE.MeshStandardMaterial({ color: 0x5c6066, roughness: 1 }), 0, 0.01, 0);
+    const deck = { x0: -2.85, x1: -0.3, z0: -0.4, z1: 2.35 };
+    put(new THREE.BoxGeometry(deck.x1 - deck.x0, 0.08, deck.z1 - deck.z0), new THREE.MeshStandardMaterial({ color: 0x92683f, roughness: 0.8 }), (deck.x0 + deck.x1) / 2, 0.06, (deck.z0 + deck.z1) / 2);
+    put(new THREE.BoxGeometry(0.9, 0.55, 0.75), new THREE.MeshStandardMaterial({ color: 0xb0b6bc, metalness: 0.4, roughness: 0.5 }), 1.6, 0.3, 1.8);
+    [[0.3, -1.2], [1.4, -1.2], [0.3, -2.0], [1.4, -2.0]].forEach(([x, z]) => put(new THREE.BoxGeometry(0.8, 0.2, 0.45), new THREE.MeshStandardMaterial({ color: 0x9ccbe8, emissive: 0x406080, emissiveIntensity: 0.4 }), x, 0.12, z));
+    const poleM = new THREE.MeshStandardMaterial({ color: 0x1b1c1f });
+    const corners = [[deck.x0 + 0.05, deck.z0 + 0.05], [deck.x1 - 0.05, deck.z0 + 0.05], [deck.x1 - 0.05, deck.z1 - 0.05], [deck.x0 + 0.05, deck.z1 - 0.05]];
+    corners.forEach(([x, z]) => put(new THREE.BoxGeometry(0.03, 1.2, 0.03), poleM, x, 0.7, z));
+    const bulbM = new THREE.MeshBasicMaterial({ color: 0xffd9a0 });
+    for (let k = 0; k < 4; k++) {
+      const [xa, za] = corners[k], [xb, zb] = corners[(k + 1) % 4];
+      for (let j = 1; j < 9; j++) {
+        const u = j / 9, b = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), bulbM);
+        b.position.set(xa + (xb - xa) * u, 1.25 - 0.14 * Math.sin(Math.PI * u), za + (zb - za) * u); grp.add(b);
+      }
+    }
+    grp.visible = false; scene.add(grp); return grp;
+  })();
+  const caps = [roofCap, loftCap];
 
   const spire = (() => {
     const grp = new THREE.Group();
@@ -332,6 +369,76 @@ window.HQ = (() => {
   [[-20, 10.6, 8.5], [-11, 10.6, 9.5], [-2, 10.8, 8], [7, 10.6, 9], [16, 10.6, 8.5], [25, 10.7, 9.5],
    [-10.5, 3.5, 7.5], [10.5, 4.5, 8.5], [-22, -12, 9], [20, -16, 8]].forEach(([x, z, h]) => addHood(palm(x, z, h), 0, 0));
 
+  // ---------- San Francisco (Series A and IPO) ----------
+  {
+    const bay = new THREE.Mesh(new THREE.PlaneGeometry(320, 110),
+      new THREE.MeshStandardMaterial({ color: 0x1b2747, roughness: 0.2, metalness: 0.6, emissive: 0x0c1226, emissiveIntensity: 0.6 }));
+    bay.rotation.x = -Math.PI / 2; bay.position.set(0, 0.04, -100);
+    const bayG = new THREE.Group(); bayG.add(bay); addHood(bayG, 1, 9);
+
+    // Generic suspension bridge across the bay, lit deck
+    const br = new THREE.Group(), steel = new THREE.MeshStandardMaterial({ color: 0x8f98a6, metalness: 0.6, roughness: 0.4 });
+    const deckM = new THREE.Mesh(new THREE.BoxGeometry(200, 0.6, 2.2), steel); deckM.position.y = 6; br.add(deckM);
+    [-32, 32].forEach((x) => {
+      [-0.9, 0.9].forEach((z) => { const leg = new THREE.Mesh(new THREE.BoxGeometry(0.9, 30, 0.9), steel); leg.position.set(x, 15, z); br.add(leg); });
+      [12, 22, 29].forEach((y) => { const beam = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.7, 2.6), steel); beam.position.set(x, y, 0); br.add(beam); });
+    });
+    const cableM = new THREE.LineBasicMaterial({ color: 0xb8c2d0 });
+    [-0.9, 0.9].forEach((z) => {
+      const pts = [];
+      for (let x = -100; x <= 100; x += 2) {
+        let y;
+        if (x < -32) y = 30 - (x + 32) / -68 * 23;
+        else if (x > 32) y = 30 - (x - 32) / 68 * 23;
+        else y = 9 + 21 * Math.pow(x / 32, 2);
+        pts.push(new THREE.Vector3(x, y, z));
+        if (x % 6 === 0 && y > 7) br.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x, 6.3, z), new THREE.Vector3(x, y, z)]), cableM));
+      }
+      br.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), cableM));
+    });
+    const lp = []; for (let x = -98; x <= 98; x += 3) lp.push(x, 6.6, 1.2, x, 6.6, -1.2);
+    const lg = new THREE.BufferGeometry(); lg.setAttribute("position", new THREE.BufferAttribute(new Float32Array(lp), 3));
+    br.add(new THREE.Points(lg, new THREE.PointsMaterial({ color: 0xffd38a, size: 0.5, sizeAttenuation: true, fog: false })));
+    [-32, 32].forEach((x) => { const beacon = new THREE.Mesh(new THREE.SphereGeometry(0.4, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff4a4a })); beacon.position.set(x, 30.6, 0); br.add(beacon); });
+    br.position.set(-20, 0, -78); br.rotation.y = 0.18;
+    addHood(br, 1, 9);
+
+    // Hills across the bay
+    const farHill = new THREE.MeshStandardMaterial({ color: 0x1c2233, roughness: 1 });
+    const r = rng(41);
+    for (let i = 0; i < 7; i++) {
+      const g = new THREE.Group(), h = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 10, 0, Math.PI * 2, 0, Math.PI / 2), farHill);
+      h.scale.set(30 + r() * 25, 10 + r() * 12, 14); g.add(h);
+      g.position.set(-130 + i * 44 + r() * 10, 0, -140 - r() * 12); addHood(g, 1, 9);
+    }
+
+    // Painted Victorian row houses across the street (Series A only)
+    const pastel = [0xe9b8c4, 0xb9d7e8, 0xf1dca7, 0xc7e3c5, 0xd8c6ea, 0xf3c9a5, 0xa9d3d0];
+    const trimM = new THREE.MeshStandardMaterial({ color: 0xf6f1e7, roughness: 0.8 });
+    const litM = new THREE.MeshBasicMaterial({ color: 0xffd28f });
+    for (let i = 0; i < 12; i++) {
+      const g = new THREE.Group(), w = 2.3, h = 4.4 + (i % 3) * 0.4;
+      const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, 3), new THREE.MeshStandardMaterial({ color: pastel[i % pastel.length], roughness: 0.85 }));
+      body.position.y = h / 2; body.castShadow = true; g.add(body);
+      const roof = new THREE.Mesh(new THREE.ConeGeometry(1.75, 1.3, 4), new THREE.MeshStandardMaterial({ color: 0x4a4550, roughness: 0.9 }));
+      roof.rotation.y = Math.PI / 4; roof.scale.set(0.95, 1, 1.2); roof.position.y = h + 0.6; g.add(roof);
+      const bayW = new THREE.Mesh(new THREE.BoxGeometry(1.3, 2.4, 0.5), trimM); bayW.position.set(-0.3, h - 1.9, -1.7); g.add(bayW);
+      [[-0.3, h - 1.6], [-0.3, h - 2.5], [0.75, 1.2]].forEach(([x, y], k) => {
+        const win = new THREE.Mesh(new THREE.PlaneGeometry(k < 2 ? 1.0 : 0.5, 0.6), (i + k) % 3 ? litM : new THREE.MeshBasicMaterial({ color: 0x2a3040 }));
+        win.position.set(x, y, k < 2 ? -1.96 : -1.51); win.rotation.y = Math.PI; g.add(win);
+      });
+      g.position.set(-27.6 + i * w, 0, 13.6);
+      addHood(g, 1, 1);
+    }
+
+    // A bank of fog rolling over the bay
+    const fogM = new THREE.MeshBasicMaterial({ color: 0xe9e4f2, transparent: true, opacity: 0.16, depthWrite: false, fog: false });
+    for (let i = 0; i < 5; i++) {
+      const g = new THREE.Group(), f = new THREE.Mesh(new THREE.PlaneGeometry(90, 14), fogM);
+      f.position.set(-60 + i * 32, 4 + (i % 2) * 2, -60 - i * 6); g.add(f); g.userData.fog = f; addHood(g, 1, 1);
+    }
+  }
+
   // Retro-modern electric pickup (original design) parked in the Seed driveway, nose to the garage
   {
     const T = new THREE.Group();
@@ -450,10 +557,14 @@ window.HQ = (() => {
 
     const topSt = floors.length ? STY[floors[floors.length - 1].r] : null;
     sign.visible = !!topSt;
-    const capOn = topSt === STY[0] && (ghostOn === 0 || ghostOn === -1);
-    roofCap.visible = capOn;
-    roofCap.userData.targetY = topY + (ghostOn === 0 ? STY[0].h + 0.15 : 0);
-    if (!roofCap.userData.placed || reduce) { roofCap.position.y = roofCap.userData.targetY; roofCap.userData.placed = capOn; }
+    let capOn = false;
+    caps.forEach((cap, i) => {
+      const on = topSt === STY[i] && (ghostOn === i || ghostOn === -1);
+      cap.visible = on;
+      cap.userData.targetY = topY + (ghostOn === i ? STY[i].h + 0.15 : 0);
+      if (!cap.userData.placed || reduce) { cap.position.y = cap.userData.targetY; cap.userData.placed = on; }
+      if (on && i === 0) capOn = true;
+    });
     if (topSt) {
       if (capOn) sign.position.set(0, topY - 0.55, topSt.d / 2 + 0.75);
       else sign.position.set(0, topY, topSt.d / 2 - 0.35);
@@ -488,7 +599,7 @@ window.HQ = (() => {
     }
     if (setFrom && now - setStart < 1900) applySetting(ease((now - setStart) / 1800));
     else if (setFrom) { applySetting(1); setFrom = null; }
-    if (roofCap.visible) roofCap.position.y += (roofCap.userData.targetY - roofCap.position.y) * Math.min(1, dt * 5);
+    caps.forEach((cap) => { if (cap.visible) cap.position.y += (cap.userData.targetY - cap.position.y) * Math.min(1, dt * 5); });
     hood.forEach((h) => {
       const want = round >= h.minRound && round <= h.maxRound ? 1 : 0;
       h.s += (want - h.s) * (reduce ? 1 : Math.min(1, dt * 3));

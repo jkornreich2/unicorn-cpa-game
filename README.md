@@ -7,6 +7,13 @@ Two ways to play: walk Silicon Valley in first person (arrow keys or WASD, drag 
 
 Open `dist/index.html` in a browser. It is one self-contained file.
 
+## Footnote (second game)
+`footnote/index.html` is a daily rarity trivia game for CPA candidates: seven prompts, 25 seconds each,
+rarer correct answers score more (10 to 100 points; every point is a page deeper into a 10-K).
+Includes a gem answer per prompt, practice packs by section, an archive, stats, a copy-to-text result,
+and Pass the Ledger, a pass-and-play party mode. Answers, aliases, rarity and notes live in the
+`PROMPTS` list at the top of the script.
+
 ## Layout
 - `content/cases/far.json`, `aud.json`, `reg.json` – the cases. **Edit these to add or fix questions.**
 - `content/cases/tcp.json`, `bar.json` – discipline-section cases (TCP, BAR), parked: checked but not in the core game yet

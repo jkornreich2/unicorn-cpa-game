@@ -121,6 +121,19 @@ ol.how{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .legend span{display:flex;align-items:center;gap:5px;background:rgba(9,12,21,.72);padding:3px 7px;border-radius:6px}
 .legend i{width:8px;height:8px;border-radius:2px;background:var(--c)}
 @media (max-width:420px){.hqcap .hint{display:none}}
+.hq.walking{height:min(70vh,600px)}
+.hq.walking .legend,.hq.walking .hqcap .hint{display:none}
+.hqbtn{position:absolute;top:10px;left:10px;min-height:38px;padding:7px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(9,12,21,.78);color:var(--text);font-weight:600;font-size:13.5px;cursor:pointer}
+.hq.walking .hqbtn{background:var(--accent);color:#1a0d08;border-color:var(--accent)}
+.hqguide{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:rgba(9,12,21,.8);border:1px solid rgba(255,122,89,.5);border-radius:99px;padding:6px 14px;font-weight:600;font-size:14px;pointer-events:none;white-space:nowrap}
+.hqguide b{display:inline-block;color:var(--accent);font-size:16px;line-height:1}
+.hqjoy{display:none;position:absolute;left:16px;bottom:16px;width:116px;height:116px;border-radius:50%;background:rgba(9,12,21,.45);border:2px solid rgba(255,255,255,.22);touch-action:none}
+.hqjoy i{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.hq.walking .hqjoy{display:block}
+@media (hover:hover) and (pointer:fine){.hq.walking .hqjoy{opacity:.55}}
+.find h2{font-size:22px}
+.keys{display:flex;flex-wrap:wrap;gap:6px;font-size:13px;color:var(--dim)}
+.keys kbd{font-family:var(--mono);font-size:11.5px;border:1px solid var(--edge);border-bottom-width:2px;border-radius:5px;padding:1px 6px;color:var(--text)}
 @media (max-width:380px){.val{font-size:28px}h1{font-size:31px}.chips{grid-template-columns:1fr}.stages span{padding:4px 6px}}
 </style>
 </head>
@@ -161,7 +174,7 @@ const UNICORN_AT = Math.round(MAX * 5 / 6);
 const roundMax = (r) => CASES.filter(c => c.r === r).length * 100;
 
 let S;
-const fresh = () => ({phase:"intro",tab:"play",i:0,pts:[],tries:0,solved:false,pick:null,dr:null,cr:null,active:"dr",note:null,trust:70});
+const fresh = () => ({phase:"intro",tab:"play",i:0,pts:[],tries:0,solved:false,pick:null,dr:null,cr:null,active:"dr",note:null,trust:70,world:false,arrived:-1});
 const $ = (id) => document.getElementById(id);
 const sum = (a) => a.reduce((x, y) => x + y, 0);
 const ptsIn = (r) => sum(CASES.map((c, k) => c.r === r ? (S.pts[k] || 0) : 0));
@@ -210,11 +223,21 @@ function viewPlay(){
       <li>Each is tagged <b style="color:var(--far)">FAR</b>, <b style="color:var(--aud)">AUD</b> or <b style="color:var(--reg)">REG</b> and ends with the exam takeaway.</li>
       <li>Score ${UNICORN_AT.toLocaleString("en-US")} of ${MAX.toLocaleString("en-US")} points to list at a <b>$1B valuation</b>.</li>
     </ol>
-    <div class="row"><button class="btn" data-act="start">Start the seed round</button></div>
+    <div class="row"><button class="btn" data-act="startWorld">Walk Silicon Valley</button><button class="btn ghost" data-act="start">Play at the desk</button></div>
+    <p class="dim">Walking: find each character around Palo Alto to get their case. Desk: cases come to you.</p>
     <p class="dim">Kestrel AI and everyone in it are fictional. Rules shown are US GAAP, AICPA and PCAOB standards, and federal tax law.</p></section>`;
   if (S.phase === "close") return viewClose();
   if (S.phase === "done") return viewDone();
   const c = CASES[S.i], got = S.pts[S.i];
+  if (S.world && !S.solved && S.arrived !== S.i) {
+    const who = c.from.split(",")[0], place = window.HQ && window.HQ.whereIs ? window.HQ.whereIs(who) : "Kestrel HQ";
+    return `<section class="panel find">
+      <div class="headrow"><span class="tag" style="--c:${SEC[c.sec]}">${c.sec} &middot; ${c.topic}</span><span class="dim mono">${S.i + 1}/${CASES.length}</span></div>
+      <h2>Find ${who} at ${place}</h2>
+      <p>${c.from} has something for you. Follow the coral beacon and the arrow at the top of the view, and walk up to them.</p>
+      <div class="keys"><span><kbd>↑</kbd><kbd>↓</kbd> walk</span><span><kbd>←</kbd><kbd>→</kbd> turn</span><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> also work</span><span><kbd>Shift</kbd> run</span><span>Drag to look</span><span>Phone: joystick</span></div>
+      <div class="row"><button class="btn" data-act="teleport">Take me there</button><button class="btn ghost" data-act="world">Play at the desk instead</button></div></section>`;
+  }
   let after = "";
   if (S.solved) after = `
     <div class="verdict ${got ? "good" : "bad"}">${got === 100 ? "Correct. +100" : got ? "Correct on the second try. +50" : "Missed. +0"}</div>
@@ -279,7 +302,8 @@ function hqState(){
   const floors = [];
   for (let k = 0; k < CASES.length && S.pts[k] !== undefined; k++) floors.push({r: CASES[k].r, g: S.pts[k] === 100 ? 2 : S.pts[k] ? 1 : 0});
   const next = S.phase === "done" || floors.length >= CASES.length ? null : CASES[floors.length].r;
-  return {floors, next, round: round(), done: S.phase === "done"};
+  const target = S.phase === "play" && !S.solved && S.i < CASES.length ? CASES[S.i].from.split(",")[0] : null;
+  return {floors, next, round: round(), done: S.phase === "done", world: !!S.world, target, targetKey: S.i};
 }
 function render(){
   chrome();
@@ -302,7 +326,10 @@ function act(a, d){
   const c = CASES[S.i];
   if (a === "tab") S.tab = d.v;
   else if (a === "start") S.phase = "play";
-  else if (a === "again") { S = fresh(); S.phase = "play"; }
+  else if (a === "again") { const w = S.world; S = fresh(); S.phase = "play"; S.world = w; }
+  else if (a === "startWorld") { S.phase = "play"; S.world = true; S.tab = "play"; }
+  else if (a === "world") { S.world = !S.world; if (S.world && S.phase === "intro") S.phase = "play"; }
+  else if (a === "teleport") { if (window.HQ && window.HQ.teleport) window.HQ.teleport(); return; }
   else if (a === "open") S.phase = "play";
   else if (a === "mcq" && !S.solved) { S.pick = +d.v; grade(S.pick === c.ans, c); }
   else if (a === "num" && !S.solved) {
@@ -333,6 +360,14 @@ document.addEventListener("submit", (ev) => {
   ev.preventDefault();
   if (ev.target.id === "numform") act("num", {v: $("numin").value});
 });
+
+window.onHQMode = () => act("world");
+window.onHQArrive = (key) => {
+  if (!S.world || S.phase !== "play" || key !== S.i || S.arrived === S.i) return;
+  S.arrived = S.i; render();
+  const v = $("view").getBoundingClientRect();
+  if (v.top > window.innerHeight - 140) $("view").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+};
 
 function start(saved){ S = Object.assign(fresh(), saved && saved.phase ? saved : {}); render(); }
 window.claude?.hot?.snapshot?.(() => S);

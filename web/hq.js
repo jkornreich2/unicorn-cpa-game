@@ -293,6 +293,7 @@ window.HQ = (() => {
     while (out.length < 26) {
       const x = (r() - 0.5) * 70, z = -6 - r() * 38 + (r() < 0.25 ? 26 : 0);
       if (Math.abs(x) < 9 && z > -9) continue;
+      if ((x > 14 && x < 34 && z > -9 && z < 7) || (x < -14 && x > -34 && z > -9 && z < 7) || (x > 8 && x < 20 && z > 9 && z < 19)) continue;
       if (z > 4 && z < 12) continue;
       if (out.some((p) => Math.hypot(p.x - x, p.z - z) < 6.5)) continue;
       out.push({ x, z, v: r() });
@@ -301,13 +302,17 @@ window.HQ = (() => {
   })();
   const leaf = new THREE.MeshStandardMaterial({ color: 0x16301f, roughness: 1 });
   const bark = new THREE.MeshStandardMaterial({ color: 0x2a1d16, roughness: 1 });
+  const colliders = [];   // walking blockers: rects and circles, each active only while its object is shown
+  const always = () => true;
+  const addRect = (x0, x1, z0, z1, when = always) => colliders.push({ t: 0, x0, x1, z0, z1, when });
+  const addCircle = (x, z, r, when = always) => colliders.push({ t: 1, x, z, r, when });
   const tree = (x, z, s) => {
     const g = new THREE.Group();
     const t = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 1.2), bark); t.position.y = 0.6;
     const c = new THREE.Mesh(new THREE.IcosahedronGeometry(0.9 * s, 0), leaf); c.position.y = 1.5 * s + 0.4;
     t.castShadow = c.castShadow = true; g.add(t, c); g.position.set(x, 0, z); return g;
   };
-  [[-8, 3], [8.5, 2], [-9, -4], [9.5, -5], [-12, 6], [13, 5], [-6, 12.5], [6, 12.5]].forEach(([x, z], i) => addHood(tree(x, z, 1 + (i % 3) * 0.2), 0, 9));
+  [[-8, 3], [8.5, 2], [-9, -4], [9.5, -5], [-12, 6], [13, 5], [-6, 12.5], [6, 12.5]].forEach(([x, z], i) => { const g = tree(x, z, 1 + (i % 3) * 0.2); addHood(g, 0, 9); addCircle(x, z, 0.45, () => g.visible); });
 
   const tallTex = (st, reps) => {
     const m = st.tex.map.clone(), e = st.tex.sparse.clone();
@@ -326,7 +331,7 @@ window.HQ = (() => {
       const win = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.6), new THREE.MeshBasicMaterial({ color: p.v > 0.4 ? 0xffd58a : 0x1a2030 }));
       win.position.set(0.9, 0.9, 1.71);
       body.castShadow = roof.castShadow = true; g.add(body, roof, win);
-      g.position.set(p.x, 0, p.z); g.rotation.y = (p.v - 0.5) * 0.6; addHood(g, 0, 0);
+      g.position.set(p.x, 0, p.z); g.rotation.y = (p.v - 0.5) * 0.6; addHood(g, 0, 0); addCircle(p.x, p.z, 2.7, () => g.visible);
     } else {
       const st = STY[kind === 1 ? 1 : 2];
       const h = kind === 1 ? 3 + p.v * 4 : 12 + p.v * 16, w = kind === 1 ? 4 + p.v * 2 : 3.6 + p.v * 1.6;
@@ -336,7 +341,7 @@ window.HQ = (() => {
       const top = new THREE.MeshStandardMaterial({ color: 0x0e1424 });
       const box = new THREE.Mesh(new THREE.BoxGeometry(w, h, w * 0.9), [mat, mat, top, top, mat, mat]);
       box.position.y = h / 2; box.castShadow = box.receiveShadow = true; g.add(box);
-      g.position.set(p.x, 0, p.z); addHood(g, kind === 1 ? 1 : 2, 9);
+      g.position.set(p.x, 0, p.z); addHood(g, kind === 1 ? 1 : 2, 9); addCircle(p.x, p.z, w * 0.72, () => g.visible);
     }
   });
 
@@ -376,7 +381,7 @@ window.HQ = (() => {
     g.position.set(x, 0, z); return g;
   };
   [[-20, 10.6, 8.5], [-11, 10.6, 9.5], [-2, 10.8, 8], [7, 10.6, 9], [16, 10.6, 8.5], [25, 10.7, 9.5],
-   [-10.5, 3.5, 7.5], [10.5, 4.5, 8.5], [-22, -12, 9], [20, -16, 8]].forEach(([x, z, h]) => addHood(palm(x, z, h), 0, 0));
+   [-10.5, 3.5, 7.5], [10.5, 4.5, 8.5], [-22, -12, 9], [20, -16, 8]].forEach(([x, z, h]) => { const g = palm(x, z, h); addHood(g, 0, 0); addCircle(x, z, 0.35, () => g.visible); });
 
   // ---------- San Francisco (Series A and IPO) ----------
   {
@@ -437,7 +442,7 @@ window.HQ = (() => {
         win.position.set(x, y, k < 2 ? -1.96 : -1.51); win.rotation.y = Math.PI; g.add(win);
       });
       g.position.set(-27.6 + i * w, 0, 13.6);
-      addHood(g, 1, 1);
+      addHood(g, 1, 1); addRect(-28.75 + i * w, -26.45 + i * w, 12.0, 15.2, () => g.visible);
     }
 
     // A bank of fog rolling over the bay
@@ -482,7 +487,7 @@ window.HQ = (() => {
       const h = add(new THREE.CylinderGeometry(0.1, 0.1, 0.012, 16), cream, x + Math.sign(x) * 0.066, 0.21, z); h.rotation.z = Math.PI / 2;
     });
     T.position.set(-1.8, 0, 4.2);
-    addHood(T, 0, 0);
+    addHood(T, 0, 0); addRect(-2.35, -1.25, 2.9, 5.5, () => T.visible);
   }
 
   const cars = [0, 1].map((i) => {
@@ -515,23 +520,165 @@ window.HQ = (() => {
     scene.add(pts); bursts.push({ pts, o, vel, start: now });
   };
 
+  // ---------- First-person world: places and characters ----------
+  addRect(-3.7, 3.7, -3.0, 3.0);                                   // Kestrel HQ
+  addRect(-4.85, -4.7, -2.8, 3.0, () => round === 0); addRect(4.7, 4.85, -2.8, 3.0, () => round === 0);   // yard fences
+  const label = (text, sub, w, h, bg, fg) => {
+    const t = canvasTex((c, cw, ch) => {
+      c.fillStyle = bg; c.fillRect(0, 0, cw, ch);
+      c.fillStyle = fg; c.textAlign = "center"; c.textBaseline = "middle";
+      c.font = "800 54px 'Bricolage Grotesque', 'Avenir Next', sans-serif"; c.fillText(text, cw / 2, sub ? ch * 0.4 : ch / 2);
+      if (sub) { c.font = "500 26px 'Hanken Grotesk', sans-serif"; c.globalAlpha = 0.75; c.fillText(sub, cw / 2, ch * 0.78); c.globalAlpha = 1; }
+    }, 512, 128);
+    return new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: t, transparent: bg === "rgba(0,0,0,0)" }));
+  };
+  const M = (c, o) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: 0.8 }, o || {}));
+  const piece = (grp, geo, mat, x, y, z) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; grp.add(m); return m; };
+
+  // Northlight Ventures: low glass-and-timber office on a Sand Hill-style road (fictional firm)
+  {
+    const g = new THREE.Group(), cx = 24, cz = -1;
+    piece(g, new THREE.BoxGeometry(12.4, 0.15, 7.4), M(0x9a968f), cx, 0.075, cz);
+    piece(g, new THREE.BoxGeometry(11, 1.9, 6), M(0x1c2430, { emissive: 0xffd9a0, emissiveIntensity: 0.35, roughness: 0.2, metalness: 0.4 }), cx, 1.1, cz);
+    for (let x = -5.2; x <= 5.2; x += 0.8) piece(g, new THREE.BoxGeometry(0.08, 1.9, 0.14), M(0x8a5a36), cx + x, 1.1, cz + 3.04);
+    piece(g, new THREE.BoxGeometry(13, 0.18, 7.6), M(0xe8e4dc), cx, 2.14, cz);
+    piece(g, new THREE.BoxGeometry(4.4, 0.9, 0.3), M(0xb8b0a2), cx, 0.45, 3.6);
+    const sg = label("NORTHLIGHT", "VENTURES", 3.8, 0.75, "#1b1d22", "#f1ece2"); sg.position.set(cx, 0.48, 3.76); g.add(sg);
+    [[18, 3.8], [30.5, 3.5], [31, -5.5]].forEach(([x, z]) => { piece(g, new THREE.CylinderGeometry(0.12, 0.16, 1.2), M(0x3a2a20), x, 0.6, z); piece(g, new THREE.IcosahedronGeometry(1.2, 0), M(0x3b4a26), x, 1.9, z); addCircle(x, z, 0.5); });
+    scene.add(g); addRect(17.7, 30.3, -4.8, 2.8); addRect(21.7, 26.3, 3.4, 3.8);
+  }
+  // Ledgerline & Co.: limestone audit firm with a columned porch (fictional firm)
+  {
+    const g = new THREE.Group(), cx = -24, cz = -1, stone = M(0xd9d0bf);
+    piece(g, new THREE.BoxGeometry(10, 3.4, 6), stone, cx, 1.7, cz);
+    const lit = new THREE.MeshBasicMaterial({ color: 0xffd28f }), dark = new THREE.MeshBasicMaterial({ color: 0x2a3040 });
+    for (let r = 0; r < 2; r++) for (let k = 0; k < 6; k++) {
+      if (r === 0 && (k === 2 || k === 3)) continue;
+      const w = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.9), (k + r) % 3 ? lit : dark); w.position.set(cx - 3.75 + k * 1.5, 1.0 + r * 1.5, cz + 3.01); g.add(w);
+    }
+    piece(g, new THREE.BoxGeometry(4.4, 0.12, 1.6), stone, cx, 0.06, 2.8); piece(g, new THREE.BoxGeometry(4.0, 0.12, 1.3), stone, cx, 0.18, 2.75);
+    [-1.5, -0.5, 0.5, 1.5].forEach((x) => { piece(g, new THREE.CylinderGeometry(0.16, 0.18, 2.4, 14), stone, cx + x, 1.44, 3.1); addCircle(cx + x, 3.1, 0.25); });
+    piece(g, new THREE.BoxGeometry(4.2, 0.3, 1.0), stone, cx, 2.79, 2.95);
+    const ped = new THREE.Shape(); ped.moveTo(-2.2, 0); ped.lineTo(2.2, 0); ped.lineTo(0, 0.7); ped.lineTo(-2.2, 0);
+    const pm = piece(g, new THREE.ExtrudeGeometry(ped, { depth: 1.0, bevelEnabled: false }), stone, cx, 2.94, 2.45);
+    const door = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 1.6), new THREE.MeshBasicMaterial({ color: 0x3a2a22 })); door.position.set(cx, 1.04, cz + 3.01); g.add(door);
+    const sg = label("LEDGERLINE & CO.", "Certified Public Accountants", 3.6, 0.6, "#d9d0bf", "#2a2620"); sg.position.set(cx, 3.2, 3.46); g.add(sg);
+    scene.add(g); addRect(-29.2, -18.8, -4.2, 2.2); addRect(-26.3, -21.7, 2.2, 3.6, () => false);
+  }
+  // Second Shot Coffee, across the street (fictional cafe)
+  {
+    const g = new THREE.Group(), cx = 14, cz = 14;
+    piece(g, new THREE.BoxGeometry(6, 2.3, 4), M(0xf2ead8), cx, 1.15, cz);
+    const front = new THREE.Mesh(new THREE.PlaneGeometry(4.6, 1.5), M(0x2a2620, { emissive: 0xffc98a, emissiveIntensity: 0.7 })); front.position.set(cx - 0.3, 0.95, cz - 2.01); front.rotation.y = Math.PI; g.add(front);
+    const awn = piece(g, new THREE.BoxGeometry(6.2, 0.06, 1.2), M(0xff7a59), cx, 2.0, cz - 2.5); awn.rotation.x = -0.35;
+    const sg = label("SECOND SHOT", "COFFEE", 3.2, 0.6, "#2a2620", "#f2ead8"); sg.position.set(cx, 2.45, cz - 2.02); sg.rotation.y = Math.PI; g.add(sg);
+    [[12.2, 10.9], [15.8, 10.9]].forEach(([x, z]) => { piece(g, new THREE.CylinderGeometry(0.3, 0.3, 0.04, 16), M(0x1b1c1f), x, 0.5, z); piece(g, new THREE.CylinderGeometry(0.04, 0.04, 0.5), M(0x1b1c1f), x, 0.25, z); addCircle(x, z, 0.35); });
+    scene.add(g); addRect(10.9, 17.1, 11.9, 16.1);
+  }
+
+  // Characters who bring you cases. Keyed by the first name in each case's "from" field.
+  const CHARS = {
+    Maya: { x: 2.4, z: 4.0, color: 0xff7a59, role: "CEO", place: "Kestrel HQ" },
+    Dev: { x: -0.2, z: 5.9, color: 0x5cc8ff, role: "CTO", place: "the driveway at Kestrel HQ" },
+    Priya: { x: 24, z: 4.5, color: 0xc58bff, role: "Northlight partner", place: "Northlight Ventures" },
+    Sam: { x: -24, z: 4.4, color: 0xffc857, role: "Audit senior", place: "Ledgerline & Co., the audit firm" },
+    Lena: { x: 14, z: 11.2, color: 0x58d6a0, role: "Staff engineer", place: "Second Shot Coffee", fromStreet: true }
+  };
+  const skin = [0xe8c4a0, 0xc68a5e, 0xf0d2b6, 0x8d5a3b, 0xd9a882];
+  Object.keys(CHARS).forEach((name, i) => {
+    const c = CHARS[name], g = new THREE.Group();
+    piece(g, new THREE.CylinderGeometry(0.13, 0.16, 0.6, 12), M(c.color, { roughness: 0.6 }), 0, 0.3, 0);
+    piece(g, new THREE.SphereGeometry(0.12, 14, 12), M(skin[i % skin.length], { roughness: 0.7 }), 0, 0.73, 0);
+    const tag = new THREE.Sprite(new THREE.SpriteMaterial({ map: canvasTex((cx, w, h) => {
+      cx.fillStyle = "rgba(9,12,21,.82)"; cx.fillRect(0, 18, w, h - 36);
+      cx.fillStyle = "#" + c.color.toString(16).padStart(6, "0"); cx.fillRect(0, 18, 10, h - 36);
+      cx.fillStyle = "#eef0f6"; cx.font = "700 46px 'Hanken Grotesk', sans-serif"; cx.textBaseline = "middle"; cx.fillText(name + " · " + c.role, 30, h / 2);
+    }, 512, 128), depthTest: false }));
+    tag.scale.set(1.5, 0.375, 1); tag.position.y = 1.08; g.add(tag);
+    g.position.set(c.x, 0, c.z); scene.add(g); c.grp = g;
+    addCircle(c.x, c.z, 0.3);
+  });
+  const beacon = new THREE.Group();
+  beacon.add(new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 16, 20, 1, true),
+    new THREE.MeshBasicMaterial({ color: 0xff7a59, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, fog: false })));
+  beacon.children[0].position.y = 8;
+  const gem = new THREE.Mesh(new THREE.OctahedronGeometry(0.16), new THREE.MeshBasicMaterial({ color: 0xff7a59 }));
+  beacon.add(gem); beacon.visible = false; scene.add(beacon);
+
+  // On-screen controls for walking (created here so the scene owns them)
+  const mkEl = (tag, cls, html) => { const e = document.createElement(tag); e.className = cls; if (html) e.innerHTML = html; host.appendChild(e); return e; };
+  const modeBtn = mkEl("button", "hqbtn", "Walk Silicon Valley");
+  modeBtn.type = "button";
+  modeBtn.addEventListener("click", () => window.onHQMode && window.onHQMode());
+  const guide = mkEl("div", "hqguide"); guide.setAttribute("aria-live", "polite");
+  const joy = mkEl("div", "hqjoy", "<i></i>"); joy.setAttribute("aria-hidden", "true");
+
+  let worldMode = false, target = null, targetKey = null, arrivedKey = null;
+  const player = { x: 0, z: 10.5, yaw: 0, pitch: -0.04 };
+  const keys = {};
+  const joyVec = { x: 0, y: 0 };
+  let joyId = null;
+  const joyMove = (e) => {
+    const b = joy.getBoundingClientRect(), r = b.width / 2;
+    let dx = e.clientX - (b.left + r), dy = e.clientY - (b.top + r);
+    const d = Math.hypot(dx, dy); if (d > r) { dx *= r / d; dy *= r / d; }
+    joyVec.x = dx / r; joyVec.y = dy / r; joy.firstChild.style.transform = `translate(${dx}px, ${dy}px)`;
+  };
+  joy.addEventListener("pointerdown", (e) => { joyId = e.pointerId; joy.setPointerCapture(e.pointerId); joyMove(e); e.preventDefault(); });
+  joy.addEventListener("pointermove", (e) => { if (e.pointerId === joyId) joyMove(e); });
+  const joyEnd = (e) => { if (e.pointerId !== joyId) return; joyId = null; joyVec.x = joyVec.y = 0; joy.firstChild.style.transform = ""; };
+  joy.addEventListener("pointerup", joyEnd); joy.addEventListener("pointercancel", joyEnd);
+  const blocked = (x, z, r) => {
+    for (const c of colliders) {
+      if (!c.when()) continue;
+      if (c.t === 0) { if (x > c.x0 - r && x < c.x1 + r && z > c.z0 - r && z < c.z1 + r) return true; }
+      else if (Math.hypot(x - c.x, z - c.z) < c.r + r) return true;
+    }
+    return false;
+  };
+  const walk = (dx, dz) => {                         // slide along walls: try x then z separately
+    const r = 0.3;
+    if (!blocked(player.x + dx, player.z, r)) player.x += dx;
+    if (!blocked(player.x, player.z + dz, r)) player.z += dz;
+    player.x = Math.max(-45, Math.min(45, player.x)); player.z = Math.max(-40, Math.min(32, player.z));
+  };
+  function teleport() {
+    const c = target && CHARS[target];
+    if (!c) return;
+    player.x = c.x; player.z = c.z + (c.fromStreet ? -1.3 : 1.3); player.yaw = c.fromStreet ? Math.PI : 0; player.pitch = -0.08;
+  }
+  const whereIs = (name) => (CHARS[name] ? CHARS[name].place : "Kestrel HQ");
+
   // ---------- Camera and input ----------
   let theta = 0.6, thetaGoal = 0.6, lastInput = -1e9;
   const look = { y: 2, d: 22 };
   let dragging = false, lastX = 0;
   cv.addEventListener("pointerdown", (e) => { dragging = true; lastX = e.clientX; lastInput = performance.now(); cv.style.cursor = "grabbing"; });
   window.addEventListener("pointerup", () => { dragging = false; cv.style.cursor = ""; });
+  let lastY = 0;
+  cv.addEventListener("pointerdown", (e) => { lastY = e.clientY; });
   cv.addEventListener("pointermove", (e) => {
     if (!dragging) return;
-    thetaGoal -= (e.clientX - lastX) * 0.01; lastX = e.clientX; lastInput = performance.now();
+    if (worldMode) {
+      player.yaw -= (e.clientX - lastX) * 0.006;
+      player.pitch = Math.max(-0.9, Math.min(0.7, player.pitch - (e.clientY - lastY) * 0.004));
+    } else thetaGoal -= (e.clientX - lastX) * 0.01;
+    lastX = e.clientX; lastY = e.clientY; lastInput = performance.now();
   });
+  const WALK_KEYS = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", "W", "A", "S", "D", "Shift"];
   window.addEventListener("keydown", (e) => {
-    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
     const tag = (e.target && e.target.tagName) || "";
     if (tag === "INPUT" || tag === "TEXTAREA") return;
+    if (worldMode) {
+      if (!WALK_KEYS.includes(e.key)) return;
+      keys[e.key.length === 1 ? e.key.toLowerCase() : e.key] = true; e.preventDefault(); return;
+    }
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
     e.preventDefault();
     thetaGoal += e.key === "ArrowLeft" ? 0.45 : -0.45; lastInput = performance.now();
   });
+  window.addEventListener("keyup", (e) => { keys[e.key.length === 1 ? e.key.toLowerCase() : e.key] = false; });
+  window.addEventListener("blur", () => { Object.keys(keys).forEach((k) => (keys[k] = false)); });
 
   const resize = () => {
     const w = host.clientWidth, h = host.clientHeight;
@@ -564,6 +711,16 @@ window.HQ = (() => {
       applySetting(setFrom ? 0 : 1);
     }
     round = st.round; done = st.done;
+    if (!!st.world !== worldMode) {
+      worldMode = !!st.world;
+      host.classList.toggle("walking", worldMode);
+      modeBtn.textContent = worldMode ? "Back to overview" : "Walk Silicon Valley";
+      cam.fov = worldMode ? 68 : 38; cam.updateProjectionMatrix();
+      if (worldMode) cv.focus({ preventScroll: true });
+    }
+    target = st.target || null; targetKey = st.targetKey;
+    if (target === null) arrivedKey = null;
+    Object.keys(CHARS).forEach((n) => (CHARS[n].grp.visible = worldMode || n === target));
     ghostOn = st.next === null ? -1 : st.next;
     ghosts.forEach((g, i) => { g.grp.visible = i === ghostOn; g.grp.position.y = topY; });
 
@@ -629,6 +786,41 @@ window.HQ = (() => {
       a.needsUpdate = true; b.pts.material.opacity = 1 - t / 1.8;
     }
 
+    const tc = target && CHARS[target];
+    beacon.visible = !!tc;
+    if (tc) {
+      beacon.position.set(tc.x, 0, tc.z);
+      gem.position.y = 1.45 + (reduce ? 0 : Math.sin(now / 300) * 0.08); gem.rotation.y = reduce ? 0 : now / 600;
+    }
+    Object.keys(CHARS).forEach((n) => {
+      const c = CHARS[n]; if (!c.grp.visible) return;
+      const d = Math.hypot(player.x - c.x, player.z - c.z);
+      if (worldMode && d < 7) c.grp.rotation.y = Math.atan2(player.x - c.x, player.z - c.z);
+      else c.grp.rotation.y = 0;
+    });
+    if (worldMode) {
+      const fwd = (keys.ArrowUp || keys.w ? 1 : 0) - (keys.ArrowDown || keys.s ? 1 : 0) - joyVec.y;
+      const turn = (keys.ArrowLeft ? 1 : 0) - (keys.ArrowRight ? 1 : 0) - joyVec.x * 0.9;
+      const strafe = (keys.d ? 1 : 0) - (keys.a ? 1 : 0);
+      player.yaw += turn * 2.0 * dt;
+      const sp = (keys.Shift ? 7 : 4.2) * dt, sy = Math.sin(player.yaw), cy = Math.cos(player.yaw);
+      const f = Math.max(-1, Math.min(1, fwd));
+      if (f || strafe) walk((-sy * f + cy * strafe) * sp, (-cy * f - sy * strafe) * sp);
+      cam.position.set(player.x, 0.82 + (f && !reduce ? Math.sin(now / 110) * 0.015 : 0), player.z);
+      cam.rotation.set(player.pitch, player.yaw, 0, "YXZ");
+      if (tc) {
+        const dist = Math.hypot(tc.x - player.x, tc.z - player.z);
+        const ang = Math.atan2(-(tc.x - player.x), -(tc.z - player.z));
+        let rel = ang - player.yaw; rel = Math.atan2(Math.sin(rel), Math.cos(rel));
+        guide.innerHTML = `<b style="transform:rotate(${(-rel * 180 / Math.PI).toFixed(0)}deg)">▲</b>${target} · ${Math.round(dist * 2)} m`;
+        guide.hidden = false;
+        if (dist < 1.7 && arrivedKey !== targetKey) { arrivedKey = targetKey; window.onHQArrive && window.onHQArrive(targetKey); }
+      } else guide.hidden = true;
+      R.render(scene, cam);
+      requestAnimationFrame(tick);
+      return;
+    }
+    guide.hidden = true;
     if (!reduce && !dragging && now - lastInput > 3500) thetaGoal += dt * 0.12;
     theta += (thetaGoal - theta) * Math.min(1, dt * 6);
     const H = topY + (spire.visible ? 4.5 : 0);
@@ -636,6 +828,7 @@ window.HQ = (() => {
     const blend = reduce ? 1 : Math.min(1, dt * 2.5);
     look.y += (wantY - look.y) * blend; look.d += (wantD - look.d) * blend;
     cam.position.set(Math.sin(theta) * look.d, look.y + look.d * 0.32, Math.cos(theta) * look.d);
+    cam.rotation.order = "XYZ";
     cam.lookAt(0, look.y, 0);
 
     R.render(scene, cam);
@@ -643,5 +836,5 @@ window.HQ = (() => {
   }
   requestAnimationFrame(tick);
 
-  return { update };
+  return { update, teleport, whereIs };
 })();

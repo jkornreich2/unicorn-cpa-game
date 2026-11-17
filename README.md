@@ -3,6 +3,8 @@
 A CPA exam study game. You are the first finance hire at Kestrel AI, a fictional startup, and take it from seed round to IPO by solving cases from the three core sections: FAR, AUD and REG.
 
 ## Play
+Two ways to play: walk Silicon Valley in first person (arrow keys or WASD, drag to look, joystick on phones) and find each character to get their case, or play at the desk where cases come to you.
+
 Open `dist/index.html` in a browser. It is one self-contained file.
 
 ## Layout

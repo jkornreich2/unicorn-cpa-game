@@ -24,7 +24,8 @@ window.HQ = (() => {
   scene.fog = new THREE.Fog(0x070a13, 45, 110);
   const cam = new THREE.PerspectiveCamera(38, 1, 0.1, 300);
 
-  scene.add(new THREE.HemisphereLight(0x9db8ff, 0x0a0e18, 0.6));
+  const hemi = new THREE.HemisphereLight(0x9db8ff, 0x0a0e18, 0.6);
+  scene.add(hemi);
   const moon = new THREE.DirectionalLight(0xc8d6ff, 0.8);
   moon.position.set(-16, 30, 14);
   moon.castShadow = true;
@@ -43,7 +44,7 @@ window.HQ = (() => {
     const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshStandardMaterial({ color, roughness: 1 }));
     m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); m.receiveShadow = true; scene.add(m); return m;
   };
-  flat(240, 240, 0x0b111e, 0);
+  const groundMesh = flat(240, 240, 0x0b111e, 0);
   flat(14, 11, 0x141b2b, 0.005);
   flat(240, 4, 0x121827, 0.01, 0, 8);
   const dashMat = new THREE.MeshBasicMaterial({ color: 0x3a4258 });
@@ -51,6 +52,7 @@ window.HQ = (() => {
     const d = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.12), dashMat);
     d.rotation.x = -Math.PI / 2; d.position.set(x, 0.02, 8); scene.add(d);
   }
+  let starMat;
   {
     const r = rng(17), n = 500, pos = new Float32Array(n * 3);
     for (let i = 0; i < n; i++) {
@@ -60,8 +62,45 @@ window.HQ = (() => {
       pos[i * 3 + 2] = rad * Math.sin(th) * Math.sin(ph + 0.6);
     }
     const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    scene.add(new THREE.Points(g, new THREE.PointsMaterial({ color: 0xdfe6ff, size: 0.6, sizeAttenuation: true, fog: false })));
+    starMat = new THREE.PointsMaterial({ color: 0xdfe6ff, size: 0.6, sizeAttenuation: true, fog: false, transparent: true, opacity: 1 });
+    scene.add(new THREE.Points(g, starMat));
   }
+
+  // ---------- Sky dome and per-round settings ----------
+  // Seed: Palo Alto at golden hour. Series A: dusk. IPO: night.
+  const SETTINGS = [
+    { top: 0x1f2d58, mid: 0x8a5a78, hor: 0xf3a65c, fog: 0xc98d62, groundC: 0x3a3226, sun: 0xffc48a, sunI: 1.15, sunPos: [-30, 14, 22], hs: 0xffd8ab, hg: 0x3a2f22, hI: 0.75, stars: 0 },
+    { top: 0x0d1430, mid: 0x3a2a5c, hor: 0x8a4f6e, fog: 0x2c2240, groundC: 0x121522, sun: 0xc3b2ff, sunI: 0.7, sunPos: [-20, 22, 16], hs: 0xa99cf0, hg: 0x0e0e1a, hI: 0.6, stars: 0.5 },
+    { top: 0x05070f, mid: 0x0b1226, hor: 0x1a2238, fog: 0x0b0f1c, groundC: 0x0b111e, sun: 0xc8d6ff, sunI: 0.8, sunPos: [-16, 30, 14], hs: 0x9db8ff, hg: 0x0a0e18, hI: 0.6, stars: 1 }
+  ];
+  const skyGeo = new THREE.SphereGeometry(150, 32, 16);
+  const skyCol = new Float32Array(skyGeo.attributes.position.count * 3);
+  skyGeo.setAttribute("color", new THREE.BufferAttribute(skyCol, 3));
+  const sky = new THREE.Mesh(skyGeo, new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.BackSide, fog: false, depthWrite: false }));
+  scene.add(sky);
+  const cur = { top: new THREE.Color(), mid: new THREE.Color(), hor: new THREE.Color(), fog: new THREE.Color(), groundC: new THREE.Color(),
+                sun: new THREE.Color(), hs: new THREE.Color(), hg: new THREE.Color(), sunI: 0, hI: 0, stars: 1, sunPos: new THREE.Vector3() };
+  let setFrom = null, setTo = SETTINGS[2], setStart = -1e9;
+  const tmpA = new THREE.Color(), tmpB = new THREE.Color();
+  const applySetting = (k) => {
+    const A = setFrom || setTo, B = setTo;
+    ["top", "mid", "hor", "fog", "groundC", "sun", "hs", "hg"].forEach((key) => cur[key].copy(tmpA.set(A[key])).lerp(tmpB.set(B[key]), k));
+    cur.sunI = A.sunI + (B.sunI - A.sunI) * k; cur.hI = A.hI + (B.hI - A.hI) * k; cur.stars = A.stars + (B.stars - A.stars) * k;
+    cur.sunPos.set(...A.sunPos).lerp(new THREE.Vector3(...B.sunPos), k);
+    const pos = skyGeo.attributes.position, c = new THREE.Color();
+    for (let i = 0; i < pos.count; i++) {
+      const y = pos.getY(i) / 150;
+      if (y < 0.12) c.copy(cur.hor).lerp(cur.mid, Math.max(0, y) / 0.12 * 0.5);
+      else c.copy(cur.mid).lerp(cur.top, Math.min(1, (y - 0.12) / 0.6));
+      skyCol[i * 3] = c.r; skyCol[i * 3 + 1] = c.g; skyCol[i * 3 + 2] = c.b;
+    }
+    skyGeo.attributes.color.needsUpdate = true;
+    scene.background = cur.fog; scene.fog.color.copy(cur.fog);
+    groundMesh.material.color.copy(cur.groundC);
+    moon.color.copy(cur.sun); moon.intensity = cur.sunI; moon.position.copy(cur.sunPos);
+    hemi.color.copy(cur.hs); hemi.groundColor.copy(cur.hg); hemi.intensity = cur.hI;
+    starMat.opacity = cur.stars; starMat.visible = cur.stars > 0.02;
+  };
 
   // ---------- Facade textures ----------
   const canvasTex = (draw, w = 256, h = 128) => {
@@ -73,14 +112,14 @@ window.HQ = (() => {
     return t;
   };
   const STY = [
-    { name: "The garage", w: 7.2, d: 5.6, h: 1.8, wall: "#5c4636", frame: "#3a2a20", cols: 3, win: 0xffc98a, seed: 3 },
+    { name: "The garage · Palo Alto", w: 7.2, d: 5.6, h: 1.8, wall: "#2a2c30", frame: "#17181b", cols: 3, win: 0xffc98a, seed: 3, batten: true },
     { name: "The loft", w: 6.4, d: 5.4, h: 1.55, wall: "#6b3328", frame: "#3a1e17", cols: 5, brick: true, win: 0xffd58a, seed: 5 },
     { name: "The tower", w: 5, d: 5, h: 1.35, wall: "#1b2c47", frame: "#2c4166", cols: 8, glass: true, win: 0xaee0ff, seed: 9 }
   ];
   const facade = (ctx, w, h, st, mode) => {
     ctx.fillStyle = mode === "map" ? st.wall : "#000"; ctx.fillRect(0, 0, w, h);
     if (mode === "map" && st.brick) { ctx.fillStyle = "rgba(0,0,0,.2)"; for (let y = 4; y < h; y += 8) ctx.fillRect(0, y, w, 1); }
-    if (mode === "map" && !st.glass && !st.brick) { ctx.fillStyle = "rgba(0,0,0,.18)"; for (let x = 6; x < w; x += 12) ctx.fillRect(x, 0, 1, h); }
+    if (mode === "map" && st.batten) { for (let x = 4; x < w; x += 12) { ctx.fillStyle = "rgba(255,255,255,.07)"; ctx.fillRect(x, 0, 2, h); ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.fillRect(x + 2, 0, 1, h); } }
     const r = rng(st.seed), pad = w * 0.04, gw = (w - pad * 2) / st.cols, wy = h * (st.glass ? 0.12 : 0.22), wh = h * (st.glass ? 0.76 : 0.56);
     for (let i = 0; i < st.cols; i++) {
       const x = pad + i * gw + gw * (st.glass ? 0.06 : 0.14), ww = gw * (st.glass ? 0.88 : 0.72);
@@ -146,6 +185,33 @@ window.HQ = (() => {
     grp.visible = false; scene.add(grp); return grp;
   })();
 
+  const roofCap = (() => {
+    const st = STY[0], pitch = Math.tan(18 * Math.PI / 180), half = st.w / 2, over = 0.25, rise = half * pitch;
+    const grp = new THREE.Group();
+    const shape = new THREE.Shape();
+    shape.moveTo(-half - over, -over * pitch); shape.lineTo(0, rise); shape.lineTo(half + over, -over * pitch);
+    shape.lineTo(half + over, -over * pitch + 0.14); shape.lineTo(0, rise + 0.14); shape.lineTo(-half - over, -over * pitch + 0.14);
+    const roofGeo = new THREE.ExtrudeGeometry(shape, { depth: st.d + 0.5, bevelEnabled: false });
+    roofGeo.translate(0, 0, -(st.d + 0.5) / 2);
+    const roof = new THREE.Mesh(roofGeo, new THREE.MeshStandardMaterial({ color: 0x1d1f24, roughness: 0.55, metalness: 0.35 }));
+    roof.castShadow = true; grp.add(roof);
+    const tri = (z, mat) => {
+      const sh = new THREE.Shape(); sh.moveTo(-half, 0); sh.lineTo(half, 0); sh.lineTo(0, rise); sh.lineTo(-half, 0);
+      const m = new THREE.Mesh(new THREE.ShapeGeometry(sh), mat); m.position.z = z; return m;
+    };
+    const glass = tri(st.d / 2 - 0.05, new THREE.MeshStandardMaterial({ color: 0x2a2620, emissive: 0xffc98a, emissiveIntensity: 0.9, side: THREE.DoubleSide }));
+    const back = tri(-st.d / 2 + 0.05, new THREE.MeshStandardMaterial({ color: 0x2a2c30, roughness: 0.9, side: THREE.DoubleSide }));
+    grp.add(glass, back);
+    const mullMat = new THREE.MeshStandardMaterial({ color: 0x111214 });
+    [-2.4, -1.2, 0, 1.2, 2.4].forEach((x) => {
+      const h = (half - Math.abs(x)) * pitch;
+      const m = new THREE.Mesh(new THREE.BoxGeometry(0.05, h, 0.06), mullMat);
+      m.position.set(x, h / 2, st.d / 2 - 0.02); grp.add(m);
+    });
+    grp.userData.glass = glass; grp.userData.rise = rise;
+    grp.visible = false; scene.add(grp); return grp;
+  })();
+
   const spire = (() => {
     const grp = new THREE.Group();
     const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.18, 4.5, 8), new THREE.MeshStandardMaterial({ color: 0x9fb4d8, metalness: 0.7, roughness: 0.3 }));
@@ -206,12 +272,13 @@ window.HQ = (() => {
     const kind = i % 3;   // 0 house, 1 low-rise, 2 skyscraper
     const g = new THREE.Group();
     if (kind === 0) {
-      const body = new THREE.Mesh(new THREE.BoxGeometry(3, 2, 3), new THREE.MeshStandardMaterial({ color: 0x2a2f42, roughness: 0.9 }));
-      body.position.y = 1;
-      const roof = new THREE.Mesh(new THREE.ConeGeometry(2.4, 1.4, 4), new THREE.MeshStandardMaterial({ color: 0x1a1f2e, roughness: 0.9 }));
-      roof.position.y = 2.7; roof.rotation.y = Math.PI / 4;
+      const stucco = [0xd9cbb3, 0xe6dfd2, 0xc9b99c, 0xbfc6c3][i % 4];
+      const body = new THREE.Mesh(new THREE.BoxGeometry(4.8, 1.6, 3.4), new THREE.MeshStandardMaterial({ color: stucco, roughness: 0.95 }));
+      body.position.y = 0.8;
+      const roof = new THREE.Mesh(new THREE.ConeGeometry(3.4, 0.9, 4), new THREE.MeshStandardMaterial({ color: 0x5b5148, roughness: 0.9 }));
+      roof.position.y = 2.05; roof.rotation.y = Math.PI / 4; roof.scale.set(1.25, 1, 0.9);
       const win = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.6), new THREE.MeshBasicMaterial({ color: p.v > 0.4 ? 0xffd58a : 0x1a2030 }));
-      win.position.set(0.6, 1.2, 1.51);
+      win.position.set(0.9, 0.9, 1.71);
       body.castShadow = roof.castShadow = true; g.add(body, roof, win);
       g.position.set(p.x, 0, p.z); g.rotation.y = (p.v - 0.5) * 0.6; addHood(g, 0, 0);
     } else {
@@ -226,6 +293,44 @@ window.HQ = (() => {
       g.position.set(p.x, 0, p.z); addHood(g, kind === 1 ? 1 : 2, 9);
     }
   });
+
+  // Golden foothills on the horizon
+  {
+    const hillMat = new THREE.MeshStandardMaterial({ color: 0xb88f4e, roughness: 1 });
+    const oakMat = new THREE.MeshStandardMaterial({ color: 0x3b4a26, roughness: 1 });
+    const r = rng(31);
+    for (let i = 0; i < 9; i++) {
+      const a = -Math.PI * 0.95 + (i / 8) * Math.PI * 0.9 - Math.PI * 0.03, rad = 78 + r() * 18;
+      const g = new THREE.Group();
+      const hill = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 12, 0, Math.PI * 2, 0, Math.PI / 2), hillMat);
+      const sx = 22 + r() * 18, sy = 6 + r() * 9, sz = 12 + r() * 8;
+      hill.scale.set(sx, sy, sz); g.add(hill);
+      for (let k = 0; k < 6; k++) {
+        const u = (r() - 0.5) * 1.4, v = (r() - 0.5) * 1.2, y = sy * Math.sqrt(Math.max(0, 1 - u * u / 1.0 - v * v / 1.0)) * 0.9;
+        const oak = new THREE.Mesh(new THREE.IcosahedronGeometry(0.9 + r() * 0.8, 0), oakMat);
+        oak.position.set(u * sx * 0.7, Math.max(0.5, y), v * sz * 0.7); g.add(oak);
+      }
+      g.position.set(Math.cos(a) * rad, 0, Math.sin(a) * rad);
+      addHood(g, 0, 0);
+    }
+  }
+  // California fan palms
+  const palmTrunk = new THREE.MeshStandardMaterial({ color: 0x8c7356, roughness: 1 });
+  const palmLeaf = new THREE.MeshStandardMaterial({ color: 0x4f6f3a, roughness: 0.9, side: THREE.DoubleSide });
+  const palm = (x, z, h) => {
+    const g = new THREE.Group();
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.2, h, 7), palmTrunk);
+    trunk.position.y = h / 2; trunk.castShadow = true; g.add(trunk);
+    for (let i = 0; i < 11; i++) {
+      const pivot = new THREE.Object3D(); pivot.position.y = h; pivot.rotation.y = (i / 11) * Math.PI * 2;
+      const frond = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.04, 0.42), palmLeaf);
+      frond.position.x = 0.85; frond.rotation.z = -0.32 - (i % 3) * 0.12; frond.castShadow = true;
+      pivot.add(frond); g.add(pivot);
+    }
+    g.position.set(x, 0, z); return g;
+  };
+  [[-20, 10.6, 8.5], [-11, 10.6, 9.5], [-2, 10.8, 8], [7, 10.6, 9], [16, 10.6, 8.5], [25, 10.7, 9.5],
+   [-10.5, 3.5, 7.5], [10.5, 4.5, 8.5], [-22, -12, 9], [20, -16, 8]].forEach(([x, z, h]) => addHood(palm(x, z, h), 0, 0));
 
   const cars = [0, 1].map((i) => {
     const g = new THREE.Group();
@@ -284,7 +389,7 @@ window.HQ = (() => {
   resize();
 
   // ---------- State from the game ----------
-  let round = 0, done = false, ready = false;
+  let round = 0, done = false, ready = false, settingReady = false;
   function update(st) {
     const same = st.floors.length >= floors.length && floors.every((f, i) => f.r === st.floors[i].r && f.g === st.floors[i].g);
     if (!same) clearFloors();
@@ -292,13 +397,30 @@ window.HQ = (() => {
     for (let i = floors.length; i < st.floors.length; i++) placeFloor(st.floors[i].r, st.floors[i].g, animate);
     ready = true;
 
+    if (st.round !== round || !settingReady) {
+      setFrom = settingReady && !reduce ? {
+        top: cur.top.clone(), mid: cur.mid.clone(), hor: cur.hor.clone(), fog: cur.fog.clone(), groundC: cur.groundC.clone(),
+        sun: cur.sun.clone(), hs: cur.hs.clone(), hg: cur.hg.clone(), sunI: cur.sunI, hI: cur.hI, stars: cur.stars, sunPos: cur.sunPos.toArray()
+      } : null;
+      setTo = SETTINGS[Math.min(st.round, 2)];
+      setStart = settingReady && !reduce ? performance.now() : -1e9;
+      settingReady = true;
+      applySetting(setFrom ? 0 : 1);
+    }
     round = st.round; done = st.done;
     ghostOn = st.next === null ? -1 : st.next;
     ghosts.forEach((g, i) => { g.grp.visible = i === ghostOn; g.grp.position.y = topY; });
 
     const topSt = floors.length ? STY[floors[floors.length - 1].r] : null;
     sign.visible = !!topSt;
-    if (topSt) sign.position.set(0, topY, topSt.d / 2 - 0.35);
+    const capOn = topSt === STY[0] && (ghostOn === 0 || ghostOn === -1);
+    roofCap.visible = capOn;
+    roofCap.userData.targetY = topY + (ghostOn === 0 ? STY[0].h + 0.15 : 0);
+    if (!roofCap.userData.placed || reduce) { roofCap.position.y = roofCap.userData.targetY; roofCap.userData.placed = capOn; }
+    if (topSt) {
+      if (capOn) sign.position.set(0, topY - 0.55, topSt.d / 2 + 0.75);
+      else sign.position.set(0, topY, topSt.d / 2 - 0.35);
+    }
     spire.visible = done; spire.position.y = topY;
     cars.forEach((c) => (c.visible = round >= 1));
 
@@ -327,6 +449,9 @@ window.HQ = (() => {
       const a = reduce ? 0.8 : 0.45 + 0.4 * Math.sin(now / 320);
       ghosts[ghostOn].edges.material.opacity = a;
     }
+    if (setFrom && now - setStart < 1900) applySetting(ease((now - setStart) / 1800));
+    else if (setFrom) { applySetting(1); setFrom = null; }
+    if (roofCap.visible) roofCap.position.y += (roofCap.userData.targetY - roofCap.position.y) * Math.min(1, dt * 5);
     hood.forEach((h) => {
       const want = round >= h.minRound && round <= h.maxRound ? 1 : 0;
       h.s += (want - h.s) * (reduce ? 1 : Math.min(1, dt * 3));

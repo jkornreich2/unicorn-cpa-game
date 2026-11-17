@@ -1,0 +1,10 @@
+{
+  "name": "unicorn-cpa-game",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/build.mjs --check",
+    "build": "node scripts/build.mjs && node scripts/review-sheet.mjs",
+    "review": "node scripts/review-sheet.mjs"
+  }
+}

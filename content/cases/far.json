@@ -1,0 +1,87 @@
+[
+  {
+    "id": "far-001",
+    "round": "seed",
+    "order": 3,
+    "section": "FAR",
+    "topic": "Contract liabilities",
+    "from": "Maya, CEO",
+    "message": "First real customer! They wired $120,000 today, December 1, for a 12-month subscription starting now. Book it so the dashboard shows it.",
+    "question": "Record the cash receipt on December 1.",
+    "type": "je",
+    "amount": 120000,
+    "accounts": [
+      "Cash",
+      "Accounts Receivable",
+      "Subscription Revenue",
+      "Deferred Revenue",
+      "Prepaid Expenses",
+      "Additional Paid-in Capital"
+    ],
+    "debit": "Cash",
+    "credit": "Deferred Revenue",
+    "explanation": "Cash arrived before the service was delivered, so Kestrel owes the customer twelve months of access. That obligation is a contract liability. Revenue is recognized over time: $10,000 by December 31.",
+    "takeaway": "ASC 606: recognize revenue when (or as) the performance obligation is satisfied. Cash timing does not drive revenue.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "far-002",
+    "round": "series-a",
+    "order": 5,
+    "section": "FAR",
+    "topic": "Stock compensation",
+    "from": "Maya, CEO",
+    "message": "We granted 120,000 options to the new engineering hires on January 1. The valuation firm puts fair value at $5 per option on the grant date. They vest at the end of four years of service.",
+    "question": "How much compensation expense does Kestrel record in year 1?",
+    "type": "num",
+    "answer": 150000,
+    "tolerance": 0,
+    "explanation": "Total cost is 120,000 x $5 = $600,000, measured at grant-date fair value and spread straight-line over the four-year service period: $150,000 a year. Debit Compensation Expense, credit APIC (stock options).",
+    "takeaway": "ASC 718: equity awards are measured once, at grant date. Later changes in the share price do not change the expense.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "far-003",
+    "round": "series-a",
+    "order": 6,
+    "section": "FAR",
+    "topic": "Leases",
+    "from": "Dev, CTO",
+    "message": "Signed the new office. Five years, $100,000 due at the end of each year, and our borrowing rate is 6%. The present value factor for an ordinary annuity, five periods at 6%, is 4.2124.",
+    "question": "What lease liability goes on the balance sheet at commencement?",
+    "type": "num",
+    "answer": 421240,
+    "tolerance": 60,
+    "explanation": "The liability is the present value of the payments: $100,000 x 4.2124 = $421,240. With no prepaid rent or initial direct costs, the right-of-use asset starts at the same amount.",
+    "takeaway": "ASC 842: lessees put both operating and finance leases on the balance sheet. Only short-term leases (12 months or less) can stay off.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "far-004",
+    "round": "ipo",
+    "order": 9,
+    "section": "FAR",
+    "topic": "Revenue allocation",
+    "from": "Maya, CEO",
+    "message": "Enterprise deal closed: $300,000 for a one-year platform subscription plus our implementation service. Sold separately, the subscription goes for $270,000 and implementation for $90,000. Both are distinct.",
+    "question": "How much of the price is allocated to implementation?",
+    "type": "num",
+    "answer": 75000,
+    "tolerance": 0,
+    "explanation": "Allocate the transaction price by relative standalone selling price. Implementation is 90,000 of 360,000, or 25%, so it gets $300,000 x 25% = $75,000. The subscription gets $225,000.",
+    "takeaway": "ASC 606 step 4: the discount is spread proportionally across obligations unless evidence shows it belongs to specific ones.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  }
+]

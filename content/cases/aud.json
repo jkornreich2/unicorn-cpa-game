@@ -1,0 +1,98 @@
+[
+  {
+    "id": "aud-001",
+    "round": "seed",
+    "order": 4,
+    "section": "AUD",
+    "topic": "Segregation of duties",
+    "from": "Priya, Northlight partner",
+    "message": "Diligence question. Your office manager sets up new vendors, enters the bills, and releases the payments. That's one person. What are you going to change?",
+    "question": "Which change addresses the biggest risk?",
+    "type": "mcq",
+    "options": [
+      "Require her to take a yearly vacation",
+      "Have someone else approve new vendors and release payments",
+      "Reconcile the bank account quarterly instead of monthly",
+      "Move the accounting system to the cloud"
+    ],
+    "answer": 1,
+    "explanation": "One person who can create a vendor and pay it can pay a fictitious vendor. Splitting authorization and custody of cash from recordkeeping removes that opportunity.",
+    "takeaway": "Keep three duties apart: Authorization, Recordkeeping, Custody of assets.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "aud-002",
+    "round": "series-a",
+    "order": 8,
+    "section": "AUD",
+    "topic": "Audit risk model",
+    "from": "Sam, audit senior",
+    "message": "First-year audit, fast growth, and your controls are still thin. We've assessed both inherent risk and control risk as high.",
+    "question": "How does the audit team respond?",
+    "type": "mcq",
+    "options": [
+      "Accept higher detection risk and do less substantive testing",
+      "Set detection risk lower and do more substantive testing",
+      "Raise materiality so fewer items need testing",
+      "Rely on controls testing instead of substantive procedures"
+    ],
+    "answer": 1,
+    "explanation": "Audit risk = risk of material misstatement x detection risk. When the first part is high, the auditor must hold detection risk low, which means more evidence: larger samples, more reliable procedures, and testing closer to year-end.",
+    "takeaway": "The auditor controls only detection risk. Inherent and control risk belong to the client and are assessed, not set.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "aud-003",
+    "round": "ipo",
+    "order": 10,
+    "section": "AUD",
+    "topic": "Revenue fraud",
+    "from": "Sam, audit senior",
+    "message": "Sales booked a $900,000 contract on December 31. I'm hearing there may be a side letter that lets the customer cancel through March.",
+    "question": "Which procedure best tests this?",
+    "type": "mcq",
+    "options": [
+      "Recalculate the invoice math",
+      "Trace delivery records forward to recorded sales",
+      "Confirm contract terms, including side agreements, with the customer",
+      "Compare this year's gross margin with last year's"
+    ],
+    "answer": 2,
+    "explanation": "A side letter lives outside the accounting records, so evidence from the customer is the most direct way to find it. Tracing from delivery records to sales tests completeness, which is the wrong direction for overstated revenue.",
+    "takeaway": "Revenue recognition is a presumed fraud risk. Overstatement: vouch from the ledger back to support. Understatement: trace from source forward.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "aud-004",
+    "round": "ipo",
+    "order": 12,
+    "section": "AUD",
+    "topic": "Integrated audit",
+    "from": "Sam, audit senior",
+    "message": "Last one before the filing. The financial statements are fairly presented, but we found a material weakness in internal control over financial reporting that still existed at year-end. Assume the integrated audit applies.",
+    "question": "What opinions does the auditor issue?",
+    "type": "mcq",
+    "options": [
+      "Unmodified on the statements, adverse on internal control",
+      "Qualified on both",
+      "Adverse on both",
+      "Unmodified on both, with an emphasis paragraph"
+    ],
+    "answer": 0,
+    "explanation": "The two opinions are separate. A material weakness at the reporting date requires an adverse opinion on internal control, even when the auditor did enough extra work to conclude the statements themselves are fairly stated.",
+    "takeaway": "PCAOB integrated audit: any material weakness at year-end means an adverse ICFR opinion. A scope limitation leads to a disclaimer or withdrawal.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  }
+]

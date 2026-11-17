@@ -139,79 +139,222 @@ const ROUNDS = [
 ];
 const SEC = {FAR:"var(--far)", AUD:"var(--aud)", REG:"var(--reg)"};
 const CASES = [
- // Seed
- {r:0,sec:"REG",topic:"Entity choice",from:"Maya, CEO",
-  msg:"Northlight wants to lead our seed. Their fund has pension plans and foreign investors as limited partners, and they want preferred stock. We're still an LLC taxed as a partnership. What do we become?",
-  q:"Which entity fits a venture-backed company?",type:"mcq",
-  opts:["S corporation, to keep one level of tax","Delaware C corporation","Stay an LLC taxed as a partnership","General partnership with the fund as a partner"],ans:1,
-  why:"A C corporation can issue preferred stock and blocks pass-through income from reaching the fund's tax-exempt and foreign investors. An S corporation fails twice: it allows only one class of stock, and a venture fund (a partnership) cannot be a shareholder.",
-  tip:"S corp limits: 100 shareholders, one class of stock, no partnership, corporate or nonresident alien shareholders."},
- {r:0,sec:"REG",topic:"Section 83(b)",from:"Dev, CTO",
-  msg:"I just bought my 4,000,000 founder shares at $0.001 each, which is what they're worth today. They vest over four years. Our lawyer said something about an 83(b) election?",
-  q:"When must Dev file the election?",type:"mcq",
-  opts:["With his tax return for the year of grant","Within 30 days of each vesting date","Within 30 days of the share transfer","Within 75 days of the share transfer"],ans:2,
-  why:"The election is due within 30 days of the transfer and cannot be extended. Dev is taxed now on value minus price paid, which is $0. Without it, he has ordinary income at every vesting date on the shares' value at that time.",
-  tip:"83(b): taxed at grant on FMV less amount paid. Later growth is capital gain. If the shares are forfeited, no deduction for tax already paid."},
- {r:0,sec:"FAR",topic:"Contract liabilities",from:"Maya, CEO",
-  msg:"First real customer! They wired $120,000 today, December 1, for a 12-month subscription starting now. Book it so the dashboard shows it.",
-  q:"Record the cash receipt on December 1.",type:"je",amt:120000,
-  accts:["Cash","Accounts Receivable","Subscription Revenue","Deferred Revenue","Prepaid Expenses","Additional Paid-in Capital"],dr:"Cash",cr:"Deferred Revenue",
-  why:"Cash arrived before the service was delivered, so Kestrel owes the customer twelve months of access. That obligation is a contract liability. Revenue is recognized over time: $10,000 by December 31.",
-  tip:"ASC 606: recognize revenue when (or as) the performance obligation is satisfied. Cash timing does not drive revenue."},
- {r:0,sec:"AUD",topic:"Segregation of duties",from:"Priya, Northlight partner",
-  msg:"Diligence question. Your office manager sets up new vendors, enters the bills, and releases the payments. That's one person. What are you going to change?",
-  q:"Which change addresses the biggest risk?",type:"mcq",
-  opts:["Require her to take a yearly vacation","Have someone else approve new vendors and release payments","Reconcile the bank account quarterly instead of monthly","Move the accounting system to the cloud"],ans:1,
-  why:"One person who can create a vendor and pay it can pay a fictitious vendor. Splitting authorization and custody of cash from recordkeeping removes that opportunity.",
-  tip:"Keep three duties apart: Authorization, Recordkeeping, Custody of assets."},
- // Series A
- {r:1,sec:"FAR",topic:"Stock compensation",from:"Maya, CEO",
-  msg:"We granted 120,000 options to the new engineering hires on January 1. The valuation firm puts fair value at $5 per option on the grant date. They vest at the end of four years of service.",
-  q:"How much compensation expense does Kestrel record in year 1?",type:"num",ans:150000,tol:0,
-  why:"Total cost is 120,000 x $5 = $600,000, measured at grant-date fair value and spread straight-line over the four-year service period: $150,000 a year. Debit Compensation Expense, credit APIC (stock options).",
-  tip:"ASC 718: equity awards are measured once, at grant date. Later changes in the share price do not change the expense."},
- {r:1,sec:"FAR",topic:"Leases",from:"Dev, CTO",
-  msg:"Signed the new office. Five years, $100,000 due at the end of each year, and our borrowing rate is 6%. The present value factor for an ordinary annuity, five periods at 6%, is 4.2124.",
-  q:"What lease liability goes on the balance sheet at commencement?",type:"num",ans:421240,tol:60,
-  why:"The liability is the present value of the payments: $100,000 x 4.2124 = $421,240. With no prepaid rent or initial direct costs, the right-of-use asset starts at the same amount.",
-  tip:"ASC 842: lessees put both operating and finance leases on the balance sheet. Only short-term leases (12 months or less) can stay off."},
- {r:1,sec:"REG",topic:"Stock options",from:"Lena, staff engineer",
-  msg:"I'm exercising 10,000 nonqualified options today. Exercise price is $1 and the 409A value is $9 a share. HR says payroll needs something from finance.",
-  q:"What is the tax result on the exercise date?",type:"mcq",
-  opts:["No income until she sells the shares","$80,000 of long-term capital gain for Lena","$80,000 of ordinary income for Lena, and Kestrel deducts $80,000","$90,000 of ordinary income for Lena, and no deduction for Kestrel"],ans:2,
-  why:"For a nonqualified option, the spread at exercise, (9 - 1) x 10,000 = $80,000, is wages to the employee, subject to withholding. The company deducts the same amount. Her basis in the shares becomes $9.",
-  tip:"ISO contrast: no regular tax at exercise (the spread is an AMT item) and no company deduction unless there is a disqualifying disposition."},
- {r:1,sec:"AUD",topic:"Audit risk model",from:"Sam, audit senior",
-  msg:"First-year audit, fast growth, and your controls are still thin. We've assessed both inherent risk and control risk as high.",
-  q:"How does the audit team respond?",type:"mcq",
-  opts:["Accept higher detection risk and do less substantive testing","Set detection risk lower and do more substantive testing","Raise materiality so fewer items need testing","Rely on controls testing instead of substantive procedures"],ans:1,
-  why:"Audit risk = risk of material misstatement x detection risk. When the first part is high, the auditor must hold detection risk low, which means more evidence: larger samples, more reliable procedures, and testing closer to year-end.",
-  tip:"The auditor controls only detection risk. Inherent and control risk belong to the client and are assessed, not set."},
- // IPO
- {r:2,sec:"FAR",topic:"Revenue allocation",from:"Maya, CEO",
-  msg:"Enterprise deal closed: $300,000 for a one-year platform subscription plus our implementation service. Sold separately, the subscription goes for $270,000 and implementation for $90,000. Both are distinct.",
-  q:"How much of the price is allocated to implementation?",type:"num",ans:75000,tol:0,
-  why:"Allocate the transaction price by relative standalone selling price. Implementation is 90,000 of 360,000, or 25%, so it gets $300,000 x 25% = $75,000. The subscription gets $225,000.",
-  tip:"ASC 606 step 4: the discount is spread proportionally across obligations unless evidence shows it belongs to specific ones."},
- {r:2,sec:"AUD",topic:"Revenue fraud",from:"Sam, audit senior",
-  msg:"Sales booked a $900,000 contract on December 31. I'm hearing there may be a side letter that lets the customer cancel through March.",
-  q:"Which procedure best tests this?",type:"mcq",
-  opts:["Recalculate the invoice math","Trace delivery records forward to recorded sales","Confirm contract terms, including side agreements, with the customer","Compare this year's gross margin with last year's"],ans:2,
-  why:"A side letter lives outside the accounting records, so evidence from the customer is the most direct way to find it. Tracing from delivery records to sales tests completeness, which is the wrong direction for overstated revenue.",
-  tip:"Revenue recognition is a presumed fraud risk. Overstatement: vouch from the ledger back to support. Understatement: trace from source forward."},
- {r:2,sec:"REG",topic:"Net operating losses",from:"Maya, CEO",
-  msg:"We finally made money. Taxable income before any loss deduction is $2,000,000, and we're carrying $5,000,000 of net operating losses from the last few years. So no tax, right?",
-  q:"What is Kestrel's federal income tax for the year?",type:"num",ans:84000,tol:0,
-  why:"Losses from years after 2017 can offset only 80% of taxable income: $1,600,000. That leaves $400,000 taxed at 21%, which is $84,000. The remaining $3,400,000 carries forward indefinitely.",
-  tip:"Post-2017 NOLs: no carryback, unlimited carryforward, 80% of taxable income cap."},
- {r:2,sec:"AUD",topic:"Integrated audit",from:"Sam, audit senior",
-  msg:"Last one before the filing. The financial statements are fairly presented, but we found a material weakness in internal control over financial reporting that still existed at year-end. Assume the integrated audit applies.",
-  q:"What opinions does the auditor issue?",type:"mcq",
-  opts:["Unmodified on the statements, adverse on internal control","Qualified on both","Adverse on both","Unmodified on both, with an emphasis paragraph"],ans:0,
-  why:"The two opinions are separate. A material weakness at the reporting date requires an adverse opinion on internal control, even when the auditor did enough extra work to conclude the statements themselves are fairly stated.",
-  tip:"PCAOB integrated audit: any material weakness at year-end means an adverse ICFR opinion. A scope limitation leads to a disclaimer or withdrawal."}
+ {
+  "id": "reg-001",
+  "r": 0,
+  "sec": "REG",
+  "topic": "Entity choice",
+  "from": "Maya, CEO",
+  "msg": "Northlight wants to lead our seed. Their fund has pension plans and foreign investors as limited partners, and they want preferred stock. We're still an LLC taxed as a partnership. What do we become?",
+  "q": "Which entity fits a venture-backed company?",
+  "type": "mcq",
+  "why": "A C corporation can issue preferred stock and blocks pass-through income from reaching the fund's tax-exempt and foreign investors. An S corporation fails twice: it allows only one class of stock, and a venture fund (a partnership) cannot be a shareholder.",
+  "tip": "S corp limits: 100 shareholders, one class of stock, no partnership, corporate or nonresident alien shareholders.",
+  "opts": [
+   "S corporation, to keep one level of tax",
+   "Delaware C corporation",
+   "Stay an LLC taxed as a partnership",
+   "General partnership with the fund as a partner"
+  ],
+  "ans": 1
+ },
+ {
+  "id": "reg-002",
+  "r": 0,
+  "sec": "REG",
+  "topic": "Section 83(b)",
+  "from": "Dev, CTO",
+  "msg": "I just bought my 4,000,000 founder shares at $0.001 each, which is what they're worth today. They vest over four years. Our lawyer said something about an 83(b) election?",
+  "q": "When must Dev file the election?",
+  "type": "mcq",
+  "why": "The election is due within 30 days of the transfer and cannot be extended. Dev is taxed now on value minus price paid, which is $0. Without it, he has ordinary income at every vesting date on the shares' value at that time.",
+  "tip": "83(b): taxed at grant on FMV less amount paid. Later growth is capital gain. If the shares are forfeited, no deduction for tax already paid.",
+  "opts": [
+   "With his tax return for the year of grant",
+   "Within 30 days of each vesting date",
+   "Within 30 days of the share transfer",
+   "Within 75 days of the share transfer"
+  ],
+  "ans": 2
+ },
+ {
+  "id": "far-001",
+  "r": 0,
+  "sec": "FAR",
+  "topic": "Contract liabilities",
+  "from": "Maya, CEO",
+  "msg": "First real customer! They wired $120,000 today, December 1, for a 12-month subscription starting now. Book it so the dashboard shows it.",
+  "q": "Record the cash receipt on December 1.",
+  "type": "je",
+  "why": "Cash arrived before the service was delivered, so Kestrel owes the customer twelve months of access. That obligation is a contract liability. Revenue is recognized over time: $10,000 by December 31.",
+  "tip": "ASC 606: recognize revenue when (or as) the performance obligation is satisfied. Cash timing does not drive revenue.",
+  "amt": 120000,
+  "accts": [
+   "Cash",
+   "Accounts Receivable",
+   "Subscription Revenue",
+   "Deferred Revenue",
+   "Prepaid Expenses",
+   "Additional Paid-in Capital"
+  ],
+  "dr": "Cash",
+  "cr": "Deferred Revenue"
+ },
+ {
+  "id": "aud-001",
+  "r": 0,
+  "sec": "AUD",
+  "topic": "Segregation of duties",
+  "from": "Priya, Northlight partner",
+  "msg": "Diligence question. Your office manager sets up new vendors, enters the bills, and releases the payments. That's one person. What are you going to change?",
+  "q": "Which change addresses the biggest risk?",
+  "type": "mcq",
+  "why": "One person who can create a vendor and pay it can pay a fictitious vendor. Splitting authorization and custody of cash from recordkeeping removes that opportunity.",
+  "tip": "Keep three duties apart: Authorization, Recordkeeping, Custody of assets.",
+  "opts": [
+   "Require her to take a yearly vacation",
+   "Have someone else approve new vendors and release payments",
+   "Reconcile the bank account quarterly instead of monthly",
+   "Move the accounting system to the cloud"
+  ],
+  "ans": 1
+ },
+ {
+  "id": "far-002",
+  "r": 1,
+  "sec": "FAR",
+  "topic": "Stock compensation",
+  "from": "Maya, CEO",
+  "msg": "We granted 120,000 options to the new engineering hires on January 1. The valuation firm puts fair value at $5 per option on the grant date. They vest at the end of four years of service.",
+  "q": "How much compensation expense does Kestrel record in year 1?",
+  "type": "num",
+  "why": "Total cost is 120,000 x $5 = $600,000, measured at grant-date fair value and spread straight-line over the four-year service period: $150,000 a year. Debit Compensation Expense, credit APIC (stock options).",
+  "tip": "ASC 718: equity awards are measured once, at grant date. Later changes in the share price do not change the expense.",
+  "ans": 150000,
+  "tol": 0
+ },
+ {
+  "id": "far-003",
+  "r": 1,
+  "sec": "FAR",
+  "topic": "Leases",
+  "from": "Dev, CTO",
+  "msg": "Signed the new office. Five years, $100,000 due at the end of each year, and our borrowing rate is 6%. The present value factor for an ordinary annuity, five periods at 6%, is 4.2124.",
+  "q": "What lease liability goes on the balance sheet at commencement?",
+  "type": "num",
+  "why": "The liability is the present value of the payments: $100,000 x 4.2124 = $421,240. With no prepaid rent or initial direct costs, the right-of-use asset starts at the same amount.",
+  "tip": "ASC 842: lessees put both operating and finance leases on the balance sheet. Only short-term leases (12 months or less) can stay off.",
+  "ans": 421240,
+  "tol": 60
+ },
+ {
+  "id": "reg-003",
+  "r": 1,
+  "sec": "REG",
+  "topic": "Stock options",
+  "from": "Lena, staff engineer",
+  "msg": "I'm exercising 10,000 nonqualified options today. Exercise price is $1 and the 409A value is $9 a share. HR says payroll needs something from finance.",
+  "q": "What is the tax result on the exercise date?",
+  "type": "mcq",
+  "why": "For a nonqualified option, the spread at exercise, (9 - 1) x 10,000 = $80,000, is wages to the employee, subject to withholding. The company deducts the same amount. Her basis in the shares becomes $9.",
+  "tip": "ISO contrast: no regular tax at exercise (the spread is an AMT item) and no company deduction unless there is a disqualifying disposition.",
+  "opts": [
+   "No income until she sells the shares",
+   "$80,000 of long-term capital gain for Lena",
+   "$80,000 of ordinary income for Lena, and Kestrel deducts $80,000",
+   "$90,000 of ordinary income for Lena, and no deduction for Kestrel"
+  ],
+  "ans": 2
+ },
+ {
+  "id": "aud-002",
+  "r": 1,
+  "sec": "AUD",
+  "topic": "Audit risk model",
+  "from": "Sam, audit senior",
+  "msg": "First-year audit, fast growth, and your controls are still thin. We've assessed both inherent risk and control risk as high.",
+  "q": "How does the audit team respond?",
+  "type": "mcq",
+  "why": "Audit risk = risk of material misstatement x detection risk. When the first part is high, the auditor must hold detection risk low, which means more evidence: larger samples, more reliable procedures, and testing closer to year-end.",
+  "tip": "The auditor controls only detection risk. Inherent and control risk belong to the client and are assessed, not set.",
+  "opts": [
+   "Accept higher detection risk and do less substantive testing",
+   "Set detection risk lower and do more substantive testing",
+   "Raise materiality so fewer items need testing",
+   "Rely on controls testing instead of substantive procedures"
+  ],
+  "ans": 1
+ },
+ {
+  "id": "far-004",
+  "r": 2,
+  "sec": "FAR",
+  "topic": "Revenue allocation",
+  "from": "Maya, CEO",
+  "msg": "Enterprise deal closed: $300,000 for a one-year platform subscription plus our implementation service. Sold separately, the subscription goes for $270,000 and implementation for $90,000. Both are distinct.",
+  "q": "How much of the price is allocated to implementation?",
+  "type": "num",
+  "why": "Allocate the transaction price by relative standalone selling price. Implementation is 90,000 of 360,000, or 25%, so it gets $300,000 x 25% = $75,000. The subscription gets $225,000.",
+  "tip": "ASC 606 step 4: the discount is spread proportionally across obligations unless evidence shows it belongs to specific ones.",
+  "ans": 75000,
+  "tol": 0
+ },
+ {
+  "id": "aud-003",
+  "r": 2,
+  "sec": "AUD",
+  "topic": "Revenue fraud",
+  "from": "Sam, audit senior",
+  "msg": "Sales booked a $900,000 contract on December 31. I'm hearing there may be a side letter that lets the customer cancel through March.",
+  "q": "Which procedure best tests this?",
+  "type": "mcq",
+  "why": "A side letter lives outside the accounting records, so evidence from the customer is the most direct way to find it. Tracing from delivery records to sales tests completeness, which is the wrong direction for overstated revenue.",
+  "tip": "Revenue recognition is a presumed fraud risk. Overstatement: vouch from the ledger back to support. Understatement: trace from source forward.",
+  "opts": [
+   "Recalculate the invoice math",
+   "Trace delivery records forward to recorded sales",
+   "Confirm contract terms, including side agreements, with the customer",
+   "Compare this year's gross margin with last year's"
+  ],
+  "ans": 2
+ },
+ {
+  "id": "reg-004",
+  "r": 2,
+  "sec": "REG",
+  "topic": "Net operating losses",
+  "from": "Maya, CEO",
+  "msg": "We finally made money. Taxable income before any loss deduction is $2,000,000, and we're carrying $5,000,000 of net operating losses from the last few years. So no tax, right?",
+  "q": "What is Kestrel's federal income tax for the year?",
+  "type": "num",
+  "why": "Losses from years after 2017 can offset only 80% of taxable income: $1,600,000. That leaves $400,000 taxed at 21%, which is $84,000. The remaining $3,400,000 carries forward indefinitely.",
+  "tip": "Post-2017 NOLs: no carryback, unlimited carryforward, 80% of taxable income cap.",
+  "ans": 84000,
+  "tol": 0
+ },
+ {
+  "id": "aud-004",
+  "r": 2,
+  "sec": "AUD",
+  "topic": "Integrated audit",
+  "from": "Sam, audit senior",
+  "msg": "Last one before the filing. The financial statements are fairly presented, but we found a material weakness in internal control over financial reporting that still existed at year-end. Assume the integrated audit applies.",
+  "q": "What opinions does the auditor issue?",
+  "type": "mcq",
+  "why": "The two opinions are separate. A material weakness at the reporting date requires an adverse opinion on internal control, even when the auditor did enough extra work to conclude the statements themselves are fairly stated.",
+  "tip": "PCAOB integrated audit: any material weakness at year-end means an adverse ICFR opinion. A scope limitation leads to a disclaimer or withdrawal.",
+  "opts": [
+   "Unmodified on the statements, adverse on internal control",
+   "Qualified on both",
+   "Adverse on both",
+   "Unmodified on both, with an emphasis paragraph"
+  ],
+  "ans": 0
+ }
 ];
 const MAX = CASES.length * 100;
+const UNICORN_AT = Math.round(MAX * 5 / 6);
+const roundMax = (r) => CASES.filter(c => c.r === r).length * 100;
 
 let S;
 const fresh = () => ({phase:"intro",tab:"play",i:0,pts:[],tries:0,solved:false,pick:null,dr:null,cr:null,active:"dr",note:null,trust:70});
@@ -259,9 +402,9 @@ function viewPlay(){
     <h1>Take an AI startup from seed round to IPO.</h1>
     <p>You are the first finance hire at Kestrel AI. Founders, investors and auditors will message you with real problems. Every call you make moves the valuation.</p>
     <ol class="how">
-      <li><b>Twelve cases</b> across three funding rounds.</li>
+      <li><b>${CASES.length} cases</b> across three funding rounds.</li>
       <li>Each is tagged <b style="color:var(--far)">FAR</b>, <b style="color:var(--aud)">AUD</b> or <b style="color:var(--reg)">REG</b> and ends with the exam takeaway.</li>
-      <li>Score 1,000 of 1,200 points to list at a <b>$1B valuation</b>.</li>
+      <li>Score ${UNICORN_AT.toLocaleString("en-US")} of ${MAX.toLocaleString("en-US")} points to list at a <b>$1B valuation</b>.</li>
     </ol>
     <div class="row"><button class="btn" data-act="start">Start the seed round</button></div>
     <p class="dim">Kestrel AI and everyone in it are fictional. Rules shown are US GAAP, AICPA and PCAOB standards, and federal tax law.</p></section>`;
@@ -289,8 +432,8 @@ function viewClose(){
     <span class="tag" style="--c:var(--accent)">TERM SHEET SIGNED</span>
     <h2>${R.name} round closed</h2>
     <div class="big">${fmtVal(v)}</div>
-    <div class="kv"><span>Raised</span><b>${R.raise}</b><span>Lead investor</span><b style="font-family:var(--body)">${R.lead}</b><span>Round score</span><b>${p} / 400</b></div>
-    <p>${p >= 350 ? "Clean diligence. The lead investor said your books were the easiest part of the deal." : p >= 200 ? "The round closed, but diligence found gaps and the price reflects it." : "The round barely closed. Investors priced in the cleanup work."}</p>
+    <div class="kv"><span>Raised</span><b>${R.raise}</b><span>Lead investor</span><b style="font-family:var(--body)">${R.lead}</b><span>Round score</span><b>${p} / ${roundMax(r)}</b></div>
+    <p>${p >= roundMax(r) * .875 ? "Clean diligence. The lead investor said your books were the easiest part of the deal." : p >= roundMax(r) * .5 ? "The round closed, but diligence found gaps and the price reflects it." : "The round barely closed. Investors priced in the cleanup work."}</p>
     <h3>Next: ${next.name}</h3><p class="dim">${next.blurb}</p>
     <div class="row"><button class="btn" data-act="open">Start ${next.name}</button></div></section>`;
 }
@@ -307,7 +450,7 @@ function secBars(){
 }
 
 function viewDone(){
-  const t = total(), v = 300 + 0.7 * t, uni = t >= 1000;
+  const t = total(), uni = t >= UNICORN_AT, v = uni ? Math.max(1000, 300 + 0.7 * t) : Math.min(990, 300 + 0.7 * t);
   const weak = secStats().sort((a, b) => a.got / a.of - b.got / b.of)[0];
   const missed = CASES.filter((c, k) => S.pts[k] < 100);
   return `<section class="panel deal">

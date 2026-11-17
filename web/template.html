@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unicorn: Seed to IPO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: a founder's finance console at night. One ticker (valuation) is the loud element; cases arrive as messages on glass panels. Single dark theme by choice. */
+  color-scheme: dark;
+  --bg:#090c15;
+  --panel:#121726;
+  --panel-2:#1a2033;
+  --edge:rgba(255,255,255,.09);
+  --text:#eef0f6;
+  --dim:#98a0b8;
+  --accent:#ff7a59;      /* term-sheet coral */
+  --far:#5cc8ff; --aud:#ffc857; --reg:#c58bff;
+  --good:#58d6a0; --bad:#ff6b7d;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;
+  --body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);background-image:radial-gradient(600px 320px at 85% -80px,rgba(92,200,255,.13),transparent 70%),radial-gradient(520px 300px at 0% 0%,rgba(255,122,89,.10),transparent 70%);background-repeat:no-repeat;color:var(--text);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:600px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.08;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:38px;font-weight:800}
+h2{font-size:24px;font-weight:600}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+.dim{color:var(--dim);font-size:14px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Top console */
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.co{font-family:var(--display);font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px}
+.co i{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.stages{display:flex;gap:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.stages span{padding:4px 8px;border-radius:99px;border:1px solid var(--edge);color:var(--dim)}
+.stages span.on{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:700}
+.stages span.done{color:var(--good);border-color:rgba(88,214,160,.4)}
+.ticker{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}
+.ticker small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.val{font-family:var(--mono);font-weight:700;font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}
+.trust{min-width:120px}
+.bar{height:6px;border-radius:99px;background:var(--panel-2);overflow:hidden;margin-top:6px}
+.bar b{display:block;height:100%;border-radius:99px;background:var(--c,var(--accent));transition:width .4s}
+.tabs{display:flex;gap:6px}
+.tabs button{flex:1;min-height:42px;background:transparent;border:1px solid var(--edge);border-radius:12px;color:var(--dim);font-weight:500;font-size:14px}
+.tabs button[aria-selected="true"]{background:var(--panel-2);color:var(--text);border-color:rgba(255,255,255,.22)}
+
+/* Panels */
+.panel{background:var(--panel);border:1px solid var(--edge);border-radius:18px;padding:18px 16px;display:flex;flex-direction:column;gap:14px}
+.tag{align-self:flex-start;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 9px;border-radius:6px;color:var(--bg);background:var(--c)}
+.headrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.msg{background:var(--panel-2);border-radius:4px 14px 14px 14px;padding:11px 13px;font-size:15.5px}
+.msg b{display:block;font-size:12.5px;font-weight:600;color:var(--dim);margin-bottom:3px}
+.q{font-weight:600;font-size:16.5px}
+.opt{width:100%;min-height:48px;text-align:left;background:transparent;border:1px solid var(--edge);border-radius:12px;padding:11px 13px;font-size:15px;line-height:1.35}
+.opt:hover:not(:disabled){border-color:rgba(255,255,255,.3)}
+.opt.right{border-color:var(--good);background:rgba(88,214,160,.10)}
+.opt.wrong{border-color:var(--bad);background:rgba(255,107,125,.10)}
+.opt:disabled{cursor:default}
+.opts{display:flex;flex-direction:column;gap:8px}
+.btn{min-height:48px;border-radius:12px;border:none;background:var(--accent);color:#1a0d08;font-weight:600;padding:11px 18px;flex:1}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent;border:1px solid var(--edge);color:var(--text)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.numrow{display:flex;gap:8px}
+.numrow label{flex:1;display:flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--edge);border-radius:12px;padding:0 12px;font-family:var(--mono)}
+.numrow input{flex:1;min-width:0;height:48px;background:transparent;border:none;outline:none;font-family:var(--mono);font-size:18px}
+.numrow .btn{flex:0 0 auto}
+.fb{border-left:3px solid var(--c);background:var(--panel-2);border-radius:0 12px 12px 0;padding:11px 13px;font-size:15px}
+.fb.good{--c:var(--good)} .fb.bad{--c:var(--bad)} .fb.tip{--c:var(--accent)}
+.fb b{font-weight:600}
+.verdict{font-family:var(--display);font-weight:800;font-size:20px}
+.verdict.good{color:var(--good)} .verdict.bad{color:var(--bad)}
+
+/* Journal */
+.je{width:100%;border-collapse:collapse;font-size:14.5px}
+.je th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-align:left;font-weight:500;padding:4px 6px}
+.je td{padding:5px 6px;border-top:1px solid var(--edge)}
+.je .n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;width:84px}
+.slot{width:100%;min-height:44px;text-align:left;background:var(--panel-2);border:1px dashed rgba(255,255,255,.3);border-radius:10px;padding:8px 10px;font-size:14.5px}
+.slot.cr{margin-left:18px;width:calc(100% - 18px)}
+.slot.on{border:1px solid var(--accent);box-shadow:0 0 0 3px rgba(255,122,89,.25)}
+.slot em{font-style:normal;color:var(--dim)}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.chip{min-height:44px;text-align:left;background:transparent;border:1px solid var(--edge);border-radius:10px;padding:7px 10px;font-size:14px;line-height:1.2}
+.chip.sel{background:var(--text);color:var(--bg)}
+
+/* Scorecard and deals */
+.sec{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center}
+.sec .bar{margin:0}
+.list{display:flex;flex-direction:column}
+.item{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--edge);font-size:14.5px}
+.item .tag{font-size:10px;padding:3px 6px}
+.deal{border:1px solid rgba(255,122,89,.45);background:linear-gradient(160deg,rgba(255,122,89,.12),transparent 60%),var(--panel)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:15px}
+.kv span{color:var(--dim)}
+.kv b{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.big{font-family:var(--mono);font-weight:700;font-size:44px;line-height:1;color:var(--accent);animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.big{animation:none}.bar b{transition:none}}
+ol.how{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+@media (max-width:380px){.val{font-size:28px}h1{font-size:31px}.chips{grid-template-columns:1fr}.stages span{padding:4px 6px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="co"><i></i>Kestrel AI</div>
+    <div class="stages" id="stages"></div>
+  </header>
+  <section class="ticker" aria-label="Company status">
+    <div><small>Valuation</small><div class="val" id="val">$6.0M</div></div>
+    <div class="trust"><small>Board trust <span class="mono" id="trustN">70</span></small><div class="bar"><b id="trustB" style="width:70%"></b></div></div>
+  </section>
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-play" data-act="tab" data-v="play">Desk</button>
+    <button role="tab" id="tab-score" data-act="tab" data-v="score">Scorecard</button>
+  </nav>
+  <main id="view"></main>
+</div>
+
+<script>
+const ROUNDS = [
+  {name:"Seed", raise:"$2M", lead:"Northlight Ventures", blurb:"Four founders, one laptop each, and a model that works. Get the company fundable."},
+  {name:"Series A", raise:"$15M", lead:"Northlight Ventures", blurb:"Forty employees, real customers, and investors who now require audited financials."},
+  {name:"IPO", raise:"$300M", lead:"Public markets", blurb:"Bankers are circling. Every number you report is about to be public."}
+];
+const SEC = {FAR:"var(--far)", AUD:"var(--aud)", REG:"var(--reg)"};
+const CASES = /*__CASES__*/[];
+const MAX = CASES.length * 100;
+const UNICORN_AT = Math.round(MAX * 5 / 6);
+const roundMax = (r) => CASES.filter(c => c.r === r).length * 100;
+
+let S;
+const fresh = () => ({phase:"intro",tab:"play",i:0,pts:[],tries:0,solved:false,pick:null,dr:null,cr:null,active:"dr",note:null,trust:70});
+const $ = (id) => document.getElementById(id);
+const sum = (a) => a.reduce((x, y) => x + y, 0);
+const ptsIn = (r) => sum(CASES.map((c, k) => c.r === r ? (S.pts[k] || 0) : 0));
+const total = () => sum(S.pts.map(p => p || 0));
+const round = () => S.phase === "done" ? 2 : CASES[Math.min(S.i, CASES.length - 1)].r;
+function valuation(){
+  const r = round();
+  if (r === 0) return 6 + 0.015 * ptsIn(0);
+  if (r === 1) return 40 + 0.15 * ptsIn(1);
+  return 300 + 0.7 * total();
+}
+const fmtVal = (m) => m >= 1000 ? "$" + (m / 1000).toFixed(2) + "B" : "$" + m.toFixed(1) + "M";
+const usd = (n) => "$" + n.toLocaleString("en-US");
+
+function chrome(){
+  const r = round();
+  $("stages").innerHTML = ROUNDS.map((x, k) => `<span class="${S.phase === "done" || k < r ? "done" : k === r ? "on" : ""}">${x.name}</span>`).join("");
+  $("val").textContent = fmtVal(valuation());
+  $("trustN").textContent = S.trust;
+  $("trustB").style.width = S.trust + "%";
+  $("trustB").style.setProperty("--c", S.trust >= 60 ? "var(--good)" : S.trust >= 35 ? "var(--aud)" : "var(--bad)");
+  ["play","score"].forEach(v => $("tab-" + v).setAttribute("aria-selected", String(S.tab === v)));
+}
+
+function answerUI(c){
+  if (c.type === "mcq") return `<div class="opts">${c.opts.map((o, k) => {
+    const cls = S.solved ? (k === c.ans ? " right" : k === S.pick ? " wrong" : "") : "";
+    return `<button class="opt${cls}" data-act="mcq" data-v="${k}" ${S.solved ? "disabled" : ""}>${o}</button>`;}).join("")}</div>`;
+  if (c.type === "num") return S.solved ? `<p class="mono">Answer: ${usd(c.ans)}</p>` : `
+    <form class="numrow" id="numform"><label for="numin">$<input id="numin" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Amount in dollars"></label><button class="btn" type="submit">Submit</button></form>`;
+  const slot = (side) => `<button class="slot ${side}${S.active === side && !S.solved ? " on" : ""}" data-act="slot" data-v="${side}" ${S.solved ? "disabled" : ""}>${S[side] || `<em>Pick the ${side === "dr" ? "debit" : "credit"} account</em>`}</button>`;
+  return `<table class="je" aria-label="Journal entry"><tr><th>Account</th><th class="n">Debit</th><th class="n">Credit</th></tr>
+    <tr><td>${slot("dr")}</td><td class="n">${c.amt.toLocaleString("en-US")}</td><td class="n"></td></tr>
+    <tr><td>${slot("cr")}</td><td class="n"></td><td class="n">${c.amt.toLocaleString("en-US")}</td></tr></table>` +
+    (S.solved ? "" : `<div class="chips">${c.accts.map(a => `<button class="chip${S.dr === a || S.cr === a ? " sel" : ""}" data-act="pick" data-v="${a}">${a}</button>`).join("")}</div>
+    <div class="row"><button class="btn" data-act="post" ${S.dr && S.cr ? "" : "disabled"}>Post entry</button></div>`);
+}
+
+function viewPlay(){
+  if (S.phase === "intro") return `<section class="panel">
+    <span class="tag" style="--c:var(--accent)">CPA CORE: FAR + AUD + REG</span>
+    <h1>Take an AI startup from seed round to IPO.</h1>
+    <p>You are the first finance hire at Kestrel AI. Founders, investors and auditors will message you with real problems. Every call you make moves the valuation.</p>
+    <ol class="how">
+      <li><b>${CASES.length} cases</b> across three funding rounds.</li>
+      <li>Each is tagged <b style="color:var(--far)">FAR</b>, <b style="color:var(--aud)">AUD</b> or <b style="color:var(--reg)">REG</b> and ends with the exam takeaway.</li>
+      <li>Score ${UNICORN_AT.toLocaleString("en-US")} of ${MAX.toLocaleString("en-US")} points to list at a <b>$1B valuation</b>.</li>
+    </ol>
+    <div class="row"><button class="btn" data-act="start">Start the seed round</button></div>
+    <p class="dim">Kestrel AI and everyone in it are fictional. Rules shown are US GAAP, AICPA and PCAOB standards, and federal tax law.</p></section>`;
+  if (S.phase === "close") return viewClose();
+  if (S.phase === "done") return viewDone();
+  const c = CASES[S.i], got = S.pts[S.i];
+  let after = "";
+  if (S.solved) after = `
+    <div class="verdict ${got ? "good" : "bad"}">${got === 100 ? "Correct. +100" : got ? "Correct on the second try. +50" : "Missed. +0"}</div>
+    <div class="fb ${got ? "good" : "bad"}"><b>Why:</b> ${c.why}</div>
+    <div class="fb tip"><b>Exam takeaway:</b> ${c.tip}</div>
+    <div class="row"><button class="btn" data-act="next">${S.i + 1 < CASES.length && CASES[S.i + 1].r === c.r ? "Next case" : c.r === 2 ? "Ring the bell" : "Close the " + ROUNDS[c.r].name + " round"}</button></div>`;
+  else if (S.note) after = `<div class="fb bad" role="status">${S.note}</div>`;
+  return `<section class="panel">
+    <div class="headrow"><span class="tag" style="--c:${SEC[c.sec]}">${c.sec} &middot; ${c.topic}</span><span class="dim mono">${S.i + 1}/${CASES.length}</span></div>
+    <div class="msg"><b>${c.from}</b>${c.msg}</div>
+    <p class="q">${c.q}</p>
+    ${answerUI(c)}${after}</section>`;
+}
+
+function viewClose(){
+  const r = CASES[S.i].r - 1, R = ROUNDS[r], p = ptsIn(r), next = ROUNDS[r + 1];
+  const v = r === 0 ? 6 + 0.015 * p : 40 + 0.15 * p;
+  return `<section class="panel deal">
+    <span class="tag" style="--c:var(--accent)">TERM SHEET SIGNED</span>
+    <h2>${R.name} round closed</h2>
+    <div class="big">${fmtVal(v)}</div>
+    <div class="kv"><span>Raised</span><b>${R.raise}</b><span>Lead investor</span><b style="font-family:var(--body)">${R.lead}</b><span>Round score</span><b>${p} / ${roundMax(r)}</b></div>
+    <p>${p >= roundMax(r) * .875 ? "Clean diligence. The lead investor said your books were the easiest part of the deal." : p >= roundMax(r) * .5 ? "The round closed, but diligence found gaps and the price reflects it." : "The round barely closed. Investors priced in the cleanup work."}</p>
+    <h3>Next: ${next.name}</h3><p class="dim">${next.blurb}</p>
+    <div class="row"><button class="btn" data-act="open">Start ${next.name}</button></div></section>`;
+}
+
+function secStats(){
+  return Object.keys(SEC).map(s => {
+    const ks = CASES.map((c, k) => c.sec === s ? k : -1).filter(k => k >= 0);
+    const done = ks.filter(k => S.pts[k] !== undefined);
+    return {s, got: sum(done.map(k => S.pts[k])), of: done.length * 100, all: ks.length * 100};
+  });
+}
+function secBars(){
+  return secStats().map(x => `<div class="sec"><span class="tag" style="--c:${SEC[x.s]}">${x.s}</span><div class="bar"><b style="width:${x.of ? 100 * x.got / x.of : 0}%;--c:${SEC[x.s]}"></b></div><span class="mono dim">${x.got}/${x.of || x.all}</span></div>`).join("");
+}
+
+function viewDone(){
+  const t = total(), uni = t >= UNICORN_AT, v = uni ? Math.max(1000, 300 + 0.7 * t) : Math.min(990, 300 + 0.7 * t);
+  const weak = secStats().sort((a, b) => a.got / a.of - b.got / b.of)[0];
+  const missed = CASES.filter((c, k) => S.pts[k] < 100);
+  return `<section class="panel deal">
+    <span class="tag" style="--c:var(--accent)">${uni ? "UNICORN" : "LISTED"}</span>
+    <h2>${uni ? "Kestrel AI opens above a billion dollars." : "Kestrel AI is public, short of unicorn status."}</h2>
+    <div class="big">${fmtVal(v)}</div>
+    <div class="kv"><span>Total score</span><b>${t} / ${MAX}</b><span>Board trust</span><b>${S.trust}</b></div>
+    ${secBars()}
+    <p>${t === MAX ? "A perfect record across all three sections." : `Your weakest section was <b>${weak.s}</b>. Review these before you replay:`}</p>
+    ${missed.length ? `<div class="list">${missed.map(c => `<div class="item"><span class="tag" style="--c:${SEC[c.sec]}">${c.sec}</span><span>${c.topic}<br><span class="dim">${c.tip}</span></span><span></span></div>`).join("")}</div>` : ""}
+    <div class="row"><button class="btn" data-act="again">Play again</button></div></section>`;
+}
+
+function viewScore(){
+  const rows = CASES.map((c, k) => S.pts[k] === undefined ? "" : `<div class="item"><span class="tag" style="--c:${SEC[c.sec]}">${c.sec}</span><span>${c.topic}</span><span class="mono" style="color:${S.pts[k] === 100 ? "var(--good)" : S.pts[k] ? "var(--aud)" : "var(--bad)"}">+${S.pts[k]}</span></div>`).join("");
+  return `<section class="panel"><div class="headrow"><h2>Scorecard</h2><span class="mono">${total()} pts</span></div>
+    <p class="dim">Points earned out of points attempted, by CPA section.</p>${secBars()}
+    ${rows ? `<h3>Cases</h3><div class="list">${rows}</div>` : `<p class="dim">Answer your first case on the Desk tab to see results here.</p>`}</section>`;
+}
+
+function render(){ chrome(); $("view").innerHTML = S.tab === "score" ? viewScore() : viewPlay(); }
+
+function settle(points){
+  S.pts[S.i] = points; S.solved = true; S.note = null;
+  S.trust = Math.max(0, Math.min(100, S.trust + (points === 100 ? 4 : points ? 1 : -10)));
+}
+function grade(ok, c){
+  if (ok) return settle(S.tries === 0 ? 100 : 50);
+  S.tries++;
+  if (c.type === "mcq" || S.tries >= 2) { if (c.type === "je") { S.dr = c.dr; S.cr = c.cr; } return settle(0); }
+  S.note = c.type === "num" ? "Not quite. Check the method and try once more for 50 points." : (S.dr === c.cr && S.cr === c.dr ? "Right accounts, wrong sides. One more try for 50 points." : "Not quite. Has Kestrel earned this cash yet? One more try for 50 points.");
+}
+
+function act(a, d){
+  const c = CASES[S.i];
+  if (a === "tab") S.tab = d.v;
+  else if (a === "start") S.phase = "play";
+  else if (a === "again") { S = fresh(); S.phase = "play"; }
+  else if (a === "open") S.phase = "play";
+  else if (a === "mcq" && !S.solved) { S.pick = +d.v; grade(S.pick === c.ans, c); }
+  else if (a === "num" && !S.solved) {
+    const n = parseFloat(String(d.v).replace(/[^0-9.\-]/g, ""));
+    if (isNaN(n)) S.note = "Enter a dollar amount, for example 125000."; else grade(Math.abs(n - c.ans) <= c.tol, c);
+  }
+  else if (a === "slot") { S[d.v] = null; S.active = d.v; }
+  else if (a === "pick") {
+    if (S.dr === d.v) { S.dr = null; S.active = "dr"; }
+    else if (S.cr === d.v) { S.cr = null; S.active = "cr"; }
+    else { S[S.active] = d.v; S.active = S.active === "dr" ? (S.cr ? "dr" : "cr") : (S.dr ? "cr" : "dr"); }
+  }
+  else if (a === "post" && S.dr && S.cr) grade(S.dr === c.dr && S.cr === c.cr, c);
+  else if (a === "next") {
+    const prev = c.r;
+    S.i++; S.tries = 0; S.solved = false; S.pick = null; S.dr = S.cr = null; S.active = "dr"; S.note = null;
+    if (S.i >= CASES.length) S.phase = "done"; else if (CASES[S.i].r !== prev) S.phase = "close";
+    window.scrollTo(0, 0);
+  }
+  render();
+}
+
+document.addEventListener("click", (ev) => {
+  const el = ev.target.closest("[data-act]");
+  if (el && !el.disabled) act(el.dataset.act, el.dataset);
+});
+document.addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  if (ev.target.id === "numform") act("num", {v: $("numin").value});
+});
+
+function start(saved){ S = Object.assign(fresh(), saved && saved.phase ? saved : {}); render(); }
+window.claude?.hot?.snapshot?.(() => S);
+if (window.claude?.hot?.ready) window.claude.hot.ready(start); else start(window.claude?.hot?.data ?? {});
+</script>
+</body>
+</html>

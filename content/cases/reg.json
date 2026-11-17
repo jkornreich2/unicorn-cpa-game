@@ -1,0 +1,93 @@
+[
+  {
+    "id": "reg-001",
+    "round": "seed",
+    "order": 1,
+    "section": "REG",
+    "topic": "Entity choice",
+    "from": "Maya, CEO",
+    "message": "Northlight wants to lead our seed. Their fund has pension plans and foreign investors as limited partners, and they want preferred stock. We're still an LLC taxed as a partnership. What do we become?",
+    "question": "Which entity fits a venture-backed company?",
+    "type": "mcq",
+    "options": [
+      "S corporation, to keep one level of tax",
+      "Delaware C corporation",
+      "Stay an LLC taxed as a partnership",
+      "General partnership with the fund as a partner"
+    ],
+    "answer": 1,
+    "explanation": "A C corporation can issue preferred stock and blocks pass-through income from reaching the fund's tax-exempt and foreign investors. An S corporation fails twice: it allows only one class of stock, and a venture fund (a partnership) cannot be a shareholder.",
+    "takeaway": "S corp limits: 100 shareholders, one class of stock, no partnership, corporate or nonresident alien shareholders.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "reg-002",
+    "round": "seed",
+    "order": 2,
+    "section": "REG",
+    "topic": "Section 83(b)",
+    "from": "Dev, CTO",
+    "message": "I just bought my 4,000,000 founder shares at $0.001 each, which is what they're worth today. They vest over four years. Our lawyer said something about an 83(b) election?",
+    "question": "When must Dev file the election?",
+    "type": "mcq",
+    "options": [
+      "With his tax return for the year of grant",
+      "Within 30 days of each vesting date",
+      "Within 30 days of the share transfer",
+      "Within 75 days of the share transfer"
+    ],
+    "answer": 2,
+    "explanation": "The election is due within 30 days of the transfer and cannot be extended. Dev is taxed now on value minus price paid, which is $0. Without it, he has ordinary income at every vesting date on the shares' value at that time.",
+    "takeaway": "83(b): taxed at grant on FMV less amount paid. Later growth is capital gain. If the shares are forfeited, no deduction for tax already paid.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "reg-003",
+    "round": "series-a",
+    "order": 7,
+    "section": "REG",
+    "topic": "Stock options",
+    "from": "Lena, staff engineer",
+    "message": "I'm exercising 10,000 nonqualified options today. Exercise price is $1 and the 409A value is $9 a share. HR says payroll needs something from finance.",
+    "question": "What is the tax result on the exercise date?",
+    "type": "mcq",
+    "options": [
+      "No income until she sells the shares",
+      "$80,000 of long-term capital gain for Lena",
+      "$80,000 of ordinary income for Lena, and Kestrel deducts $80,000",
+      "$90,000 of ordinary income for Lena, and no deduction for Kestrel"
+    ],
+    "answer": 2,
+    "explanation": "For a nonqualified option, the spread at exercise, (9 - 1) x 10,000 = $80,000, is wages to the employee, subject to withholding. The company deducts the same amount. Her basis in the shares becomes $9.",
+    "takeaway": "ISO contrast: no regular tax at exercise (the spread is an AMT item) and no company deduction unless there is a disqualifying disposition.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  },
+  {
+    "id": "reg-004",
+    "round": "ipo",
+    "order": 11,
+    "section": "REG",
+    "topic": "Net operating losses",
+    "from": "Maya, CEO",
+    "message": "We finally made money. Taxable income before any loss deduction is $2,000,000, and we're carrying $5,000,000 of net operating losses from the last few years. So no tax, right?",
+    "question": "What is Kestrel's federal income tax for the year?",
+    "type": "num",
+    "answer": 84000,
+    "tolerance": 0,
+    "explanation": "Losses from years after 2017 can offset only 80% of taxable income: $1,600,000. That leaves $400,000 taxed at 21%, which is $84,000. The remaining $3,400,000 carries forward indefinitely.",
+    "takeaway": "Post-2017 NOLs: no carryback, unlimited carryforward, 80% of taxable income cap.",
+    "review": {
+      "reviewedBy": null,
+      "currentAsOf": null
+    }
+  }
+]

@@ -544,6 +544,9 @@ window.HQ = (() => {
   // ---------- State from the game ----------
   let round = 0, done = false, ready = false, settingReady = false;
   function update(st) {
+    // Once Series A starts the company has moved into the loft: earlier garage floors are
+    // shown as loft floors too, so the building reads as one design. Each keeps its glow.
+    if (st.round >= 1) st = Object.assign({}, st, { floors: st.floors.map((f) => (f.r === 0 ? { r: 1, g: f.g } : f)) });
     const same = st.floors.length >= floors.length && floors.every((f, i) => f.r === st.floors[i].r && f.g === st.floors[i].g);
     if (!same) clearFloors();
     const animate = ready && same;

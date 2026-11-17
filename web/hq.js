@@ -332,6 +332,43 @@ window.HQ = (() => {
   [[-20, 10.6, 8.5], [-11, 10.6, 9.5], [-2, 10.8, 8], [7, 10.6, 9], [16, 10.6, 8.5], [25, 10.7, 9.5],
    [-10.5, 3.5, 7.5], [10.5, 4.5, 8.5], [-22, -12, 9], [20, -16, 8]].forEach(([x, z, h]) => addHood(palm(x, z, h), 0, 0));
 
+  // Retro-modern electric pickup (original design) parked in the Seed driveway, nose to the garage
+  {
+    const T = new THREE.Group();
+    const std = (c, extra) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: 0.5, metalness: 0.15 }, extra || {}));
+    const orange = std(0xe86e34), cream = std(0xf0e8d6), chrome = std(0xc4c8ce, { metalness: 0.8, roughness: 0.25 });
+    const glass = std(0x1c2632, { roughness: 0.15, metalness: 0.4 }), tire = std(0x161618, { roughness: 0.9 });
+    const add = (geo, mat, x, y, z) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; T.add(m); return m; };
+    add(new THREE.BoxGeometry(0.98, 0.3, 2.5), orange, 0, 0.37, 0);                       // lower body
+    add(new THREE.BoxGeometry(0.95, 0.06, 0.8), orange, 0, 0.55, -0.83);                 // hood
+    const prof = new THREE.Shape();
+    [[0.3, 0.52], [-0.4, 0.52], [-0.4, 0.585], [-0.265, 0.9], [0.24, 0.93], [0.3, 0.9]].forEach(([z, y], i) => (i ? prof.lineTo(z, y) : prof.moveTo(z, y)));
+    const cabGeo = new THREE.ExtrudeGeometry(prof, { depth: 0.95, bevelEnabled: false });
+    cabGeo.rotateY(-Math.PI / 2); cabGeo.translate(0.475, 0, 0);
+    add(cabGeo, cream, 0, 0, 0);                                                          // cream two-tone cab
+    const ws = add(new THREE.BoxGeometry(0.82, 0.32, 0.012), glass, 0, 0.745, -0.345); ws.rotation.x = 0.407;
+    [-0.481, 0.481].forEach((x) => add(new THREE.BoxGeometry(0.01, 0.2, 0.46), glass, x, 0.77, -0.03));
+    add(new THREE.BoxGeometry(0.68, 0.19, 0.01), glass, 0, 0.775, 0.306);                  // rear window
+    [-0.45, 0.45].forEach((x) => { add(new THREE.BoxGeometry(0.04, 0.2, 0.88), orange, x, 0.62, 0.79); add(new THREE.BoxGeometry(0.04, 0.02, 0.88), cream, x, 0.73, 0.79); });
+    add(new THREE.BoxGeometry(0.98, 0.2, 0.04), orange, 0, 0.62, 1.23); add(new THREE.BoxGeometry(0.98, 0.02, 0.04), cream, 0, 0.73, 1.23);
+    add(new THREE.BoxGeometry(0.86, 0.01, 0.88), std(0x96643c, { roughness: 0.8 }), 0, 0.525, 0.79);       // teak bed
+    [-0.495, 0.495].forEach((x) => add(new THREE.BoxGeometry(0.01, 0.035, 2.25), cream, x, 0.45, 0));      // side stripes
+    add(new THREE.BoxGeometry(1.0, 0.075, 0.06), chrome, 0, 0.26, -1.28); add(new THREE.BoxGeometry(1.0, 0.075, 0.06), chrome, 0, 0.26, 1.28);
+    add(new THREE.BoxGeometry(0.42, 0.16, 0.01), std(0x18191c), 0, 0.41, -1.255);                          // grille
+    const lamp = new THREE.MeshBasicMaterial({ color: 0xfff3d6 }), tail = new THREE.MeshBasicMaterial({ color: 0xff3a3a });
+    [-0.34, 0.34].forEach((x) => {
+      const ring = add(new THREE.CylinderGeometry(0.075, 0.075, 0.01, 18), chrome, x, 0.41, -1.256); ring.rotation.x = Math.PI / 2;
+      const l = add(new THREE.CylinderGeometry(0.055, 0.055, 0.012, 18), lamp, x, 0.41, -1.262); l.rotation.x = Math.PI / 2;
+      add(new THREE.BoxGeometry(0.1, 0.12, 0.01), tail, x * 1.25, 0.62, 1.256);
+    });
+    [[-0.52, 0.8], [0.52, 0.8], [-0.52, -0.775], [0.52, -0.775]].forEach(([x, z]) => {
+      const w = add(new THREE.CylinderGeometry(0.21, 0.21, 0.12, 18), tire, x, 0.21, z); w.rotation.z = Math.PI / 2;
+      const h = add(new THREE.CylinderGeometry(0.1, 0.1, 0.012, 16), cream, x + Math.sign(x) * 0.066, 0.21, z); h.rotation.z = Math.PI / 2;
+    });
+    T.position.set(-1.8, 0, 4.35);
+    addHood(T, 0, 0);
+  }
+
   const cars = [0, 1].map((i) => {
     const g = new THREE.Group();
     const body = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.42, 0.55), new THREE.MeshStandardMaterial({ color: i ? 0x3a2a4a : 0x24324f, roughness: 0.6 }));

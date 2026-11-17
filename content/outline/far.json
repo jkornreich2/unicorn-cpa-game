@@ -1,12 +1,49 @@
 {
   "section": "FAR",
-  "source": "Unit list from the reviewer's FAR study course, November 2026",
+  "source": "AICPA Uniform CPA Examination Blueprints (effective January 2026), content areas and topics. Taken from a secondary summary; verify against the AICPA's published blueprint PDFs.",
   "areas": [
-    { "area": "F1", "modules": ["Financial Reporting"] },
-    { "area": "F2", "modules": ["Financial Reporting and Disclosures"] },
-    { "area": "F3", "modules": ["Assets and Related Topics"] },
-    { "area": "F4", "modules": ["Liabilities"] },
-    { "area": "F5", "modules": ["Investments, Statement of Cash Flows, and Income Taxes"] },
-    { "area": "F6", "modules": ["NFP Accounting and Governmental Accounting"] }
+    {
+      "area": "Area I",
+      "name": "Financial Reporting",
+      "weight": "30–40%",
+      "modules": [
+        "General-Purpose Financial Reporting: For-Profit Business Entities",
+        "General-Purpose Financial Reporting: Nongovernmental Not-for-Profit Entities",
+        "State and Local Government Concepts",
+        "Public Company Reporting Topics",
+        "Special Purpose Frameworks",
+        "Financial Statement Ratios and Performance Metrics"
+      ]
+    },
+    {
+      "area": "Area II",
+      "name": "Select Balance Sheet Accounts",
+      "weight": "30–40%",
+      "modules": [
+        "Cash and Cash Equivalents",
+        "Trade Receivables",
+        "Inventory",
+        "Property, Plant and Equipment",
+        "Investments",
+        "Intangible Assets",
+        "Payables and Accrued Liabilities",
+        "Debt (Financial Liabilities)",
+        "Equity"
+      ]
+    },
+    {
+      "area": "Area III",
+      "name": "Select Transactions",
+      "weight": "25–35%",
+      "modules": [
+        "Accounting Changes and Error Corrections",
+        "Contingencies and Commitments",
+        "Revenue Recognition",
+        "Accounting for Income Taxes",
+        "Fair Value Measurements",
+        "Lessee Accounting",
+        "Subsequent Events"
+      ]
+    }
   ]
 }

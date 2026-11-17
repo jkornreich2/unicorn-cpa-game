@@ -1,12 +1,61 @@
 {
   "section": "AUD",
-  "source": "Unit list from the reviewer's AUD study course, November 2026",
+  "source": "AICPA Uniform CPA Examination Blueprints (effective January 2026), content areas and topics. Taken from a secondary summary; verify against the AICPA's published blueprint PDFs.",
   "areas": [
-    { "area": "A1", "modules": ["Audit Reports"] },
-    { "area": "A2", "modules": ["Engagement Quality and Acceptance, Planning, and Internal Control"] },
-    { "area": "A3", "modules": ["Risk, Evidence, and Sampling"] },
-    { "area": "A4", "modules": ["Performing Further Procedures, Forming Conclusions, and Communications"] },
-    { "area": "A5", "modules": ["Integrated Audits, Attestation Engagements, Compliance, and Government Audits"] },
-    { "area": "A6", "modules": ["Accounting and Review Service Engagements, Interim Reviews, and Ethics and Professional Responsibilities"] }
+    {
+      "area": "Area I",
+      "name": "Ethics, Professional Responsibilities, and General Principles",
+      "weight": "15–25%",
+      "modules": [
+        "Ethics, Independence, and Professional Responsibilities",
+        "Professional Skepticism and Professional Judgment",
+        "Nature and Scope",
+        "Terms of Engagement",
+        "Requirements for Engagement Documentation",
+        "Communication with Management and Those Charged with Governance",
+        "Audit and Assurance Quality"
+      ]
+    },
+    {
+      "area": "Area II",
+      "name": "Assessing Risk and Developing a Planned Response",
+      "weight": "25–35%",
+      "modules": [
+        "Planning an Engagement",
+        "Understanding an Entity and Its Environment",
+        "Understanding an Entity's Control Environment and Business Processes, Including IT Systems",
+        "Materiality",
+        "Assessing and Responding to Risks of Material Misstatement, Whether Due to Fraud or Error",
+        "Planning for and Using the Work of Others",
+        "Specific Areas of Engagement Risk"
+      ]
+    },
+    {
+      "area": "Area III",
+      "name": "Performing Further Procedures and Obtaining Evidence",
+      "weight": "30–40%",
+      "modules": [
+        "Use of Data and Information",
+        "Sufficient Appropriate Evidence",
+        "Sampling Techniques",
+        "Procedures to Obtain Sufficient Appropriate Evidence",
+        "Specific Matters that Require Special Consideration",
+        "Misstatements and Internal Control Deficiencies",
+        "Written Representations",
+        "Subsequent Events and Subsequently Discovered Facts"
+      ]
+    },
+    {
+      "area": "Area IV",
+      "name": "Forming Conclusions and Reporting",
+      "weight": "10–20%",
+      "modules": [
+        "Reporting on Audit Engagements",
+        "Reporting on Attestation Engagements",
+        "Accounting and Review Service Engagements",
+        "Reporting on Compliance",
+        "Other Reporting Considerations"
+      ]
+    }
   ]
 }

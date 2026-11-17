@@ -42,16 +42,21 @@ for (const sec of ["FAR", "AUD", "REG", "TCP"]) {
   }
 }
 
-// Coverage: how many cases each outline module has.
+// Coverage: how many cases each blueprint topic has, grouped by content area.
 let coverage = "";
 for (const sec of ["FAR", "AUD", "REG", "TCP"]) {
   const op = join(root, `content/outline/${sec.toLowerCase()}.json`), cp = join(root, `content/cases/${sec.toLowerCase()}.json`);
   if (!existsSync(op) || !existsSync(cp)) continue;
   const outline = JSON.parse(readFileSync(op, "utf8")), list = JSON.parse(readFileSync(cp, "utf8"));
-  const mods = outline.areas.flatMap((x) => x.modules.map((m) => `${x.area} · ${m}`));
-  const empty = mods.filter((m) => !list.some((c) => c.studyArea === m)).length;
-  coverage += `### ${sec}: ${mods.length - empty} of ${mods.length} study areas have a case\n\n| Study area | Cases |\n|---|---|\n` +
-    mods.map((m) => { const n = list.filter((c) => c.studyArea === m).length; return `| ${m} | ${n || "**0**"} |`; }).join("\n") + "\n\n";
+  const all = outline.areas.flatMap((x) => x.modules.map((m) => `${x.area} · ${m}`));
+  const hit = all.filter((m) => list.some((c) => c.studyArea === m)).length;
+  coverage += `### ${sec}: ${hit} of ${all.length} blueprint topics have a case\n\n| Topic | Cases |\n|---|---|\n`;
+  for (const x of outline.areas) {
+    const n = list.filter((c) => (c.studyArea || "").startsWith(x.area + " · ")).length;
+    coverage += `| **${x.area}: ${x.name}** (exam weight ${x.weight}) | **${n}** |\n`;
+    coverage += x.modules.map((m) => { const k = list.filter((c) => c.studyArea === `${x.area} · ${m}`).length; return `| ${m} | ${k || "—"} |`; }).join("\n") + "\n";
+  }
+  coverage += `\nOutline source: ${outline.source}\n\n`;
 }
 
 const table = "| ID | Round | Topic | Study area | Reviewed |\n|---|---|---|---|---|\n" + rows.map((r) => `| ${r.join(" | ")} |`).join("\n") + "\n\n";

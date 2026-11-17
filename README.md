@@ -8,7 +8,7 @@ Open `dist/index.html` in a browser. It is one self-contained file.
 ## Layout
 - `content/cases/far.json`, `aud.json`, `reg.json` – the cases. **Edit these to add or fix questions.**
 - `content/cases/tcp.json` – TCP discipline cases, parked: checked but not in the core game yet
-- `content/outline/` – the study outline for each section. Every case's `studyArea` must match an entry, and REVIEW.md shows which areas still have no cases
+- `content/outline/` – the AICPA blueprint content areas and topics for each section. Every case's `studyArea` must match one ("Area III · Revenue Recognition"), and REVIEW.md shows which topics still have no cases
 - `web/template.html` – the game screens and logic
 - `scripts/build.mjs` – checks every case, then builds `dist/index.html`
 - `REVIEW.md` – every case with its answer, for CPA review (generated)
@@ -26,7 +26,7 @@ Case types: `mcq` (multiple choice, `answer` is the position of the right option
 
 ## Roadmap
 1. Playtest chapter one (12 cases) and log feedback as GitHub issues
-2. ~~Move cases out of the HTML into `content/cases/*.json`~~ Done. Next: map each case to the AICPA blueprints
+2. ~~Move cases into content files and map them to the AICPA blueprints~~ Done
 3. Grow to 300–400 cases, add task-based simulations
 4. CPA review of every case, with a "current as of" date on REG content
 5. Mobile app with Expo, saved progress with Supabase, App Store release

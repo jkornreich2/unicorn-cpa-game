@@ -811,7 +811,7 @@ window.HQ = (() => {
     if (!!st.world !== worldMode) {
       worldMode = !!st.world;
       host.classList.toggle("walking", worldMode);
-      modeBtn.textContent = worldMode ? "Back to overview" : "Walk Silicon Valley";
+      modeBtn.textContent = worldMode ? "Exit walk" : "Walk Silicon Valley";
       cam.fov = worldMode ? 68 : 38; cam.updateProjectionMatrix();
       if (worldMode) cv.focus({ preventScroll: true });
     }

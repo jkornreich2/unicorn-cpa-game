@@ -1,0 +1,938 @@
+# FOOTNOTE LIBRARY: AUD, part 2   (format explained at the top of far.txt)
+
+# ---------- Ethics, professional responsibilities and general principles (ETH) ----------
+
+## aud-code-principles | AUD | Name a principle of the AICPA Code of Professional Conduct | ETH
+1 | Integrity |
+1 | Objectivity and independence | objectivity; independence
+2 | Due care |
+2 | The public interest | public interest
+2 | Responsibilities | responsibility
+3 | Scope and nature of services | scope and nature
+6* | Professional judgment in all activities | moral judgment; sensitive professional and moral judgments | The Responsibilities principle asks members to exercise sensitive professional and moral judgments.
+4 | Competence | professional competence
+4 | Diligence |
+5 | Planning and supervision |
+5 | Honoring the public trust | public trust
+
+## aud-code-rules | AUD | Name a rule in the AICPA Code of Professional Conduct | ETH
+1 | Independence Rule | independence
+1 | Integrity and Objectivity Rule | integrity and objectivity
+2 | Confidential Client Information Rule | confidentiality; confidential client information
+2 | Acts Discreditable Rule | acts discreditable
+2 | Contingent Fees Rule | contingent fees
+3 | General Standards Rule | general standards
+3 | Compliance With Standards Rule | compliance with standards
+3 | Accounting Principles Rule | accounting principles
+4 | Commissions and Referral Fees Rule | commissions; referral fees
+4 | Advertising and Other Forms of Solicitation Rule | advertising; solicitation
+4 | Form of Organization and Name Rule | form of organization; firm name
+5 | Conceptual framework approach | conceptual framework | Used when no specific rule addresses a threat.
+6* | Ethical conflicts guidance | ethical conflicts | Steps for when obligations to the client, firm and public pull different ways.
+
+## aud-discreditable | AUD | Name an act discreditable to the profession | ETH
+1 | Discrimination and harassment | discrimination; harassment
+1 | Failing to file own tax return | not filing tax returns; failure to file tax returns
+2 | Retaining client records after a request | withholding client records; keeping client records
+2 | Solicitation or disclosure of CPA exam questions | disclosing cpa exam questions; cheating on cpa exam
+2 | Negligence in preparing financial statements | negligent preparation; making false entries
+3 | Failing to follow government audit requirements | ignoring government audit standards
+3 | Not paying own taxes | failure to remit payroll taxes; failing to pay taxes
+6* | Disclosing confidential information from employment or volunteer work | misusing confidential information; confidential information from employment; volunteer activities | Confidentiality duties extend to what you learn at your job or volunteering.
+4 | False or misleading advertising | misleading advertising
+4 | Practicing with a lapsed license | lapsed license; practicing without a license
+5 | Failing to comply with regulatory requirements (like SEC rules) | violating sec rules; regulatory noncompliance
+5 | Indemnification clauses that violate regulators' rules | indemnification; prohibited indemnification
+
+## aud-confidential-exceptions | AUD | Name a situation where a CPA can disclose client information without consent | ETH
+1 | Responding to a subpoena | subpoena; court order; summons
+1 | Peer review | peer review program
+2 | Ethics investigation | professional ethics investigation; ethics complaint
+2 | Complying with laws and regulations | compliance with laws; legal requirement
+3 | State board of accountancy inquiry | state board; board of accountancy
+3 | Initiating a complaint with a recognized body | filing a complaint
+4 | Sale or merger of a practice (due diligence) | sale of practice; merger of firms | With a confidentiality agreement in place.
+4 | Defending yourself in litigation | defending against a lawsuit; litigation defense
+5 | Third-party service providers (with safeguards) | outsourcing; third party service provider | Disclosure or written agreement required first.
+6* | Meeting professional obligations under GAAP or GAAS | professional obligations; compliance with standards | Disclosures needed to comply with the Compliance With Standards or Accounting Principles rules aren't violations.
+
+## aud-covered-member | AUD | Name someone who is a covered member for independence | ETH
+1 | Engagement team member | attest engagement team; audit team member
+1 | Engagement partner | audit partner; lead partner
+2 | Partners in the same office as the lead partner | same office partner; office partners
+2 | The firm itself | firm; the firm
+3 | Those who can influence the engagement | people in a position to influence; chain of command
+4 | Firm's employee benefit plans | benefit plans of the firm
+3 | Partners or managers providing 10+ hours of nonattest services | managers providing nonattest; partners providing nonattest services; 10 hours
+5 | Engagement quality reviewer | eqr; quality reviewer
+5 | Specialists on the team | specialists
+6* | Entities a covered member controls | entity controlled by a covered member | An entity the covered member controls is a covered member too.
+6 | Network firms (for certain clients) | network firm | A firm in the same network must be independent of financial statement attest clients.
+
+## aud-nonattest-ok | AUD | Name a nonattest service usually allowed for a private attest client (with safeguards) | ETH
+1 | Tax return preparation | tax preparation; tax returns
+1 | Bookkeeping | general ledger; journal entries
+2 | Payroll processing (without signing checks) | payroll; payroll services
+2 | Tax planning | tax advice
+3 | Preparing financial statements | financial statement preparation
+3 | Consulting and advisory services | advisory; consulting
+3 | Valuation not material to statements | valuation; appraisal
+4 | Benefit plan administration (ministerial) | benefit plan administration
+4 | Executive search (recommending candidates) | executive search; recruiting
+4 | IT system implementation of off-the-shelf software | software implementation
+4 | Forensic accounting (not expert testimony) | forensic; litigation support
+5 | Internal audit assistance (not outsourcing) | internal audit assistance
+5 | Business risk consulting | risk consulting
+5 | Cybersecurity services with limits | cybersecurity
+6* | Disbursement services through a client-approved process | bill paying; disbursements | Only if the client approves each payment and the CPA can't authorize it.
+6 | Training client staff | training
+
+## aud-sox-prohibited | AUD | Name a non-audit service prohibited for an SEC issuer audit client | ETH
+1 | Bookkeeping | accounting records; bookkeeping services
+1 | Internal audit outsourcing | internal audit; outsourced internal audit
+2 | Financial information system design | system design; information systems design
+2 | Appraisal or valuation services | valuation; appraisal
+2 | Management functions | management; management responsibilities
+3 | Actuarial services | actuarial
+3 | Human resources | hr; human resources services
+3 | Legal services | legal
+3 | Broker-dealer or investment adviser services | broker dealer; investment adviser; investment banking
+4 | Fairness opinions | fairness opinion; contribution in kind reports
+4 | Expert services unrelated to the audit | expert witness; expert services
+5 | Tax services for executives in financial reporting roles | tax services for officers; executive tax services | PCAOB Rule 3523.
+5 | Contingent-fee tax services | contingent fees
+6* | Marketing aggressive tax transactions | aggressive tax shelters; confidential tax transactions; listed transactions | PCAOB Rule 3522 bars confidential or aggressive tax position transactions.
+
+## aud-sqms | AUD | Name a component of a firm's system of quality management (SQMS 1) | ETH
+1 | Governance and leadership | leadership
+1 | Monitoring and remediation | monitoring
+2 | Resources | human resources; staffing
+2 | Engagement performance |
+2 | Relevant ethical requirements | ethical requirements; independence
+3 | Acceptance and continuance | client acceptance; client acceptance and continuance
+3 | Information and communication |
+3 | The firm's risk assessment process | risk assessment
+4 | Quality objectives | objectives
+4 | Quality risks | risks
+4 | Responses | policies and procedures
+5 | Annual evaluation of the system | annual evaluation | Leadership evaluates the system at least annually.
+5 | Root cause analysis | root cause
+6* | Network requirements and services | network requirements; network services | Firms must assess what their network provides and requires.
+6 | Service providers | external service providers
+
+## aud-acceptance | AUD | Name something an auditor considers before accepting a new audit client | ETH
+1 | Independence |
+1 | Management integrity | integrity of management; client integrity
+2 | Competence | competence to perform; expertise
+2 | Communicating with the predecessor auditor | predecessor; predecessor auditor
+2 | Engagement letter | terms of engagement
+3 | Acceptable financial reporting framework | acceptable framework; framework
+3 | Management acknowledges its responsibilities | management responsibilities
+3 | Scope limitations imposed by management | scope limitation
+4 | Fee arrangements | fees
+4 | Time and staffing | staffing; timing; resources
+4 | Background checks | background investigation
+5 | Industry risk | industry
+5 | Preconditions for an audit | preconditions
+6* | Whether management will impose a limitation that leads to a disclaimer | disclaimer up front; expected disclaimer | If so, the auditor shouldn't accept the audit at all.
+
+## aud-gen-principles | AUD | Name a general principle or concept that underlies an audit | ETH
+1 | Reasonable assurance |
+1 | Professional skepticism | skepticism
+2 | Professional judgment | judgment
+2 | Materiality |
+2 | Audit risk |
+2 | Independence |
+3 | Sufficient appropriate evidence | sufficient appropriate audit evidence; evidence
+3 | Due professional care | due care
+3 | Documentation | audit documentation
+4 | Inherent limitations of an audit | inherent limitations
+4 | Planning and supervision |
+4 | Compliance with ethical requirements | ethical requirements
+5 | Premise on which an audit is conducted | premise; management responsibilities
+6* | Not an absolute guarantee | no absolute assurance; absolute assurance | Reasonable assurance is high but not absolute.
+
+## aud-pcaob | AUD | Name a PCAOB requirement or process | ETH
+1 | Inspections | pcaob inspections
+1 | Critical audit matters | cams; cam
+2 | Firm registration | registration
+2 | Engagement quality review | eqr
+3 | Form AP | form ap | Discloses the engagement partner and other firms in the audit.
+3 | Seven-year documentation retention | 7 years; retention
+3 | 45-day documentation completion | 45 days
+3 | Auditor tenure in the report | tenure
+4 | Rule 3526 independence communication | rule 3526
+4 | Integrated audit standard (AS 2201) | as 2201; icfr audit
+4 | Enforcement and sanctions | enforcement; sanctions
+5 | Standard-setting with SEC approval | sec approval
+5 | QC 1000 | qc 1000 | The PCAOB's new quality control standard.
+6* | Form 2 annual report | form 2 | Registered firms file an annual report on Form 2.
+6 | Communications with audit committee (AS 1301) | as 1301
+
+## aud-regulators | AUD | Name a body that sets auditing, ethics or independence standards | ETH
+1 | AICPA |
+1 | PCAOB |
+2 | SEC |
+2 | Auditing Standards Board | asb
+2 | GAO | government accountability office; yellow book
+3 | IAASB | international auditing and assurance standards board
+3 | State boards of accountancy | state boards; boards of accountancy
+3 | Professional Ethics Executive Committee | peec
+4 | IESBA | international ethics standards board for accountants
+4 | Accounting and Review Services Committee | arsc
+4 | Department of Labor | dol | Sets its own independence rules for ERISA plan audits.
+5 | OMB | office of management and budget; uniform guidance
+5 | NASBA |
+6* | Peer Review Board | aicpa peer review board
+
+## aud-mgmt-responsibilities | AUD | Name a responsibility management acknowledges in an audit engagement letter | ETH
+1 | Preparing fair financial statements | preparation and fair presentation; financial statements
+1 | Internal control | designing and maintaining internal control
+2 | Providing access to all information | access to information; access to records
+2 | Providing unrestricted access to people | access to personnel; unrestricted access
+3 | Written representations | representation letter
+3 | Selecting accounting policies | accounting policies
+4 | Preventing and detecting fraud | fraud prevention
+4 | Complying with laws and regulations | compliance with laws
+4 | Additional information requested | additional information
+5 | Adjusting for material misstatements | correcting misstatements
+5 | Other information in the annual report | other information
+6* | Going concern evaluation under the framework | evaluating going concern | Management evaluates going concern for a year from issuance under US GAAP.
+
+## aud-nonattest-conditions | AUD | Name a condition for performing nonattest services for an attest client | ETH
+1 | No management responsibilities | avoid management responsibilities; not assume management responsibilities
+2 | Client designates a skilled overseer | designated individual; skills knowledge or experience
+2 | Client oversees the service | oversee the service
+3 | Client evaluates the results | evaluate adequacy; evaluates results
+3 | Client accepts responsibility for results | accept responsibility
+3 | Documented understanding | written understanding; engagement letter
+4 | Client maintains internal controls | client establishes controls
+4 | Objectives and limitations agreed | scope agreed; objectives
+5 | Cumulative effect considered | cumulative effect; multiple services
+5 | Self-review threat evaluated | self review
+6* | Don't create a mutuality of interest | mutuality of interest | Services can't make the CPA a promoter or co-owner of client outcomes.
+6 | Independence considered before and during | ongoing evaluation
+
+## aud-predecessor | AUD | Name something a successor auditor asks the predecessor auditor | ETH
+1 | Reasons for the change in auditors | reasons for change; why they left
+1 | Integrity of management | management integrity
+2 | Disagreements with management | disagreements
+2 | Fraud or illegal acts communicated | fraud; noncompliance; illegal acts
+3 | Internal control deficiencies communicated | deficiencies; material weaknesses
+3 | Access to workpapers | workpapers; review prior workpapers
+4 | Understanding of the predecessor's opinion | prior opinion
+4 | Matters communicated to the audit committee | communications to those charged with governance
+5 | Client consent needed first | client permission; consent | The successor asks the prospective client to authorize the inquiry.
+5 | Opening balances evidence | opening balances
+6* | Limited response from predecessor | limited response | If the predecessor gives a limited reply, the successor considers why.
+
+## aud-peer-review | AUD | Name a peer review concept | ETH
+1 | System review | system reviews
+1 | Engagement review | engagement reviews
+2 | Pass | pass rating
+2 | Pass with deficiencies | pass with deficiency
+2 | Fail | fail rating
+3 | Every three years | triennial; three years
+3 | Administering entity | state society
+3 | Finding for further consideration | ffc
+4 | Letter of response | response letter
+4 | Corrective actions | corrective action
+4 | Implementation plans | implementation plan
+5 | Must-select engagements | must select | Government, ERISA, broker-dealer and SOC engagements must be selected if the firm does them.
+5 | PCAOB inspection (for issuer audits) | pcaob inspection
+6* | Matter for further consideration | mfc | The base level of review issue, below a finding.
+
+## aud-sec-independence | AUD | Name an SEC or PCAOB independence requirement for public-company audits | ETH
+1 | Audit committee pre-approval | pre approval; preapproval
+1 | Partner rotation | rotation; lead partner rotation
+2 | Five-year lead partner rotation | five years; 5 year rotation
+2 | Cooling-off period for hiring auditors | cooling off; one year cooling off
+3 | Five-year time-out after rotation | time out; five year timeout
+3 | No financial interests in the client | financial interests
+3 | No business relationships | business relationships
+3 | No employment relationships | employment relationships
+4 | No contingent fees | contingent fees
+4 | Prohibited non-audit services | prohibited services
+4 | EQR partner rotation | engagement quality reviewer rotation
+5 | Seven-year rotation for other audit partners | other audit partners; seven years
+5 | No compensation for selling non-audit services | compensation for selling non audit services | Partners can't be paid for cross-selling to their audit clients.
+6* | Loan Rule | loan provision; loans | Loans to or from the client, its officers and directors, or owners with significant influence impair independence.
+
+## aud-integrity | AUD | Name a situation covered by the Integrity and Objectivity Rule | ETH
+1 | Conflicts of interest | conflict of interest
+1 | Knowing misrepresentations | misrepresentation; knowingly misrepresenting facts
+2 | Subordinating judgment to others | subordination of judgment
+2 | Gifts and entertainment | gifts; entertainment
+3 | Pressure from a supervisor | supervisor pressure
+3 | Preparing misleading documents | misleading documents; false records
+4 | Educational services | educational services
+4 | Client advocacy | advocacy
+5 | Disagreements with supervisors | disagreement with supervisor
+5 | Obligations to employers | members in business
+6* | Offering or accepting gifts not reasonable in circumstances | unreasonable gifts | Only gifts reasonable in the circumstances are acceptable.
+6 | Undue influence on decisions | undue influence
+
+# ---------- Assessing risk and developing a planned response (RISK) ----------
+
+## aud-risk-model | AUD | Name a component of the audit risk model or a related term | RISK
+1 | Inherent risk |
+1 | Control risk |
+1 | Detection risk |
+2 | Audit risk |
+2 | Risk of material misstatement | rmm
+3 | Significant risk | significant risks
+3 | Spectrum of inherent risk | inherent risk spectrum
+3 | Sampling risk |
+4 | Assertion level | assertion level risk
+4 | Financial statement level | pervasive risk
+4 | Nonsampling risk | non sampling risk
+5 | Relevant assertion | significant account
+5 | Combined assessment | combined risk
+6* | Business risk | business risks | Broader than RMM: risks that keep the entity from achieving objectives.
+
+## aud-inherent-factors | AUD | Name an inherent risk factor | RISK
+1 | Complexity | complex
+1 | Subjectivity | subjective
+2 | Change | changes
+2 | Uncertainty | estimation uncertainty
+2 | Susceptibility to management bias | management bias; bias
+3 | Susceptibility to fraud | fraud; fraud risk
+3 | Related party transactions | related parties
+3 | Volume of transactions | high volume
+4 | Nonroutine transactions | unusual transactions; nonroutine
+4 | Significant judgments | judgment
+5 | Industry conditions | industry
+5 | New accounting standards | new standards
+6* | Liquidity of assets (theft risk) | susceptibility to theft; cash and liquid assets | Cash and other liquid assets are more prone to misappropriation.
+
+## aud-understand | AUD | Name something the auditor learns when understanding the entity | RISK
+1 | Industry | industry conditions
+1 | Internal control |
+2 | Regulatory environment | regulation; regulatory factors
+2 | Nature of the entity | operations; ownership; business
+2 | Accounting policies | selection of accounting policies
+3 | Objectives and strategies | strategies; objectives
+3 | Measurement of performance | kpis; performance measures
+3 | Financing | debt structure
+3 | Applicable framework | financial reporting framework
+4 | Related parties |
+4 | Governance structure | governance
+4 | IT environment | it systems
+5 | Economic conditions | economy
+5 | Business risks |
+6* | Use of service organizations | service organizations | Outsourced processing affects how the auditor understands controls.
+
+## aud-materiality-bench | AUD | Name a benchmark used to set materiality | RISK
+1 | Pretax income | income before taxes; net income before taxes
+1 | Total revenue | revenue; sales
+2 | Total assets | assets
+2 | Equity | net assets; stockholders equity
+3 | Total expenses | expenses
+3 | Gross profit |
+3 | Net income |
+4 | EBITDA |
+4 | Normalized earnings | adjusted earnings
+5 | Total contributions (NFP) | contributions; donations
+5 | Net asset value (investment funds) | nav
+5 | Expenditures (government) | government expenditures
+6* | Cash flows from operations | operating cash flows
+6 | Average earnings of several years | average earnings
+
+## aud-fraud-schemes | AUD | Name a common fraud scheme | RISK
+1 | Fictitious revenue | fake sales; fictitious sales
+1 | Embezzlement | theft; misappropriation
+2 | Lapping | lapping receivables
+2 | Check kiting | kiting
+2 | Ghost employees | phantom employees
+2 | Shell companies | fictitious vendors; fake vendors
+3 | Channel stuffing | channel stuffing
+3 | Expense reimbursement fraud | padding expenses; fake expenses
+3 | Skimming |
+3 | Cookie jar reserves | cookie jar
+4 | Bill-and-hold abuse | bill and hold
+4 | Round-tripping | round tripping
+4 | Improper capitalization of expenses | capitalizing expenses
+4 | Side agreements | side letters
+5 | Kickbacks | kickback; bribery
+5 | Inventory overstatement | fake inventory
+6* | Big bath accounting | big bath | Taking huge charges in a bad year to make future years look better.
+6 | Bill splitting to dodge approval limits | split purchases; bid splitting
+
+## aud-fraud-response | AUD | Name a required or common response to fraud risk | RISK
+1 | Journal entry testing | test journal entries; journal entries
+1 | Professional skepticism | skepticism
+2 | Revenue recognition presumed a fraud risk | revenue recognition presumption; presumed revenue risk
+2 | Management override presumed | management override
+2 | Review estimates for bias | estimates bias; retrospective review
+3 | Element of unpredictability | unpredictability; surprise procedures
+3 | Business rationale for unusual transactions | unusual transactions
+3 | More experienced staff | assign experienced staff
+4 | Change timing of procedures | timing
+4 | Use forensic specialists | forensic specialist
+4 | Brainstorming session | brainstorming
+5 | Surprise inventory counts | surprise counts; unannounced counts
+5 | Confirm contract terms with customers | confirm terms; side agreements
+6* | Communicate with those charged with governance | communicate fraud | Fraud involving management must be raised with those charged with governance.
+
+## aud-deficiency-terms | AUD | Name an internal control deficiency or control-classification term | RISK
+1 | Material weakness |
+1 | Significant deficiency |
+2 | Deficiency in design | design deficiency
+2 | Deficiency in operation | operating deficiency
+2 | Preventive control | preventive
+2 | Detective control | detective
+3 | Compensating control | compensating controls
+3 | Key control | key controls
+3 | Manual control | manual
+3 | Automated control | automated
+4 | Entity-level control | entity level controls
+4 | Corrective control | corrective
+5 | Reasonable possibility | reasonable possibility of misstatement
+5 | Prudent official test | prudent official
+6* | Indicators of material weakness | restatement; ineffective audit committee oversight; auditor identified misstatement | Restatements and auditor-found misstatements are classic indicators.
+
+## aud-cycles | AUD | Name a transaction cycle auditors use to organize work | RISK
+1 | Revenue cycle | sales cycle; revenue and receipts
+1 | Purchases cycle | expenditure cycle; purchases and disbursements
+2 | Payroll cycle | payroll; human resources cycle
+2 | Inventory cycle | production cycle; conversion cycle
+3 | Financing cycle | capital acquisition; financing
+3 | Investing cycle | investing
+3 | Cash receipts | receipts
+3 | Cash disbursements | disbursements
+4 | Fixed asset cycle | property cycle
+4 | Treasury cycle | treasury
+5 | General ledger and financial reporting cycle | financial close; financial reporting cycle
+6* | Period-end financial reporting process | period end process | Always a significant process under the integrated audit standard.
+
+## aud-rev-controls | AUD | Name a control in the revenue cycle | RISK
+1 | Credit approval | credit check; credit limits
+1 | Segregation of duties |
+2 | Shipping documents | bill of lading; shipping docs
+2 | Prenumbered sales invoices | prenumbered invoices
+2 | Matching orders, shipments and invoices | matching; three way match
+3 | Lockbox | lockbox system
+3 | Monthly customer statements | customer statements
+3 | Approved price lists | price list
+4 | Credit memo approval | credit memos
+4 | Restrictive endorsement of checks | restrictive endorsement
+4 | Remittance list | remittance advices; prelisting
+5 | Daily deposits | deposit receipts daily
+5 | Independent reconciliation of AR subledger | subledger reconciliation
+6* | Write-off approval by someone outside cash receipts | write off approval | Keeps the cash handler from hiding theft as bad debt.
+
+## aud-purch-controls | AUD | Name a control in the purchases and disbursements cycle | RISK
+1 | Purchase orders | prenumbered purchase orders
+1 | Three-way match | three way match
+2 | Approved vendor list | vendor master; approved vendors
+2 | Receiving reports | receiving report
+2 | Segregation of duties |
+3 | Check signing authority | authorized signers
+3 | Canceling supporting documents | cancel invoices; mark paid
+3 | Budget approval | budgets
+4 | Requisition approval | purchase requisition
+4 | Vendor master file changes controlled | vendor changes
+5 | Positive pay | positive pay
+5 | Dual signatures on large checks | dual signature
+6* | Blind receiving reports | blind count | The receiving clerk doesn't see quantities ordered, so they actually count.
+
+## aud-payroll-controls | AUD | Name a control in the payroll cycle | RISK
+1 | Timekeeping approval | approved timecards; time records
+1 | Segregation of HR and payroll | segregation of duties
+2 | Authorized pay rates | pay rate approval
+2 | Personnel files | employee files
+3 | Separate payroll bank account | imprest payroll account
+3 | Review of payroll register | payroll register review
+3 | Direct deposit | direct deposit
+4 | Terminations processed promptly | termination procedures
+4 | Payroll distribution by someone independent | independent paymaster
+5 | Unclaimed checks controlled | unclaimed paychecks
+5 | Reconcile payroll to general ledger | payroll reconciliation
+6* | Surprise payroll distribution | surprise payoff | Handing out checks in person to catch ghost employees.
+
+## aud-tech | AUD | Name a technology an auditor may need to understand or use | RISK
+1 | ERP systems | erp
+1 | Cloud computing | cloud
+2 | Data analytics | analytics
+2 | Artificial intelligence | ai; machine learning
+2 | Spreadsheets | excel; end user computing
+3 | Robotic process automation | rpa; bots
+3 | Cybersecurity tools | cybersecurity
+3 | Blockchain | distributed ledger
+4 | Electronic data interchange | edi
+4 | Application programming interfaces | api; apis
+5 | Data lakes and warehouses | data warehouse
+5 | Internet of things | iot
+6* | Generative AI used in financial reporting | gen ai; generative ai; large language models
+
+## aud-soc | AUD | Name a service organization (SOC) concept | RISK
+1 | SOC 1 report | soc 1
+1 | Service organization |
+2 | User entity | user organization
+2 | Type 1 report | type 1; type i
+2 | Type 2 report | type 2; type ii
+3 | Service auditor |
+3 | User auditor |
+3 | Complementary user entity controls | cuecs; cuec
+4 | Subservice organization | subservice
+4 | Carve-out method | carve out
+4 | Inclusive method | inclusive
+5 | Bridge letter | gap letter | Covers the gap between the SOC report period and year-end.
+5 | Description of the system | system description
+6* | Complementary subservice organization controls | csocs | Controls the subservice organization must have for the description to hold.
+
+## aud-specialists | AUD | Name a specialist or other party whose work an auditor may use | RISK
+1 | Actuary | actuaries
+1 | Appraiser | appraisers; valuation specialist
+2 | Internal auditors | internal audit
+2 | Attorneys | lawyers; legal counsel
+3 | IT specialists | it specialist
+3 | Component auditors | other auditors
+3 | Engineers | engineer
+4 | Environmental specialists | environmental
+4 | Tax specialists | tax specialist
+4 | Forensic specialists | forensic
+5 | Geologists | geologist; reserve engineers
+5 | Management's specialist | managements specialist
+6* | Pricing services for securities | pricing service; third party pricing | Used for fair values; the auditor still evaluates the source.
+
+# ---------- Performing further procedures and obtaining evidence (PROC) ----------
+
+## aud-evidence-quality | AUD | Name something that makes audit evidence more reliable | PROC
+1 | External source | external evidence; third party evidence
+1 | Auditor's direct knowledge | direct knowledge; observed by auditor
+2 | Original documents | originals
+2 | Effective internal controls | strong controls
+2 | Written documentation | documentary evidence
+3 | Obtained directly from third parties | confirmation; direct from third party
+3 | Contemporaneous evidence | contemporaneous
+4 | Consistent evidence from multiple sources | corroboration; corroborating evidence
+4 | Independent of the client | independent source
+5 | Relevant to the assertion | relevance
+5 | Sufficient quantity | sufficiency
+6* | Not easily altered electronic records with controls | controlled electronic records | Electronic evidence is reliable when the controls over it work.
+
+## aud-ar-procs | AUD | Name an audit procedure for accounts receivable | PROC
+1 | Confirmation | confirm receivables; confirmations
+1 | Aging analysis | aging schedule; aging
+2 | Subsequent cash receipts | subsequent receipts
+2 | Allowance evaluation | allowance; credit loss estimate
+3 | Cutoff testing | cutoff
+3 | Analytical procedures | analytics; days sales outstanding
+3 | Vouching to shipping documents | vouch to shipping
+4 | Credit memos after year-end | credit memos
+4 | Related-party receivables | related party
+4 | Pledged receivables | pledging; factored receivables
+5 | Alternative procedures for nonresponses | alternative procedures
+5 | Negative confirmations | negative confirmation
+6* | Lapping detection through deposit slips | compare deposit slips; lapping | Compare remittance details to postings to spot lapping.
+
+## aud-inv-procs | AUD | Name an audit procedure for inventory | PROC
+1 | Observe the physical count | observation; physical count; inventory count
+1 | Test counts | test count
+2 | Price testing | pricing; vouch costs
+2 | Cutoff testing | cutoff
+2 | Lower of cost or NRV testing | nrv testing; lcnrv
+3 | Obsolescence review | slow moving; obsolete inventory
+3 | Confirm inventory held by others | confirm consigned inventory; public warehouse
+3 | Rollforward or rollback | rollforward; rollback
+4 | Count tag control | tag control
+4 | Analytical procedures | inventory turnover; gross margin analysis
+5 | Overhead allocation testing | overhead
+5 | Specialist for unusual items | specialist
+6* | Test for double counting or moving items between sites | double counting | Observing locations simultaneously stops goods from being counted twice.
+
+## aud-cash-procs | AUD | Name an audit procedure for cash | PROC
+1 | Bank confirmation | confirm cash; standard bank confirmation
+1 | Bank reconciliation review | bank reconciliation
+2 | Cutoff bank statement | bank cutoff statement
+2 | Interbank transfer schedule | kiting schedule; bank transfer schedule
+3 | Proof of cash | four column
+3 | Petty cash count | count cash; cash count
+3 | Outstanding checks test | outstanding checks
+4 | Deposits in transit test | deposits in transit
+4 | Restrictions and compensating balances | compensating balances
+5 | Confirm lines of credit | lines of credit
+5 | Review for unusual entries | unusual cash entries
+6* | Count all cash and negotiable items simultaneously | simultaneous count | Prevents covering a shortage by moving cash between funds.
+
+## aud-ppe-procs | AUD | Name an audit procedure for property, plant and equipment | PROC
+1 | Vouch additions | additions; vouching additions
+1 | Recalculate depreciation | depreciation
+2 | Physical inspection | inspect assets; observe assets
+2 | Review disposals | disposals; retirements
+3 | Review repairs and maintenance | repairs expense
+3 | Title and liens | deeds; title documents
+3 | Impairment assessment | impairment
+4 | Lease agreements | leases
+4 | Capitalized interest | interest capitalization
+4 | Board minutes for authorizations | minutes
+5 | Analytical procedures | depreciation reasonableness
+5 | Property tax bills | property taxes
+6* | Trace from the asset to the register (completeness) | completeness of ppe; floor to sheet | Picking assets on the floor first tests completeness.
+
+## aud-liab-procs | AUD | Name an audit procedure for payables and liabilities | PROC
+1 | Search for unrecorded liabilities | unrecorded liabilities
+1 | Vendor statement reconciliation | vendor statements
+2 | Confirmation of payables | confirm payables
+2 | Cutoff testing | cutoff
+2 | Debt confirmation | confirm debt; loan confirmation
+3 | Review covenants | debt covenants
+3 | Recalculate accrued interest | accrued interest
+3 | Analytical procedures | analytics
+4 | Review subsequent disbursements | subsequent payments
+4 | Open purchase orders and contracts | purchase commitments
+5 | Inquire of legal counsel | legal letter
+5 | Zero-balance confirmations | zero balance vendors | Confirm vendors with small or zero balances to test completeness.
+6* | Unmatched receiving reports | unmatched receiving | Goods received without an invoice point to unrecorded liabilities.
+
+## aud-equity-procs | AUD | Name an audit procedure for stockholders' equity | PROC
+1 | Read board minutes | minutes; board minutes
+1 | Confirm shares with the transfer agent | transfer agent; confirm shares
+2 | Review articles of incorporation | articles of incorporation; charter
+2 | Vouch stock issuances | stock issuance
+3 | Recalculate dividends | dividends
+3 | Treasury stock transactions | treasury stock
+3 | Analyze retained earnings | retained earnings
+4 | Stock option plan review | stock options
+4 | Stock certificate book | stock certificates
+5 | Legal restrictions on dividends | dividend restrictions
+5 | Registrar | registrar
+6* | Check compliance with preemptive rights | preemptive rights | Existing shareholders may have rights to buy new shares first.
+
+## aud-estimates | AUD | Name an approach to auditing accounting estimates | PROC
+1 | Test management's process | test management process
+1 | Develop an independent estimate | independent estimate; auditor estimate
+2 | Review subsequent events | subsequent events
+2 | Evaluate assumptions | assumptions
+3 | Test underlying data | data
+3 | Retrospective review | look back; hindsight review
+3 | Use a specialist | specialist
+4 | Develop a range | auditor's range; range
+4 | Sensitivity analysis | sensitivity
+4 | Evaluate management bias | management bias
+5 | Estimation uncertainty | uncertainty
+5 | Point estimate | point estimate
+6* | Evaluate method changes | change in method | An unexplained switch in method is a sign of bias.
+
+## aud-confirm-terms | AUD | Name a confirmation term or practice | PROC
+1 | Positive confirmation | positive
+1 | Negative confirmation | negative
+2 | Exceptions | exception
+2 | Nonresponse | no response
+2 | Alternative procedures | alternative procedure
+3 | Blank form confirmation | blank confirmation
+3 | Auditor controls the process | maintain control
+3 | Electronic confirmations | electronic confirmation; confirmation com
+4 | Second requests | follow up requests
+4 | Management refuses to allow confirmation | management refusal
+5 | Oral confirmations | oral responses
+5 | Disclaimers in responses | restrictive language
+6* | Direct access to third-party records | direct access | Can count as confirmation when the auditor logs in to the third party's data.
+
+## aud-toc | AUD | Name a procedure used in a test of controls | PROC
+1 | Inquiry | inquire
+1 | Observation | observe
+2 | Inspection of documents | inspection
+2 | Reperformance | reperform
+3 | Walkthrough | walk through; walkthroughs
+3 | Dual-purpose tests | dual purpose
+4 | Rollforward procedures | rollforward
+4 | Testing IT application controls | application controls
+4 | Benchmarking automated controls | benchmarking
+5 | Interim testing | interim
+5 | Testing deviations | deviations
+6* | Using prior-year evidence (every third year rule) | prior year evidence; three year rotation | Controls not changed may rely on prior-audit evidence, but must be tested at least every third year.
+
+## aud-rp-procs | AUD | Name a procedure to identify related-party transactions | PROC
+1 | Inquiry of management | inquire of management
+1 | Review board minutes | minutes
+2 | Review conflict-of-interest statements | conflict of interest
+2 | Review SEC filings | proxy statements
+3 | Large or unusual transactions | unusual transactions
+3 | Review guarantees | guarantees
+3 | Confirm with intermediaries | confirm terms
+4 | Review tax returns | tax returns
+4 | Review shareholder lists | shareholder listings
+4 | Review invoices from lawyers | legal invoices
+5 | Inquire of other auditors | other auditors
+5 | Review loans with no interest | non market loans
+6* | Search public records for entity relationships | public records; entity searches | Corporate filings can reveal hidden common ownership.
+
+## aud-subsequent-procs | AUD | Name an audit procedure for subsequent events | PROC
+1 | Inquire of management | inquiry
+1 | Read minutes after year-end | minutes
+2 | Read latest interim financial statements | interim statements
+2 | Legal letter update | lawyers letter
+3 | Representation letter | management representations
+3 | Review subsequent cash receipts and disbursements | subsequent cash
+4 | Review for new debt or equity | new financing
+4 | Compare budget to actual | budgets
+5 | Search for contingencies | contingencies
+6* | Dual dating the report | dual date | Used when a subsequent event is noted after the original report date.
+
+## aud-lawyer-letter | AUD | Name something addressed in a letter of inquiry to the client's lawyer | PROC
+1 | Pending litigation | litigation; lawsuits
+1 | Likelihood of unfavorable outcome | likelihood
+2 | Estimate of potential loss | amount of loss; range of loss
+2 | Unasserted claims | unasserted claim
+3 | Management's evaluation | managements evaluation
+3 | Omissions in management's list | omissions
+4 | Limitations on the lawyer's response | limitations
+4 | Effective date of the response | date
+5 | Unpaid legal fees | unpaid fees
+5 | Lawyer's responsibility to advise on disclosure | duty to advise
+6* | A refusal to respond is a scope limitation | refusal; scope limitation | Can lead to a qualified opinion or disclaimer.
+
+## aud-je-select | AUD | Name a characteristic of a journal entry the auditor would select for testing | PROC
+1 | Round numbers | round amounts; even amounts
+1 | Made at period end | year end entries; post closing
+2 | Unusual accounts | seldom used accounts
+2 | Little or no description | no description
+3 | Made by unusual users | unauthorized users; senior management entries
+3 | Top-side entries | top side; consolidation entries
+4 | Related-party accounts | related party
+4 | Entries recorded on weekends | weekend entries
+5 | Containing consistent ending numbers | ending digits
+5 | Unusual reversals | reversals
+6* | Entries to intercompany or suspense accounts | suspense accounts | Rarely reviewed accounts are good places to hide.
+
+## aud-rev-procs | AUD | Name an audit procedure for revenue | PROC
+1 | Analytical procedures | analytics
+1 | Cutoff testing | cutoff
+2 | Review contracts | contract review
+2 | Confirm terms with customers | confirm terms
+2 | Vouch sales to shipping documents | vouch sales
+3 | Review credit memos after year-end | credit memos
+3 | Test performance obligations | performance obligations
+4 | Recalculate allocation of transaction price | allocation testing
+4 | Review side agreements | side agreements
+5 | Bill-and-hold criteria testing | bill and hold
+5 | Review sales returns after period end | sales returns
+6* | Test revenue from manual journal entries | manual revenue entries | Revenue booked outside the normal system is a high-risk population.
+
+## aud-invest-procs | AUD | Name an audit procedure for investments | PROC
+1 | Confirm with custodian | confirm investments; broker confirmation
+1 | Inspect securities | inspect certificates
+2 | Test fair values | fair value testing
+2 | Recalculate gains and losses | gains and losses
+3 | Review classification | classification
+3 | Evaluate impairment | impairment
+3 | Check pricing sources | pricing sources
+4 | Review board authorization | authorization
+4 | Equity method income recalculation | equity method
+5 | Obtain investee financials | investee financial statements
+5 | Test level 3 inputs | level 3
+6* | Count securities simultaneously with cash | simultaneous count | Keeps securities from being moved to cover shortages.
+
+# ---------- Forming conclusions and reporting (REP) ----------
+
+## aud-report-sections | AUD | Name a section or element of the auditor's report | REP
+1 | Opinion section | opinion
+1 | Title | independent auditors report
+2 | Basis for opinion | basis for opinion section
+2 | Responsibilities of management | managements responsibilities
+2 | Auditor's responsibilities | auditors responsibilities
+3 | Addressee | addressed
+3 | Signature | auditors signature; firm signature
+3 | Date | report date
+4 | City and state | auditor's location
+4 | Going concern section | going concern
+5 | Key audit matters | kams; critical audit matters
+5 | Other information | other information section
+6* | Statement of independence and ethics | independence statement | The basis-for-opinion section states the auditor is independent.
+
+## aud-modify-reasons | AUD | Name a reason an auditor modifies the opinion | REP
+1 | Material misstatement | misstatement; gaap departure
+1 | Scope limitation | inability to obtain evidence; scope limitations
+2 | Inadequate disclosure | omitted disclosures
+2 | Client-imposed limitation | management limitation
+3 | Pervasive effects | pervasive
+3 | Inappropriate accounting principles | wrong accounting principle
+4 | Circumstance-imposed limitation | records destroyed
+4 | Unreasonable estimates | unreasonable estimate
+5 | Lack of independence (for a disclaimer) | not independent
+5 | Inability to observe inventory | inventory not observed
+6* | Multiple uncertainties | multiple uncertainties | Rarely, interacting uncertainties can lead to a disclaimer.
+
+## aud-emphasis | AUD | Name a matter that might get an emphasis-of-matter paragraph | REP
+1 | Going concern | substantial doubt
+1 | Significant subsequent event | subsequent event
+2 | Change in accounting principle | consistency; accounting change
+2 | Major catastrophe | catastrophe; disaster
+3 | Significant related-party transactions | related party
+3 | Major litigation uncertainty | litigation; uncertainty
+4 | Early adoption of a standard | early adoption
+4 | Correction of an error | restatement
+5 | Unusually important risk | important risk
+5 | Special-purpose framework | special purpose framework | Alerts readers to the basis of accounting.
+6* | Material uncertainty about a regulatory action | regulatory action
+
+## aud-review-procs | AUD | Name a procedure or feature of a review engagement | REP
+1 | Inquiry | inquiries
+1 | Analytical procedures | analytics
+2 | Limited assurance | limited
+2 | Representation letter | management representations
+2 | Independence required | independence
+3 | Engagement letter | written understanding
+3 | Reading the financial statements | read financial statements
+3 | Reconciling to records | agree to records
+4 | Knowledge of the industry | industry knowledge
+4 | Review report | accountants review report
+5 | Going concern consideration | going concern
+5 | Documentation of significant findings | documentation
+6* | Inquiry of actions taken at board meetings | meetings of stockholders and board | A specific inquiry required in SSARS reviews.
+
+## aud-compilation | AUD | Name a feature of a compilation or preparation engagement | REP
+1 | No assurance | no assurance provided
+1 | Compilation report | report
+2 | Preparation engagement | preparation
+2 | No report required for preparation | no report
+3 | Independence impairment disclosed | lack of independence disclosed
+3 | May omit disclosures | omit disclosures; omitted disclosures
+3 | Engagement letter | written understanding
+4 | Not assuming management responsibilities | management responsibilities
+4 | Read the statements for obvious errors | read statements
+5 | "No assurance is provided" on each page | no assurance legend | Preparation engagements need this legend on each page.
+5 | Knowledge of the framework | framework knowledge
+6* | Reason for independence impairment may be listed | reasons optional | Optional: if one reason is given, all must be.
+
+## aud-icfr | AUD | Name a concept in an integrated audit of internal control | REP
+1 | Material weakness | material weaknesses
+1 | Top-down approach | top down
+2 | Entity-level controls | entity level
+2 | Management's assessment | managements assessment
+2 | Walkthroughs | walkthrough
+3 | Significant accounts | significant accounts and disclosures
+3 | Relevant assertions | assertions
+3 | Adverse opinion on ICFR | adverse opinion
+4 | As-of date | as of date
+4 | Control environment | environment
+4 | Period-end financial reporting process | period end process
+5 | Using the work of others | reliance on others
+5 | Rollforward | roll forward
+6* | Combined or separate reports | combined report; separate reports | The ICFR and financial statement opinions can be in one or two reports.
+
+## aud-special-reports | AUD | Name a special report or other type of auditor reporting | REP
+1 | Special-purpose framework report | special purpose framework
+1 | Single financial statement | one statement
+2 | Supplementary information | supplementary
+2 | Required supplementary information | rsi
+3 | Summary financial statements | summary
+3 | Compliance with contracts | compliance report
+3 | Comparative statements | comparative
+4 | Reports on application of requirements | application of framework; second opinions
+4 | Letters for underwriters | comfort letters
+5 | Specified elements, accounts or items | specified elements
+5 | Pro forma financial information | pro forma
+6* | Reports with an alert restricting use | restricted use; alert | Required for certain reports, like contractual-basis statements.
+
+## aud-report-date | AUD | Name a concept about report dating or events after the report | REP
+1 | Report date | date of report
+1 | Dual dating | dual date
+2 | Subsequent events | type 1; type 2
+2 | Subsequently discovered facts | facts discovered after
+3 | Reissuance | reissued report
+3 | Documentation completion date | completion date
+4 | Omitted procedures | omitted procedure
+4 | Updating the report | updated report
+5 | Sufficient evidence date | evidence date | The report can't be dated before sufficient appropriate evidence is obtained.
+5 | Notifying regulators and users | notification
+6* | Assembly deadline (60 days) | 60 days; assembly | Workpapers must be assembled within 60 days of the report release date under AICPA standards.
+
+## aud-gc-plans | AUD | Name a management plan that can mitigate going concern doubt | REP
+1 | Borrowing money | new financing; loans
+1 | Selling assets | asset sales; dispose of assets
+2 | Reducing expenses | cutting costs; cost reductions
+2 | Issuing equity | raising capital; selling stock
+3 | Restructuring debt | debt restructuring
+3 | Delaying expenditures | postponing capex
+4 | Sale-leaseback | sale and leaseback
+4 | Factoring receivables | factoring
+5 | Owner support letters | parent support; support letter
+5 | Merging with another company | merger
+6* | Probable of being effectively implemented | probable implementation | The plans must be both probable of implementation and probable to mitigate.
+
+## aud-misstatements | AUD | Name a type of misstatement evaluated at the end of an audit | REP
+1 | Factual misstatement | factual; known misstatement
+1 | Judgmental misstatement | judgmental
+2 | Projected misstatement | projected
+2 | Uncorrected misstatements | passed adjustments; unadjusted
+3 | Clearly trivial | trivial
+3 | Qualitative materiality | qualitative factors
+3 | Corrected misstatements | adjustments
+4 | Likely misstatement | likely
+4 | Prior-period uncorrected misstatements | prior period misstatements
+5 | Disclosure misstatements | disclosure errors
+5 | Classification misstatements | classification
+6* | Rollover versus iron curtain | rollover; iron curtain | Two ways to evaluate prior-period errors; SAB 108 requires both.
+
+## aud-completion | AUD | Name a procedure performed when completing an audit | REP
+1 | Final analytical review | final analytics
+1 | Management representation letter | representation letter
+2 | Legal letter | lawyers letter
+2 | Subsequent events review | subsequent events
+2 | Evaluate going concern | going concern
+3 | Evaluate misstatements | summary of misstatements
+3 | Engagement quality review | eqr
+3 | Communicate with those charged with governance | tcwg
+4 | Workpaper review | review of documentation
+4 | Read other information | other information
+5 | Disclosure checklist | disclosures
+5 | Evaluate audit evidence sufficiency | sufficiency of evidence
+6* | Evaluate consistency of the statements with the auditor's understanding | overall review | The final overall review.
+
+## aud-documentation | AUD | Name an audit documentation requirement or concept | REP
+1 | Audit program | audit plan
+1 | Working papers | workpapers
+2 | Retention (5 years AICPA) | five years; retention
+2 | Experienced auditor standard | experienced auditor
+3 | Who performed and reviewed | preparer and reviewer
+3 | Significant findings | significant matters
+3 | Permanent file | permanent
+3 | Current file | current
+4 | Documentation completion date | completion date
+4 | Lead schedules | lead schedule
+5 | Tick marks | tickmarks
+5 | Changes after the report date | documentation changes
+6* | Identifying characteristics of items tested | identifying characteristics | Enough detail to identify exactly what was tested.
+
+## aud-comparatives | AUD | Name a concept in reporting on comparative financial statements | REP
+1 | Prior-period audit report | predecessor's report
+1 | Updated opinion | update
+2 | Reissued report | reissue
+2 | Other-matter paragraph | other matter
+3 | Change in prior opinion | different opinion
+3 | Unaudited prior period | unaudited
+4 | Restated prior periods | restated
+4 | Predecessor's report not reissued | not reissued
+5 | Consistency evaluation | consistency
+6* | Predecessor's written representation from successor | successor representation | The predecessor gets a letter from the successor before reissuing.
+
+## aud-attest-terms | AUD | Name a term from the attestation standards (SSAEs) | REP
+1 | Examination | examination
+1 | Agreed-upon procedures | aup
+2 | Review | review
+2 | Subject matter | subject
+2 | Criteria | suitable criteria
+3 | Responsible party | responsible
+3 | Engaging party | engaging
+3 | Written assertion | assertion
+4 | Practitioner | practitioner
+4 | Intended users | users
+5 | Reasonable assurance (examination) | reasonable assurance
+5 | Direct engagement | direct
+6* | Available criteria | criteria availability | Criteria must be available to users, not just suitable.
+
+## aud-supp | AUD | Name supplementary or other information the auditor reads or reports on | REP
+1 | Required supplementary information | rsi
+1 | MD&A | management discussion
+2 | Annual report | annual report
+2 | Letter to shareholders | shareholder letter
+3 | Schedule of expenditures of federal awards | sefa
+3 | Supplementary schedules | supplementary schedules
+4 | In-relation-to opinion | in relation to
+4 | Pension schedules | pension rsi
+5 | Budgetary comparison | budget to actual
+5 | Statistical section | statistics
+6* | Ratios and highlights in an annual report | financial highlights; selected data | Other information the auditor reads for material inconsistencies.

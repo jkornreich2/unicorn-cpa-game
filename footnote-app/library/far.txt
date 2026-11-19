@@ -1,11 +1,12 @@
 # FOOTNOTE LIBRARY: FAR
 # Format, one prompt block at a time:
-#   ## id | SECTION | Prompt text
+#   ## id | SECTION | Prompt text | AREA
+#   AREA is the AICPA blueprint area: FAR FR/BS/TX; AUD ETH/RISK/PROC/REP; REG ETH/LAW/PROP/IND/ENT.
 #   rarity | Answer as shown | alternate spellings; separated; by semicolons | optional note shown to players
 # Rarity: 1 on the face (everyone says it), 2 review-course favorite, 3 solid, 4 sharp, 5 deep cut, 6 footnote.
 # Put * after the rarity (e.g. 6*) on exactly one answer per prompt: the gem.
 
-## far-curr-liab | FAR | Name a current liability
+## far-curr-liab | FAR | Name a current liability | BS
 1 | Accounts payable | ap; payables; trade payables
 2 | Wages payable | salaries payable; accrued wages; accrued salaries; payroll payable
 2 | Accrued expenses | accrued liabilities; accruals
@@ -29,7 +30,7 @@
 6 | Accrued litigation | litigation accrual; contingent liability; loss contingency; lawsuit liability | Probable and reasonably estimable loss contingencies are accrued.
 6 | Coupons and premiums | coupon liability; premium liability; premiums; coupons | Estimated cost of outstanding coupons or premium offers.
 
-## far-intangible | FAR | Name an intangible asset
+## far-intangible | FAR | Name an intangible asset | BS
 1 | Goodwill |
 1 | Patent | patents
 2 | Trademark | trademarks
@@ -51,7 +52,7 @@
 6 | Order backlog | backlog | Recognized in an acquisition as a contract-based intangible.
 6 | Landing or water rights | landing rights; airport slots; water rights; takeoff and landing slots | Contract and use rights that can carry real value.
 
-## far-indirect | FAR | Name an item added back to net income in the indirect method
+## far-indirect | FAR | Name an item added back to net income in the indirect method | FR
 1 | Depreciation | depreciation expense
 1 | Amortization | amortization expense; amortization of intangibles
 2 | Decrease in accounts receivable | decrease in receivables; decrease in ar
@@ -71,7 +72,7 @@
 6* | Equity-method losses | equity method loss; equity in losses of investee; share of investee losses | Your share of an investee's loss reduces income without using cash.
 6 | Unrealized loss on trading securities | unrealized loss; unrealized holding loss | A fair-value loss through net income with no cash outflow.
 
-## far-variable | FAR | Name a form of variable consideration under ASC 606
+## far-variable | FAR | Name a form of variable consideration under ASC 606 | TX
 1 | Returns and refunds | returns; refunds; right of return; sales returns
 2 | Discounts | discount; volume discounts; trade discounts
 2 | Rebates | rebate; volume rebates
@@ -90,7 +91,7 @@
 6 | Contingent fees | contingent fee; success fees; success fee | A fee payable only if an outcome occurs, such as a successful lawsuit.
 6 | Most-favored-nation clauses | most favored nation; mfn clause; mfn | A promise to match a better price given to another customer.
 
-## far-temp-diff | FAR | Name a source of deferred taxes
+## far-temp-diff | FAR | Name a source of deferred taxes | TX
 1 | Depreciation differences | depreciation; accelerated depreciation; bonus depreciation; macrs
 2 | Warranty accruals | warranty; warranties; warranty expense; warranty accrual
 2 | Allowance for credit losses | bad debts; bad debt; allowance for doubtful accounts
@@ -108,7 +109,7 @@
 6 | Equity-method income | equity method; equity in earnings of investee | Book income now, taxed only when dividends are received or the stake is sold.
 6* | Leases | lease; right of use asset; lease liability | The ROU asset and lease liability have no tax basis, creating offsetting differences.
 
-## far-equity | FAR | Name a component of stockholders' equity
+## far-equity | FAR | Name a component of stockholders' equity | BS
 1 | Common stock | common shares
 1 | Retained earnings |
 2 | Additional paid-in capital | apic; paid in capital; capital in excess of par; share premium
@@ -127,7 +128,7 @@
 6* | Own-credit risk on fair value option liabilities | own credit risk; instrument specific credit risk; fair value option credit risk | Changes in a liability's fair value from your own credit go to OCI under the fair value option.
 6 | Mezzanine (temporary) equity | mezzanine equity; temporary equity; redeemable preferred stock | Shares redeemable outside the issuer's control sit between liabilities and equity under SEC rules.
 
-## far-inventory | FAR | Name an inventory costing or valuation method
+## far-inventory | FAR | Name an inventory costing or valuation method | BS
 1 | FIFO | first in first out
 1 | LIFO | last in first out
 2 | Weighted average | average cost; weighted average cost
@@ -142,7 +143,7 @@
 6 | Dollar-value LIFO retail | lifo retail; retail lifo | Combines the retail method with dollar-value LIFO layers.
 6* | Conventional retail (LCM) | conventional retail; conventional retail method; lower of cost or market retail | Excludes markdowns from the cost-to-retail ratio to approximate LCM.
 
-## far-funds | FAR | Name a type of fund used by state and local governments
+## far-funds | FAR | Name a type of fund used by state and local governments | FR
 1 | General fund |
 2 | Special revenue fund | special revenue
 2 | Capital projects fund | capital projects
@@ -155,7 +156,7 @@
 5 | Private-purpose trust fund | private purpose trust
 5 | Custodial fund | custodial funds; agency fund | Replaced agency funds under GASB 84.
 
-## far-nca | FAR | Name a noncurrent asset
+## far-nca | FAR | Name a noncurrent asset | BS
 1 | Property, plant and equipment | ppe; pp and e; fixed assets; property plant and equipment
 1 | Land |
 2 | Buildings | building
@@ -176,7 +177,7 @@
 6* | Capitalized costs to obtain a contract | costs to obtain a contract; capitalized commissions; contract costs; contract acquisition costs | Incremental costs like sales commissions are capitalized under ASC 340-40 when the benefit lasts beyond a year.
 6 | Overfunded pension asset | pension asset; prepaid pension cost; overfunded pension plan | Plan assets above the obligation show as a noncurrent asset.
 
-## far-contra | FAR | Name a contra account
+## far-contra | FAR | Name a contra account | BS
 1 | Accumulated depreciation |
 1 | Allowance for doubtful accounts | allowance; allowance for credit losses; allowance for bad debts; allowance for uncollectible accounts
 2 | Accumulated amortization |
@@ -194,7 +195,7 @@
 6* | Unamortized debt issuance costs | debt issuance costs; bond issue costs; unamortized issuance costs | Since ASU 2015-03, shown as a direct deduction from the debt.
 6 | Allowance for inventory obsolescence | inventory reserve; obsolescence reserve; inventory allowance
 
-## far-606 | FAR | Name a step or concept in ASC 606 revenue recognition
+## far-606 | FAR | Name a step or concept in ASC 606 revenue recognition | TX
 1 | Identify the contract | identify contract; contract with a customer
 1 | Identify performance obligations | performance obligations; performance obligation
 1 | Determine the transaction price | transaction price
@@ -218,7 +219,7 @@
 6* | Consideration payable to a customer | payments to customers; consideration payable | Usually reduces revenue, such as slotting fees paid to a retailer.
 6 | Licenses: right to access vs right to use | right to access; right to use; functional ip; symbolic ip | Symbolic IP is recognized over time; functional IP usually at a point in time.
 
-## far-ratio | FAR | Name a financial ratio
+## far-ratio | FAR | Name a financial ratio | FR
 1 | Current ratio |
 1 | Debt-to-equity ratio | debt to equity; debt equity ratio
 2 | Return on equity | roe
@@ -245,7 +246,7 @@
 6 | Dividend yield |
 6 | Free cash flow yield | fcf yield
 
-## far-lease | FAR | Name an input to a lessee's lease liability or ROU asset
+## far-lease | FAR | Name an input to a lessee's lease liability or ROU asset | TX
 1 | Fixed lease payments | lease payments; fixed payments
 1 | Lease term |
 2 | Incremental borrowing rate | ibr; discount rate
@@ -260,7 +261,7 @@
 4 | Lease incentives received | lease incentives; tenant improvement allowance | Reduce the ROU asset.
 5 | Risk-free rate (private company election) | risk free rate | Private companies can elect it by asset class instead of the IBR.
 
-## far-subsequent | FAR | Name an example of a nonrecognized (Type II) subsequent event
+## far-subsequent | FAR | Name an example of a nonrecognized (Type II) subsequent event | TX
 1 | Fire or casualty loss after year-end | fire; casualty loss; natural disaster; flood; hurricane
 2 | Issuing stock after year-end | stock issuance; issuance of stock; issuing stock
 2 | Issuing debt after year-end | issuance of bonds; bond issuance; issuing debt; new borrowing
@@ -275,7 +276,7 @@
 5 | Government expropriation | expropriation; nationalization; seizure of assets
 6* | Dividend declared after year-end | dividend declaration; declaring a dividend | Disclosed, not accrued: the liability arises on declaration.
 
-## far-nfp | FAR | Name a statement, classification or concept in not-for-profit reporting
+## far-nfp | FAR | Name a statement, classification or concept in not-for-profit reporting | FR
 1 | Statement of financial position |
 1 | Statement of activities |
 2 | Net assets with donor restrictions | with donor restrictions; donor restricted net assets; restricted net assets
@@ -293,7 +294,7 @@
 5 | Agency transaction | agency transactions; pass through contributions | The NFP is an intermediary, not the donee.
 6* | Split-interest agreement | split interest; charitable remainder trust; charitable lead trust | The NFP shares benefits with other beneficiaries, like a charitable remainder trust.
 
-## far-gov-report | FAR | Name a statement or section of a government's annual comprehensive financial report
+## far-gov-report | FAR | Name a statement or section of a government's annual comprehensive financial report | FR
 1 | Statement of net position |
 1 | Statement of activities |
 2 | Governmental funds balance sheet | balance sheet governmental funds; fund balance sheet
@@ -310,7 +311,7 @@
 5 | Combining statements | combining financial statements; nonmajor fund statements
 6* | Modified approach for infrastructure | modified approach; infrastructure modified approach | Skip depreciation if infrastructure is maintained at a set condition level, with assessments in RSI.
 
-## far-cf-invfin | FAR | Name a cash flow reported in investing or financing activities
+## far-cf-invfin | FAR | Name a cash flow reported in investing or financing activities | FR
 1 | Buying equipment | purchase of equipment; capital expenditures; capex; purchase of ppe
 1 | Issuing stock | issuance of stock; proceeds from stock
 1 | Paying dividends | dividends paid; dividends
@@ -329,7 +330,7 @@
 6* | Contingent consideration paid after an acquisition | contingent consideration; earnout payments; earn out | Paid soon after the deal: investing. Later, up to the acquisition-date amount: financing; any excess: operating.
 6 | Debt prepayment penalties | prepayment penalties; debt extinguishment costs | Financing outflows under ASU 2016-15.
 
-## far-fv | FAR | Name a valuation technique or concept in fair value measurement
+## far-fv | FAR | Name a valuation technique or concept in fair value measurement | TX
 1 | Market approach |
 1 | Income approach |
 1 | Level 1 inputs | level 1; level one
@@ -351,7 +352,7 @@
 5 | Orderly transaction | not a forced sale
 6* | Practical expedient using NAV | nav; net asset value; nav practical expedient | Investments in funds can use NAV per share and skip the hierarchy table.
 
-## far-changes | FAR | Name a type of accounting change or error correction concept
+## far-changes | FAR | Name a type of accounting change or error correction concept | TX
 1 | Change in accounting principle | change in principle
 1 | Change in accounting estimate | change in estimate
 1 | Correction of an error | error correction; correction of errors
@@ -371,7 +372,7 @@
 5 | Reissuance restatement (Big R) | big r; big r restatement; reissuance restatement | Material errors: reissue prior statements and file a non-reliance 8-K.
 6* | Impracticability exception | impracticable; impracticability | Skip retrospective application if period-specific effects can't be determined.
 
-## far-debt | FAR | Name a feature or term of a bond or debt instrument
+## far-debt | FAR | Name a feature or term of a bond or debt instrument | BS
 1 | Stated (coupon) rate | coupon rate; stated rate; coupon; nominal rate
 1 | Maturity date | maturity
 1 | Face value | par value; principal; face amount
@@ -394,7 +395,7 @@
 5 | Subordinated | subordination; junior debt
 6* | Payment-in-kind interest | pik; pik interest; payment in kind | Interest paid by adding to principal instead of in cash.
 
-## far-business-combo | FAR | Name an item recognized or measured in a business combination
+## far-business-combo | FAR | Name an item recognized or measured in a business combination | TX
 1 | Goodwill |
 2 | Identifiable intangible assets | intangible assets; identifiable intangibles
 2 | Noncontrolling interest | nci; minority interest
@@ -411,7 +412,7 @@
 6* | Reacquired rights | reacquired right | A right the acquiree had to use the acquirer's assets, like a franchise, recognized as an intangible.
 6 | Indemnification assets | indemnification asset | The seller's promise to cover a liability, measured on the same basis as that liability.
 
-## far-impairment | FAR | Name an indicator that a long-lived asset may be impaired
+## far-impairment | FAR | Name an indicator that a long-lived asset may be impaired | BS
 1 | Significant decline in market price | decline in market value; drop in market price; market value decline
 2 | Physical damage | damage; damaged asset
 2 | Obsolescence | obsolete; technological obsolescence

@@ -1,0 +1,645 @@
+# FOOTNOTE LIBRARY: FAR, part 2   (format explained at the top of far.txt)
+
+# ---------- Financial reporting (FR) ----------
+
+## far-fs-elements | FAR | Name an element of financial statements in the conceptual framework | FR
+1 | Assets | asset
+1 | Liabilities | liability
+1 | Equity | net assets; stockholders equity
+2 | Revenues | revenue
+2 | Expenses | expense
+3 | Gains | gain
+3 | Losses | loss
+4 | Comprehensive income |
+4 | Investments by owners | owner investments; contributions by owners
+4 | Distributions to owners | owner distributions; distributions
+5 | Deferred outflows of resources | deferred outflows | A GASB element, reported separately from assets.
+5* | Deferred inflows of resources | deferred inflows | A GASB element: an acquisition of net assets that applies to a future period.
+
+## far-qual-char | FAR | Name a qualitative characteristic or constraint of useful financial information | FR
+1 | Relevance | relevant
+1 | Faithful representation | reliability; reliable
+2 | Comparability | comparable
+2 | Consistency | consistent
+3 | Verifiability | verifiable
+3 | Timeliness | timely
+3 | Understandability | understandable
+3 | Materiality | material
+4 | Predictive value | predictive
+4 | Confirmatory value | confirmatory
+4 | Completeness | complete
+4 | Neutrality | neutral
+4 | Free from error | free from material error
+5 | Cost constraint | cost benefit; cost versus benefit; cost constraint
+6* | Conservatism (no longer a characteristic) | conservatism; prudence | Dropped from the framework because it conflicts with neutrality.
+
+## far-is-items | FAR | Name a line item or subtotal on a multistep income statement | FR
+1 | Net sales | sales; revenue; sales revenue
+1 | Cost of goods sold | cogs; cost of sales
+1 | Gross profit | gross margin
+2 | Operating income | income from operations; operating profit
+2 | Net income | net earnings; profit
+2 | Selling expenses | selling expense
+2 | General and administrative expenses | g and a; administrative expenses
+3 | Income tax expense | provision for income taxes; tax expense
+3 | Interest expense |
+3 | Income from continuing operations | continuing operations
+3 | Other income and expense | other income; other expenses; nonoperating items
+4 | Discontinued operations | income from discontinued operations
+4 | Earnings per share | eps
+4 | Income before income taxes | pretax income; earnings before taxes
+5 | Net income attributable to noncontrolling interest | nci share of income; attributable to nci
+5 | Unusual or infrequent items | unusual items; infrequent items | Shown separately in operating income, never net of tax.
+6* | Sales returns and discounts deducted from gross sales | gross sales; sales returns and discounts; contra revenue | The top of a multistep statement starts at gross sales and works down to net sales.
+
+## far-disc-ops | FAR | Name a discontinued-operations or held-for-sale concept | FR
+1 | Strategic shift | major strategic shift; strategic shift with major effect
+1 | Component of an entity | component
+2 | Held for sale | held for sale classification
+2 | Reported net of tax | net of tax
+3 | Lower of carrying amount or fair value less cost to sell | fair value less costs to sell; lower of carrying amount or fair value
+3 | Gain or loss on disposal | loss on disposal; disposal gain
+3 | Stop depreciating | no depreciation; cease depreciation | Assets held for sale aren't depreciated.
+4 | Sale expected within one year | one year; probable sale within one year
+4 | Management commits to a plan | plan to sell; committed plan
+4 | Separate line on the balance sheet | presented separately; separate presentation
+4 | EPS for discontinued operations | per share discontinued operations
+5 | Major line of business or geographic area | major geographic area; major line of business
+5 | Actively marketed at a reasonable price | reasonable price; actively marketed
+5 | Restate prior periods | prior periods recast; retrospective presentation | Comparative periods are recast to show the component as discontinued.
+6* | Businesses acquired with intent to sell | acquired for resale; newly acquired business held for sale | Meets the held-for-sale criteria at acquisition: discontinued operations on day one.
+
+## far-cf-operating | FAR | Name a cash flow reported in operating activities | FR
+1 | Cash received from customers | collections from customers; cash from customers
+1 | Cash paid to suppliers | payments to suppliers; paid to vendors
+1 | Cash paid to employees | payroll; wages paid; payments to employees
+2 | Interest paid | interest payments
+2 | Income taxes paid | taxes paid
+2 | Interest received | interest collected
+2 | Dividends received | dividends collected
+3 | Trading securities purchases and sales | trading securities | Classified by nature: usually operating.
+3 | Lawsuit settlements | litigation settlements
+4 | Insurance proceeds for inventory or business interruption | insurance proceeds; business interruption proceeds
+4 | Payments on operating leases | operating lease payments
+4 | Interest portion of finance lease payments | finance lease interest
+5 | Payments for zero-coupon bond accreted interest | zero coupon interest; accreted interest | Under ASU 2016-15, the accreted interest portion of the payoff is operating.
+5 | Contingent consideration paid above the acquisition-date amount | contingent consideration excess; earnout excess | Payments above the acquisition-date fair value are operating.
+6* | Distributions from equity-method investees (returns on investment) | equity method distributions; distributions from investees | Under the cumulative-earnings approach, distributions up to cumulative earnings are operating.
+
+## far-segment | FAR | Name a segment reporting concept | FR
+1 | Operating segment | operating segments
+1 | Chief operating decision maker | codm
+2 | 10% revenue test | revenue test; 10 percent revenue test
+2 | 10% profit or loss test | profit or loss test; 10 percent profit test
+2 | 10% asset test | asset test; 10 percent asset test
+3 | Reportable segment | reportable segments
+3 | 75% external revenue test | 75 percent test; 75 percent of revenue
+3 | Aggregation criteria | aggregation
+4 | Segment profit or loss | segment profit
+4 | Entity-wide disclosures | entity wide disclosures; enterprise wide disclosures
+4 | Major customer disclosure (10%) | major customers; 10 percent customer
+5 | Significant segment expenses | significant expenses | ASU 2023-07 requires disclosure of significant expenses regularly given to the CODM.
+5 | Geographic information | geographic areas
+5 | Reconciliations to consolidated totals | reconciliation; reconciliations
+6* | Single-segment entities still disclose | single reportable segment; one segment | After ASU 2023-07, even a one-segment company gives the full segment disclosures.
+6 | Ten-segment practical limit | ten segments; 10 segment limit | Above about ten, consider whether the detail is still useful.
+
+## far-eps | FAR | Name an item that affects basic or diluted EPS | FR
+1 | Net income | net earnings
+1 | Weighted average shares | weighted average common shares; shares outstanding
+2 | Preferred dividends | preferred stock dividends
+2 | Stock options | options
+2 | Convertible bonds | convertible debt
+2 | Convertible preferred stock | convertible preferred
+3 | Warrants |
+3 | Treasury stock method | treasury stock
+3 | If-converted method | if converted
+3 | Stock splits | stock split; stock dividends; stock dividend | Applied retroactively to all periods.
+4 | Antidilution | antidilutive; antidilutive securities | Securities that would raise EPS are left out of diluted EPS.
+4 | Contingently issuable shares | contingent shares
+4 | Treasury share purchases | share buybacks; treasury shares
+5 | Cumulative preferred dividends (declared or not) | cumulative preferred; cumulative dividends | Deducted for the period whether declared or not.
+5 | Interest on convertible debt, net of tax | after tax interest; interest add back
+5 | Participating securities (two-class method) | two class method; participating securities
+6* | Reverse treasury stock method (put options) | reverse treasury stock method; written put options | Written puts that are in the money are dilutive under this method.
+
+## far-notes | FAR | Name a common note disclosure in financial statements | FR
+1 | Summary of significant accounting policies | significant accounting policies; accounting policies
+2 | Subsequent events |
+2 | Related party transactions | related parties
+2 | Commitments and contingencies | commitments; contingencies
+2 | Debt | long term debt; borrowings
+3 | Income taxes |
+3 | Leases |
+3 | Revenue disaggregation | disaggregation of revenue; revenue
+3 | Fair value measurements | fair value
+3 | Property, plant and equipment | ppe; fixed assets
+4 | Going concern | substantial doubt
+4 | Concentrations of risk | concentrations; concentration of credit risk
+4 | Stockholders' equity | equity; capital stock
+4 | Pensions and postretirement benefits | pensions; employee benefits; opeb
+5 | Use of estimates | estimates; risks and uncertainties
+5 | Segment information | segments
+5 | Accounting changes and new standards | recently issued standards; new accounting pronouncements
+6* | Supplier finance programs | supplier finance; reverse factoring | ASU 2022-04 requires buyers to disclose key terms and confirmed amounts outstanding.
+6 | Income tax disaggregation by jurisdiction | income taxes paid by jurisdiction; rate reconciliation categories | ASU 2023-09 expands rate reconciliation and taxes-paid disclosures.
+
+## far-sec-forms | FAR | Name an SEC filing or form | FR
+1 | Form 10-K | 10 k; annual report
+1 | Form 10-Q | 10 q; quarterly report
+2 | Form 8-K | 8 k; current report
+2 | Form S-1 | s 1; registration statement
+2 | Proxy statement | def 14a; proxy
+3 | Form 20-F | 20 f
+3 | Form S-4 | s 4
+3 | Form S-8 | s 8
+3 | Form 4 | insider trading report
+4 | Form 6-K | 6 k
+4 | Form S-3 | s 3; shelf registration
+4 | Schedule 13D | 13d
+4 | Form 3 |
+5 | Form 11-K | 11 k | Annual reports for employee stock purchase and savings plans.
+5 | Form 40-F | 40 f | Canadian issuers under the multijurisdictional system.
+5 | Form 13F | 13f
+5 | Schedule 13G | 13g
+5 | Form 144 | 144
+6* | Form 12b-25 (NT 10-K) | 12b 25; nt 10 k; notification of late filing | Buys a 15-day extension for a late 10-K (5 days for a 10-Q).
+6 | Form 1-A (Regulation A) | 1 a
+
+## far-10k | FAR | Name an item or section in a Form 10-K | FR
+1 | Audited financial statements | financial statements
+1 | MD&A | management discussion and analysis; mdna; md and a
+2 | Business description (Item 1) | business; item 1
+2 | Risk factors (Item 1A) | risk factors; item 1a
+2 | Auditor's report | audit report; report of independent registered public accounting firm
+3 | Controls and procedures (Item 9A) | controls and procedures; item 9a
+3 | Legal proceedings (Item 3) | legal proceedings
+3 | Properties (Item 2) | properties
+3 | Market for common equity (Item 5) | market for registrants common equity
+4 | Executive compensation | executive compensation
+4 | Quantitative and qualitative disclosures about market risk (Item 7A) | market risk; item 7a
+4 | Exhibits | exhibits and financial statement schedules
+4 | Signatures | signatures
+5 | Unresolved staff comments (Item 1B) | unresolved staff comments; item 1b
+5 | Cybersecurity (Item 1C) | cybersecurity; item 1c | Added for fiscal years ending on or after December 15, 2023.
+5 | CEO and CFO certifications | certifications; sox 302 certifications; section 302
+5 | Mine safety disclosures (Item 4) | mine safety
+6* | Insider trading policies (Item 408) | insider trading policies; item 408 | Companies now disclose whether they've adopted insider trading policies.
+
+## far-gov-revenue | FAR | Name a government revenue source or nonexchange transaction type | FR
+1 | Property taxes | property tax
+1 | Sales taxes | sales tax
+2 | Income taxes | income tax
+2 | Grants | federal grants; intergovernmental grants
+2 | Charges for services | user fees; charges for service
+3 | Derived tax revenues | derived tax | Taxes on exchanges, like sales or income taxes.
+3 | Imposed nonexchange revenues | imposed nonexchange | Property taxes and fines.
+3 | Government-mandated nonexchange transactions | government mandated
+3 | Voluntary nonexchange transactions | voluntary nonexchange | Grants and donations.
+3 | Fines and forfeitures | fines; forfeitures
+4 | Licenses and permits | licenses; permits
+4 | Special assessments | special assessment
+5 | Shared revenues | shared revenue
+5 | Payments in lieu of taxes | pilot; payments in lieu of taxes
+6* | Availability period (60 days) | available; 60 day rule; availability | Modified accrual recognizes property taxes collected within about 60 days after year-end.
+6 | Eligibility requirements | eligibility; time requirements
+
+## far-gov-equity | FAR | Name a government net position or fund balance classification | FR
+1 | Unassigned fund balance | unassigned
+1 | Restricted fund balance | restricted
+2 | Committed fund balance | committed
+2 | Assigned fund balance | assigned
+2 | Nonspendable fund balance | nonspendable
+3 | Net investment in capital assets | invested in capital assets net of related debt
+3 | Restricted net position | restricted net position
+3 | Unrestricted net position | unrestricted net position; unrestricted
+4 | Inventories and prepaids (nonspendable) | inventories; prepaid items
+4 | Encumbrances | encumbrance | Shown within restricted, committed or assigned, not as their own class.
+5 | Highest level of decision-making authority | formal action; ordinance | Committed amounts require formal action by this body.
+5 | Permanent fund principal | corpus; endowment principal
+6* | Negative unassigned in other funds | negative unassigned; deficit fund balance | Only the general fund reports positive unassigned; other funds can only show a deficit there.
+
+## far-consolidation | FAR | Name an elimination or concept in consolidated statements | FR
+1 | Intercompany sales | intercompany revenue; intercompany transactions
+1 | Intercompany receivables and payables | intercompany balances; intercompany receivable; intercompany payable
+2 | Investment in subsidiary | eliminate investment
+2 | Noncontrolling interest | nci; minority interest
+2 | Goodwill |
+3 | Unrealized profit in ending inventory | unrealized profit; intercompany profit in inventory
+3 | Intercompany dividends | dividends from subsidiary
+3 | Subsidiary equity eliminated | subsidiary stockholders equity; eliminate subsidiary equity
+3 | Control (more than 50%) | control; majority ownership; voting interest
+4 | Intercompany bonds | intercompany debt
+4 | Intercompany sale of fixed assets | intercompany equipment sale; intercompany ppe
+4 | Downstream versus upstream sales | upstream; downstream
+4 | Variable interest entity | vie
+5 | Primary beneficiary | | Has power over the VIE's key activities and the obligation to absorb losses or right to receive benefits.
+5 | Push-down accounting | pushdown accounting
+5 | Combined statements | combined financial statements; common control
+6* | Excess depreciation adjustment | excess depreciation; fair value step up depreciation | Extra depreciation on the subsidiary's assets stepped up to fair value.
+6 | Private company VIE exemption for common control leasing | common control leasing; private company vie alternative
+
+## far-spf | FAR | Name a financial reporting framework or basis of accounting | FR
+1 | U.S. GAAP | gaap; us gaap; generally accepted accounting principles
+1 | Cash basis |
+1 | Tax basis | income tax basis
+2 | Modified cash basis | modified cash
+3 | Regulatory basis | regulatory
+3 | Contractual basis | contractual
+4 | FRF for SMEs | frf for smes; financial reporting framework for small and medium sized entities
+3 | IFRS | international financial reporting standards
+3 | GASB standards | gasb; governmental gaap
+5 | Liquidation basis | liquidation basis of accounting | Required under GAAP once liquidation is imminent.
+5 | FASAB standards | fasab; federal accounting standards | For the U.S. federal government.
+5 | IFRS for SMEs | ifrs for smes
+6* | Other basis with substantial support | other basis; definite set of logical reasonable criteria | A basis using definite criteria applied to all material items, such as price-level accounting.
+
+# ---------- Select balance sheet accounts (BS) ----------
+
+## far-current-assets | FAR | Name a current asset | BS
+1 | Cash | cash and cash equivalents
+1 | Accounts receivable | receivables; ar
+1 | Inventory | inventories; merchandise
+2 | Prepaid expenses | prepaids; prepaid insurance; prepaid rent
+2 | Short-term investments | marketable securities; trading securities
+3 | Notes receivable (current) | notes receivable; short term notes receivable
+3 | Supplies |
+3 | Interest receivable | accrued interest receivable
+4 | Contract assets | contract asset; unbilled receivables | A right to payment that depends on something besides time.
+4 | Assets held for sale | held for sale
+4 | Income taxes receivable | tax refund receivable
+5 | Restricted cash (current) | restricted cash
+6* | Right to recover returned products | return asset; right of return asset; recovery asset | Booked at former carrying amount when expecting customer returns.
+6 | Derivative assets | derivatives; derivative asset
+
+## far-cash | FAR | Name an item classified as cash or a cash equivalent | BS
+1 | Currency and coins | currency; coins; petty cash
+1 | Checking accounts | checking account; demand deposits
+2 | Savings accounts | savings account
+2 | Treasury bills (3 months or less) | treasury bills; t bills
+3 | Money market funds | money market; money market accounts
+3 | Commercial paper (3 months or less) | commercial paper
+3 | Undeposited checks | customer checks; checks on hand
+4 | Money orders | money order
+4 | Certified checks | cashiers checks; certified check
+4 | Traveler's checks | travelers checks
+5 | Short-term certificates of deposit | cds; certificates of deposit | Only if original maturity to the holder is three months or less.
+6* | Restricted cash (shown with cash in the cash flow statement) | restricted cash | Not a cash equivalent, but included with cash in the cash flow statement since ASU 2016-18.
+
+## far-ppe-cost | FAR | Name a cost capitalized as part of PP&E | BS
+1 | Purchase price | invoice price; cost
+1 | Freight and shipping | freight in; shipping; delivery costs
+2 | Installation | installation costs
+2 | Sales tax | sales taxes
+3 | Testing | testing costs; trial runs
+3 | Site preparation | clearing land; grading; demolition of old building
+3 | Legal fees for land title | title fees; legal fees; closing costs
+3 | Insurance during transit | transit insurance
+4 | Capitalized interest | interest during construction; interest capitalization
+4 | Architect fees | architect; architectural fees
+4 | Back property taxes assumed | delinquent property taxes; back taxes
+5 | Asset retirement cost | aro; asset retirement obligation
+5 | Permanent land improvements | land improvements | Unlike parking lots, permanent landscaping is part of land.
+6* | Special assessments for local improvements | special assessments | Government charges for streets or sewers are added to land.
+6 | Building permits | permits
+
+## far-depr | FAR | Name a depreciation or depletion method | BS
+1 | Straight-line | straight line
+1 | Double-declining balance | ddb; double declining
+2 | Declining balance | declining balance
+2 | Units of production | units of output; activity method
+3 | Sum-of-the-years'-digits | soyd; sum of the years digits; syd
+3 | MACRS | modified accelerated cost recovery
+4 | 150% declining balance | 150 declining balance
+4 | Composite depreciation | composite method
+4 | Group depreciation | group method
+5 | Hours of service | machine hours; working hours
+5 | Depletion (units of production) | depletion
+6* | Inventory (appraisal) method | inventory method; appraisal method | Used for small tools: value the remaining items and expense the difference.
+6 | Retirement and replacement methods | retirement method; replacement method
+
+## far-invest-class | FAR | Name a classification or measurement approach for investments | BS
+1 | Trading securities | trading
+1 | Available-for-sale | afs; available for sale
+1 | Held-to-maturity | htm; held to maturity
+2 | Equity method | significant influence
+2 | Fair value through net income | fv ni; fair value through net income
+3 | Consolidation | consolidate; controlling interest
+3 | Amortized cost |
+4 | Measurement alternative | cost minus impairment | For equity securities without readily determinable fair values.
+4 | Fair value option | fvo
+4 | Net asset value practical expedient | nav; net asset value
+5 | Proportionate consolidation | proportionate | Allowed in certain industries, like oil and gas joint ventures.
+6* | Equity method with the fair value option | equity method fair value option | Investors can elect fair value instead of the equity method.
+
+## far-pension | FAR | Name a component of net periodic pension cost or a pension term | BS
+1 | Service cost | service costs
+1 | Interest cost | interest on pbo
+2 | Expected return on plan assets | expected return
+2 | Projected benefit obligation | pbo
+2 | Plan assets | fair value of plan assets
+3 | Amortization of prior service cost | prior service cost
+3 | Amortization of net gain or loss | actuarial gains and losses; net gain or loss
+3 | Defined benefit plan | defined benefit
+3 | Accumulated benefit obligation | abo
+4 | Corridor approach | corridor; 10 percent corridor
+4 | Funded status | overfunded; underfunded
+4 | Vested benefit obligation | vbo; vested benefits
+5 | Settlement or curtailment gain or loss | settlement; curtailment
+5 | Discount rate assumption | discount rate
+6* | Market-related value of plan assets | market related value; calculated value | A smoothed asset value allowed for computing the expected return.
+6 | Only service cost in operating income | service cost in operating income | ASU 2017-07 moved the other components outside operating income.
+
+## far-contingency | FAR | Name a contingency or loss that may be accrued or disclosed | BS
+1 | Pending litigation | litigation; lawsuit; lawsuits
+1 | Product warranties | warranty; warranties
+2 | Guarantees of others' debt | guarantee; loan guarantee
+2 | Environmental remediation | environmental liabilities; cleanup costs
+3 | Tax disputes | tax assessments; irs assessments
+3 | Unasserted claims | unasserted claim
+3 | Product recalls | recall
+4 | Premiums and coupons | premiums; coupons
+4 | Self-insurance | self insurance; uninsured risks | No liability until a loss event occurs.
+4 | Expropriation threat | expropriation
+4 | Gain contingencies | gain contingency | Disclosed but never recognized until realized.
+5 | Debt covenants at risk of violation | covenant violation
+5 | Purchase commitment losses | loss on purchase commitment; purchase commitments
+6* | Range of loss with no best estimate (accrue the minimum) | accrue minimum; minimum of range; range of loss | US GAAP accrues the low end; IFRS uses the midpoint.
+6 | Remote losses on guarantees | remote; guarantee disclosure
+
+## far-dividends | FAR | Name a type of dividend or equity distribution | BS
+1 | Cash dividend | cash dividends
+1 | Stock dividend | stock dividends
+2 | Stock split | stock splits; forward split
+2 | Property dividend | property dividends; dividend in kind
+3 | Large stock dividend | large stock dividend | Over 20 to 25%: recorded at par.
+3 | Small stock dividend | small stock dividend | Under 20 to 25%: recorded at fair value.
+3 | Liquidating dividend | liquidating dividends; return of capital
+4 | Scrip dividend | scrip; scrip dividends; dividend notes
+4 | Reverse stock split | reverse split
+4 | Preferred dividends | preferred stock dividend
+5 | Dividends in arrears | arrearage; cumulative dividends in arrears
+5 | Participating preferred | participating dividends
+6* | Stock split effected in the form of a dividend | split in the form of a dividend | Moves only par value from retained earnings; no fair value.
+6 | Spin-off | spinoff; spin off
+
+## far-inventory-costs | FAR | Name a cost included in inventory | BS
+1 | Purchase price | invoice cost; cost of goods
+1 | Freight-in | freight in; shipping in; transportation in
+2 | Direct materials | materials; raw materials
+2 | Direct labor | labor
+2 | Manufacturing overhead | overhead; factory overhead
+3 | Import duties | duties; tariffs
+3 | Insurance in transit | insurance during shipping
+3 | Purchase discounts (as a reduction) | purchase discounts; net of discounts
+4 | Fixed overhead at normal capacity | normal capacity; fixed overhead allocation | Unabsorbed overhead from low production is expensed.
+4 | Handling costs to bring to saleable condition | handling costs
+4 | Goods in transit (FOB shipping point) | fob shipping point; goods in transit
+4 | Goods on consignment held by others | consigned goods; consignment out
+5 | Factory depreciation | depreciation of factory; factory equipment depreciation
+5 | Indirect materials | supplies used in production
+6* | Storage required in production (like aging wine) | aging; storage during production | Storage that's part of production, such as aging whiskey, is a product cost.
+
+## far-credit-loss | FAR | Name a method or concept for estimating credit losses | BS
+1 | Allowance for credit losses | allowance; allowance for doubtful accounts
+1 | Aging of receivables | aging schedule; aging method
+2 | Percentage of sales | percent of sales; income statement approach
+2 | Write-off | write off; direct write off
+3 | CECL | current expected credit loss; expected credit losses
+3 | Percentage of receivables | balance sheet approach
+3 | Recoveries | recovery of written off accounts
+4 | Loss-rate method | loss rate
+4 | Pooling by risk characteristics | pooling; pools
+4 | Reasonable and supportable forecasts | forecasts; reasonable and supportable
+5 | Discounted cash flow method | dcf
+5 | Probability of default | pd; probability of default method
+5 | Vintage analysis | vintage
+5 | Roll-rate method | roll rate
+6* | Current-conditions practical expedient | current conditions expedient; asu 2025 05 | ASU 2025-05 lets entities assume balance-sheet-date conditions hold for the life of current receivables and contract assets.
+6 | Purchased financial assets with credit deterioration | pcd assets; pcd
+
+## far-expensed | FAR | Name a cost that must be expensed as incurred | BS
+1 | Research and development | r and d; research
+1 | Advertising | advertising costs
+2 | Start-up costs | startup costs; start up activities
+2 | Organization costs | organizational costs
+3 | Training costs | training
+3 | Repairs and maintenance | ordinary repairs; maintenance
+3 | Internally generated goodwill | internal goodwill
+4 | Relocation and reorganization costs | relocation; reorganization costs
+4 | Software preliminary project stage costs | preliminary project stage
+4 | Acquisition-related costs | acquisition costs; deal costs
+5 | Internally developed intangibles (not specifically identifiable) | internally developed intangibles
+5 | Abnormal waste and idle capacity | abnormal waste; idle facility expense
+6* | Costs to defend a patent that fails | failed patent defense; unsuccessful patent defense | Successful defense costs are capitalized; a loss means expense (and likely impairment).
+
+## far-debt-retire | FAR | Name a way a company retires or modifies debt | BS
+1 | Paying at maturity | pay off at maturity; repayment
+1 | Calling the bonds | call; early redemption
+2 | Open-market repurchase | repurchase; buy back bonds
+2 | Refinancing | refinance; refunding
+3 | Conversion to stock | conversion; convert to equity
+3 | Troubled debt restructuring | tdr; debt restructuring
+3 | Debt-for-equity swap | debt for equity; equity for debt
+4 | Modification of terms | debt modification; modification
+4 | Transfer of assets in settlement | asset transfer; settlement with assets
+4 | Sinking fund retirement | sinking fund
+5 | Extinguishment by legal release | legal release; release by creditor
+5 | 10% cash flow test (modification versus extinguishment) | 10 percent test; substantially different terms | A 10%+ change in present value of cash flows means extinguishment.
+6* | In-substance defeasance (doesn't count) | in substance defeasance; defeasance | Putting assets in trust isn't extinguishment under US GAAP unless legally released.
+
+# ---------- Select transactions (TX) ----------
+
+## far-fx | FAR | Name a foreign currency concept | TX
+1 | Functional currency | functional
+1 | Translation | translation adjustment
+2 | Remeasurement | remeasure
+2 | Exchange rate | spot rate; exchange rates
+3 | Current rate method | current rate
+3 | Temporal method | temporal
+3 | Reporting currency | presentation currency
+3 | Transaction gain or loss | foreign currency transaction gain
+4 | Cumulative translation adjustment | cta; translation adjustment in oci
+4 | Historical rate | historical exchange rate
+4 | Average rate | weighted average rate
+5 | Highly inflationary economy | hyperinflation; highly inflationary | Cumulative inflation of about 100% over three years: use the reporting currency as functional.
+5 | Monetary versus nonmonetary items | monetary items; nonmonetary items
+6* | Net investment hedge | hedge of net investment | Hedge gains and losses go to the CTA alongside translation.
+6 | Release of CTA on sale or liquidation | cta release; recycling cta
+
+## far-derivatives | FAR | Name a derivative or hedging concept | TX
+1 | Forward contract | forward; forwards
+1 | Futures contract | futures
+1 | Option | options; call option; put option
+2 | Swap | interest rate swap; swaps
+2 | Fair value hedge | fair value hedges
+2 | Cash flow hedge | cash flow hedges
+3 | Notional amount | notional
+3 | Underlying |
+3 | Hedge effectiveness | effectiveness
+4 | Net settlement | net settled
+4 | Embedded derivative | embedded derivatives; bifurcation
+4 | Little or no initial investment | initial net investment
+5 | Shortcut method | shortcut
+5 | Critical terms match | critical terms
+5 | Forecasted transaction | forecasted transactions
+6* | Normal purchases and normal sales exception | normal purchases and sales; npns | Contracts for expected physical delivery can be excluded from derivative accounting.
+6 | Hedge documentation at inception | contemporaneous documentation; hedge documentation
+
+## far-related-party | FAR | Name an example of a related party | TX
+1 | Parent company | parent
+1 | Subsidiary | subsidiaries
+2 | Officers and directors | officers; directors; management
+2 | Principal owners | principal owner; major shareholders
+2 | Affiliates | affiliate; sister companies
+3 | Immediate family of management | family members; family of owners
+3 | Equity-method investees | equity method investee; investee
+4 | Employee benefit trusts managed by management | pension trusts; employee trusts
+4 | Entities under common control | common control
+5 | Joint ventures | joint venture
+5 | Variable interest entities | vie
+6* | Anyone who can significantly influence the other party | significant influence over management; can prevent pursuing own interests | The catch-all: either party can keep the other from pursuing its own interests.
+
+## far-software | FAR | Name a software costing concept | TX
+1 | Technological feasibility | technological feasibility
+1 | Internal-use software | internal use
+2 | Software to be sold | software for sale; external use software
+2 | Research and development (expensed) | r and d; research
+3 | Preliminary project stage | preliminary stage
+3 | Application development stage | development stage
+3 | Post-implementation stage | post implementation; operation stage
+4 | Amortization of capitalized software | amortization
+4 | Working model | working model
+4 | Data conversion costs (expensed) | data conversion
+4 | Training costs (expensed) | training
+5 | Greater of revenue ratio or straight-line | revenue ratio; greater of | For software to be sold.
+5 | Cloud computing implementation costs | cloud computing; hosting arrangement; saas implementation
+5 | Upgrades and enhancements | upgrades
+6* | Probable-to-complete threshold | probable to complete; management authorizes and commits funding | ASU 2025-06 replaces internal-use stages with a probable-to-complete threshold.
+
+## far-control-transfer | FAR | Name an indicator that control of a good has transferred to the customer | TX
+1 | Legal title | title transferred
+1 | Physical possession | possession
+2 | Present right to payment | right to payment
+2 | Risks and rewards of ownership | risks and rewards
+2 | Customer acceptance | acceptance
+3 | Delivery | shipped; shipping
+3 | FOB shipping point | fob shipping point
+3 | FOB destination | fob destination
+4 | Bill-and-hold criteria met | bill and hold
+4 | Consignment (not transferred) | consignment
+5 | Repurchase agreements (forward or call) | repurchase agreement; call option; forward | A seller's obligation or right to buy back means control hasn't passed.
+5 | Customer can direct use and obtain benefits | direct use; obtain benefits
+6* | Put option with significant economic incentive | put option; significant economic incentive | If the customer will likely put it back, it's a lease or financing, not a sale.
+
+## far-perf-oblig | FAR | Name a promise that may be a separate performance obligation | TX
+1 | Goods | products; product
+1 | Services | service
+2 | Installation | installation services
+2 | Extended warranty | service type warranty; extended warranties
+2 | Software license | license; licenses
+3 | Post-contract customer support | pcs; maintenance; support
+3 | Customer loyalty points | loyalty points
+3 | Training | training services
+4 | Material right options | material right; customer options
+4 | Upgrades and updates | when and if available upgrades; updates
+4 | Hosting | hosting services
+5 | Shipping after control transfers (or policy election) | shipping and handling; shipping | Can be treated as fulfillment by election.
+6* | Stand-ready obligations | stand ready; stand ready obligation | Being available, like a snow-removal or software-update promise, can itself be the obligation.
+
+## far-tax-perm | FAR | Name a permanent difference between book and taxable income | TX
+1 | Municipal bond interest | tax exempt interest; muni interest
+1 | Fines and penalties | fines; penalties
+2 | Life insurance premiums (company beneficiary) | life insurance premiums; key person life insurance
+2 | Life insurance proceeds | key person life insurance proceeds
+2 | Dividends received deduction | drd
+3 | 50% of business meals | meals; nondeductible meals
+3 | Entertainment | entertainment expense
+3 | Political contributions and lobbying | lobbying; political contributions
+4 | Excess executive compensation | 162m
+5 | Percentage depletion over cost | excess percentage depletion; percentage depletion
+5 | Nondeductible stock compensation (ISOs) | isos; incentive stock options | ISO expense usually never produces a deduction.
+6* | Goodwill impairment (non-deductible goodwill) | nondeductible goodwill impairment | Book-only goodwill from a stock deal has no tax basis, so no deferred tax is set up.
+
+## far-dta-evidence | FAR | Name evidence considered for a deferred tax asset valuation allowance | TX
+1 | Future taxable income | projected income; forecasted income
+1 | Cumulative losses in recent years | cumulative losses; three year cumulative loss
+2 | Reversing taxable temporary differences | reversal of deferred tax liabilities; dtl reversals
+2 | Tax-planning strategies | tax planning strategies
+3 | Carryback availability | carryback; taxable income in carryback years
+3 | Expiring carryforwards | expiration of nol; carryforwards expiring unused
+3 | Existing contracts or backlog | backlog; firm sales backlog
+4 | Strong earnings history | earnings history
+4 | Losses expected in early future years | expected losses
+5 | Appreciated asset values | built in gains; appreciated assets
+5 | More likely than not | more likely than not; greater than 50 percent
+6* | Unsettled circumstances that could hurt profits | unsettled circumstances; brief carryforward period | Listed in the guidance alongside short carryforward periods as negative evidence.
+
+## far-lessor | FAR | Name a lease classification test or lessor lease type | TX
+1 | Sales-type lease | sales type
+1 | Operating lease | operating
+2 | Direct financing lease | direct financing
+2 | Finance lease | finance; capital lease
+2 | Transfer of ownership | ownership transfer
+3 | Purchase option reasonably certain | purchase option; bargain purchase option
+3 | Major part of economic life | major part; 75 percent of economic life
+3 | Present value substantially all of fair value | substantially all; 90 percent test; present value test
+4 | Specialized asset | specialized nature; no alternative use
+4 | Collectibility | collectible; collectibility probable
+4 | Third-party residual value guarantee | third party guarantee; residual value guarantee
+5 | Net investment in the lease | net investment
+5 | Selling profit | selling profit or loss | Recognized at commencement in a sales-type lease.
+5 | Leveraged lease (grandfathered) | leveraged lease
+6* | Sale-leaseback | sale and leaseback; failed sale leaseback | If the transfer isn't a sale under ASC 606, it's a financing.
+6 | Variable payments causing a day-one loss | day one loss; variable payments | ASU 2021-05 makes such leases operating.
+
+## far-goodwill-test | FAR | Name a step or concept in goodwill impairment testing | TX
+1 | Reporting unit | reporting units
+1 | Fair value of the reporting unit | fair value
+2 | Carrying amount | carrying value
+2 | Qualitative assessment (step zero) | qualitative assessment; step zero; step 0
+2 | Impairment loss | goodwill impairment
+3 | Annual testing | annual test; annual impairment test
+3 | Triggering events | triggering event; interim test
+3 | One-step quantitative test | quantitative test; one step test | ASU 2017-04 removed step 2.
+4 | Loss capped at goodwill balance | capped at goodwill; limited to goodwill
+4 | Assigning goodwill to reporting units | goodwill allocation
+5 | Private company amortization alternative | amortize goodwill; 10 year amortization | Private companies can amortize over up to 10 years.
+5 | Entity-level testing election | entity level; test at entity level
+5 | No reversal of impairment | no reversals
+6* | Triggering event evaluated only at reporting date | reporting date evaluation; private company triggering election | Private companies can assess triggers only at period-end.
+6 | Negative carrying amount reporting units | negative carrying amount | Disclosed when goodwill sits in a unit with zero or negative carrying value.
+
+## far-errors | FAR | Name an example of an accounting error | TX
+1 | Mathematical mistakes | math errors; mathematical errors; calculation errors
+1 | Misapplying GAAP | misapplication of gaap; wrong accounting principle
+2 | Oversight or misuse of facts | oversight of facts; misuse of facts
+2 | Cutoff errors | cutoff error
+3 | Expensing a capital item | expensed capital expenditure; capitalizing expenses
+3 | Inventory count errors | inventory miscount; inventory errors
+3 | Unrecorded accruals | missed accruals; unrecorded liabilities
+4 | Switching from non-GAAP to GAAP | cash basis to accrual; non gaap to gaap
+4 | Omitted depreciation | missed depreciation
+4 | Misclassification | classification error
+5 | Counterbalancing errors | counterbalancing; self correcting errors | Errors that reverse automatically over two periods.
+5 | Fraud | fraudulent reporting
+6* | Unreasonable estimate at the time it was made | bad faith estimate; estimate not in good faith | Hindsight doesn't make an error, but an estimate unreasonable when made does.
+
+## far-tax-concepts | FAR | Name an income tax accounting concept | TX
+1 | Deferred tax asset | dta
+1 | Deferred tax liability | dtl
+2 | Valuation allowance | allowance
+2 | Temporary difference | temporary differences
+2 | Permanent difference | permanent differences
+3 | Effective tax rate | etr
+3 | Enacted tax rate | enacted rate
+3 | Uncertain tax positions | utp; fin 48; unrecognized tax benefits
+4 | More-likely-than-not threshold | more likely than not
+4 | Intraperiod tax allocation | intraperiod allocation
+4 | Rate reconciliation | tax rate reconciliation
+4 | Net operating loss carryforward | nol; nol carryforward
+5 | Largest amount more than 50% likely | cumulative probability; largest amount | The measurement step for uncertain positions.
+5 | Interest and penalties on uncertain positions | interest and penalties
+5 | Backwards tracing (prohibited) | backwards tracing
+6* | Pillar Two global minimum tax | pillar two; global minimum tax; glo be | Treated as a period cost; no deferred taxes for the top-up tax.
+6 | Investment tax credits: deferral or flow-through | flow through method; deferral method

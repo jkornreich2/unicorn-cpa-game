@@ -1,6 +1,6 @@
 # FOOTNOTE LIBRARY: AUD   (format explained at the top of far.txt)
 
-## aud-threats | AUD | Name an independence threat or a safeguard against one
+## aud-threats | AUD | Name an independence threat or a safeguard against one | ETH
 1 | Self-interest threat | self interest
 2 | Self-review threat | self review
 2 | Familiarity threat | familiarity
@@ -18,7 +18,7 @@
 5 | Firm quality management policies | quality management; firm policies; system of quality management
 6* | Client has a designated skilled overseer for nonattest services | skills knowledge and experience; skilled client oversight; client oversight of nonattest services | Required before performing nonattest services: someone at the client with suitable skill, knowledge or experience.
 
-## aud-assertions | AUD | Name a management assertion
+## aud-assertions | AUD | Name a management assertion | RISK
 1 | Existence |
 1 | Completeness |
 2 | Occurrence |
@@ -31,7 +31,7 @@
 5* | Allocation | | Paired with valuation for account balances.
 5 | Understandability | classification and understandability | Part of the presentation assertions in older frameworks.
 
-## aud-procedures | AUD | Name a substantive audit procedure
+## aud-procedures | AUD | Name a substantive audit procedure | PROC
 1 | Confirmation | confirmations; confirm; external confirmation
 2 | Inspection | inspection of documents; inspection of assets
 2 | Observation | observe
@@ -50,7 +50,7 @@
 5 | Bank cutoff statement | cutoff bank statement
 6 | Kiting schedule | interbank transfer schedule; bank transfer schedule | Catches checks recorded in one bank but not the other at year-end.
 
-## aud-fraud | AUD | Name a fraud risk factor
+## aud-fraud | AUD | Name a fraud risk factor | RISK
 1 | Pressure or incentive | pressure; incentive; incentives; pressures; financial pressure
 1 | Opportunity | opportunities
 2 | Rationalization | attitude; rationalizations
@@ -67,7 +67,7 @@
 5 | Declining industry | industry decline; declining demand
 6* | Aggressive analyst expectations | analyst expectations; aggressive forecasts; unrealistic forecasts; pressure to meet analyst expectations
 
-## aud-reports | AUD | Name a type of audit opinion or audit report element
+## aud-reports | AUD | Name a type of audit opinion or audit report element | REP
 1 | Unmodified opinion | unmodified; unqualified; clean; clean opinion
 1 | Qualified opinion | qualified
 2 | Adverse opinion | adverse
@@ -82,7 +82,7 @@
 6* | Other information section | other information | Covers information in the annual report outside the financial statements.
 6 | Auditor tenure statement | auditor tenure; year the auditor began serving | PCAOB reports state the year the firm began serving consecutively.
 
-## aud-tcwg | AUD | Name something the auditor communicates to those charged with governance
+## aud-tcwg | AUD | Name something the auditor communicates to those charged with governance | REP
 1 | Material weaknesses | material weakness
 2 | Significant deficiencies | significant deficiency
 3 | Uncorrected misstatements | unadjusted differences; passed adjustments
@@ -98,7 +98,7 @@
 6* | Consultations with other accountants | opinion shopping; second opinions | When management seeks second opinions on accounting matters.
 6 | Written representations requested | management representation letter; representation letter
 
-## aud-controls | AUD | Name a type of internal control activity
+## aud-controls | AUD | Name a type of internal control activity | RISK
 1 | Segregation of duties |
 1 | Authorization and approval | authorization; approval; approvals
 2 | Reconciliations | reconciliation; account reconciliations
@@ -118,7 +118,7 @@
 5 | Cycle counts | cycle counting
 6* | Positive pay | positive pay system | The bank only clears checks matching the issued-check file sent by the company.
 
-## aud-coso | AUD | Name a COSO internal control component or principle
+## aud-coso | AUD | Name a COSO internal control component or principle | RISK
 1 | Control environment |
 1 | Risk assessment |
 1 | Control activities |
@@ -137,7 +137,7 @@
 5 | Evaluates and communicates deficiencies | communicates deficiencies
 6* | Communicates with external parties | external communication; communicating externally | Principle 15: share relevant information with regulators, customers and others.
 
-## aud-sampling | AUD | Name an audit sampling term or method
+## aud-sampling | AUD | Name an audit sampling term or method | PROC
 1 | Random sampling | random selection
 1 | Sample size |
 2 | Attribute sampling | attributes sampling
@@ -162,7 +162,7 @@
 5 | Difference and ratio estimation | difference estimation; ratio estimation
 6* | Allowance for sampling risk | sampling allowance | The cushion between the sample result and the tolerable rate or misstatement.
 
-## aud-planning | AUD | Name something an auditor does or considers when planning an audit
+## aud-planning | AUD | Name something an auditor does or considers when planning an audit | RISK
 1 | Setting materiality | materiality
 1 | Engagement letter | terms of engagement
 2 | Understanding the entity | understanding the entity and its environment; understanding the business
@@ -184,7 +184,7 @@
 5 | Service organizations | service organization; soc 1 reports; soc reports
 6* | Considering going concern from the start | going concern; going concern in planning | The going-concern evaluation runs through the whole audit, not just the end.
 
-## aud-engagements | AUD | Name a type of attestation or non-audit engagement
+## aud-engagements | AUD | Name a type of attestation or non-audit engagement | REP
 1 | Review engagement | review
 1 | Compilation | compilation engagement
 2 | Examination | examination engagement
@@ -202,7 +202,7 @@
 6* | Comfort letter | comfort letters; letter for underwriters | Issued to underwriters in securities offerings.
 6 | Greenhouse gas or sustainability attestation | sustainability attestation; esg attestation; greenhouse gas attestation; ghg
 
-## aud-govt | AUD | Name a feature of a Government Auditing Standards (Yellow Book) or Single Audit engagement
+## aud-govt | AUD | Name a feature of a Government Auditing Standards (Yellow Book) or Single Audit engagement | REP
 1 | Yellow Book | gagas; government auditing standards
 2 | Schedule of expenditures of federal awards | sefa
 2 | Major program determination | major programs; major program
@@ -218,7 +218,7 @@
 5 | Compliance Supplement | omb compliance supplement
 6* | Data collection form | data collection form sf sac; sf sac; federal audit clearinghouse | Filed with the Federal Audit Clearinghouse by the earlier of 30 days after the report or 9 months after year-end.
 
-## aud-going-concern | AUD | Name a condition that may indicate substantial doubt about going concern
+## aud-going-concern | AUD | Name a condition that may indicate substantial doubt about going concern | REP
 1 | Recurring operating losses | recurring losses; operating losses
 1 | Negative cash flows | negative operating cash flows
 2 | Loan defaults | default on loans; defaults
@@ -237,7 +237,7 @@
 6* | Uninsured catastrophe | uninsured loss; uninsured disaster
 6 | Dependence on one project's success | dependence on a single project | Such as a biotech riding on one drug approval.
 
-## aud-impairs | AUD | Name a relationship or service that impairs independence
+## aud-impairs | AUD | Name a relationship or service that impairs independence | ETH
 1 | Direct financial interest in the client | direct financial interest; owning client stock
 2 | Performing management responsibilities | management responsibilities; making management decisions
 2 | Serving as an officer or director | officer; director; board member
@@ -254,7 +254,7 @@
 5 | Designing the client's financial information system (public client) | system design; designing information systems
 6* | Accepting more than a token gift | gifts; significant gifts; client gifts | Gifts or entertainment beyond clearly insignificant in value create a threat.
 
-## aud-it | AUD | Name an IT general control or IT risk area
+## aud-it | AUD | Name an IT general control or IT risk area | RISK
 1 | Access controls | access; user access; logical access
 2 | Passwords and multifactor authentication | passwords; mfa; multifactor authentication; two factor authentication
 2 | Change management | program change; change controls
@@ -273,7 +273,7 @@
 5 | Vendor management and SOC reports | vendor management; third party risk
 6* | Terminated-user access removal | terminated users; deprovisioning; offboarding access | Former employees with live logins are a classic ITGC finding.
 
-## aud-analytics | AUD | Name an analytical procedure or audit data analytic
+## aud-analytics | AUD | Name an analytical procedure or audit data analytic | PROC
 1 | Ratio analysis | ratios
 1 | Trend analysis | trends
 2 | Reasonableness test | reasonableness testing
@@ -292,7 +292,7 @@
 5 | Scanning | scan
 6* | Weekend and holiday entry analysis | weekend entries; holiday postings; unusual posting times | Entries posted at odd times by odd users often point to override.
 
-## aud-mrl | AUD | Name something management confirms in the representation letter
+## aud-mrl | AUD | Name something management confirms in the representation letter | PROC
 1 | Statements are fairly presented | fair presentation; fairly presented
 2 | Responsibility for internal control | internal control
 2 | Access to all records | all records provided; access to records; completeness of information

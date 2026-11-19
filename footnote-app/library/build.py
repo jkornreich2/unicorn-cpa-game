@@ -11,7 +11,12 @@ import json, re, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LIB = ROOT / "library"
-FILES = ["far.txt", "aud.txt", "reg.txt"]
+FILES = sorted(p.name for p in LIB.glob("*.txt"))
+AREAS = {"FAR": {"FR": "Financial reporting", "BS": "Select balance sheet accounts", "TX": "Select transactions"},
+         "AUD": {"ETH": "Ethics, professional responsibilities and general principles", "RISK": "Assessing risk and developing a planned response",
+                 "PROC": "Performing further procedures and obtaining evidence", "REP": "Forming conclusions and reporting"},
+         "REG": {"ETH": "Ethics, professional responsibilities and federal tax procedures", "LAW": "Business law",
+                 "PROP": "Federal taxation of property transactions", "IND": "Federal taxation of individuals", "ENT": "Federal taxation of entities"}}
 TIER = {1: "On the face", 2: "Review-course favorite", 3: "Solid", 4: "Sharp", 5: "Deep cut", 6: "Footnote"}
 
 def norm(s):
@@ -32,9 +37,9 @@ def parse():
                 continue
             if t.startswith("##"):
                 parts = [p.strip() for p in t[2:].split("|")]
-                if len(parts) != 3:
-                    errors.append(f"{where}: header needs 'id | SECTION | prompt'"); cur = None; continue
-                cur = {"id": parts[0], "sec": parts[1], "q": parts[2], "a": [], "where": where}
+                if len(parts) != 4:
+                    errors.append(f"{where}: header needs 'id | SECTION | prompt | AREA'"); cur = None; continue
+                cur = {"id": parts[0], "sec": parts[1], "q": parts[2], "area": parts[3], "a": [], "where": where}
                 prompts.append(cur); continue
             if cur is None:
                 errors.append(f"{where}: answer line before any ## header"); continue
@@ -51,13 +56,30 @@ def parse():
                              "aliases": aliases, "note": note, "where": where})
     return prompts, errors
 
+def add_auto_aliases(prompts):
+    """Also accept each answer without its parenthetical, e.g. "Form 2848 (power of attorney)" -> "Form 2848",
+    unless that shorter form is too short or belongs to another answer in the same prompt."""
+    for p in prompts:
+        owned = {}
+        for i, a in enumerate(p["a"]):
+            for al in a["aliases"]: owned.setdefault(norm(al), set()).add(i)
+        for i, a in enumerate(p["a"]):
+            if "(" not in a["display"]: continue
+            short = re.sub(r"\s*\(.*?\)", "", a["display"]).strip()
+            k = norm(short)
+            if len(k) < 4 or owned.get(k, {i}) != {i}: continue
+            clash = [j for j, b in enumerate(p["a"]) if j != i and re.sub(r"\s*\(.*?\)", "", b["display"]).strip() and norm(re.sub(r"\s*\(.*?\)", "", b["display"])) == k]
+            if clash: continue
+            if k not in owned: a["aliases"].append(short); owned[k] = {i}
+
 def validate(prompts, errors):
     seen = set()
     for p in prompts:
         w = p["where"]
         if p["id"] in seen: errors.append(f"{w}: duplicate id {p['id']}")
         seen.add(p["id"])
-        if p["sec"] not in ("FAR", "AUD", "REG"): errors.append(f"{w}: section must be FAR, AUD or REG")
+        if p["sec"] not in AREAS: errors.append(f"{w}: section must be FAR, AUD or REG")
+        elif p["area"] not in AREAS[p["sec"]]: errors.append(f"{w}: area must be one of {list(AREAS[p['sec']])}")
         if len(p["a"]) < 10: errors.append(f"{w}: {p['id']} has {len(p['a'])} answers (need at least 10)")
         gems = [a for a in p["a"] if a["gem"]]
         if len(gems) != 1: errors.append(f"{w}: {p['id']} has {len(gems)} gems (need exactly 1)")
@@ -95,7 +117,11 @@ def review(prompts):
     for sec in ("FAR", "AUD", "REG"):
         ps = [p for p in prompts if p["sec"] == sec]
         L += [f"## {sec} ({len(ps)} prompts)", ""]
+        ps.sort(key=lambda p: list(AREAS[sec]).index(p["area"]))
+        last = None
         for p in ps:
+            if p["area"] != last:
+                last = p["area"]; L += [f"## {sec} · {AREAS[sec][last]} ({sum(q['area'] == last for q in ps)})", ""]
             L += [f"### {p['q']}  `{p['id']}`", "", "| Rarity | Answer | Note |", "|---|---|---|"]
             for a in sorted(p["a"], key=lambda a: a["r"]):
                 L.append(f"| {a['r']} {TIER[a['r']]}{' 💎' if a['gem'] else ''} | {a['display']} | {a['note']} |")
@@ -104,6 +130,7 @@ def review(prompts):
 
 def main():
     prompts, errors = parse()
+    add_auto_aliases(prompts)
     errors = validate(prompts, errors)
     if errors:
         print("Library has problems:\n  " + "\n  ".join(errors)); sys.exit(1)
@@ -116,6 +143,8 @@ def main():
     (LIB / "REVIEW.md").write_text(review(prompts))
     counts = {s: sum(p["sec"] == s for p in prompts) for s in ("FAR", "AUD", "REG")}
     print(f"OK: {len(prompts)} prompts {counts}, {sum(len(p['a']) for p in prompts)} answers")
+    for sec, areas in AREAS.items():
+        print("  " + sec + ": " + ", ".join(f"{k} {sum(p['sec'] == sec and p['area'] == k for p in prompts)}" for k in areas))
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,6 @@
 # FOOTNOTE LIBRARY: REG   (format explained at the top of far.txt)
 
-## reg-not-capital | REG | Name an asset that is NOT a capital asset
+## reg-not-capital | REG | Name an asset that is NOT a capital asset | PROP
 1 | Inventory | inventory held for sale; merchandise
 2 | Accounts receivable | receivables; ar; trade receivables
 2 | Depreciable business property | section 1231 property; 1231; business equipment; depreciable property
@@ -13,7 +13,7 @@
 5 | Self-created patents and inventions | self created patent; inventions; secret formula; self created inventions | Excluded from capital assets since 2018.
 6* | Musical works (unless elected) | musical compositions; musical works | A songwriter can elect capital treatment on the sale of self-created music.
 
-## reg-itemized | REG | Name an itemized deduction
+## reg-itemized | REG | Name an itemized deduction | IND
 1 | Mortgage interest | home mortgage interest; qualified residence interest
 1 | Charitable contributions | charity; donations; charitable donations
 2 | State and local taxes | salt; state taxes; property taxes; real estate taxes; state income tax
@@ -27,7 +27,7 @@
 6* | Estate tax on income in respect of a decedent | ird; income in respect of a decedent; section 691 deduction; estate tax on ird | Heirs deduct estate tax paid on income they later report.
 6 | Claim of right repayments over $3,000 | claim of right; section 1341 | Repaying income taxed in a prior year.
 
-## reg-gross-income | REG | Name an item included in gross income
+## reg-gross-income | REG | Name an item included in gross income | IND
 1 | Wages | salary; salaries; compensation
 1 | Interest income | interest
 1 | Dividends | dividend income
@@ -51,7 +51,7 @@
 6* | Illegal income | embezzled funds; illegal gains; illegal income | Taxable even if obtained unlawfully.
 6 | Punitive damages | punitive damages | Unlike compensatory damages for physical injury.
 
-## reg-exclusion | REG | Name an item excluded from gross income
+## reg-exclusion | REG | Name an item excluded from gross income | IND
 1 | Gifts | gift
 1 | Inheritances | inheritance; bequests
 2 | Life insurance proceeds | life insurance; death benefits
@@ -72,7 +72,7 @@
 6 | Foster care payments | foster care
 6 | Discharge of debt in bankruptcy or insolvency | insolvency exclusion; bankruptcy exclusion | Excluded, but tax attributes are reduced.
 
-## reg-entities | REG | Name a type of business entity
+## reg-entities | REG | Name a type of business entity | LAW
 1 | Sole proprietorship | sole proprietor
 1 | Partnership | general partnership; gp
 1 | C corporation | c corp; corporation
@@ -89,7 +89,7 @@
 6* | Series LLC | series limited liability company | Separate "cells" with their own assets and liabilities under one LLC.
 6 | Benefit corporation | b corp; public benefit corporation
 
-## reg-basis | REG | Name an item that increases a partner's outside basis
+## reg-basis | REG | Name an item that increases a partner's outside basis | ENT
 1 | Cash contributions | cash contributed; contributing cash
 1 | Share of partnership income | share of income; taxable income; ordinary income
 2 | Property contributions (adjusted basis) | contributed property; property contributed
@@ -101,7 +101,7 @@
 5 | Gain recognized on contribution | recognized gain on contribution | Rare: such as a contribution to an investment-company partnership under Section 721(b).
 6* | Excess depletion deduction over basis of property | excess of depletion over basis; excess depletion | A quirky upward adjustment for oil and gas property.
 
-## reg-m1 | REG | Name a Schedule M-1 book-to-tax reconciling item
+## reg-m1 | REG | Name a Schedule M-1 book-to-tax reconciling item | ENT
 1 | Federal income tax expense | federal income taxes; income tax expense
 1 | Depreciation differences | depreciation; excess tax depreciation
 2 | Meals (50% nondeductible) | meals; business meals
@@ -120,7 +120,7 @@
 6* | Goodwill amortization | section 197; goodwill | Tax amortizes over 15 years; books don't for public companies.
 6 | Excess executive compensation | 162m; executive compensation over 1 million | Public-company pay above $1 million is nondeductible.
 
-## reg-procedures | REG | Name an IRS procedure, form or penalty
+## reg-procedures | REG | Name an IRS procedure, form or penalty | ETH
 1 | Audit | examination; irs audit
 1 | Failure-to-file penalty | failure to file; late filing penalty
 1 | Failure-to-pay penalty | failure to pay; late payment penalty
@@ -145,7 +145,7 @@
 6* | Taxpayer Advocate Service | taxpayer advocate; national taxpayer advocate | Independent IRS office that helps taxpayers facing hardship or stuck cases.
 6 | Collection due process hearing | cdp hearing; collection due process
 
-## reg-ethics | REG | Name an ethical duty or rule for tax practitioners
+## reg-ethics | REG | Name an ethical duty or rule for tax practitioners | ETH
 1 | Confidentiality | client confidentiality; privacy
 1 | Due diligence |
 2 | Circular 230 |
@@ -167,7 +167,7 @@
 6* | Best practices (Section 10.33) | best practices; section 10 33 | Aspirational practices for communication, facts and advice.
 6 | Not endorsing client refund checks | negotiating refund checks; endorsing refund checks
 
-## reg-agency | REG | Name a concept from agency law
+## reg-agency | REG | Name a concept from agency law | LAW
 1 | Principal |
 1 | Agent |
 2 | Actual authority | authority; express authority; express actual authority
@@ -187,7 +187,7 @@
 6* | Agency coupled with an interest | coupled with an interest | Irrevocable by the principal because the agent has a stake in the subject.
 6 | Frolic versus detour | frolic; detour | A frolic takes the employee outside the scope of employment; a detour doesn't.
 
-## reg-bankruptcy | REG | Name a bankruptcy concept
+## reg-bankruptcy | REG | Name a bankruptcy concept | LAW
 1 | Chapter 7 | liquidation
 1 | Chapter 11 | reorganization
 2 | Chapter 13 | wage earner plan; individual repayment plan
@@ -210,7 +210,7 @@
 6* | Absolute priority rule | absolute priority | Junior classes get nothing unless senior dissenting classes are paid in full.
 6 | Equitable subordination | subordination
 
-## reg-secured | REG | Name a secured-transactions (UCC Article 9) concept
+## reg-secured | REG | Name a secured-transactions (UCC Article 9) concept | LAW
 1 | Security interest |
 1 | Collateral |
 2 | Attachment | attach
@@ -231,7 +231,7 @@
 6* | Strict foreclosure | acceptance of collateral in satisfaction | The creditor keeps the collateral in full or partial satisfaction of the debt.
 6 | Proceeds |
 
-## reg-federal-law | REG | Name a federal law or regulator a CPA should know for REG
+## reg-federal-law | REG | Name a federal law or regulator a CPA should know for REG | LAW
 1 | Securities Act of 1933 | 33 act; 1933 act; securities act
 1 | Securities Exchange Act of 1934 | 34 act; 1934 act; exchange act
 2 | Sarbanes-Oxley Act | sox; sarbanes oxley
@@ -252,7 +252,7 @@
 6* | Regulation A+ | reg a; regulation a; reg a plus | A mini-IPO exemption for raising up to $75 million.
 6 | Crowdfunding (Regulation CF) | regulation cf; reg cf; crowdfunding
 
-## reg-filing | REG | Name an individual filing status or dependency test
+## reg-filing | REG | Name an individual filing status or dependency test | IND
 1 | Single |
 1 | Married filing jointly | mfj; joint return
 2 | Married filing separately | mfs
@@ -271,7 +271,7 @@
 6* | Multiple support agreement | form 2120; multiple support | Lets one of several supporters claim the dependent.
 6 | Abandoned spouse rule | considered unmarried; abandoned spouse | A married person who lives apart can file as head of household.
 
-## reg-property | REG | Name a property transaction or basis rule
+## reg-property | REG | Name a property transaction or basis rule | PROP
 1 | Sale of capital assets | capital gains; sale of stock
 2 | Like-kind exchange | 1031; section 1031; like kind
 2 | Gift basis | carryover basis; basis of gifted property
@@ -290,7 +290,7 @@
 6* | Alternate valuation date | alternate valuation; six months after death | The estate can value assets six months after death if it lowers estate tax.
 6 | Small business stock loss (Section 1244) | section 1244; 1244 stock | Ordinary loss up to $50,000 ($100,000 joint).
 
-## reg-cost-recovery | REG | Name a tax cost recovery method or concept
+## reg-cost-recovery | REG | Name a tax cost recovery method or concept | PROP
 1 | Depreciation | macrs
 2 | Section 179 | 179; expensing
 2 | Bonus depreciation | bonus
@@ -311,7 +311,7 @@
 6* | Luxury auto limits | section 280f; luxury auto; 280f | Caps annual depreciation on passenger autos.
 6 | Cost segregation | cost seg
 
-## reg-corp | REG | Name a corporate tax concept
+## reg-corp | REG | Name a corporate tax concept | ENT
 1 | 21% flat rate | 21 percent; flat rate; corporate tax rate
 2 | Dividends received deduction | drd
 2 | Earnings and profits | e and p; eandp
@@ -330,7 +330,7 @@
 6* | Section 382 limitation | section 382; 382 | Limits NOL use after an ownership change.
 6 | Controlled group | controlled groups; brother sister; parent subsidiary group
 
-## reg-s-corp | REG | Name an S corporation requirement or rule
+## reg-s-corp | REG | Name an S corporation requirement or rule | ENT
 1 | 100 shareholder limit | 100 shareholders; shareholder limit
 1 | One class of stock | single class of stock
 2 | Domestic corporation | domestic
@@ -349,7 +349,7 @@
 5 | Qualified Subchapter S Subsidiary | qsub; qsss
 6* | ESBT and QSST trusts as shareholders | esbt; qsst; electing small business trust; qualified subchapter s trust | Special trusts that can hold S stock.
 
-## reg-partnership | REG | Name a partnership tax concept
+## reg-partnership | REG | Name a partnership tax concept | ENT
 1 | Schedule K-1 | k1; k 1
 1 | Form 1065 | 1065
 2 | Guaranteed payments | guaranteed payment
@@ -371,7 +371,7 @@
 5 | Centralized partnership audit regime | bba; bipartisan budget act; partnership representative
 6* | Section 199A (QBI) | qbi; qualified business income; 199a | A 20% deduction for owners of pass-through businesses.
 
-## reg-retirement | REG | Name a retirement plan or account
+## reg-retirement | REG | Name a retirement plan or account | IND
 1 | 401(k) | 401k; 401 k
 1 | Traditional IRA | ira; traditional ira
 1 | Roth IRA | roth
@@ -390,7 +390,7 @@
 6* | Money purchase plan | money purchase pension plan | Defined contribution with a fixed employer contribution percentage.
 6 | Nonqualified deferred compensation | nqdc; section 409a; 409a
 
-## reg-above-line | REG | Name an above-the-line deduction (adjustment to income)
+## reg-above-line | REG | Name an above-the-line deduction (adjustment to income) | IND
 1 | Traditional IRA contributions | ira; traditional ira; ira contributions; ira deduction
 1 | Student loan interest |
 2 | HSA contributions | hsa; health savings account
@@ -406,7 +406,7 @@
 6 | Reservists, performing artists and fee-basis officials | reservist expenses; performing artists; fee basis officials; reservists | Certain unreimbursed business expenses for these groups.
 6* | Jury duty pay given to employer | jury duty pay; jury duty | When you must remit jury pay to your employer.
 
-## reg-credits | REG | Name a federal tax credit for individuals
+## reg-credits | REG | Name a federal tax credit for individuals | IND
 1 | Child tax credit | ctc
 1 | Earned income credit | earned income tax credit; eitc; eic
 2 | American opportunity credit | american opportunity tax credit; aotc
@@ -421,7 +421,7 @@
 5 | Prior-year minimum tax credit | minimum tax credit; amt credit; credit for prior year minimum tax | AMT paid on timing items comes back as a credit in later years.
 6* | Excess Social Security withholding | excess social security; excess fica | With two or more employers, Social Security withheld above the wage base comes back as a credit.
 
-## reg-contract | REG | Name a contract element or a defense to enforcing a contract
+## reg-contract | REG | Name a contract element or a defense to enforcing a contract | LAW
 1 | Offer |
 1 | Acceptance |
 1 | Consideration |

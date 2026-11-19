@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Footnote Question Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#f4f6f1; --grid:#dde5dc; --ink:#16202e; --dim:#5c6878; --red:#c8102e; --blue:#1f4fa8; --rule:#b9c6bb; --ok:#2f7d55; --warn:#b4570f;
+  --display:"Instrument Serif", Georgia, serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --t1:#c9cfc4; --t2:#4d7fd6; --t3:#2f9e6a; --t4:#e3b23c; --t5:#e2742f; --t6:#c8102e;
+  --far:#1f4fa8; --aud:#2f7d55; --reg:#8a3fb0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font:15px/1.45 var(--body)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.app{display:grid;grid-template-columns:330px 1fr;grid-template-rows:auto 1fr;height:100vh}
+header{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:2px solid var(--ink);background:var(--paper)}
+.logo{font-family:var(--display);font-size:30px;line-height:1}
+.logo sup{font-family:var(--mono);font-size:12px;color:var(--red)}
+.logo small{font-family:var(--mono);font-size:12px;color:var(--dim);margin-left:8px;letter-spacing:.04em}
+.progress{display:flex;gap:16px;align-items:center;font-family:var(--mono);font-size:12px}
+.pbar{width:120px;height:8px;background:#fff;border:1px solid var(--rule);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:6px}
+.pbar i{display:block;height:100%;background:var(--ok)}
+.save{font-family:var(--mono);font-size:12px;color:var(--dim);min-width:110px;text-align:right}
+.save.err{color:var(--red)}
+aside{border-right:1px solid var(--rule);display:flex;flex-direction:column;min-height:0;background:rgba(244,246,241,.92)}
+.filters{padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;border-bottom:1px solid var(--rule)}
+.filters input{grid-column:1/-1}
+.filters input,.filters select{width:100%;padding:7px 8px;border:1px solid var(--rule);border-radius:4px;background:#fff}
+.filters .row2{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--dim)}
+.list{overflow:auto;flex:1;min-height:0}
+.item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:start;padding:9px 12px;border-bottom:1px solid var(--grid);cursor:pointer;background:transparent;border-left:3px solid transparent;width:100%;text-align:left;border-top:0;border-right:0}
+.item:hover{background:#fff}
+.item.on{background:#fff;border-left-color:var(--red)}
+.item .q{font-size:13.5px;line-height:1.3}
+.item .meta{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:2px}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:4px;border:1.5px solid var(--dim)}
+.dot.reviewed{background:var(--ok);border-color:var(--ok)}
+.dot.edited{background:var(--blue);border-color:var(--blue)}
+.dot.flagged{background:var(--warn);border-color:var(--warn)}
+.dot.deleted{background:var(--red);border-color:var(--red)}
+.dot.new{background:#fff;border-color:var(--blue);border-style:dashed}
+.chip{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.06em;padding:2px 6px;border-radius:3px;color:#fff;white-space:nowrap}
+.chip.FAR{background:var(--far)} .chip.AUD{background:var(--aud)} .chip.REG{background:var(--reg)}
+main{overflow:auto;padding:18px 22px 0;min-height:0}
+.empty{max-width:640px;margin:40px auto;font-size:15px}
+.empty h2{font-family:var(--display);font-weight:400;font-size:34px;margin:0 0 8px}
+.empty ol{padding-left:20px} .empty li{margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--dim);margin-top:14px}
+.legend span{display:inline-flex;gap:5px;align-items:center}
+.card{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:16px;margin-bottom:14px}
+.ptop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.ptop select{max-width:100%;padding:5px 6px;border:1px solid var(--rule);border-radius:4px;background:#fff;font-size:13px}
+.pid{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.status-pill{font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:10px;border:1px solid var(--rule);margin-left:auto}
+.qtext{width:100%;font-family:var(--display);font-size:28px;line-height:1.15;border:0;border-bottom:1px dashed var(--rule);padding:4px 0;background:transparent}
+.qtext:focus{outline:none;border-bottom-color:var(--ink)}
+.checks{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.check{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:3px;background:#e7f3ec;color:var(--ok)}
+.check.bad{background:#fbe9e9;color:var(--red)}
+.dist{display:flex;gap:3px;align-items:flex-end;height:28px;margin-left:auto}
+.dist i{width:16px;background:var(--rule);display:block;border-radius:1px 1px 0 0;position:relative}
+.dist i b{position:absolute;bottom:-15px;left:0;right:0;text-align:center;font:600 9px var(--mono);color:var(--dim)}
+table{width:100%;border-collapse:collapse}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);text-align:left;padding:4px 6px;border-bottom:1px solid var(--ink);font-weight:600}
+td{padding:4px 4px;border-bottom:1px solid var(--grid);vertical-align:top}
+tr.hit td{background:#fff6d6}
+tr.bad td{background:#fdf1f1}
+td input,td select,td textarea.grow{width:100%;padding:6px 7px;border:1px solid transparent;border-radius:3px;background:transparent;font-size:14px}
+td textarea.grow{min-height:0;resize:none;overflow:hidden;line-height:1.35;display:block}
+td input:hover,td select:hover,td textarea.grow:hover{border-color:var(--grid)}
+td input:focus,td select:focus,td textarea.grow:focus{border-color:var(--ink);background:#fff;outline:none}
+td.r{width:218px} td.d{width:24%} td.g{width:44px;text-align:center} td.x{width:36px}
+td.r select{border-left:6px solid var(--rule);padding-left:6px}
+.gem{width:32px;height:32px;border:1px solid var(--rule);border-radius:50%;background:#fff;font-size:16px;line-height:1;opacity:.35;filter:grayscale(1)}
+.gem.on{opacity:1;filter:none;border-color:var(--red);box-shadow:0 0 0 2px #fbe9e9}
+.del{width:30px;height:30px;border:0;background:transparent;color:var(--dim);font-size:18px;border-radius:3px}
+.del:hover{background:#fbe9e9;color:var(--red)}
+.disp{font-weight:600}
+.small{font-size:13px} .alias{font-family:var(--mono);font-size:12.5px !important}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{min-height:40px;border-radius:4px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-weight:600;padding:7px 14px;font-size:14px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ok{background:var(--ok);border-color:var(--ok)}
+.btn.warn{background:transparent;border-color:var(--warn);color:var(--warn)}
+.btn.danger{background:transparent;border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.small{min-height:32px;padding:4px 10px;font-size:13px;border-width:1.5px}
+.try{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.try input{flex:1;min-width:200px;padding:9px 10px;border:1.5px solid var(--ink);border-radius:4px;font-size:15px}
+.try .res{font-family:var(--mono);font-size:13px}
+label.lab{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+textarea{width:100%;min-height:70px;padding:8px 10px;border:1px solid var(--rule);border-radius:4px;background:#fff;resize:vertical}
+.actions{position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0 14px;background:var(--paper);border-top:1px solid var(--rule);margin-top:4px;z-index:2}
+.actions .sp{flex:1}
+.kbd{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.banner{grid-column:1/-1;background:#fbe9e9;color:var(--red);padding:8px 18px;font-size:13px;border-bottom:1px solid #f1c7c7}
+.modal{position:fixed;inset:0;background:rgba(22,32,46,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:5}
+.modal .card{width:min(560px,100%);margin:0}
+.modal h3{font-family:var(--display);font-weight:400;font-size:28px;margin:0 0 12px}
+.field{margin-bottom:12px}
+.field input,.field select{width:100%;padding:8px 10px;border:1px solid var(--rule);border-radius:4px;background:#fff}
+.hint{font-size:12px;color:var(--dim);margin-top:4px}
+.deleted-note{background:#fbe9e9;color:var(--red);padding:10px 12px;border-radius:4px;margin-bottom:12px;font-size:14px}
+.mobile-back{display:none}
+@media (max-width:820px){
+  .app{grid-template-columns:1fr;height:auto;min-height:100vh}
+  aside{border-right:0;max-height:none}
+  .app.editing aside{display:none}
+  .app:not(.editing) main{display:none}
+  .mobile-back{display:inline-flex}
+  .list{max-height:none}
+  main{padding:12px 12px 0}
+  td.d{width:auto}
+  .qtext{font-size:23px}
+  thead{display:none}
+  table,tbody,tr,td{display:block;width:100%}
+  tr{border:1px solid var(--rule);border-radius:4px;margin-bottom:8px;padding:6px;background:#fff;position:relative}
+  td{border:0;padding:2px}
+  td.r,td.g,td.x{width:auto;display:inline-block}
+  td.r{width:calc(100% - 90px)}
+  td.x{position:absolute;right:6px;top:6px}
+  td.g{position:absolute;right:42px;top:6px}
+  td[data-l]::before{content:attr(data-l);display:block;font:600 10px var(--mono);color:var(--dim);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px 0}
+  .dist{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header>
+    <div class="logo">Footnote<sup>1</sup><small>QUESTION REVIEW</small></div>
+    <div class="progress" id="progress"></div>
+    <div class="save" id="save">Loading…</div>
+  </header>
+  <aside>
+    <div class="filters">
+      <input id="f-search" type="search" placeholder="Search prompts and answers">
+      <select id="f-sec"><option value="">All sections</option><option>FAR</option><option>AUD</option><option>REG</option></select>
+      <select id="f-area"><option value="">All areas</option></select>
+      <select id="f-status" style="grid-column:1/-1">
+        <option value="">Every status</option>
+        <option value="todo">Not reviewed yet</option>
+        <option value="edited">Edited, not marked reviewed</option>
+        <option value="reviewed">Reviewed</option>
+        <option value="flagged">Flagged for Claude</option>
+        <option value="deleted">Marked for deletion</option>
+        <option value="new">New prompts</option>
+        <option value="invalid">Failing a check</option>
+      </select>
+      <div class="row2"><span id="count"></span><button class="btn ghost small" id="new-btn" type="button">+ New prompt</button></div>
+    </div>
+    <div class="list" id="list"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+<div id="modal"></div>
+
+<script>
+"use strict";
+const TIER = ["", "On the face", "Review-course favorite", "Solid", "Sharp", "Deep cut", "Footnote"];
+const PTS = [0, 10, 15, 30, 60, 85, 100];
+const AREA_SHORT = {FR:"Fin. reporting", BS:"Balance sheet", TX:"Transactions", ETH:"Ethics", RISK:"Risk", PROC:"Procedures", REP:"Reporting", LAW:"Business law", PROP:"Property", IND:"Individuals", ENT:"Entities"};
+let AREAS = {}, BASE = [], BASE_BY = {}, EDITS = {}, ORDER = [];
+let cur = null, work = null, db = null, dbState = "connecting", tryText = "";
+const LOCAL_KEY = "footnote-review-drafts";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const clone = (o) => JSON.parse(JSON.stringify(o));
+
+// ---------- the game's matcher, so "Try an answer" behaves exactly like the app ----------
+const norm = (s) => (" " + String(s).toLowerCase().replace(/&/g, " and ").replace(/['’.]/g, "").replace(/[^a-z0-9]+/g, " ") + " ").replace(/ (the|a|an) /g, " ").trim();
+const sing = (s) => s.split(" ").map((w) => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w)).join(" ");
+const lev = (a, b) => {
+  if (Math.abs(a.length - b.length) > 3) return 9;
+  const D = Array.from({length: a.length + 1}, (_, i) => Array.from({length: b.length + 1}, (_, j) => (i ? (j ? 0 : i) : j)));
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    D[i][j] = Math.min(D[i-1][j] + 1, D[i][j-1] + 1, D[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+    if (i > 1 && j > 1 && a[i-1] === b[j-2] && a[i-2] === b[j-1]) D[i][j] = Math.min(D[i][j], D[i-2][j-2] + 1);
+  }
+  return D[a.length][b.length];
+};
+const strip = (s) => s.replace(/\s*\(.*?\)/g, "").trim();
+const aliasList = (a) => [a.display, ...String(a.aliases || "").split(";")].map((x) => x.trim()).filter(Boolean);
+function allAliases(p) {   // mirrors build.py: display + aliases + display without its parenthetical (when unambiguous)
+  const lists = p.a.map(aliasList);
+  const owned = {};
+  lists.forEach((l, i) => l.forEach((al) => { const k = norm(al); (owned[k] = owned[k] || new Set()).add(i); }));
+  p.a.forEach((a, i) => {
+    if (!a.display.includes("(")) return;
+    const k = norm(strip(a.display));
+    if (k.length < 4 || owned[k]) return;
+    if (p.a.some((b, j) => j !== i && b.display && norm(strip(b.display)) === k)) return;
+    lists[i].push(strip(a.display)); owned[k] = new Set([i]);
+  });
+  return lists;
+}
+function match(p, raw) {
+  const x = sing(norm(raw)); if (!x) return null;
+  const lists = allAliases(p);
+  let best = null, bestScore = 99;
+  lists.forEach((l, idx) => l.forEach((al) => {
+    const y = sing(norm(al)); let s = 99;
+    if (x === y) s = 0;
+    else if (y.length >= 5 && (" " + x + " ").includes(" " + y + " ")) s = 1;
+    else if (x.length >= 6 && (" " + y + " ").includes(" " + x + " ") && x.length >= y.length * 0.6) s = 1.5;
+    else if (y.length >= 5) { const d = lev(x, y); if (d <= (y.length >= 10 ? 2 : 1)) s = 2 + d; }
+    if (s < bestScore || (s === bestScore && best !== null && p.a[idx].r > p.a[best].r)) { bestScore = s; best = idx; }
+  }));
+  return bestScore < 99 ? best : null;
+}
+
+// ---------- checks (same rules as library/build.py) ----------
+function checks(p) {
+  const out = [];
+  const n = p.a.length, gems = p.a.filter((a) => a.gem).length;
+  out.push({ok: n >= 10, text: `${n} answers` + (n >= 10 ? "" : " (need 10+)")});
+  out.push({ok: gems === 1, text: gems === 1 ? "1 gem" : `${gems} gems (need exactly 1)`});
+  out.push({ok: p.a.some((a) => a.r === 1), text: p.a.some((a) => a.r === 1) ? "has an easy answer" : "no rarity-1 answer"});
+  out.push({ok: !!p.q.trim(), text: p.q.trim() ? "prompt text" : "prompt text missing"});
+  const empty = p.a.filter((a) => !a.display.trim()).length;
+  if (empty) out.push({ok: false, text: `${empty} blank answer${empty > 1 ? "s" : ""}`});
+  const clash = aliasClashes(p);
+  out.push({ok: !clash.length, text: clash.length ? `shared spelling: “${clash[0].alias}”` : "no shared spellings", rows: clash.flatMap((c) => c.rows)});
+  return out;
+}
+function aliasClashes(p) {
+  const owner = {}, clashes = [];
+  p.a.forEach((a, i) => aliasList(a).forEach((al) => {
+    const k = norm(al); if (!k) return;
+    if (k in owner && owner[k] !== i) clashes.push({alias: al, rows: [owner[k], i]});
+    owner[k] = i;
+  }));
+  return clashes;
+}
+const isValid = (p) => checks(p).every((c) => c.ok);
+
+// ---------- effective state ----------
+const effective = (id) => (EDITS[id] && !EDITS[id].applied ? EDITS[id] : null) || BASE_BY[id];
+function statusOf(id) {      // review status survives Claude applying the edits (applied: true)
+  const e = EDITS[id];
+  if (!e) return "todo";
+  if (e.status === "deleted") return "deleted";
+  if (e.status === "flagged") return "flagged";
+  if (e.status === "reviewed") return "reviewed";
+  return e.isNew && !e.applied ? "new" : "edited";
+}
+const gone = (id) => { const e = EDITS[id]; return e && e.applied && e.status === "deleted" && !BASE_BY[id]; };
+const changedFromBase = (p) => { const b = BASE_BY[p.id]; return !b || JSON.stringify(pick(b)) !== JSON.stringify(pick(p)); };
+const pick = (p) => ({sec: p.sec, area: p.area, q: p.q.trim(), a: p.a.map((a) => ({r: +a.r, gem: !!a.gem, display: a.display.trim(), aliases: aliasList(a).slice(1).join("; "), note: (a.note || "").trim()}))});
+
+// ---------- saving ----------
+const inflight = {}, queued = {};
+function setSave(text, err) { const el = $("save"); el.textContent = text; el.className = "save" + (err ? " err" : ""); }
+async function persist(id) {
+  const doc = EDITS[id];
+  if (!db) { saveLocal(); setSave("Saved in this browser only", true); return; }
+  if (inflight[id]) { queued[id] = true; return; }
+  inflight[id] = true; setSave("Saving…");
+  try {
+    if (doc) await db.collection("edits").doc(id).set(clone(doc));
+    else await db.collection("edits").doc(id).delete();
+    setSave("All changes saved");
+  } catch (e) {
+    if (e && (e.code === "invalid_argument" || e.code === "quota_exceeded" || e.code === "revoked")) { setSave(e.code === "quota_exceeded" ? "Storage is full" : "You can't save edits on this page", true); }
+    else { setSave("Couldn't save. Retrying…", true); setTimeout(() => persist(id), 4000); }
+  } finally {
+    inflight[id] = false;
+    if (queued[id]) { queued[id] = false; persist(id); }
+  }
+}
+let saveTimer = null;
+function stage(status) {          // copy the working prompt into EDITS and schedule a save
+  if (!work) return;
+  const id = work.id, prev = EDITS[id] || {};
+  const st = status || (prev.status && prev.status !== "reviewed" ? prev.status : "edited");
+  const isNew = !BASE_BY[id];
+  if (!isNew && !changedFromBase(work) && !status && !(prev.comment || "").trim() && st === "edited") {
+    if (EDITS[id]) { delete EDITS[id]; schedule(id); }
+    renderList(); renderProgress(); return;
+  }
+  EDITS[id] = {...pick(work), id, status: st, comment: prev.comment || "", reply: prev.reply || "", isNew, applied: false, updatedAt: new Date().toISOString()};
+  schedule(id); renderList(); renderProgress();
+}
+function schedule(id) { setSave("Unsaved changes…"); clearTimeout(saveTimer); saveTimer = setTimeout(() => persist(id), 700); }
+function flushNow() { if (saveTimer && work) { clearTimeout(saveTimer); saveTimer = null; persist(work.id); } }
+function saveLocal() { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(EDITS)); } catch (e) {} }
+function loadLocal() { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || "{}"); } catch (e) { return {}; } }
+
+// ---------- list ----------
+function filtered() {
+  const s = norm($("f-search").value), sec = $("f-sec").value, area = $("f-area").value, st = $("f-status").value;
+  return ORDER.filter((id) => {
+    if (gone(id)) return false;
+    const p = effective(id); if (!p) return false;
+    if (sec && p.sec !== sec) return false;
+    if (area && p.area !== area) return false;
+    if (st === "invalid") { if (statusOf(id) === "deleted" || isValid(p)) return false; }
+    else if (st === "edited") { if (statusOf(id) !== "edited") return false; }
+    else if (st && statusOf(id) !== st) return false;
+    if (s) {
+      const hay = norm([p.id, p.q, ...p.a.map((a) => a.display + " " + a.aliases + " " + a.note)].join(" "));
+      if (!hay.includes(s)) return false;
+    }
+    return true;
+  });
+}
+function renderList() {
+  const ids = filtered();
+  $("count").textContent = `${ids.length} of ${ORDER.length} prompts`;
+  $("list").innerHTML = ids.map((id) => {
+    const p = effective(id), st = statusOf(id);
+    const warn = st !== "deleted" && !isValid(p) ? ' · <span style="color:var(--red)">needs fixing</span>' : "";
+    return `<button type="button" class="item${id === cur ? " on" : ""}" data-id="${esc(id)}">
+      <span class="dot ${st}" title="${st}"></span>
+      <span><div class="q">${esc(p.q || "(no prompt text)")}</div><div class="meta">${esc(AREA_SHORT[p.area] || p.area)} · ${p.a.length} answers${warn}</div></span>
+      <span class="chip ${p.sec}">${p.sec}</span></button>`;
+  }).join("") || `<p style="padding:14px;color:var(--dim)">Nothing matches these filters.</p>`;
+}
+function renderProgress() {
+  const secs = ["FAR", "AUD", "REG"];
+  const live = ORDER.filter((id) => !gone(id) && effective(id));
+  const done = (id) => ["reviewed", "deleted"].includes(statusOf(id));
+  const total = live.length, d = live.filter(done).length;
+  const flagged = live.filter((id) => statusOf(id) === "flagged").length;
+  $("progress").innerHTML = `<span>Reviewed ${d}/${total}<span class="pbar"><i style="width:${total ? (100 * d / total).toFixed(1) : 0}%"></i></span></span>` +
+    secs.map((s) => { const ids = live.filter((id) => effective(id).sec === s); return `<span>${s} ${ids.filter(done).length}/${ids.length}</span>`; }).join("") +
+    (flagged ? `<span style="color:var(--warn)">⚑ ${flagged} flagged</span>` : "");
+}
+function fillAreas() {
+  const sec = $("f-sec").value, keep = $("f-area").value;
+  const opts = Object.entries(AREAS).filter(([s]) => !sec || s === sec).flatMap(([s, a]) => Object.entries(a).map(([k, v]) => [k, (sec ? "" : s + " · ") + v]));
+  $("f-area").innerHTML = `<option value="">All areas</option>` + opts.map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("");
+  if (opts.some(([k]) => k === keep)) $("f-area").value = keep;
+}
+
+// ---------- editor ----------
+function open(id) {
+  flushNow();
+  cur = id; work = clone(effective(id)); tryText = "";
+  $("app").classList.add("editing");
+  renderList(); renderEditor();
+  $("main").scrollTop = 0;
+  try { history.replaceState(null, "", "#" + id.replace(/[^A-Za-z0-9-]/g, "")); } catch (e) {}
+}
+function renderEditor() {
+  const p = work, st = statusOf(p.id), base = BASE_BY[p.id], e = EDITS[p.id] || {};
+  const areaOpts = Object.entries(AREAS[p.sec] || {}).map(([k, v]) => `<option value="${k}"${k === p.area ? " selected" : ""}>${esc(v)}</option>`).join("");
+  const cks = checks(p), badRows = new Set(cks.flatMap((c) => (c.ok ? [] : c.rows || [])));
+  p.a.forEach((a, i) => { if (!a.display.trim()) badRows.add(i); });
+  const hit = tryText ? match(p, tryText) : null;
+  const counts = [1,2,3,4,5,6].map((r) => p.a.filter((a) => +a.r === r).length), maxc = Math.max(1, ...counts);
+  const statusLabel = {todo: "Not reviewed", edited: "Edited", reviewed: "Reviewed ✓", flagged: "Flagged ⚑", deleted: "Marked for deletion", new: "New prompt"}[st];
+  $("main").innerHTML = `
+  <button class="btn ghost small mobile-back" type="button" id="back">← All prompts</button>
+  ${st === "deleted" ? `<div class="deleted-note">This prompt is marked for deletion. It'll be removed from the game when Claude applies your review. <button class="btn small danger" type="button" id="undelete">Keep it</button></div>` : ""}
+  <div class="card">
+    <div class="ptop">
+      <span class="chip ${p.sec}">${p.sec}</span>
+      ${base ? "" : `<select id="p-sec">${["FAR","AUD","REG"].map((s) => `<option${s === p.sec ? " selected" : ""}>${s}</option>`).join("")}</select>`}
+      <select id="p-area" title="Blueprint area">${areaOpts}</select>
+      <span class="pid">${esc(p.id)}</span>
+      <span class="status-pill">${statusLabel}</span>
+    </div>
+    <input class="qtext" id="p-q" value="${esc(p.q)}" placeholder="Name a…" aria-label="Prompt text">
+    <div class="checks">${cks.map((c) => `<span class="check${c.ok ? "" : " bad"}">${c.ok ? "✓" : "✗"} ${esc(c.text)}</span>`).join("")}
+      <span class="dist" title="Answers per rarity">${counts.map((c, i) => `<i style="height:${4 + 24 * c / maxc}px;background:var(--t${i + 1})"><b>${c}</b></i>`).join("")}</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead><tr><th>Rarity</th><th>Gem</th><th>Answer as shown</th><th>Also accept (separate with ;)</th><th>Note shown after the round</th><th></th></tr></thead>
+      <tbody>${p.a.map((a, i) => `
+        <tr class="${i === hit ? "hit" : badRows.has(i) ? "bad" : ""}" data-i="${i}">
+          <td class="r" data-l="Rarity"><select data-f="r" style="border-left-color:var(--t${a.r})">${[1,2,3,4,5,6].map((r) => `<option value="${r}"${+a.r === r ? " selected" : ""}>${r} · ${TIER[r]}</option>`).join("")}</select></td>
+          <td class="g"><button type="button" class="gem${a.gem ? " on" : ""}" data-f="gem" title="${a.gem ? "This is the gem" : "Make this the gem"}" aria-label="Gem">💎</button></td>
+          <td class="d" data-l="Answer"><textarea rows="1" class="grow disp" data-f="display" placeholder="Answer">${esc(a.display)}</textarea></td>
+          <td data-l="Also accept"><textarea rows="1" class="grow alias" data-f="aliases" placeholder="other spellings; abbreviations">${esc(a.aliases)}</textarea></td>
+          <td data-l="Note"><textarea rows="1" class="grow small" data-f="note" placeholder="${+a.r >= 4 || a.gem ? "Why it's right (recommended)" : ""}">${esc(a.note)}</textarea></td>
+          <td class="x"><button type="button" class="del" data-f="del" title="Remove answer" aria-label="Remove answer">×</button></td>
+        </tr>`).join("")}
+      </tbody>
+    </table>
+    <div class="tools">
+      <button class="btn ghost small" type="button" id="add">+ Add answer</button>
+      <button class="btn ghost small" type="button" id="sort">Sort by rarity</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <label class="lab" for="try">Try an answer the way a player would</label>
+    <div class="try"><input id="try" value="${esc(tryText)}" placeholder="Type a guess, typos and all" autocomplete="off">
+      <span class="res" id="try-res">${tryResult(hit)}</span></div>
+  </div>
+
+  ${e.reply ? `<div class="card" style="border-left:4px solid var(--blue)"><label class="lab">Claude's reply</label>${esc(e.reply)}</div>` : ""}
+  <div class="card">
+    <label class="lab" for="comment">Note to Claude (optional)</label>
+    <textarea id="comment" placeholder="e.g. “Double-check the 2026 rule here” or “Add three more deep cuts.” Flag the prompt and Claude will handle it when applying your review.">${esc(e.comment || "")}</textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn ok" type="button" id="reviewed">${st === "reviewed" ? "Reviewed ✓ · Next" : "Mark reviewed · Next"}</button>
+    <button class="btn warn" type="button" id="flag">${st === "flagged" ? "Unflag" : "⚑ Flag for Claude"}</button>
+    <span class="sp"></span>
+    ${base && changedFromBase(p) ? `<button class="btn ghost small" type="button" id="revert">Undo my edits</button>` : ""}
+    ${st !== "deleted" ? `<button class="btn danger small" type="button" id="delete">Delete prompt</button>` : ""}
+    <span class="kbd">Ctrl/⌘ + Enter = reviewed and next</span>
+  </div>`;
+  wireEditor();
+}
+function wireEditor() {
+  const m = $("main");
+  m.querySelectorAll("tbody tr").forEach((tr) => {
+    const i = +tr.dataset.i;
+    tr.querySelectorAll("[data-f]").forEach((el) => {
+      const f = el.dataset.f;
+      if (f === "gem") el.onclick = () => { work.a.forEach((a, j) => (a.gem = j === i ? !a.gem : false)); stage(); renderEditor(); };
+      else if (f === "del") el.onclick = () => { work.a.splice(i, 1); stage(); renderEditor(); };
+      else if (f === "r") el.onchange = () => { work.a[i].r = +el.value; stage(); renderEditor(); };
+      else {
+        el.oninput = () => {
+          if (el.tagName === "TEXTAREA" && /\n/.test(el.value)) el.value = el.value.replace(/\s*\n\s*/g, " ");   // one line per answer in the library
+          work.a[i][f] = el.value; grow(el); stage(); refreshLight();
+        };
+      }
+    });
+  });
+  m.querySelectorAll("textarea.grow").forEach(grow);
+  $("p-q").oninput = (ev) => { work.q = ev.target.value; stage(); refreshLight(); };
+  $("p-area").onchange = (ev) => { work.area = ev.target.value; stage(); };
+  if ($("p-sec")) $("p-sec").onchange = (ev) => { work.sec = ev.target.value; work.area = Object.keys(AREAS[work.sec])[0]; stage(); renderEditor(); };
+  $("add").onclick = () => { work.a.push({r: 3, gem: false, display: "", aliases: "", note: ""}); stage(); renderEditor(); const ins = m.querySelectorAll(".disp"); ins[ins.length - 1].focus(); };
+  $("sort").onclick = () => { work.a.sort((x, y) => x.r - y.r); stage(); renderEditor(); };
+  $("try").oninput = (ev) => { tryText = ev.target.value; refreshLight(); };
+  $("comment").oninput = (ev) => { const id = work.id; if (!EDITS[id]) stage("edited"); EDITS[id].comment = ev.target.value; EDITS[id].updatedAt = new Date().toISOString(); schedule(id); };
+  $("reviewed").onclick = markReviewed;
+  $("flag").onclick = () => { stage(statusOf(work.id) === "flagged" ? "edited" : "flagged"); renderEditor(); };
+  if ($("revert")) $("revert").onclick = () => { const c = (EDITS[work.id] || {}).comment; work = clone(BASE_BY[work.id]); if (c) { stage("edited"); EDITS[work.id].comment = c; } else { delete EDITS[work.id]; schedule(work.id); } renderList(); renderProgress(); renderEditor(); };
+  if ($("delete")) $("delete").onclick = () => confirmBox("Delete this prompt?", "It'll be removed from the game when Claude applies your review. You can undo this until then.", "Delete prompt", () => { stage("deleted"); renderEditor(); });
+  if ($("undelete")) $("undelete").onclick = () => { stage("edited"); renderEditor(); };
+  if ($("back")) $("back").onclick = () => { flushNow(); $("app").classList.remove("editing"); cur = null; renderList(); window.scrollTo(0, 0); };
+}
+function grow(el) { el.style.height = "auto"; el.style.height = el.scrollHeight + 2 + "px"; }
+function tryResult(hit) {
+  if (!tryText) return "";
+  if (hit === null) return `<span style="color:var(--red)">✗ Not in the ledger: no answer accepts this</span>`;
+  const a = work.a[hit];
+  return `✓ Counts as <b>${esc(a.display)}</b> · rarity ${a.r}, ${PTS[a.r]} pts`;
+}
+function refreshLight() {   // update checks, row highlights and the test result without touching the inputs being typed in
+  const m = $("main"), el = m.querySelector(".checks"); if (!el) return;
+  const cks = checks(work), bad = new Set(cks.flatMap((c) => (c.ok ? [] : c.rows || [])));
+  work.a.forEach((a, i) => { if (!a.display.trim()) bad.add(i); });
+  el.querySelectorAll(".check").forEach((c) => c.remove());
+  el.insertAdjacentHTML("afterbegin", cks.map((c) => `<span class="check${c.ok ? "" : " bad"}">${c.ok ? "✓" : "✗"} ${esc(c.text)}</span>`).join(""));
+  const hit = tryText ? match(work, tryText) : null;
+  m.querySelectorAll("tbody tr").forEach((tr) => { const i = +tr.dataset.i; tr.className = i === hit ? "hit" : bad.has(i) ? "bad" : ""; });
+  const r = $("try-res"); if (r) r.innerHTML = tryResult(hit);
+}
+function markReviewed() {
+  if (!isValid(work) && statusOf(work.id) !== "deleted") {
+    confirmBox("This prompt fails a check", "The game build will refuse it until it's fixed: " + checks(work).filter((c) => !c.ok).map((c) => c.text).join(", ") + ". Mark it reviewed anyway?", "Mark reviewed", go);
+    return;
+  }
+  go();
+  function go() {
+    stage("reviewed"); flushNow();
+    const ids = filtered(), i = ids.indexOf(work.id);
+    const next = ids.slice(i + 1).find((id) => statusOf(id) !== "reviewed") || ids.find((id) => statusOf(id) !== "reviewed");
+    if (next && next !== work.id) open(next); else renderEditor();
+  }
+}
+
+// ---------- dialogs ----------
+function confirmBox(title, body, okText, onOk) {
+  $("modal").innerHTML = `<div class="modal"><div class="card"><h3>${esc(title)}</h3><p>${esc(body)}</p>
+    <div class="tools"><button class="btn danger" id="m-ok" type="button">${esc(okText)}</button><button class="btn ghost" id="m-no" type="button">Cancel</button></div></div></div>`;
+  $("m-no").onclick = () => ($("modal").innerHTML = "");
+  $("m-ok").onclick = () => { $("modal").innerHTML = ""; onOk(); };
+}
+function newPrompt() {
+  const secs = ["FAR", "AUD", "REG"], s0 = $("f-sec").value || "FAR";
+  $("modal").innerHTML = `<div class="modal"><div class="card"><h3>New prompt</h3>
+    <div class="field"><label class="lab">Section</label><select id="n-sec">${secs.map((s) => `<option${s === s0 ? " selected" : ""}>${s}</option>`).join("")}</select></div>
+    <div class="field"><label class="lab">Blueprint area</label><select id="n-area"></select></div>
+    <div class="field"><label class="lab">Prompt</label><input id="n-q" placeholder="Name a…"></div>
+    <div class="hint" id="n-hint">Start with “Name a…” so it plays like the others.</div>
+    <div class="tools"><button class="btn" id="n-ok" type="button">Create</button><button class="btn ghost" id="n-no" type="button">Cancel</button></div></div></div>`;
+  const fill = () => ($("n-area").innerHTML = Object.entries(AREAS[$("n-sec").value]).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join(""));
+  fill(); $("n-sec").onchange = fill; $("n-q").focus();
+  $("n-no").onclick = () => ($("modal").innerHTML = "");
+  $("n-ok").onclick = () => {
+    const q = $("n-q").value.trim(); if (!q) { $("n-hint").textContent = "Type the prompt first."; return; }
+    const sec = $("n-sec").value;
+    let base = sec.toLowerCase() + "-" + norm(q).replace(/^name (a|an|the)? ?/, "").split(" ").filter((w) => w.length > 2).slice(0, 3).join("-");
+    let id = base, n = 2; while (BASE_BY[id] || EDITS[id]) id = base + "-" + n++;
+    work = {id, sec, area: $("n-area").value, q, a: Array.from({length: 10}, (_, i) => ({r: i < 2 ? 1 : Math.min(6, 2 + Math.floor((i - 2) / 2)), gem: i === 9, display: "", aliases: "", note: ""}))};
+    $("modal").innerHTML = "";
+    EDITS[id] = {...pick(work), id, status: "edited", comment: "", isNew: true, applied: false, updatedAt: new Date().toISOString()};
+    ORDER.push(id); schedule(id);
+    cur = id; $("app").classList.add("editing"); renderList(); renderProgress(); renderEditor();
+  };
+}
+function intro() {
+  $("main").innerHTML = `<div class="empty"><h2>Review the question library</h2>
+  <ol>
+    <li><b>Pick a prompt</b> from the list. Filter by section, blueprint area or status.</li>
+    <li><b>Fix anything.</b> Change rarity, pick the gem 💎, edit or add answers, list other spellings players might type, and add a note explaining deep cuts.</li>
+    <li><b>Test it</b> with “Try an answer”: it uses the game's own matcher.</li>
+    <li><b>Mark reviewed</b> to jump to the next one. Use <b>⚑ Flag for Claude</b> with a note for anything you want researched or rewritten.</li>
+    <li>Every change saves automatically. When you're ready, tell Claude <b>“apply my review”</b>. Claude checks it, rebuilds the game and publishes it to your app.</li>
+  </ol>
+  <div class="legend"><span><i class="dot"></i>Not reviewed</span><span><i class="dot edited"></i>Edited</span><span><i class="dot reviewed"></i>Reviewed</span><span><i class="dot flagged"></i>Flagged</span><span><i class="dot deleted"></i>To delete</span><span><i class="dot new"></i>New</span></div></div>`;
+}
+
+// ---------- start ----------
+async function start() {
+  try {
+    const res = await fetch("library.json"); const data = await res.json();
+    AREAS = data.areas; BASE = data.prompts;
+    BASE.forEach((p) => (BASE_BY[p.id] = p));
+    const secRank = {FAR: 0, AUD: 1, REG: 2}, areaRank = (p) => Object.keys(AREAS[p.sec]).indexOf(p.area);
+    ORDER = BASE.slice().sort((x, y) => secRank[x.sec] - secRank[y.sec] || areaRank(x) - areaRank(y)).map((p) => p.id);
+  } catch (e) { $("main").innerHTML = `<p class="empty">Couldn't load the question library. Reload the page.</p>`; return; }
+  fillAreas(); renderProgress(); renderList(); intro();
+  ["f-search", "f-area", "f-status"].forEach((id) => ($(id).oninput = renderList));
+  $("f-sec").onchange = () => { fillAreas(); renderList(); };
+  $("list").onclick = (ev) => { const b = ev.target.closest(".item"); if (b) open(b.dataset.id); };
+  $("new-btn").onclick = newPrompt;
+  document.addEventListener("keydown", (ev) => { if ((ev.ctrlKey || ev.metaKey) && ev.key === "Enter" && work) { ev.preventDefault(); markReviewed(); } });
+  window.addEventListener("beforeunload", flushNow);
+
+  const timer = setTimeout(() => { if (dbState === "connecting") offline(); }, 10000);
+  let cdb = null;
+  try { cdb = window.claude && window.claude.use ? await window.claude.use("db") : null; } catch (e) { cdb = null; }
+  clearTimeout(timer);
+  if (!cdb) { offline(); return; }
+  db = cdb; dbState = "ok"; setSave("Connecting…");
+  let first = true;
+  const loadTimer = setTimeout(() => setSave("Saved edits can't be reached yet", true), 10000);
+  db.collection("edits").onSnapshot((snap) => {
+    const docs = snap.docs ? snap.docs : snap;
+    const incoming = {};
+    docs.forEach((d) => { const v = typeof d.data === "function" ? d.data() : d; const id = d.id || v.id; if (id && v) incoming[id] = v; });
+    Object.keys(incoming).forEach((id) => { if (!BASE_BY[id] && !ORDER.includes(id) && !incoming[id].applied) ORDER.push(id); });
+    // keep what's being typed right now; take everything else from the server
+    const keep = work && (saveTimer || inflight[work.id]) ? EDITS[work.id] : null;
+    EDITS = incoming; if (keep) EDITS[work.id] = keep;
+    if (first && !(snap.metadata && snap.metadata.fromCache)) { first = false; clearTimeout(loadTimer); setSave("All changes saved"); const h = location.hash.slice(1); if (h && (BASE_BY[h] || EDITS[h])) open(h); }
+    renderProgress(); renderList();
+  }, (err) => { clearTimeout(loadTimer); setSave("Lost connection: reload to keep saving", true); });
+}
+function offline() {
+  if (dbState === "offline") return;
+  dbState = "offline";
+  EDITS = loadLocal();
+  Object.keys(EDITS).forEach((id) => { if (!BASE_BY[id] && !ORDER.includes(id)) ORDER.push(id); });
+  document.querySelector(".app").insertAdjacentHTML("afterbegin", `<div class="banner">Your edits can't reach Claude from this view, so they're only being kept in this browser. Open the page on claude.ai while signed in.</div>`);
+  setSave("Browser only", true); renderProgress(); renderList();
+}
+start();
+</script>
+</body>
+</html>

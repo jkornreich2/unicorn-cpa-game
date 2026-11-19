@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Daily rarity trivia for CPA candidates. Name the answer nobody else thinks of.">
+<meta name="theme-color" content="#f4f6f1">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Footnote">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta property="og:title" content="Footnote">
+<meta property="og:description" content="Daily rarity trivia for CPA candidates. Name the answer nobody else thinks of.">
+<meta property="og:image" content="https://jkornreich2.github.io/footnote/icons/icon-512.png">
+<title>Footnote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: an auditor's workpaper. Graph-paper sheet, red-pencil tickmarks, superscript footnote numbers. Single light theme by choice. */
+  color-scheme: light;
+  --paper:#f4f6f1;
+  --grid:#dde5dc;
+  --ink:#16202e;
+  --dim:#5c6878;
+  --red:#c8102e;      /* red pencil: tickmarks and the deepest tier */
+  --blue:#1f4fa8;     /* blue pencil */
+  --rule:#b9c6bb;
+  --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --t0:#3a3f47; --t1:#e9ece6; --t2:#4d7fd6; --t3:#2f9e6a; --t4:#e3b23c; --t5:#e2742f; --t6:#c8102e;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));display:flex;flex-direction:column;gap:16px}
+header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.logo{font-family:var(--display);font-size:38px;line-height:1;letter-spacing:-.01em}
+.logo sup{font-family:var(--mono);font-size:14px;color:var(--red);margin-left:2px}
+.meta{font-family:var(--mono);font-size:12px;color:var(--dim);text-align:right}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+h1{font-family:var(--display);font-size:44px;line-height:1.02}
+h2{font-family:var(--display);font-size:32px;line-height:1.05}
+h3{font-family:var(--body);font-size:15px;font-weight:600}
+p{margin:0}
+.dim{color:var(--dim);font-size:14.5px}
+.card{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:18px 16px;box-shadow:0 1px 0 var(--rule);display:flex;flex-direction:column;gap:14px}
+.btn{min-height:50px;border-radius:4px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-weight:600;padding:10px 18px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row .btn{flex:1}
+.sec{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;padding:3px 8px;border-radius:3px;color:#fff}
+.sec.FAR{background:var(--blue)} .sec.AUD{background:#7a4fb0} .sec.REG{background:#2f7d5a}
+.tiers{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.tiers div{text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.tiers i{display:block;height:10px;border-radius:2px;margin-bottom:4px}
+ol.rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+
+/* Prompt screen */
+.prog{display:flex;gap:4px}
+.prog span{flex:1;height:6px;border-radius:2px;background:var(--grid)}
+.prog span.done{background:var(--ink)} .prog span.now{background:var(--red)}
+.qhead{display:flex;justify-content:space-between;align-items:center}
+.timer{font-family:var(--mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.timer.low{color:var(--red)}
+.bar{height:4px;background:var(--grid);border-radius:2px;overflow:hidden}
+.bar b{display:block;height:100%;background:var(--ink);transform-origin:left;transition:transform .2s linear}
+.prompt{font-family:var(--display);font-size:36px;line-height:1.08}
+.prompt sup{font-family:var(--mono);font-size:15px;color:var(--red);vertical-align:super}
+form.ans{display:flex;gap:8px}
+form.ans input{flex:1;min-width:0;height:54px;border:2px solid var(--ink);border-radius:4px;padding:0 14px;background:#fff;font-size:18px}
+form.ans .btn{flex:none}
+
+/* Result */
+.verdict{display:flex;align-items:center;gap:14px}
+.tick{font-family:var(--display);font-size:56px;line-height:1;color:var(--red);width:56px;text-align:center}
+.verdict .pts{font-family:var(--mono);font-size:28px;font-weight:600}
+.tierchip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.tierchip i{width:12px;height:12px;border-radius:2px}
+.notes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.notes li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:baseline;padding:9px 0;border-top:1px dashed var(--rule);font-size:15px}
+.notes li b{font-weight:600}
+.notes li small{display:block;color:var(--dim);font-size:13.5px;margin-top:2px}
+.notes li .p{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+.notes li .n{font-family:var(--mono);font-size:11px;color:var(--red)}
+
+/* Summary */
+.score{font-family:var(--display);font-size:84px;line-height:.9}
+.squares{font-size:26px;letter-spacing:2px}
+.depth{font-family:var(--mono);font-size:13px;color:var(--dim)}
+.share{font-family:var(--mono);font-size:13px;white-space:pre-wrap;background:var(--paper);border:1px dashed var(--rule);padding:10px;border-radius:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stats b{display:block;font-family:var(--mono);font-size:22px}
+.stats span{font-size:12px;color:var(--dim)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:13px;padding:3px 8px;border-radius:3px;border:1px solid var(--rule);background:var(--paper)}
+.fuse{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;color:var(--red)}
+.fuse i{width:14px;height:14px;border-radius:50%;background:var(--red);animation:tick 1s infinite}
+@keyframes tick{50%{transform:scale(.55);opacity:.4}}
+@media (prefers-reduced-motion:reduce){.fuse i{animation:none}}
+.players{display:flex;flex-direction:column;gap:8px}
+.players input{height:46px;border:1px solid var(--rule);border-radius:4px;padding:0 12px;background:#fff}
+.board{display:grid;grid-template-columns:1fr auto auto;gap:6px 12px;font-size:14.5px}
+.board .out{color:var(--dim);text-decoration:line-through}
+.big{font-family:var(--display);font-size:40px;line-height:1.05}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:4px;font-size:14px}
+@media (max-width:380px){h1{font-size:36px}.prompt{font-size:30px}.score{font-size:68px}}
+@media (prefers-reduced-motion:reduce){.bar b{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="logo">Footnote<sup>1</sup></div><div class="meta" id="meta"></div></header>
+  <main id="view"></main>
+  <p class="dim" id="install" hidden style="font-size:13.5px">Add Footnote to your home screen: on iPhone, tap Share, then <b>Add to Home Screen</b>. On Android, open the browser menu and tap <b>Install app</b>.</p>
+  <p class="dim" style="font-size:12.5px">¹ A rarity trivia game for CPA candidates. Rarity ratings are curated estimates of how often candidates think of each answer. Not affiliated with the AICPA or any review course.</p>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Prompts. Each answer: [rarity 1-6, display name, "alias|alias", note shown when revealed]
+// Rarity: 1 = the face of the statements (everyone says it) ... 6 = deep in the footnotes.
+// ---------------------------------------------------------------------------
+const PROMPTS = [
+ {id:"far-curr-liab", sec:"FAR", q:"Name a current liability", a:[
+  [1,"Accounts payable","accounts payable|ap|payables|trade payables"],
+  [2,"Wages payable","wages payable|salaries payable|accrued wages|accrued salaries|payroll payable"],
+  [2,"Accrued expenses","accrued expenses|accrued liabilities|accruals"],
+  [2,"Income taxes payable","income taxes payable|income tax payable|taxes payable"],
+  [2,"Interest payable","interest payable|accrued interest"],
+  [2,"Short-term notes payable","notes payable|short term notes payable|short term debt|short term borrowings|line of credit"],
+  [3,"Unearned revenue","unearned revenue|deferred revenue|contract liability|contract liabilities|customer advances","A contract liability: cash received before the performance obligation is satisfied."],
+  [3,"Current portion of long-term debt","current portion of long term debt|current maturities of long term debt|cpltd","The slice of long-term debt due within a year is reclassified to current."],
+  [3,"Dividends payable","dividends payable|dividend payable","A liability once the board declares the dividend."],
+  [4,"Sales tax payable","sales tax payable|sales taxes payable|sales tax","Collected from customers on the government's behalf."],
+  [4,"Payroll taxes and withholdings","payroll taxes payable|payroll tax payable|withholdings payable|fica payable|withholding taxes payable","Employee withholdings plus the employer's share, owed to tax authorities."],
+  [4,"Warranty liability","warranty liability|warranty obligation|accrued warranty|warranty payable|warranties","Estimated cost of assurance-type warranties, accrued at the time of sale."],
+  [4,"Customer deposits","customer deposits|deposits from customers|refundable deposits"],
+  [5,"Compensated absences","compensated absences|accrued vacation|vacation pay|paid time off|pto liability|accrued pto","Vested or accumulating paid time off that employees have earned."],
+  [5,"Current operating lease liability","operating lease liability|current lease liability|lease liability|current portion of lease liability","Under ASC 842, the current portion of the lease liability is a current liability."],
+  [5,"Commercial paper","commercial paper","Short-term unsecured notes issued by large companies."],
+  [5,"Gift card liability","gift card liability|gift cards|gift card|stored value cards","Unredeemed gift cards are a contract liability until redeemed or until breakage is recognized."],
+  [5,"Refund liability","refund liability|refund liabilities|sales returns liability|returns reserve","Expected refunds to customers under ASC 606."],
+  [5,"Bank overdraft","bank overdraft|overdraft|book overdraft"],
+  [6,"Customer loyalty points","loyalty points|loyalty program|customer loyalty liability|reward points|loyalty program liability","Points are a separate performance obligation: part of the price is deferred until they're redeemed.",1],
+  [6,"Accrued litigation","litigation accrual|accrued litigation|contingent liability|loss contingency|lawsuit liability","Probable and reasonably estimable loss contingencies are accrued."],
+  [6,"Coupons and premiums","coupon liability|premium liability|premiums|coupons","Estimated cost of outstanding coupons or premium offers."]
+ ]},
+ {id:"far-intangible", sec:"FAR", q:"Name an intangible asset", a:[
+  [1,"Goodwill","goodwill"],
+  [1,"Patent","patent|patents"],
+  [2,"Trademark","trademark|trademarks"],
+  [2,"Copyright","copyright|copyrights"],
+  [3,"Trade name","trade name|trade names|brand|brand name"],
+  [3,"Franchise","franchise|franchise rights|franchise agreement"],
+  [3,"License","license|licenses|licensing rights"],
+  [3,"Customer list","customer list|customer lists"],
+  [4,"Customer relationships","customer relationships|customer relationship|customer contracts","Recognized separately from goodwill in a business combination."],
+  [4,"Internal-use software","software|internal use software|capitalized software|computer software","Application-development-stage costs are capitalized under ASC 350-40."],
+  [4,"Noncompete agreement","noncompete|non compete|noncompete agreement|non compete agreement|covenant not to compete"],
+  [4,"Domain name","domain name|domain names|website domain|internet domain"],
+  [5,"Acquired in-process R&D","in process research and development|in process r and d|ipr and d|iprd|acquired iprd","Acquired IPR&D in a business combination is capitalized as indefinite-lived until the project is done or abandoned."],
+  [5,"Broadcast or FCC license","fcc license|broadcast license|broadcast rights|spectrum license","Often indefinite-lived because renewal is routine."],
+  [6,"Mortgage servicing rights","mortgage servicing rights|servicing rights|msr","A servicing asset recognized when servicing is retained on sold loans.",1],
+  [6,"Order backlog","order backlog|backlog","Recognized in an acquisition as a contract-based intangible."],
+  [6,"Landing or water rights","landing rights|airport slots|water rights|takeoff and landing slots","Contract and use rights that can carry real value."]
+ ]},
+ {id:"far-indirect", sec:"FAR", q:"Name an item added back to net income in the indirect method", a:[
+  [1,"Depreciation","depreciation|depreciation expense"],
+  [1,"Amortization","amortization|amortization expense|amortization of intangibles"],
+  [2,"Decrease in accounts receivable","decrease in accounts receivable|decrease in receivables|decrease in ar"],
+  [2,"Increase in accounts payable","increase in accounts payable|increase in payables|increase in ap"],
+  [2,"Decrease in inventory","decrease in inventory|inventory decrease"],
+  [3,"Loss on sale of assets","loss on sale|loss on sale of assets|loss on sale of equipment|loss on disposal","The cash from the sale goes in investing, so the noncash loss is added back."],
+  [3,"Impairment loss","impairment|impairment loss|goodwill impairment|asset impairment"],
+  [3,"Increase in accrued liabilities","increase in accrued liabilities|increase in accrued expenses|increase in wages payable"],
+  [3,"Decrease in prepaid expenses","decrease in prepaid expenses|decrease in prepaids"],
+  [3,"Increase in unearned revenue","increase in unearned revenue|increase in deferred revenue|increase in contract liabilities"],
+  [4,"Stock-based compensation","stock based compensation|stock compensation|share based compensation|stock option expense"],
+  [4,"Deferred tax expense","deferred taxes|deferred income taxes|deferred tax expense|increase in deferred tax liability","Tax expense that hasn't been paid in cash."],
+  [4,"Depletion","depletion|depletion expense"],
+  [5,"Bond discount amortization","amortization of bond discount|bond discount amortization|discount amortization","Interest expense exceeds the cash coupon, so the difference is added back."],
+  [5,"Loss on extinguishment of debt","loss on extinguishment|loss on extinguishment of debt|loss on debt retirement","The payoff cash is financing; the loss is noncash in operating."],
+  [5,"Provision for credit losses","bad debt expense|provision for credit losses|credit loss expense|provision for bad debts","A noncash charge when receivables are shown gross of the allowance."],
+  [6,"Equity-method losses","equity method loss|equity in losses of investee|share of investee losses","Your share of an investee's loss reduces income without using cash.",1],
+  [6,"Unrealized loss on trading securities","unrealized loss|unrealized loss on trading securities|unrealized holding loss","A fair-value loss through net income with no cash outflow."]
+ ]},
+ {id:"far-variable", sec:"FAR", q:"Name a form of variable consideration under ASC 606", a:[
+  [1,"Returns and refunds","returns|refunds|right of return|sales returns"],
+  [2,"Discounts","discounts|discount|volume discounts|trade discounts"],
+  [2,"Rebates","rebates|rebate|volume rebates"],
+  [3,"Performance bonuses","bonuses|performance bonus|performance bonuses|incentive payments"],
+  [3,"Penalties","penalties|penalty|late delivery penalty|late penalties"],
+  [3,"Price concessions","price concessions|price concession|implicit price concession","Expected concessions reduce the transaction price even if never written in the contract."],
+  [4,"Credits","credits|service credits|sla credits","Service-level credits reduce what the customer ultimately pays."],
+  [4,"Milestone payments","milestone payments|milestones|milestone"],
+  [5,"Early payment discounts","early payment discount|prompt payment discount|cash discount|sales discount"],
+  [5,"Price protection","price protection|price protection clauses","A promise to refund the difference if the seller later cuts the price."],
+  [5,"Chargebacks","chargebacks|chargeback","Common in distribution: the distributor claws back amounts after resale."],
+  [6,"Liquidated damages","liquidated damages","Fixed contractual damages for delay reduce the transaction price.",1],
+  [6,"Contingent fees","contingent fees|contingent fee|success fees|success fee","A fee payable only if an outcome occurs, such as a successful lawsuit."]
+ ]},
+ {id:"far-temp-diff", sec:"FAR", q:"Name a source of deferred taxes", a:[
+  [1,"Depreciation differences","depreciation|accelerated depreciation|bonus depreciation|macrs"],
+  [2,"Warranty accruals","warranty|warranties|warranty expense|warranty accrual"],
+  [2,"Allowance for credit losses","bad debts|bad debt|allowance for doubtful accounts|allowance for credit losses"],
+  [3,"Unearned revenue","unearned revenue|deferred revenue|prepaid income|advance payments"],
+  [3,"Net operating loss carryforwards","nol|net operating loss|nol carryforward|net operating loss carryforward","Not a temporary difference itself, but a carryforward that creates a deferred tax asset."],
+  [3,"Installment sales","installment sales|installment method"],
+  [4,"Prepaid expenses","prepaid expenses|prepaids|prepaid insurance"],
+  [4,"Stock compensation","stock compensation|stock based compensation|stock options|nonqualified options","Book expense now, tax deduction later when nonqualified options are exercised."],
+  [4,"Litigation accruals","litigation accrual|contingent liabilities|lawsuit accrual|accrued litigation"],
+  [4,"Unrealized gains and losses","unrealized gains|unrealized losses|unrealized gains and losses|fair value adjustments"],
+  [5,"Goodwill amortization for tax","goodwill|goodwill amortization|section 197","Tax amortizes goodwill over 15 years; GAAP doesn't amortize it (for public companies)."],
+  [5,"Uniform capitalization (263A)","unicap|263a|uniform capitalization","Extra inventory costs capitalized for tax."],
+  [5,"Capitalized R&E (Section 174)","section 174|r and d capitalization|research and experimental|capitalized research","Research costs capitalized for tax while expensed for books."],
+  [5,"Accrued bonuses","accrued bonuses|accrued compensation|bonus accrual","Bonuses not paid within 2½ months of year-end aren't deductible until paid."],
+  [6,"Equity-method income","equity method|equity method income|equity in earnings of investee","Book income now, taxed only when dividends are received or the stake is sold."],
+  [6,"Leases","leases|lease|right of use asset|lease liability","The ROU asset and lease liability have no tax basis, creating offsetting differences.",1]
+ ]},
+ {id:"far-oci", sec:"FAR", q:"Name an item reported in other comprehensive income", a:[
+  [1,"Unrealized gains/losses on AFS debt securities","available for sale|afs|unrealized gains on afs|unrealized gains and losses on available for sale securities|afs securities"],
+  [2,"Foreign currency translation adjustments","foreign currency translation|translation adjustment|cumulative translation adjustment|cta"],
+  [3,"Pension gains and losses","pension gains|pension losses|actuarial gains|actuarial losses|pension gains and losses|opeb gains"],
+  [3,"Cash flow hedges","cash flow hedge|cash flow hedges|effective portion of cash flow hedge"],
+  [4,"Prior service cost","prior service cost|prior service credit|pension prior service cost","Plan amendments' cost goes to OCI, then amortizes into pension expense."],
+  [5,"Reclassification adjustments","reclassification adjustments|reclassification adjustment|recycling","Amounts moved out of OCI into net income when realized."],
+  [5,"Net investment hedges","net investment hedge|hedge of net investment","Gains and losses on hedges of a foreign subsidiary's net assets."],
+  [6,"Own-credit risk on fair value option liabilities","own credit risk|instrument specific credit risk|fair value option credit risk","Changes in a liability's fair value from your own credit go to OCI under the fair value option.",1]
+ ]},
+ {id:"far-inventory", sec:"FAR", q:"Name an inventory costing or valuation method", a:[
+  [1,"FIFO","fifo|first in first out"],
+  [1,"LIFO","lifo|last in first out"],
+  [2,"Weighted average","weighted average|average cost|weighted average cost"],
+  [3,"Specific identification","specific identification|specific id"],
+  [4,"Moving average","moving average|perpetual average"],
+  [4,"Retail inventory method","retail method|retail inventory method"],
+  [4,"Lower of cost or net realizable value","lower of cost or net realizable value|lcnrv|lower of cost and nrv","For FIFO and average cost under ASU 2015-11."],
+  [4,"Lower of cost or market","lower of cost or market|lcm","Still used for LIFO and the retail method."],
+  [5,"Dollar-value LIFO","dollar value lifo|dvl|dollar value lifo method","Pools inventory in dollars and adjusts layers with price indexes."],
+  [5,"Gross profit method","gross profit method","An estimate for interim periods or lost inventory. Not acceptable for annual GAAP statements."],
+  [5,"Standard costing","standard cost|standard costing|standard costs"],
+  [6,"Dollar-value LIFO retail","dollar value lifo retail|lifo retail|retail lifo","Combines the retail method with dollar-value LIFO layers."],
+  [6,"Conventional retail (LCM)","conventional retail|conventional retail method|lower of cost or market retail","Excludes markdowns from the cost-to-retail ratio to approximate LCM.",1]
+ ]},
+ {id:"far-funds", sec:"FAR", q:"Name a type of fund used by state and local governments", a:[
+  [1,"General fund","general fund"],
+  [2,"Special revenue fund","special revenue fund|special revenue"],
+  [2,"Capital projects fund","capital projects fund|capital projects"],
+  [2,"Debt service fund","debt service fund|debt service"],
+  [3,"Enterprise fund","enterprise fund|enterprise funds"],
+  [3,"Internal service fund","internal service fund|internal service"],
+  [4,"Permanent fund","permanent fund|permanent funds","Governmental fund where only earnings may be spent, such as a cemetery perpetual-care fund."],
+  [4,"Pension trust fund","pension trust fund|pension trust|pension and other employee benefit trust fund"],
+  [5,"Investment trust fund","investment trust fund|external investment pool","Reports the external portion of an investment pool run for other governments.",1],
+  [5,"Private-purpose trust fund","private purpose trust fund|private purpose trust"],
+  [5,"Custodial fund","custodial fund|custodial funds|agency fund","Replaced agency funds under GASB 84."]
+ ]},
+ {id:"aud-threats", sec:"AUD", q:"Name a threat to auditor independence in the AICPA conceptual framework", a:[
+  [1,"Self-interest","self interest|self interest threat"],
+  [2,"Self-review","self review|self review threat"],
+  [2,"Familiarity","familiarity|familiarity threat"],
+  [2,"Advocacy","advocacy|advocacy threat"],
+  [3,"Undue influence","undue influence|undue influence threat"],
+  [3,"Adverse interest","adverse interest|adverse interest threat","For example, litigation between the firm and the client."],
+  [4,"Management participation","management participation|management participation threat","Performing management responsibilities for an attest client.",1]
+ ]},
+ {id:"aud-assertions", sec:"AUD", q:"Name a management assertion", a:[
+  [1,"Existence","existence"],
+  [1,"Completeness","completeness"],
+  [2,"Occurrence","occurrence"],
+  [2,"Valuation","valuation|valuation and allocation"],
+  [2,"Rights and obligations","rights and obligations|rights|obligations"],
+  [3,"Accuracy","accuracy|accuracy and valuation"],
+  [3,"Cutoff","cutoff|cut off"],
+  [3,"Classification","classification"],
+  [4,"Presentation","presentation|presentation and disclosure"],
+  [5,"Allocation","allocation","Paired with valuation for account balances.",1],
+  [5,"Understandability","understandability|classification and understandability","Part of the presentation assertions in older frameworks."]
+ ]},
+ {id:"aud-procedures", sec:"AUD", q:"Name a substantive audit procedure", a:[
+  [1,"Confirmation","confirmation|confirmations|confirm|external confirmation"],
+  [2,"Inspection","inspection|inspection of documents|inspection of assets"],
+  [2,"Observation","observation|observe"],
+  [2,"Analytical procedures","analytical procedures|substantive analytics|analytics|analytical review"],
+  [2,"Inquiry","inquiry|inquiries"],
+  [3,"Recalculation","recalculation|recalculate|recompute"],
+  [3,"Vouching","vouching|vouch","From the ledger back to support: tests existence and occurrence."],
+  [3,"Tracing","tracing|trace","From source documents forward to the ledger: tests completeness."],
+  [3,"Physical inventory observation","inventory count|inventory observation|physical inventory|observe inventory count"],
+  [4,"Cutoff testing","cutoff testing|cutoff test|cutoff"],
+  [4,"Search for unrecorded liabilities","search for unrecorded liabilities|unrecorded liabilities","Review payments after year-end for liabilities that belonged in the period."],
+  [4,"Subsequent receipts testing","subsequent receipts|subsequent cash receipts","Cash collected after year-end supports receivable existence."],
+  [5,"Legal letter","legal letter|lawyers letter|attorney letter|inquiry of legal counsel","Inquiry of the client's lawyers about litigation and claims."],
+  [5,"Proof of cash","proof of cash|four column bank reconciliation","",1],
+  [6,"Reperformance","reperformance|reperform","Strictly a test of controls procedure; substantive tests use recalculation."]
+ ]},
+ {id:"aud-fraud", sec:"AUD", q:"Name a fraud risk factor", a:[
+  [1,"Pressure or incentive","pressure|incentive|incentives|pressures|financial pressure"],
+  [1,"Opportunity","opportunity|opportunities"],
+  [2,"Rationalization","rationalization|attitude|rationalizations"],
+  [2,"Weak internal controls","weak internal controls|weak controls|poor internal controls|ineffective controls"],
+  [3,"Management override","management override|override of controls|management override of controls"],
+  [3,"Lack of segregation of duties","segregation of duties|lack of segregation of duties|no segregation of duties"],
+  [3,"Bonuses tied to earnings","bonus tied to earnings|incentive compensation|earnings based bonus|bonuses tied to targets"],
+  [4,"Related party transactions","related party transactions|related parties|related party"],
+  [4,"Complex transactions","complex transactions|complex accounting|unusual transactions"],
+  [4,"High turnover in management","high turnover|management turnover|cfo turnover|high turnover of management"],
+  [4,"Personal financial pressure","personal financial pressure|personal debt|living beyond means"],
+  [5,"Debt covenant pressure","debt covenants|covenant pressure|debt covenant pressure"],
+  [5,"Domination by one person","dominant management|domination by one person|dominant ceo|domination by a single person"],
+  [5,"Declining industry","declining industry|industry decline|declining demand"],
+  [6,"Aggressive analyst expectations","analyst expectations|aggressive forecasts|unrealistic forecasts|pressure to meet analyst expectations","",1]
+ ]},
+ {id:"aud-reports", sec:"AUD", q:"Name a type of audit opinion or audit report element", a:[
+  [1,"Unmodified opinion","unmodified|unmodified opinion|unqualified|clean opinion"],
+  [1,"Qualified opinion","qualified|qualified opinion"],
+  [2,"Adverse opinion","adverse|adverse opinion"],
+  [2,"Disclaimer of opinion","disclaimer|disclaimer of opinion"],
+  [3,"Emphasis-of-matter paragraph","emphasis of matter|emphasis of matter paragraph"],
+  [3,"Going concern section","going concern|substantial doubt|going concern paragraph"],
+  [4,"Other-matter paragraph","other matter|other matter paragraph"],
+  [4,"Critical audit matters","critical audit matters|cam|cams","Required in PCAOB audit reports for most public companies."],
+  [5,"Key audit matters","key audit matters|kam|kams","The AICPA and ISA counterpart to CAMs, when engaged to report them."],
+  [5,"Basis for opinion section","basis for opinion|basis for opinion section"],
+  [6,"Other information section","other information|other information section","Covers information in the annual report outside the financial statements.",1]
+ ]},
+ {id:"aud-tcwg", sec:"AUD", q:"Name something the auditor communicates to those charged with governance", a:[
+  [1,"Material weaknesses","material weakness|material weaknesses"],
+  [2,"Significant deficiencies","significant deficiency|significant deficiencies"],
+  [3,"Uncorrected misstatements","uncorrected misstatements|unadjusted differences|passed adjustments"],
+  [3,"Disagreements with management","disagreements with management|disagreements"],
+  [3,"Planned scope and timing","planned scope and timing|scope and timing|audit plan"],
+  [3,"Auditor's responsibilities","auditor responsibilities|auditors responsibilities|responsibilities of the auditor"],
+  [4,"Significant difficulties encountered","significant difficulties|difficulties encountered|difficulties during the audit"],
+  [4,"Qualitative aspects of accounting practices","qualitative aspects|accounting practices|significant accounting policies"],
+  [4,"Fraud involving management","fraud|fraud involving management|management fraud"],
+  [5,"Noncompliance with laws","noncompliance with laws|illegal acts|noncompliance"],
+  [5,"Going concern conclusions","going concern|substantial doubt"],
+  [6,"Consultations with other accountants","consultations with other accountants|opinion shopping|second opinions","When management seeks second opinions on accounting matters.",1],
+  [6,"Written representations requested","written representations|management representation letter|representation letter"]
+ ]},
+ {id:"reg-above-line", sec:"REG", q:"Name an above-the-line deduction (adjustment to income)", a:[
+  [1,"Traditional IRA contributions","ira|traditional ira|ira contributions|ira deduction"],
+  [1,"Student loan interest","student loan interest"],
+  [2,"HSA contributions","hsa|health savings account|hsa contributions"],
+  [2,"Half of self-employment tax","self employment tax|half of self employment tax|se tax|deductible part of self employment tax"],
+  [3,"Self-employed health insurance","self employed health insurance|self employed health insurance deduction"],
+  [3,"Educator expenses","educator expenses|teacher expenses|educator expense"],
+  [3,"Alimony paid (pre-2019 divorce)","alimony|alimony paid","Only for divorces finalized before 2019."],
+  [3,"Self-employed retirement contributions","sep|sep ira|simple ira|solo 401k|keogh|self employed retirement"],
+  [4,"Early withdrawal penalty","early withdrawal penalty|penalty on early withdrawal of savings","Forfeited interest when you break a CD early."],
+  [5,"Moving expenses (armed forces)","moving expenses|military moving expenses","Only active-duty military moving under orders."],
+  [5,"Archer MSA contributions","archer msa|msa"],
+  [6,"Reservists, performing artists and fee-basis officials","reservist expenses|performing artists|fee basis officials|reservists","Certain unreimbursed business expenses for these groups."],
+  [6,"Jury duty pay given to employer","jury duty pay|jury duty","When you must remit jury pay to your employer.",1]
+ ]},
+ {id:"reg-itemized", sec:"REG", q:"Name an itemized deduction", a:[
+  [1,"Mortgage interest","mortgage interest|home mortgage interest"],
+  [1,"Charitable contributions","charitable contributions|charity|donations|charitable donations"],
+  [1,"State and local taxes","salt|state and local taxes|state income taxes|state taxes"],
+  [2,"Medical expenses","medical expenses|medical|medical and dental expenses","Only the amount above 7.5% of AGI."],
+  [2,"Real estate taxes","real estate taxes|property taxes|real property taxes"],
+  [4,"Investment interest expense","investment interest|investment interest expense|margin interest","Limited to net investment income."],
+  [4,"Casualty losses in a declared disaster","casualty loss|casualty losses|disaster loss","Personal casualty losses must stem from a federally declared disaster."],
+  [4,"Gambling losses","gambling losses","Up to gambling winnings."],
+  [4,"Personal property taxes","personal property taxes|car registration tax|vehicle property tax"],
+  [4,"Mortgage points","points|mortgage points|loan origination points"],
+  [6,"Impairment-related work expenses","impairment related work expenses|disability work expenses"],
+  [6,"Unrecovered annuity investment","unrecovered investment in annuity|unrecovered annuity investment"],
+  [6,"Estate tax on income in respect of a decedent","ird|income in respect of a decedent|estate tax on ird","",1]
+ ]},
+ {id:"reg-exclusion", sec:"REG", q:"Name an item excluded from gross income", a:[
+  [1,"Municipal bond interest","municipal bond interest|muni interest|municipal interest|tax exempt interest"],
+  [1,"Gifts","gifts|gift"],
+  [1,"Inheritances","inheritance|inheritances|bequests"],
+  [2,"Life insurance proceeds","life insurance|life insurance proceeds"],
+  [2,"Child support","child support"],
+  [2,"Employer health insurance","employer health insurance|employer provided health insurance|health insurance premiums paid by employer"],
+  [3,"Workers' compensation","workers compensation|workers comp"],
+  [3,"Qualified scholarships","scholarships|qualified scholarship|scholarship"],
+  [3,"Gain on sale of a home (Section 121)","section 121|home sale exclusion|gain on sale of residence|sale of principal residence"],
+  [3,"Qualified Roth distributions","roth distributions|roth ira distributions|qualified roth distributions"],
+  [4,"Compensatory damages for physical injury","personal injury damages|physical injury damages|compensatory damages"],
+  [4,"De minimis fringe benefits","de minimis fringe|de minimis fringe benefits"],
+  [4,"Veterans' benefits","veterans benefits|va benefits"],
+  [5,"Qualified small business stock gain","qsbs|section 1202|qualified small business stock"],
+  [5,"Dependent care assistance","dependent care assistance|dependent care fsa"],
+  [5,"Adoption assistance","adoption assistance|employer adoption assistance"],
+  [6,"Foster care payments","foster care payments|foster care","",1],
+  [6,"Employee achievement awards","employee achievement awards|length of service award|safety award"]
+ ]},
+ {id:"reg-credits", sec:"REG", q:"Name a federal tax credit for individuals", a:[
+  [1,"Child tax credit","child tax credit|ctc"],
+  [1,"Earned income credit","earned income credit|earned income tax credit|eitc|eic"],
+  [2,"American opportunity credit","american opportunity credit|american opportunity tax credit|aotc"],
+  [2,"Child and dependent care credit","child and dependent care credit|dependent care credit|child care credit"],
+  [3,"Lifetime learning credit","lifetime learning credit|llc"],
+  [3,"Adoption credit","adoption credit"],
+  [3,"Foreign tax credit","foreign tax credit|ftc"],
+  [4,"Saver's credit","savers credit|retirement savings contributions credit"],
+  [4,"Premium tax credit","premium tax credit|ptc|aca credit"],
+  [4,"Credit for other dependents","credit for other dependents|other dependent credit|odc"],
+  [5,"Elderly or disabled credit","credit for the elderly|elderly or disabled credit|credit for elderly or disabled"],
+  [6,"Excess Social Security withholding","excess social security|excess social security withholding|excess fica","With two or more employers, Social Security withheld above the wage base comes back as a credit.",1]
+ ]},
+ {id:"reg-contract", sec:"REG", q:"Name a contract element or a defense to enforcing a contract", a:[
+  [1,"Offer","offer"],
+  [1,"Acceptance","acceptance"],
+  [1,"Consideration","consideration"],
+  [2,"Capacity","capacity|legal capacity"],
+  [2,"Legality","legality|legal purpose|lawful purpose"],
+  [2,"Mutual assent","mutual assent|meeting of the minds|agreement"],
+  [3,"Fraud","fraud|fraud in the inducement|fraud in the execution"],
+  [3,"Duress","duress"],
+  [3,"Statute of frauds","statute of frauds"],
+  [3,"Misrepresentation","misrepresentation"],
+  [4,"Undue influence","undue influence"],
+  [4,"Mutual mistake","mutual mistake|mistake"],
+  [4,"Minority","minority|infancy|minor"],
+  [5,"Unconscionability","unconscionability|unconscionable"],
+  [5,"Impossibility","impossibility|impracticability|commercial impracticability"],
+  [5,"Intoxication","intoxication"],
+  [6,"Frustration of purpose","frustration of purpose","",1]
+ ]},
+ {id:"reg-s-corp", sec:"REG", q:"Name an S corporation requirement or a way to lose S status", a:[
+  [1,"100 or fewer shareholders","100 shareholders|100 or fewer shareholders|no more than 100 shareholders"],
+  [1,"One class of stock","one class of stock|single class of stock"],
+  [2,"Domestic corporation","domestic corporation|domestic"],
+  [2,"Eligible shareholders only","eligible shareholders|individuals estates and certain trusts|no corporate shareholders|no partnership shareholders"],
+  [3,"No nonresident alien shareholders","no nonresident aliens|nonresident alien|no nonresident alien shareholders"],
+  [4,"Consent of all shareholders","consent of all shareholders|shareholder consent|unanimous consent"],
+  [4,"Timely election on Form 2553","form 2553|timely election|election"],
+  [4,"Voluntary revocation","revocation|voluntary revocation|majority revocation","Shareholders holding more than half the shares can revoke."],
+  [5,"Not an ineligible corporation","ineligible corporation|certain banks|insurance companies|not an ineligible corporation"],
+  [5,"Excess passive income for 3 years","passive investment income|excess passive income|passive income","With accumulated C corporation E&P, passive income above 25% of gross receipts for three straight years ends S status.",1]
+ ]},
+ {id:"reg-not-capital", sec:"REG", q:"Name an asset that is not a capital asset under Section 1221", a:[
+  [1,"Inventory","inventory|stock in trade"],
+  [2,"Business accounts receivable","accounts receivable|receivables|trade receivables"],
+  [2,"Depreciable business property","depreciable property|depreciable business property|section 1231 property|business equipment"],
+  [3,"Real property used in a business","real property used in business|business real estate|business land"],
+  [4,"Creative works held by their creator","copyrights|creative works|artistic works|works held by creator","A self-created copyright, composition or artwork isn't a capital asset to its creator."],
+  [5,"Supplies used in a business","supplies|business supplies"],
+  [6,"Government publications received free","government publications|us government publications","",1],
+  [6,"Hedging transactions","hedging transactions|hedges","Clearly identified business hedges produce ordinary gain or loss."],
+  [6,"Dealer commodities derivatives","commodities derivatives|commodity derivatives held by dealers"]
+ ]}
+];
+
+const TIERS = [
+  {name:"Not in the ledger", pts:0, sq:"⬛", c:"var(--t0)"},
+  {name:"On the face", pts:10, sq:"⬜", c:"var(--t1)"},
+  {name:"Review-course favorite", pts:15, sq:"🟦", c:"var(--t2)"},
+  {name:"Solid", pts:30, sq:"🟩", c:"var(--t3)"},
+  {name:"Sharp", pts:60, sq:"🟨", c:"var(--t4)"},
+  {name:"Deep cut", pts:85, sq:"🟧", c:"var(--t5)"},
+  {name:"Footnote", pts:100, sq:"🟥", c:"var(--t6)"}
+];
+// Every point takes you one page deeper into a 10-K.
+const DEPTHS = [[0, "the cover page"], [100, "Item 1A, risk factors"], [250, "MD&A"], [400, "the notes to the financial statements"], [550, "the deepest footnote"]];
+const depthName = (t) => DEPTHS.filter((d) => t >= d[0]).pop()[1];
+const TICK = ["✗", "✓", "✓", "✓", "⊕", "⊕", "※"];   // auditors' tickmarks
+const PER = 7, SECONDS = 25;
+const SHARE_URL = "https://jkornreich2.github.io/footnote/";
+
+// ---------- Matching ----------
+const norm = (s) => (" " + s.toLowerCase().replace(/&/g, " and ").replace(/['’.]/g, "").replace(/[^a-z0-9]+/g, " ") + " ")
+  .replace(/ (the|a|an) /g, " ").trim();
+const sing = (s) => s.split(" ").map((w) => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w)).join(" ");
+const lev = (a, b) => {                 // edit distance where swapping two neighboring letters counts as one typo
+  if (Math.abs(a.length - b.length) > 3) return 9;
+  const D = Array.from({ length: a.length + 1 }, (_, i) => Array.from({ length: b.length + 1 }, (_, j) => (i ? (j ? 0 : i) : j)));
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    D[i][j] = Math.min(D[i - 1][j] + 1, D[i][j - 1] + 1, D[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) D[i][j] = Math.min(D[i][j], D[i - 2][j - 2] + 1);
+  }
+  return D[a.length][b.length];
+};
+function match(prompt, raw) {
+  const x = sing(norm(raw));
+  if (!x) return null;
+  let best = null, bestScore = 99;
+  prompt.a.forEach((ans, idx) => {
+    ans[2].split("|").forEach((al) => {
+      const y = sing(norm(al));
+      let s = 99;
+      if (x === y) s = 0;
+      else if (y.length >= 5 && (" " + x + " ").includes(" " + y + " ")) s = 1;
+      else if (x.length >= 6 && (" " + y + " ").includes(" " + x + " ") && x.length >= y.length * 0.6) s = 1.5;
+      else if (y.length >= 5) { const d = lev(x, y); if (d <= (y.length >= 10 ? 2 : 1)) s = 2 + d; }
+      if (s < bestScore || (s === bestScore && best !== null && ans[0] > prompt.a[best][0])) { bestScore = s; best = idx; }
+    });
+  });
+  return bestScore < 99 ? best : null;
+}
+
+// ---------- Daily selection ----------
+const EPOCH = Date.UTC(2026, 10, 17);           // Footnote #1 = Nov 17, 2026
+const easternYMD = () => {
+  try {
+    const f = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+    const g = (t) => +f.find((x) => x.type === t).value; return [g("year"), g("month") - 1, g("day")];
+  } catch (e) { const n = new Date(); return [n.getFullYear(), n.getMonth(), n.getDate()]; }
+};
+const today = () => { const [y, m, d] = easternYMD(); return Math.floor((Date.UTC(y, m, d) - EPOCH) / 864e5) + 1; };
+const dayDate = (n) => new Date(EPOCH + (n - 1) * 864e5).toLocaleDateString(undefined, { month: "short", day: "numeric", timeZone: "UTC" });
+const rng = (seed) => { let s = (seed * 2654435761) >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); };
+function pick(seed) {
+  const r = rng(seed), bySec = { FAR: [], AUD: [], REG: [] };
+  PROMPTS.forEach((p) => bySec[p.sec].push(p));
+  Object.values(bySec).forEach((arr) => { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } });
+  const order = ["FAR", "AUD", "REG", "FAR", "REG", "AUD", "FAR"], take = { FAR: 0, AUD: 0, REG: 0 };
+  return order.map((s) => bySec[s][take[s]++ % bySec[s].length]);
+}
+
+// ---------- Storage (this browser only) ----------
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("footnote:" + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("footnote:" + k, JSON.stringify(v)); } catch (e) {} }
+};
+
+// ---------- State ----------
+let G = null;            // current dive
+let timer = null;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const supNum = (n) => String(n).split("").map((d) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[d]).join("");
+
+function newDive(mode, opt) {
+  const day = mode === "archive" ? opt : today();
+  let prompts;
+  if (mode === "daily" || mode === "archive") prompts = pick(day);
+  else {
+    const pool = PROMPTS.filter((p) => !opt || opt === "MIX" || p.sec === opt).slice(), r = rng(Math.floor(Math.random() * 1e9));
+    for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    prompts = pool.slice(0, Math.min(PER, pool.length));
+  }
+  G = { mode, day, pack: opt, prompts, i: 0, results: [], phase: "prompt", left: SECONDS, started: Date.now() };
+  startPrompt();
+}
+function startPrompt() {
+  G.phase = "prompt"; G.left = SECONDS; G.deadline = Date.now() + SECONDS * 1000;
+  render();
+  clearInterval(timer);
+  timer = setInterval(() => {
+    G.left = Math.max(0, Math.ceil((G.deadline - Date.now()) / 1000));
+    const t = $("timer"), b = $("tbar");
+    if (t) { t.textContent = G.left; t.classList.toggle("low", G.left <= 5); }
+    if (b) b.style.transform = `scaleX(${G.left / SECONDS})`;
+    if (G.left <= 0) submit("");
+  }, 200);
+}
+function submit(raw) {
+  if (G.phase !== "prompt") return;
+  clearInterval(timer);
+  const p = G.prompts[G.i], idx = raw.trim() ? match(p, raw) : null;
+  const tier = idx === null ? 0 : p.a[idx][0];
+  G.results.push({ id: p.id, raw: raw.trim(), idx, tier, pts: TIERS[tier].pts, timeout: !raw.trim(), gem: idx !== null && p.a[idx][4] === 1 });
+  G.phase = "result";
+  render();
+}
+function next() {
+  G.i++;
+  if (G.i < G.prompts.length) return startPrompt();
+  G.phase = "done";
+  const total = G.results.reduce((s, r) => s + r.pts, 0);
+  if (G.mode === "daily" || G.mode === "archive") store.set("day:" + G.day, { results: G.results.map((r) => ({ tier: r.tier, pts: r.pts })), total, archive: G.mode === "archive" });
+  const st = store.get("stats", { played: 0, best: 0, streak: 0, last: 0, sum: 0, deep: 0, zero: 0, gems: 0 });
+  st.sum = (st.sum || 0) + total; st.played++; st.best = Math.max(st.best, total);
+  st.deep = (st.deep || 0) + G.results.filter((r) => r.tier >= 5).length;
+  st.zero = (st.zero || 0) + G.results.filter((r) => r.tier === 0).length;
+  st.gems = (st.gems || 0) + G.results.filter((r) => r.gem).length;
+  if (G.mode === "daily") { st.streak = st.last === G.day - 1 ? st.streak + 1 : 1; st.last = G.day; }   // archive replays don't extend streaks
+  store.set("stats", st);
+  render();
+}
+
+// ---------- Views ----------
+const tierLegend = () => `<div class="tiers">${TIERS.slice(1).map((t) => `<div><i style="background:${t.c};border:1px solid var(--rule)"></i>${t.pts}</div>`).join("")}</div>`;
+
+function viewHome() {
+  const day = today(), done = store.get("day:" + day, null), st = store.get("stats", { played: 0, best: 0, streak: 0 });
+  const st2 = Object.assign({ sum: 0, deep: 0, zero: 0, gems: 0 }, st);
+  const archive = Array.from({ length: Math.min(day - 1, 30) }, (_, k) => day - 1 - k);
+  return `<div class="card">
+    <h1>Name the answer nobody else thinks of.</h1>
+    <p>Seven CPA prompts. Twenty-five seconds each. Every correct answer scores, but the obvious ones sit on the face of the statements. Dig into the footnotes for the rare ones.</p>
+    <ol class="rules">
+      <li>Type one answer per prompt. Spelling doesn't have to be perfect.</li>
+      <li>Rarer correct answers score more, from 5 to 100 points.</li>
+      <li>After each prompt, see the deeper answers you could have given.</li>
+      <li>Every point takes you a page deeper into a 10-K. A perfect dive is 700 pages.</li>
+    </ol>
+    <p class="dim">Tip: a sure 30 beats a risky 85 you're not certain about. A blank scores zero.</p>
+    ${tierLegend()}
+    <div class="row">${done
+      ? `<button class="btn" data-act="summary">See today's result</button><button class="btn ghost" data-act="practice">Practice dive</button>`
+      : `<button class="btn" data-act="daily">Start Footnote #${day}</button><button class="btn ghost" data-act="practice">Practice</button>`}</div>
+  </div>
+  <div class="card"><h3>Practice packs</h3><p class="dim">Seven random prompts. No timer pressure on your streak.</p>
+    <div class="row"><button class="btn ghost" data-act="pack" data-v="FAR">FAR</button><button class="btn ghost" data-act="pack" data-v="AUD">AUD</button><button class="btn ghost" data-act="pack" data-v="REG">REG</button><button class="btn ghost" data-act="pack" data-v="MIX">Mixed</button></div></div>
+  <div class="card"><h3>Pass the Ledger</h3><p class="dim">A party game for one phone. Name a valid answer, then pass the phone before the hidden fuse pops. Three pops and you're out.</p>
+    <div class="row"><button class="btn ghost" data-act="party">Start a party</button></div></div>
+  ${archive.length ? `<div class="card"><h3>Archive</h3><p class="dim">Replay past daily dives. Replays don't extend your streak.</p>
+    <div class="row">${archive.map((d) => { const r = store.get("day:" + d, null); return `<button class="btn ghost" data-act="archive" data-v="${d}" style="flex:0 0 auto;min-height:44px">#${d}${r ? " · " + r.total : ""}</button>`; }).join("")}</div></div>` : ""}
+  <div class="card"><div class="stats">
+    <div><b>${st.played}</b><span>Dives</span></div><div><b>${st.best}</b><span>Best score</span></div><div><b>${st.streak}</b><span>Day streak</span></div>
+    <div><b>${st.played ? Math.round(st2.sum / st.played) : 0}</b><span>Average</span></div><div><b>${st2.deep}</b><span>Deep cuts and footnotes</span></div><div><b>${st2.gems}</b><span>Gems found</span></div>
+  </div></div>`;
+}
+
+function viewPrompt() {
+  const p = G.prompts[G.i];
+  return `<div class="card">
+    <div class="prog">${G.prompts.map((_, k) => `<span class="${k < G.i ? "done" : k === G.i ? "now" : ""}"></span>`).join("")}</div>
+    <div class="qhead"><span class="sec ${p.sec}">${p.sec}</span><span class="timer" id="timer" aria-live="off">${G.left}</span></div>
+    <div class="bar"><b id="tbar" style="transform:scaleX(1)"></b></div>
+    <p class="prompt">${esc(p.q)}<sup>${supNum(G.i + 1)}</sup></p>
+    <form class="ans" id="ansform" autocomplete="off">
+      <label for="ans" class="dim" style="position:absolute;left:-9999px">Your answer</label>
+      <input id="ans" name="ans" enterkeyhint="send" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type an answer" maxlength="80">
+      <button class="btn" type="submit">Enter</button>
+    </form>
+    <p class="dim">${G.mode === "daily" ? "Daily dive" : G.mode === "archive" ? "Archive #" + G.day : "Practice"} · prompt ${G.i + 1} of ${G.prompts.length} · ${G.results.reduce((s, r) => s + r.pts, 0)} pages deep</p>
+  </div>`;
+}
+
+function viewResult() {
+  const p = G.prompts[G.i], r = G.results[G.i], T = TIERS[r.tier];
+  const yours = r.idx !== null ? p.a[r.idx] : null;
+  const deeper = p.a.map((a, k) => ({ a, k })).filter((x) => x.k !== r.idx && x.a[0] >= Math.max(4, r.tier)).sort((x, y) => (y.a[4] === 1) - (x.a[4] === 1) || y.a[0] - x.a[0]).slice(0, 4);
+  const face = p.a.filter((a) => a[0] === 1).map((a) => a[1]).join(", ");
+  return `<div class="card">
+    <div class="prog">${G.prompts.map((_, k) => `<span class="${k <= G.i ? "done" : ""}"></span>`).join("")}</div>
+    <p class="dim">${esc(p.q)}</p>
+    <div class="verdict">
+      <span class="tick" aria-hidden="true">${TICK[r.tier]}</span>
+      <div>
+        <span class="tierchip"><i style="background:${T.c};border:1px solid var(--rule)"></i>${T.name}</span>
+        <div class="pts">+${r.pts}</div>
+      </div>
+    </div>
+    ${r.gem ? `<p style="color:var(--red);font-weight:600">※ You found the gem: the answer we hoped someone would land on.</p>` : ""}
+    <p>${r.timeout ? "Time ran out." : yours ? `You said <b>${esc(r.raw)}</b>, which we count as <b>${esc(yours[1])}</b>.${yours[3] ? " " + esc(yours[3]) : ""}` : `<b>${esc(r.raw)}</b> isn't in our ledger for this prompt. If you think it should count, note it for review.`}</p>
+    <h3>Deeper in the notes</h3>
+    <ul class="notes">${deeper.map((x) => `<li><span class="n">${x.a[4] === 1 ? "※" : supNum(x.a[0])}</span><span><b>${esc(x.a[1])}</b>${x.a[4] === 1 ? ' <span class="n">the gem</span>' : ""}${x.a[3] ? `<small>${esc(x.a[3])}</small>` : ""}</span><span class="p">${TIERS[x.a[0]].pts}</span></li>`).join("")}</ul>
+    <p class="dim">On the face of the statements: ${esc(face)}.</p>
+    <div class="row"><button class="btn" data-act="next" id="nextbtn">${G.i + 1 < G.prompts.length ? "Next prompt" : "See my dive"}</button></div>
+  </div>`;
+}
+
+function shareText(res, day, total) {
+  return `Footnote #${day} · ${total} pages deep\n${res.map((r) => TIERS[r.tier].sq).join("")}\nReached ${depthName(total)}${SHARE_URL ? "\n" + SHARE_URL : ""}`;
+}
+function viewDone(saved) {
+  const res = saved ? saved.results : G.results, total = saved ? saved.total : res.reduce((s, r) => s + r.pts, 0);
+  const daily = saved || G.mode === "daily" || G.mode === "archive", day = saved ? today() : G.day;
+  const text = shareText(res, day, total);
+  return `<div class="card">
+    <p class="dim">${daily ? "Footnote #" + day : "Practice dive"}</p>
+    <div class="score">${total}</div>
+    <p class="squares" aria-label="Tiers: ${res.map((r) => TIERS[r.tier].name).join(", ")}">${res.map((r) => TIERS[r.tier].sq).join("")}</p>
+    <p class="depth">${total} pages deep · reached ${depthName(total)}</p>
+    ${daily ? `<div class="share" id="sharetext">${esc(text)}</div>
+    <div class="row"><button class="btn" data-act="copy">Share result with friends</button></div>` : ""}
+    <div class="row"><button class="btn ghost" data-act="practice">Practice dive</button><button class="btn ghost" data-act="home">Home</button></div>
+    <p class="dim">A new daily dive starts at midnight.</p>
+  </div>`;
+}
+
+// ---------- Pass the Ledger: pass-and-play party mode ----------
+let P = null, ptimer = null;
+const MIN_LEFT = 6000;                    // after a pass, at least 6 seconds remain on the fuse
+function partySetup() { P = { phase: "setup", names: ["", "", ""] }; render(); }
+function partyStart(names) {
+  const players = names.map((n, k) => ({ name: n.trim() || "Player " + (k + 1), strikes: 0, pts: 0 }));
+  if (players.length < 2) return toast("Add at least two players.");
+  const deck = PROMPTS.slice(), r = rng(Math.floor(Math.random() * 1e9));
+  for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+  P = { phase: "play", players, turn: 0, deck, d: 0, msg: "" };
+  partyRound();
+}
+function partyRound() {
+  P.prompt = P.deck[P.d++ % P.deck.length]; P.used = []; P.msg = ""; P.phase = "play";
+  P.fuseEnd = Date.now() + 10000 + Math.random() * 20000;      // hidden fuse: 10 to 30 seconds
+  render();
+  clearInterval(ptimer);
+  ptimer = setInterval(() => { if (P && P.phase === "play" && Date.now() >= P.fuseEnd) partyPop(); }, 100);
+}
+const alive = () => P.players.filter((p) => p.strikes < 3);
+function nextTurn() { do { P.turn = (P.turn + 1) % P.players.length; } while (P.players[P.turn].strikes >= 3); }
+function partyAnswer(raw) {
+  if (!P || P.phase !== "play" || !raw.trim()) return;
+  const idx = match(P.prompt, raw), me = P.players[P.turn];
+  if (idx === null) { P.msg = `"${raw.trim()}" isn't in the ledger. Try another!`; return render(); }
+  if (P.used.some((u) => u.idx === idx)) { P.msg = `${P.prompt.a[idx][1]} was already said. Try another!`; return render(); }
+  P.used.push({ idx, by: me.name }); me.pts += TIERS[P.prompt.a[idx][0]].pts;
+  P.msg = `${me.name}: ${P.prompt.a[idx][1]} (+${TIERS[P.prompt.a[idx][0]].pts}). Pass the phone!`;
+  if (P.fuseEnd - Date.now() < MIN_LEFT) P.fuseEnd = Date.now() + MIN_LEFT;
+  nextTurn(); render();
+}
+function partyPop() {
+  clearInterval(ptimer);
+  const me = P.players[P.turn]; me.strikes++;
+  P.popped = me.name; P.phase = alive().length <= 1 ? "over" : "pop";
+  if (navigator.vibrate) try { navigator.vibrate(300); } catch (e) {}
+  if (P.phase === "pop" && me.strikes >= 3) nextTurn();
+  render();
+}
+const board = () => `<div class="board">${P.players.map((p) => `<span class="${p.strikes >= 3 ? "out" : ""}">${esc(p.name)}</span><span class="mono" style="font-family:var(--mono)">${"✗".repeat(p.strikes)}${"·".repeat(3 - p.strikes)}</span><span style="font-family:var(--mono)">${p.pts}</span>`).join("")}</div>`;
+function viewParty() {
+  if (P.phase === "setup") return `<div class="card">
+    <h2>Pass the Ledger</h2>
+    <p>One phone, two to eight players. Everyone gets the same prompt. On your turn, name a valid answer nobody has said yet, then pass the phone. A hidden fuse is ticking. Whoever is holding the phone when it pops takes a strike. Three strikes and you're out.</p>
+    <form id="partyform" class="players">${P.names.map((n, k) => `<label class="dim" for="pn${k}" style="position:absolute;left:-9999px">Player ${k + 1}</label><input id="pn${k}" value="${esc(n)}" placeholder="Player ${k + 1}" maxlength="18">`).join("")}</form>
+    <div class="row">${P.names.length < 8 ? `<button class="btn ghost" data-act="addp">Add a player</button>` : ""}<button class="btn" data-act="pstart">Start</button></div>
+    <div class="row"><button class="btn ghost" data-act="home">Back</button></div></div>`;
+  if (P.phase === "play") {
+    const me = P.players[P.turn];
+    return `<div class="card">
+      <div class="qhead"><span class="sec ${P.prompt.sec}">${P.prompt.sec}</span><span class="fuse"><i></i>fuse is lit</span></div>
+      <p class="prompt">${esc(P.prompt.q)}</p>
+      <p class="big">${esc(me.name)}, your turn</p>
+      <form class="ans" id="pform" autocomplete="off">
+        <label for="pans" style="position:absolute;left:-9999px">Your answer</label>
+        <input id="pans" enterkeyhint="send" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Name one fast" maxlength="80">
+        <button class="btn" type="submit">Enter</button>
+      </form>
+      ${P.msg ? `<p role="status" style="font-weight:600">${esc(P.msg)}</p>` : ""}
+      ${P.used.length ? `<div class="chips">${P.used.map((u) => `<span style="border-left:4px solid ${TIERS[P.prompt.a[u.idx][0]].c}">${esc(P.prompt.a[u.idx][1])}</span>`).join("")}</div>` : ""}
+      ${board()}</div>`;
+  }
+  const missed = P.prompt.a.map((a, k) => ({ a, k })).filter((x) => !P.used.some((u) => u.idx === x.k)).sort((x, y) => y.a[0] - x.a[0]).slice(0, 4);
+  const winner = alive()[0];
+  return `<div class="card">
+    <p class="tick" style="width:auto;text-align:left">※</p>
+    <h2>${P.phase === "over" ? `${esc(winner ? winner.name : "Nobody")} wins the ledger!` : `The ledger popped on ${esc(P.popped)}.`}</h2>
+    <h3>Answers nobody said</h3>
+    <ul class="notes">${missed.map((x) => `<li><span class="n">${supNum(x.a[0])}</span><span><b>${esc(x.a[1])}</b>${x.a[3] ? `<small>${esc(x.a[3])}</small>` : ""}</span><span class="p">${TIERS[x.a[0]].pts}</span></li>`).join("")}</ul>
+    ${board()}
+    <div class="row">${P.phase === "over" ? `<button class="btn" data-act="party">New party</button>` : `<button class="btn" data-act="pnext">Next prompt: ${esc(P.players[P.turn].name)} starts</button>`}<button class="btn ghost" data-act="home">Home</button></div></div>`;
+}
+
+function render() {
+  $("meta").innerHTML = `#${today()}<br>${new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" })}`;
+  let html;
+  if (P) html = viewParty();
+  else if (!G) html = viewHome();
+  else if (G.phase === "prompt") html = viewPrompt();
+  else if (G.phase === "result") html = viewResult();
+  else html = viewDone();
+  if (G === "summary") html = viewDone(store.get("day:" + today(), null));
+  $("view").innerHTML = html;
+  const inp = $("ans") || $("pans"); if (inp) inp.focus({ preventScroll: true });
+  const nb = $("nextbtn"); if (nb) nb.focus({ preventScroll: true });
+}
+
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => (t.hidden = true), 2200); }
+
+document.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (e.target.id === "ansform") submit($("ans").value);
+  if (e.target.id === "pform") partyAnswer($("pans").value);
+  if (e.target.id === "partyform") partyStart(P.names.map((_, k) => $("pn" + k).value));
+});
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const a = b.dataset.act;
+  const keepNames = () => { if (P && P.phase === "setup") P.names = P.names.map((_, k) => ($("pn" + k) || {}).value || ""); };
+  if (a === "party") { G = null; clearInterval(timer); partySetup(); }
+  else if (a === "addp") { keepNames(); P.names.push(""); render(); }
+  else if (a === "pstart") { keepNames(); partyStart(P.names); }
+  else if (a === "pnext") partyRound();
+  else if (a === "pack") { P = null; newDive("practice", b.dataset.v); }
+  else if (a === "archive") { P = null; newDive("archive", +b.dataset.v); }
+  else if (a === "daily") { if (store.get("day:" + today(), null)) { G = "summary"; render(); } else newDive("daily"); }
+  else if (a === "practice") newDive("practice");
+  else if (a === "next") next();
+  else if (a === "home") { clearInterval(timer); clearInterval(ptimer); G = null; P = null; render(); }
+  else if (a === "summary") { G = "summary"; render(); }
+  else if (a === "copy") {
+    const text = $("sharetext").textContent;
+    if (navigator.share) { try { await navigator.share({ text }); return; } catch (err) { if (err && err.name === "AbortError") return; } }
+    try { await navigator.clipboard.writeText(text); toast("Copied. Paste it into a text."); }
+    catch (err) {
+      const r = document.createRange(); r.selectNodeContents($("sharetext"));
+      const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      toast("Selected. Use Copy from your phone's menu.");
+    }
+  }
+});
+render();
+const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+if (!standalone) $("install").hidden = false;
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+</script>
+</body>
+</html>

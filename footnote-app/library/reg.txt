@@ -1,0 +1,444 @@
+# FOOTNOTE LIBRARY: REG   (format explained at the top of far.txt)
+
+## reg-not-capital | REG | Name an asset that is NOT a capital asset
+1 | Inventory | inventory held for sale; merchandise
+2 | Accounts receivable | receivables; ar; trade receivables
+2 | Depreciable business property | section 1231 property; 1231; business equipment; depreciable property
+2 | Real property used in a business | business real estate; business real property
+3 | Copyrights created by the taxpayer | self created copyright; copyright; self created works; artistic works
+3 | Letters and memoranda | letters; memoranda; memos
+4 | Supplies used in a business | supplies; business supplies
+4 | Hedging transactions | hedges; hedging
+5 | U.S. government publications received free | government publications | Received at no cost or below the public price.
+5 | Self-created patents and inventions | self created patent; inventions; secret formula; self created inventions | Excluded from capital assets since 2018.
+6* | Musical works (unless elected) | musical compositions; musical works | A songwriter can elect capital treatment on the sale of self-created music.
+
+## reg-itemized | REG | Name an itemized deduction
+1 | Mortgage interest | home mortgage interest; qualified residence interest
+1 | Charitable contributions | charity; donations; charitable donations
+2 | State and local taxes | salt; state taxes; property taxes; real estate taxes; state income tax
+2 | Medical expenses | medical; medical and dental expenses
+3 | Investment interest expense | investment interest | Limited to net investment income.
+3 | Casualty and theft losses (disaster areas) | casualty losses; theft losses; casualty loss; disaster losses | Personal losses are limited to federally declared disasters.
+4 | Gambling losses | gambling | Limited to gambling winnings, and starting in 2026 only 90% of losses count.
+4 | Mortgage points | points; loan points
+5 | Impairment-related work expenses | impairment related work expenses; disability work expenses
+5 | Unrecovered annuity investment | unrecovered investment in annuity; annuity loss | For an annuitant who dies before recovering their cost.
+6* | Estate tax on income in respect of a decedent | ird; income in respect of a decedent; section 691 deduction; estate tax on ird | Heirs deduct estate tax paid on income they later report.
+6 | Claim of right repayments over $3,000 | claim of right; section 1341 | Repaying income taxed in a prior year.
+
+## reg-gross-income | REG | Name an item included in gross income
+1 | Wages | salary; salaries; compensation
+1 | Interest income | interest
+1 | Dividends | dividend income
+2 | Business income | self employment income; schedule c income
+2 | Rental income | rents; rent
+2 | Capital gains | capital gain; gain on sale
+2 | Unemployment compensation | unemployment
+3 | Alimony (pre-2019 divorces) | alimony | Taxable only under divorce agreements executed before 2019.
+3 | Gambling winnings | gambling; lottery winnings
+3 | Pension and IRA distributions | pensions; ira distributions; retirement distributions; annuities
+3 | Social Security benefits (partly) | social security; social security benefits | Up to 85% may be taxable depending on income.
+3 | Tips | tip income; gratuities
+4 | Canceled debt | cancellation of debt; cod income; debt forgiveness; discharge of indebtedness
+4 | Bartering income | barter; bartering
+4 | Jury duty pay | jury duty
+4 | Prizes and awards | awards; prize
+4 | Interest on state tax refunds | interest on refund
+5 | Treasure trove | found property; treasure | Taxed in the year it's reduced to undisputed possession.
+5 | State tax refund (if deducted) | state tax refund; tax benefit rule | Taxable under the tax benefit rule to the extent the deduction helped.
+5 | Group-term life insurance over $50,000 | group term life over 50000; excess group term life | The cost of coverage above $50,000 is imputed income.
+6* | Illegal income | embezzled funds; illegal gains; illegal income | Taxable even if obtained unlawfully.
+6 | Punitive damages | punitive damages | Unlike compensatory damages for physical injury.
+
+## reg-exclusion | REG | Name an item excluded from gross income
+1 | Gifts | gift
+1 | Inheritances | inheritance; bequests
+2 | Life insurance proceeds | life insurance; death benefits
+2 | Municipal bond interest | muni interest; tax exempt interest; state bond interest
+2 | Child support | child support payments
+3 | Gain on sale of a home (up to the limit) | home sale exclusion; section 121; sale of principal residence
+3 | Workers' compensation | workers compensation; workmens comp
+3 | Compensatory damages for physical injury | personal injury damages; physical injury damages
+3 | Employer health insurance | health insurance premiums paid by employer; employer health coverage
+4 | Qualified scholarships | scholarships; scholarship | Tuition, fees and books only. Room and board is taxable.
+4 | Roth IRA qualified distributions | roth distributions; qualified roth distributions
+4 | Qualified HSA distributions | hsa distributions; hsa
+4 | De minimis fringe benefits | de minimis fringe; de minimis benefits
+5 | Foreign earned income exclusion | feie; foreign earned income | Requires bona fide residence or physical presence abroad.
+5 | Qualified Opportunity Zone gains (after 10 years) | opportunity zone; qoz; qualified opportunity fund
+5 | Qualified small business stock gain | qsbs; section 1202; small business stock
+6* | Meals and lodging for the employer's convenience | meals and lodging; employer convenience; section 119 | Excluded when on the employer's premises and, for lodging, required as a condition of employment.
+6 | Foster care payments | foster care
+6 | Discharge of debt in bankruptcy or insolvency | insolvency exclusion; bankruptcy exclusion | Excluded, but tax attributes are reduced.
+
+## reg-entities | REG | Name a type of business entity
+1 | Sole proprietorship | sole proprietor
+1 | Partnership | general partnership; gp
+1 | C corporation | c corp; corporation
+2 | S corporation | s corp
+2 | LLC | limited liability company
+3 | Limited partnership | lp
+3 | Limited liability partnership | llp
+4 | Single-member LLC | single member llc; smllc; disregarded entity | Disregarded for tax unless it elects corporate treatment.
+4 | Professional corporation | pc; professional services corporation
+4 | Joint venture | joint ventures
+5 | Limited liability limited partnership | lllp
+5 | Personal service corporation | psc | Pays the flat 21% corporate rate but faces other limits.
+5 | Trust | business trust
+6* | Series LLC | series limited liability company | Separate "cells" with their own assets and liabilities under one LLC.
+6 | Benefit corporation | b corp; public benefit corporation
+
+## reg-basis | REG | Name an item that increases a partner's outside basis
+1 | Cash contributions | cash contributed; contributing cash
+1 | Share of partnership income | share of income; taxable income; ordinary income
+2 | Property contributions (adjusted basis) | contributed property; property contributed
+2 | Increase in share of partnership liabilities | share of liabilities; increase in liabilities; partnership debt
+3 | Tax-exempt income | tax exempt income; municipal interest
+3 | Capital gains allocated | capital gains; gains allocated
+4 | Section 1231 gains allocated | 1231 gains
+4 | Partnership assuming a partner's debt (net) | assumption of debt | Only on a net basis: relief of the partner's own debt decreases basis.
+5 | Gain recognized on contribution | recognized gain on contribution | Rare: such as a contribution to an investment-company partnership under Section 721(b).
+6* | Excess depletion deduction over basis of property | excess of depletion over basis; excess depletion | A quirky upward adjustment for oil and gas property.
+
+## reg-m1 | REG | Name a Schedule M-1 book-to-tax reconciling item
+1 | Federal income tax expense | federal income taxes; income tax expense
+1 | Depreciation differences | depreciation; excess tax depreciation
+2 | Meals (50% nondeductible) | meals; business meals
+2 | Municipal bond interest | tax exempt interest; muni interest
+2 | Fines and penalties | penalties; fines
+3 | Life insurance premiums (company beneficiary) | life insurance premiums; key person life insurance
+3 | Excess capital losses | capital losses; capital loss in excess of gains | Corporations deduct capital losses only against capital gains.
+3 | Charitable contributions over 10% | excess charitable contributions; charitable contribution limit
+3 | Bad debt expense (allowance method) | bad debt; allowance for doubtful accounts
+4 | Entertainment | entertainment expense
+4 | Political contributions | lobbying; lobbying expenses; political expenses
+4 | Life insurance proceeds | key person life insurance proceeds
+4 | Unearned revenue | prepaid income; deferred revenue
+5 | Accrued compensation not paid in 2½ months | accrued bonuses; unpaid accrued compensation
+5 | Section 179 expensing | section 179
+6* | Goodwill amortization | section 197; goodwill | Tax amortizes over 15 years; books don't for public companies.
+6 | Excess executive compensation | 162m; executive compensation over 1 million | Public-company pay above $1 million is nondeductible.
+
+## reg-procedures | REG | Name an IRS procedure, form or penalty
+1 | Audit | examination; irs audit
+1 | Failure-to-file penalty | failure to file; late filing penalty
+1 | Failure-to-pay penalty | failure to pay; late payment penalty
+2 | Amended return | 1040 x; 1040x; 1120 x; amending
+2 | Extension | form 4868; form 7004; filing extension
+2 | Accuracy-related penalty | 20 percent penalty; accuracy penalty
+3 | Statute of limitations (3 years) | statute of limitations; three year statute
+3 | Notice of deficiency (90-day letter) | 90 day letter; statutory notice; notice of deficiency
+3 | 30-day letter | 30 day letter
+3 | Offer in compromise | oic
+3 | Civil fraud penalty | fraud penalty; 75 percent penalty
+4 | Estimated tax penalty | underpayment penalty; estimated tax underpayment
+4 | Installment agreement | payment plan
+4 | Correspondence audit | mail audit
+4 | Office audit |
+4 | Field audit |
+5 | Appeals office | irs appeals; appeal
+5 | Tax Court | us tax court; small case procedure
+5 | Six-year statute (25% omission) | six year statute; substantial omission | Applies when income is understated by more than 25%.
+5 | Private letter ruling | plr; letter ruling
+5 | Innocent spouse relief | innocent spouse
+6* | Taxpayer Advocate Service | taxpayer advocate; national taxpayer advocate | Independent IRS office that helps taxpayers facing hardship or stuck cases.
+6 | Collection due process hearing | cdp hearing; collection due process
+
+## reg-ethics | REG | Name an ethical duty or rule for tax practitioners
+1 | Confidentiality | client confidentiality; privacy
+1 | Due diligence |
+2 | Circular 230 |
+2 | Conflicts of interest | conflict of interest
+2 | Returning client records | client records; return records
+3 | Advising the client of errors | knowledge of client error; notify client of errors; advising of omissions
+3 | Signing the return as preparer | signing returns; preparer signature
+3 | No unconscionable fees | unconscionable fees; reasonable fees
+3 | Contingent fee limits | contingent fees
+3 | Statements on Standards for Tax Services | ssts
+4 | Realistic possibility standard | realistic possibility
+4 | Reasonable basis with disclosure | reasonable basis; disclosure
+4 | Substantial authority | substantial authority standard
+4 | PTIN | preparer tax identification number
+4 | Prompt disposition of matters | no unreasonable delay; prompt disposition
+5 | Solicitation rules | solicitation; advertising
+5 | Supervising subordinates | supervision; supervisory responsibility
+5 | Furnishing copies of returns | copy of return to client; provide copy
+6* | Best practices (Section 10.33) | best practices; section 10 33 | Aspirational practices for communication, facts and advice.
+6 | Not endorsing client refund checks | negotiating refund checks; endorsing refund checks
+
+## reg-agency | REG | Name a concept from agency law
+1 | Principal |
+1 | Agent |
+2 | Actual authority | authority; express authority; express actual authority
+2 | Fiduciary duty | fiduciary duties; duty of loyalty
+3 | Implied authority | implied actual authority
+3 | Apparent authority | ostensible authority
+3 | Ratification |
+3 | Duty of care | duty of performance; duty of obedience
+4 | Respondeat superior | vicarious liability
+4 | Duty to account | accounting duty
+4 | Disclosed principal |
+4 | Undisclosed principal |
+4 | Partially disclosed principal |
+5 | Independent contractor | contractor
+5 | Power of attorney | durable power of attorney
+5 | Termination by operation of law | operation of law; death of principal; insanity of principal
+6* | Agency coupled with an interest | coupled with an interest | Irrevocable by the principal because the agent has a stake in the subject.
+6 | Frolic versus detour | frolic; detour | A frolic takes the employee outside the scope of employment; a detour doesn't.
+
+## reg-bankruptcy | REG | Name a bankruptcy concept
+1 | Chapter 7 | liquidation
+1 | Chapter 11 | reorganization
+2 | Chapter 13 | wage earner plan; individual repayment plan
+2 | Automatic stay | stay
+2 | Discharge |
+3 | Bankruptcy trustee | trustee
+3 | Secured creditors | secured claims
+3 | Priority claims | priority creditors
+3 | Voluntary petition | voluntary bankruptcy
+3 | Involuntary petition | involuntary bankruptcy
+4 | Preferential transfer | preference; preferences | Payment to a creditor within 90 days (one year for insiders) before filing.
+4 | Fraudulent conveyance | fraudulent transfer
+4 | Means test |
+4 | Nondischargeable debts | nondischargeable; student loans; child support debts
+4 | Exempt property | exemptions; homestead exemption
+5 | Debtor in possession | dip
+5 | Cram-down | cram down; cramdown
+5 | Reaffirmation agreement | reaffirmation
+5 | Chapter 12 | family farmer
+6* | Absolute priority rule | absolute priority | Junior classes get nothing unless senior dissenting classes are paid in full.
+6 | Equitable subordination | subordination
+
+## reg-secured | REG | Name a secured-transactions (UCC Article 9) concept
+1 | Security interest |
+1 | Collateral |
+2 | Attachment | attach
+2 | Perfection | perfect; perfected
+2 | Financing statement | ucc 1; ucc1
+3 | Security agreement |
+3 | Purchase money security interest | pmsi
+3 | Perfection by possession | possession
+3 | Automatic perfection | automatic
+4 | Priority rules | priority; first to file or perfect
+4 | Buyer in the ordinary course of business | buyer in ordinary course; bioc
+4 | Default |
+4 | Repossession | self help repossession
+5 | Perfection by control | control | For deposit accounts and investment property.
+5 | Deficiency judgment | deficiency
+5 | Right of redemption | redemption
+5 | After-acquired property clause | after acquired property; floating lien
+6* | Strict foreclosure | acceptance of collateral in satisfaction | The creditor keeps the collateral in full or partial satisfaction of the debt.
+6 | Proceeds |
+
+## reg-federal-law | REG | Name a federal law or regulator a CPA should know for REG
+1 | Securities Act of 1933 | 33 act; 1933 act; securities act
+1 | Securities Exchange Act of 1934 | 34 act; 1934 act; exchange act
+2 | Sarbanes-Oxley Act | sox; sarbanes oxley
+2 | SEC | securities and exchange commission
+2 | IRS | internal revenue service
+3 | PCAOB | public company accounting oversight board
+3 | Dodd-Frank | dodd frank
+3 | Fair Labor Standards Act | flsa
+3 | ERISA | employee retirement income security act
+4 | FICA | federal insurance contributions act
+4 | FUTA | federal unemployment tax act
+4 | Regulation D | reg d; rule 506
+4 | Americans with Disabilities Act | ada
+5 | OSHA | occupational safety and health act
+5 | Affordable Care Act | aca; obamacare
+5 | Family and Medical Leave Act | fmla
+5 | COBRA |
+6* | Regulation A+ | reg a; regulation a; reg a plus | A mini-IPO exemption for raising up to $75 million.
+6 | Crowdfunding (Regulation CF) | regulation cf; reg cf; crowdfunding
+
+## reg-filing | REG | Name an individual filing status or dependency test
+1 | Single |
+1 | Married filing jointly | mfj; joint return
+2 | Married filing separately | mfs
+2 | Head of household | hoh
+3 | Qualifying surviving spouse | widow; widower; qualifying widow; qualifying widower; surviving spouse
+3 | Qualifying child |
+3 | Qualifying relative |
+4 | Relationship test | relationship
+4 | Age test | age
+4 | Residency test | residence test; residency
+4 | Support test | support
+4 | Gross income test | gross income
+5 | Joint return test | joint return test
+5 | Citizenship test | citizenship
+5 | Tiebreaker rules | tiebreaker
+6* | Multiple support agreement | form 2120; multiple support | Lets one of several supporters claim the dependent.
+6 | Abandoned spouse rule | considered unmarried; abandoned spouse | A married person who lives apart can file as head of household.
+
+## reg-property | REG | Name a property transaction or basis rule
+1 | Sale of capital assets | capital gains; sale of stock
+2 | Like-kind exchange | 1031; section 1031; like kind
+2 | Gift basis | carryover basis; basis of gifted property
+2 | Inherited basis (step-up) | stepped up basis; step up; inherited property
+3 | Wash sale | wash sale rule
+3 | Installment sale | installment method
+3 | Involuntary conversion | section 1033; involuntary conversions
+3 | Section 1231 netting | 1231; section 1231
+4 | Depreciation recapture (1245) | section 1245; 1245 recapture
+4 | Unrecaptured 1250 gain | section 1250; 1250 recapture
+4 | Related-party loss disallowance | section 267; related party losses
+4 | Holding period |
+5 | Boot | boot received
+5 | Dual basis rule for gifts | dual basis | When fair value at gift is below basis, a loss uses fair value.
+5 | Section 1231 lookback | lookback rule; five year lookback
+6* | Alternate valuation date | alternate valuation; six months after death | The estate can value assets six months after death if it lowers estate tax.
+6 | Small business stock loss (Section 1244) | section 1244; 1244 stock | Ordinary loss up to $50,000 ($100,000 joint).
+
+## reg-cost-recovery | REG | Name a tax cost recovery method or concept
+1 | Depreciation | macrs
+2 | Section 179 | 179; expensing
+2 | Bonus depreciation | bonus
+2 | Amortization |
+3 | Half-year convention | half year
+3 | Mid-quarter convention | mid quarter
+3 | Mid-month convention | mid month
+3 | Straight-line | straight line
+3 | Depletion | percentage depletion; cost depletion
+4 | 27.5-year residential rental | 27 5 years; residential rental property
+4 | 39-year nonresidential real property | 39 years; nonresidential real property
+4 | Section 197 intangibles (15 years) | section 197; 15 years
+4 | ADS | alternative depreciation system
+5 | Qualified improvement property | qip
+5 | Listed property | listed property rules
+5 | De minimis safe harbor | de minimis safe harbor election; 2500 safe harbor
+5 | Startup cost amortization | startup costs; section 195; organizational costs
+6* | Luxury auto limits | section 280f; luxury auto; 280f | Caps annual depreciation on passenger autos.
+6 | Cost segregation | cost seg
+
+## reg-corp | REG | Name a corporate tax concept
+1 | 21% flat rate | 21 percent; flat rate; corporate tax rate
+2 | Dividends received deduction | drd
+2 | Earnings and profits | e and p; eandp
+2 | Section 351 | 351; tax free incorporation
+3 | Net operating loss | nol
+3 | Capital loss limits | capital losses; capital loss carryback
+3 | Charitable contribution limit (10%) | charitable contributions; 10 percent limit
+3 | Constructive dividend | constructive dividends
+4 | Accumulated earnings tax | aet
+4 | Personal holding company tax | phc; personal holding company
+4 | Corporate AMT (15%) | camt; corporate alternative minimum tax; book minimum tax | Applies to very large corporations based on book income.
+4 | Stock buyback excise tax | buyback tax; 1 percent excise tax; stock repurchase excise tax
+5 | Section 338 election | 338; 338 h 10
+5 | Consolidated return | consolidated returns; consolidated group
+5 | Reorganizations | reorganization; type a reorganization; tax free reorganization; section 368
+6* | Section 382 limitation | section 382; 382 | Limits NOL use after an ownership change.
+6 | Controlled group | controlled groups; brother sister; parent subsidiary group
+
+## reg-s-corp | REG | Name an S corporation requirement or rule
+1 | 100 shareholder limit | 100 shareholders; shareholder limit
+1 | One class of stock | single class of stock
+2 | Domestic corporation | domestic
+2 | Eligible shareholders | individuals; no corporate shareholders; no partnership shareholders
+2 | Form 2553 | 2553; s election
+3 | No nonresident alien shareholders | nonresident alien; no nonresident aliens
+3 | Pass-through taxation | flow through; pass through
+3 | Reasonable compensation | reasonable salary
+3 | Schedule K-1 | k1; k 1
+4 | Accumulated adjustments account | aaa
+4 | Family members count as one shareholder | family attribution; family counts as one
+4 | Built-in gains tax | big tax; built in gains
+4 | Excess passive investment income | passive investment income; passive income | For an S corp with leftover C-corp earnings and profits, too much for three years in a row ends the election.
+5 | Five-year wait after termination | five year wait; reelection
+5 | Voting differences allowed | voting and nonvoting shares
+5 | Qualified Subchapter S Subsidiary | qsub; qsss
+6* | ESBT and QSST trusts as shareholders | esbt; qsst; electing small business trust; qualified subchapter s trust | Special trusts that can hold S stock.
+
+## reg-partnership | REG | Name a partnership tax concept
+1 | Schedule K-1 | k1; k 1
+1 | Form 1065 | 1065
+2 | Guaranteed payments | guaranteed payment
+2 | Inside basis | partnership basis
+2 | Outside basis | partner basis
+2 | Capital account | capital accounts
+3 | Section 721 | 721; nonrecognition on contribution
+3 | Hot assets | section 751; 751; unrealized receivables
+3 | Self-employment tax for partners | self employment tax; se tax
+3 | Special allocations | special allocation
+4 | Substantial economic effect |
+4 | Section 754 election | 754; basis step up
+4 | Section 704(c) | 704c; built in gain
+4 | At-risk rules | at risk
+4 | Passive activity rules | passive activity; passive losses
+5 | Technical termination | termination | Repealed for tax years after 2017, but still a classic exam distractor.
+5 | Mixing bowl rules | mixing bowl
+5 | Disguised sale | disguised sales
+5 | Centralized partnership audit regime | bba; bipartisan budget act; partnership representative
+6* | Section 199A (QBI) | qbi; qualified business income; 199a | A 20% deduction for owners of pass-through businesses.
+
+## reg-retirement | REG | Name a retirement plan or account
+1 | 401(k) | 401k; 401 k
+1 | Traditional IRA | ira; traditional ira
+1 | Roth IRA | roth
+2 | 403(b) | 403b; 403 b
+2 | Roth 401(k) | roth 401k
+2 | Pension plan | defined benefit plan; pension
+3 | SEP IRA | sep; simplified employee pension
+3 | SIMPLE IRA | simple; simple ira
+3 | Solo 401(k) | individual 401k; solo 401k
+4 | 457(b) | 457; 457b
+4 | Profit-sharing plan | profit sharing
+4 | Cash balance plan | cash balance
+5 | ESOP | employee stock ownership plan
+5 | Thrift Savings Plan | tsp
+5 | Keogh plan | keogh; hr 10
+6* | Money purchase plan | money purchase pension plan | Defined contribution with a fixed employer contribution percentage.
+6 | Nonqualified deferred compensation | nqdc; section 409a; 409a
+
+## reg-above-line | REG | Name an above-the-line deduction (adjustment to income)
+1 | Traditional IRA contributions | ira; traditional ira; ira contributions; ira deduction
+1 | Student loan interest |
+2 | HSA contributions | hsa; health savings account
+2 | Half of self-employment tax | self employment tax; se tax; deductible part of self employment tax
+3 | Self-employed health insurance | self employed health insurance deduction
+3 | Educator expenses | teacher expenses; educator expense
+3 | Alimony paid (pre-2019 divorce) | alimony; alimony paid | Only for divorces finalized before 2019.
+3 | Self-employed retirement contributions | sep; sep ira; simple ira; solo 401k; keogh; self employed retirement
+4 | Early withdrawal penalty | penalty on early withdrawal of savings | Forfeited interest when you break a CD early.
+5 | Moving expenses (armed forces) | moving expenses; military moving expenses | Only active-duty military moving under orders.
+5 | Archer MSA contributions | archer msa; msa
+5 | Attorney fees in whistleblower or discrimination suits | attorney fees; whistleblower attorney fees; legal fees discrimination | Deductible up to the award included in income.
+6 | Reservists, performing artists and fee-basis officials | reservist expenses; performing artists; fee basis officials; reservists | Certain unreimbursed business expenses for these groups.
+6* | Jury duty pay given to employer | jury duty pay; jury duty | When you must remit jury pay to your employer.
+
+## reg-credits | REG | Name a federal tax credit for individuals
+1 | Child tax credit | ctc
+1 | Earned income credit | earned income tax credit; eitc; eic
+2 | American opportunity credit | american opportunity tax credit; aotc
+2 | Child and dependent care credit | dependent care credit; child care credit
+3 | Lifetime learning credit | llc
+3 | Adoption credit |
+3 | Foreign tax credit | ftc
+4 | Saver's credit | savers credit; retirement savings contributions credit
+4 | Premium tax credit | ptc; aca credit
+4 | Credit for other dependents | other dependent credit; odc
+5 | Elderly or disabled credit | credit for the elderly; credit for elderly or disabled
+5 | Prior-year minimum tax credit | minimum tax credit; amt credit; credit for prior year minimum tax | AMT paid on timing items comes back as a credit in later years.
+6* | Excess Social Security withholding | excess social security; excess fica | With two or more employers, Social Security withheld above the wage base comes back as a credit.
+
+## reg-contract | REG | Name a contract element or a defense to enforcing a contract
+1 | Offer |
+1 | Acceptance |
+1 | Consideration |
+2 | Capacity | legal capacity
+2 | Legality | legal purpose; lawful purpose
+2 | Mutual assent | meeting of the minds; agreement
+3 | Fraud | fraud in the inducement; fraud in the execution
+3 | Duress |
+3 | Statute of frauds |
+3 | Misrepresentation |
+4 | Undue influence |
+4 | Mutual mistake | mistake
+4 | Minority | infancy; minor
+5 | Unconscionability | unconscionable
+5 | Impossibility | impracticability; commercial impracticability
+5 | Intoxication |
+5 | Mental incompetence | insanity; incompetence
+5 | Illusory promise | illusory
+6 | Statute of limitations | expired statute of limitations
+6* | Frustration of purpose | | The contract can still be performed, but the reason for it has vanished.

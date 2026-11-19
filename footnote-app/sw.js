@@ -1,6 +1,6 @@
 // Footnote offline worker: the app shell is cached on install, the page itself is fetched
 // fresh when online (so updates arrive) and served from cache offline; fonts are cached on first use.
-const SHELL = "footnote-shell-v1", FONTS = "footnote-fonts-v1";
+const SHELL = "footnote-shell-v2", FONTS = "footnote-fonts-v1";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(SHELL).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", (e) => {

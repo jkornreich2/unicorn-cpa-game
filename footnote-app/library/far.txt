@@ -1,0 +1,426 @@
+# FOOTNOTE LIBRARY: FAR
+# Format, one prompt block at a time:
+#   ## id | SECTION | Prompt text
+#   rarity | Answer as shown | alternate spellings; separated; by semicolons | optional note shown to players
+# Rarity: 1 on the face (everyone says it), 2 review-course favorite, 3 solid, 4 sharp, 5 deep cut, 6 footnote.
+# Put * after the rarity (e.g. 6*) on exactly one answer per prompt: the gem.
+
+## far-curr-liab | FAR | Name a current liability
+1 | Accounts payable | ap; payables; trade payables
+2 | Wages payable | salaries payable; accrued wages; accrued salaries; payroll payable
+2 | Accrued expenses | accrued liabilities; accruals
+2 | Income taxes payable | income tax payable; taxes payable
+2 | Interest payable | accrued interest
+2 | Short-term notes payable | notes payable; short term debt; short term borrowings; line of credit
+3 | Unearned revenue | deferred revenue; contract liability; contract liabilities; customer advances | A contract liability: cash received before the performance obligation is satisfied.
+3 | Current portion of long-term debt | current maturities of long term debt; cpltd | The slice of long-term debt due within a year is reclassified to current.
+3 | Dividends payable | dividend payable | A liability once the board declares the dividend.
+4 | Sales tax payable | sales taxes payable; sales tax | Collected from customers on the government's behalf.
+4 | Payroll taxes and withholdings | payroll taxes payable; payroll tax payable; withholdings payable; fica payable; withholding taxes payable | Employee withholdings plus the employer's share, owed to tax authorities.
+4 | Warranty liability | warranty obligation; accrued warranty; warranty payable; warranties | Estimated cost of assurance-type warranties, accrued at the time of sale.
+4 | Customer deposits | deposits from customers; refundable deposits
+5 | Compensated absences | accrued vacation; vacation pay; paid time off; pto liability; accrued pto | Vested or accumulating paid time off that employees have earned.
+5 | Current operating lease liability | operating lease liability; current lease liability; lease liability; current portion of lease liability | Under ASC 842, the current portion of the lease liability is a current liability.
+5 | Commercial paper | | Short-term unsecured notes issued by large companies.
+5 | Gift card liability | gift cards; gift card; stored value cards | Unredeemed gift cards are a contract liability until redeemed or until breakage is recognized.
+5 | Refund liability | refund liabilities; sales returns liability; returns reserve | Expected refunds to customers under ASC 606.
+5 | Bank overdraft | overdraft; book overdraft
+6* | Customer loyalty points | loyalty points; loyalty program; customer loyalty liability; reward points; loyalty program liability | Points are a separate performance obligation: part of the price is deferred until they're redeemed.
+6 | Accrued litigation | litigation accrual; contingent liability; loss contingency; lawsuit liability | Probable and reasonably estimable loss contingencies are accrued.
+6 | Coupons and premiums | coupon liability; premium liability; premiums; coupons | Estimated cost of outstanding coupons or premium offers.
+
+## far-intangible | FAR | Name an intangible asset
+1 | Goodwill |
+1 | Patent | patents
+2 | Trademark | trademarks
+2 | Copyright | copyrights
+3 | Trade name | trade names; brand; brand name
+3 | Franchise | franchise rights; franchise agreement
+3 | License | licenses; licensing rights; permits
+3 | Customer list | customer lists
+4 | Customer relationships | customer relationship; customer contracts | Recognized separately from goodwill in a business combination.
+4 | Internal-use software | software; capitalized software; computer software | Application-development-stage costs are capitalized under ASC 350-40.
+4 | Noncompete agreement | noncompete; non compete; non compete agreement; covenant not to compete
+4 | Domain name | domain names; website domain; internet domain
+4 | Trade secrets | trade secret; secret formula; secret recipe; proprietary formula | Protected by secrecy rather than registration.
+5 | Acquired in-process R&D | in process research and development; in process r and d; ipr and d; iprd; acquired iprd | Acquired IPR&D in a business combination is capitalized as indefinite-lived until the project is done or abandoned.
+5 | Broadcast or FCC license | fcc license; broadcast license; broadcast rights; spectrum license | Often indefinite-lived because renewal is routine.
+5 | Databases | database; proprietary database | Technology-based intangibles recognized in acquisitions.
+5 | Music or film rights | music catalog; film library; royalty rights; music rights; film rights
+6* | Mortgage servicing rights | servicing rights; msr | A servicing asset recognized when servicing is retained on sold loans.
+6 | Order backlog | backlog | Recognized in an acquisition as a contract-based intangible.
+6 | Landing or water rights | landing rights; airport slots; water rights; takeoff and landing slots | Contract and use rights that can carry real value.
+
+## far-indirect | FAR | Name an item added back to net income in the indirect method
+1 | Depreciation | depreciation expense
+1 | Amortization | amortization expense; amortization of intangibles
+2 | Decrease in accounts receivable | decrease in receivables; decrease in ar
+2 | Increase in accounts payable | increase in payables; increase in ap
+2 | Decrease in inventory | inventory decrease
+3 | Loss on sale of assets | loss on sale; loss on sale of equipment; loss on disposal | The cash from the sale goes in investing, so the noncash loss is added back.
+3 | Impairment loss | impairment; goodwill impairment; asset impairment
+3 | Increase in accrued liabilities | increase in accrued expenses; increase in wages payable
+3 | Decrease in prepaid expenses | decrease in prepaids
+3 | Increase in unearned revenue | increase in deferred revenue; increase in contract liabilities
+4 | Stock-based compensation | stock based compensation; stock compensation; share based compensation; stock option expense
+4 | Deferred tax expense | deferred taxes; deferred income taxes; increase in deferred tax liability | Tax expense that hasn't been paid in cash.
+4 | Depletion | depletion expense
+5 | Bond discount amortization | amortization of bond discount; discount amortization | Interest expense exceeds the cash coupon, so the difference is added back.
+5 | Loss on extinguishment of debt | loss on extinguishment; loss on debt retirement | The payoff cash is financing; the loss is noncash in operating.
+5 | Provision for credit losses | bad debt expense; credit loss expense; provision for bad debts | A noncash charge when receivables are shown gross of the allowance.
+6* | Equity-method losses | equity method loss; equity in losses of investee; share of investee losses | Your share of an investee's loss reduces income without using cash.
+6 | Unrealized loss on trading securities | unrealized loss; unrealized holding loss | A fair-value loss through net income with no cash outflow.
+
+## far-variable | FAR | Name a form of variable consideration under ASC 606
+1 | Returns and refunds | returns; refunds; right of return; sales returns
+2 | Discounts | discount; volume discounts; trade discounts
+2 | Rebates | rebate; volume rebates
+3 | Performance bonuses | bonuses; performance bonus; incentive payments
+3 | Penalties | penalty; late delivery penalty; late penalties
+3 | Price concessions | price concession; implicit price concession | Expected concessions reduce the transaction price even if never written in the contract.
+4 | Credits | service credits; sla credits | Service-level credits reduce what the customer ultimately pays.
+4 | Milestone payments | milestones; milestone
+4 | Coupons | coupon; customer coupons
+4 | Tiered pricing | tiered pricing; volume tiers; tiered volume pricing | Price per unit that depends on how many units the customer ends up buying.
+5 | Early payment discounts | early payment discount; prompt payment discount; cash discount; sales discount
+5 | Price protection | price protection clauses | A promise to refund the difference if the seller later cuts the price.
+5 | Chargebacks | chargeback | Common in distribution: the distributor claws back amounts after resale.
+5 | Usage-based fees | usage based fees; usage fees; per use fees; consumption based fees
+6* | Liquidated damages | | Fixed contractual damages for delay reduce the transaction price.
+6 | Contingent fees | contingent fee; success fees; success fee | A fee payable only if an outcome occurs, such as a successful lawsuit.
+6 | Most-favored-nation clauses | most favored nation; mfn clause; mfn | A promise to match a better price given to another customer.
+
+## far-temp-diff | FAR | Name a source of deferred taxes
+1 | Depreciation differences | depreciation; accelerated depreciation; bonus depreciation; macrs
+2 | Warranty accruals | warranty; warranties; warranty expense; warranty accrual
+2 | Allowance for credit losses | bad debts; bad debt; allowance for doubtful accounts
+3 | Unearned revenue | deferred revenue; prepaid income; advance payments
+3 | Net operating loss carryforwards | nol; net operating loss; nol carryforward; net operating loss carryforward | Not a temporary difference itself, but a carryforward that creates a deferred tax asset.
+3 | Installment sales | installment method
+4 | Prepaid expenses | prepaids; prepaid insurance
+4 | Stock compensation | stock based compensation; stock options; nonqualified options | Book expense now, tax deduction later when nonqualified options are exercised.
+4 | Litigation accruals | litigation accrual; contingent liabilities; lawsuit accrual; accrued litigation
+4 | Unrealized gains and losses | unrealized gains; unrealized losses; fair value adjustments
+5 | Goodwill amortization for tax | goodwill; goodwill amortization; section 197 | Tax amortizes goodwill over 15 years; GAAP doesn't amortize it (for public companies).
+5 | Uniform capitalization (263A) | unicap; 263a; uniform capitalization | Extra inventory costs capitalized for tax.
+5 | Capitalized foreign R&E (Section 174) | section 174; r and d capitalization; research and experimental; capitalized research; foreign research | Foreign research is still amortized over 15 years for tax. Domestic research became deductible again starting in 2025.
+5 | Accrued bonuses | accrued compensation; bonus accrual | Bonuses not paid within 2½ months of year-end aren't deductible until paid.
+6 | Equity-method income | equity method; equity in earnings of investee | Book income now, taxed only when dividends are received or the stake is sold.
+6* | Leases | lease; right of use asset; lease liability | The ROU asset and lease liability have no tax basis, creating offsetting differences.
+
+## far-equity | FAR | Name a component of stockholders' equity
+1 | Common stock | common shares
+1 | Retained earnings |
+2 | Additional paid-in capital | apic; paid in capital; capital in excess of par; share premium
+2 | Treasury stock | treasury shares
+2 | Preferred stock | preferred shares
+2 | Accumulated other comprehensive income | aoci; other comprehensive income; oci
+3 | Noncontrolling interest | nci; minority interest | Reported in equity, separately from the parent's equity.
+3 | Unrealized gains on AFS debt securities | available for sale; afs; unrealized gains on afs; afs securities
+3 | Foreign currency translation adjustment | foreign currency translation; translation adjustment; cumulative translation adjustment; cta
+4 | Pension adjustments in AOCI | pension gains; pension losses; actuarial gains; actuarial losses; prior service cost
+4 | Stock subscriptions receivable | subscriptions receivable; stock subscription receivable | Usually shown as a reduction of equity, not an asset.
+4 | Appropriated retained earnings | appropriated retained earnings; retained earnings appropriated; restricted retained earnings
+5 | Common stock subscribed | stock subscribed; subscribed stock
+5 | Cash flow hedge reserve | cash flow hedge; cash flow hedges; effective portion of cash flow hedge
+5 | Stock warrants outstanding | warrants; stock warrants; detachable warrants | Equity-classified warrants sit in paid-in capital.
+6* | Own-credit risk on fair value option liabilities | own credit risk; instrument specific credit risk; fair value option credit risk | Changes in a liability's fair value from your own credit go to OCI under the fair value option.
+6 | Mezzanine (temporary) equity | mezzanine equity; temporary equity; redeemable preferred stock | Shares redeemable outside the issuer's control sit between liabilities and equity under SEC rules.
+
+## far-inventory | FAR | Name an inventory costing or valuation method
+1 | FIFO | first in first out
+1 | LIFO | last in first out
+2 | Weighted average | average cost; weighted average cost
+3 | Specific identification | specific id
+4 | Moving average | perpetual average
+4 | Retail inventory method | retail method
+4 | Lower of cost or net realizable value | lcnrv; lower of cost and nrv | For FIFO and average cost under ASU 2015-11.
+4 | Lower of cost or market | lcm | Still used for LIFO and the retail method.
+5 | Dollar-value LIFO | dvl; dollar value lifo method | Pools inventory in dollars and adjusts layers with price indexes.
+5 | Gross profit method | | An estimate for interim periods or lost inventory. Not acceptable for annual GAAP statements.
+5 | Standard costing | standard cost; standard costs
+6 | Dollar-value LIFO retail | lifo retail; retail lifo | Combines the retail method with dollar-value LIFO layers.
+6* | Conventional retail (LCM) | conventional retail; conventional retail method; lower of cost or market retail | Excludes markdowns from the cost-to-retail ratio to approximate LCM.
+
+## far-funds | FAR | Name a type of fund used by state and local governments
+1 | General fund |
+2 | Special revenue fund | special revenue
+2 | Capital projects fund | capital projects
+2 | Debt service fund | debt service
+3 | Enterprise fund | enterprise funds
+3 | Internal service fund | internal service
+4 | Permanent fund | permanent funds | Governmental fund where only earnings may be spent, such as a cemetery perpetual-care fund.
+4 | Pension trust fund | pension trust; pension and other employee benefit trust fund
+5* | Investment trust fund | external investment pool | Reports the external portion of an investment pool run for other governments.
+5 | Private-purpose trust fund | private purpose trust
+5 | Custodial fund | custodial funds; agency fund | Replaced agency funds under GASB 84.
+
+## far-nca | FAR | Name a noncurrent asset
+1 | Property, plant and equipment | ppe; pp and e; fixed assets; property plant and equipment
+1 | Land |
+2 | Buildings | building
+2 | Equipment | machinery; machinery and equipment
+2 | Goodwill and intangibles | goodwill; intangibles; intangible assets
+2 | Long-term investments | investments; long term investment
+3 | Held-to-maturity securities | htm; held to maturity; held to maturity investments
+3 | Equity-method investments | equity method investment; investment in associate; investment in affiliate
+3 | Long-term notes receivable | notes receivable; long term receivables
+3 | Leasehold improvements | leasehold improvement
+4 | Right-of-use asset | rou asset; right of use asset; lease asset | Created by most leases under ASC 842.
+4 | Deferred tax asset | dta; deferred tax assets | Always noncurrent under ASU 2015-17.
+4 | Construction in progress | cip; construction work in progress
+4 | Natural resources | mineral rights; oil and gas reserves; timberland; mineral deposits
+5 | Cash surrender value of life insurance | cash surrender value; csv of life insurance | Company-owned policies on key employees.
+5 | Restricted cash for long-term purposes | sinking fund; bond sinking fund; restricted cash | Cash set aside to retire debt or build a plant.
+5 | Investment property | land held for investment; property held for investment
+6* | Capitalized costs to obtain a contract | costs to obtain a contract; capitalized commissions; contract costs; contract acquisition costs | Incremental costs like sales commissions are capitalized under ASC 340-40 when the benefit lasts beyond a year.
+6 | Overfunded pension asset | pension asset; prepaid pension cost; overfunded pension plan | Plan assets above the obligation show as a noncurrent asset.
+
+## far-contra | FAR | Name a contra account
+1 | Accumulated depreciation |
+1 | Allowance for doubtful accounts | allowance; allowance for credit losses; allowance for bad debts; allowance for uncollectible accounts
+2 | Accumulated amortization |
+2 | Sales returns and allowances | sales returns; sales allowances
+2 | Sales discounts | sales discount
+3 | Treasury stock | treasury shares | A contra-equity account under the cost method.
+3 | Discount on bonds payable | bond discount; discount on bonds; discount on notes payable
+3 | Purchase returns and allowances | purchase returns; purchase allowances
+3 | Purchase discounts | purchase discount
+4 | Accumulated depletion |
+4 | Stock subscriptions receivable | subscriptions receivable | Contra-equity under SEC practice.
+5 | Valuation allowance for deferred tax assets | valuation allowance; dta valuation allowance | Reduces deferred tax assets that are more likely than not to go unrealized.
+5 | Discount on notes receivable | unearned interest; unamortized discount on notes receivable
+5 | LIFO reserve | lifo allowance | Bridges FIFO cost to LIFO on the balance sheet.
+6* | Unamortized debt issuance costs | debt issuance costs; bond issue costs; unamortized issuance costs | Since ASU 2015-03, shown as a direct deduction from the debt.
+6 | Allowance for inventory obsolescence | inventory reserve; obsolescence reserve; inventory allowance
+
+## far-606 | FAR | Name a step or concept in ASC 606 revenue recognition
+1 | Identify the contract | identify contract; contract with a customer
+1 | Identify performance obligations | performance obligations; performance obligation
+1 | Determine the transaction price | transaction price
+2 | Allocate the transaction price | allocate; allocation
+2 | Recognize revenue when obligations are satisfied | recognize revenue; satisfy performance obligation; satisfaction of performance obligations
+3 | Standalone selling price | ssp; standalone selling prices
+3 | Variable consideration |
+4 | Constraint on variable consideration | constraint; variable consideration constraint | Include it only if a significant reversal is not probable.
+4 | Significant financing component | financing component | Adjust for time value when payment and delivery are far apart.
+4 | Principal versus agent | principal vs agent; gross vs net; gross versus net
+4 | Contract modification | contract modifications
+4 | Input and output methods | input method; output method; percentage of completion; measure of progress
+4 | Right of return |
+5 | Bill-and-hold | bill and hold
+5 | Consignment | consignment arrangements
+5 | Breakage | | Revenue from rights customers never exercise, like unused gift cards.
+5 | Material right | material rights | An option for future goods at a discount the customer wouldn't otherwise get.
+5 | Costs to obtain a contract | incremental costs of obtaining a contract; capitalized commissions
+5 | Noncash consideration |
+6 | Series guidance | series of distinct goods; series of distinct services | Treats a series of substantially the same goods or services as one obligation.
+6* | Consideration payable to a customer | payments to customers; consideration payable | Usually reduces revenue, such as slotting fees paid to a retailer.
+6 | Licenses: right to access vs right to use | right to access; right to use; functional ip; symbolic ip | Symbolic IP is recognized over time; functional IP usually at a point in time.
+
+## far-ratio | FAR | Name a financial ratio
+1 | Current ratio |
+1 | Debt-to-equity ratio | debt to equity; debt equity ratio
+2 | Return on equity | roe
+2 | Return on assets | roa
+2 | Quick ratio | acid test; acid test ratio
+2 | Inventory turnover |
+2 | Gross margin | gross profit margin; gross profit percentage
+2 | Profit margin | net profit margin; return on sales
+3 | Receivables turnover | accounts receivable turnover
+3 | Days sales outstanding | dso; days in receivables; average collection period
+3 | Times interest earned | interest coverage; interest coverage ratio
+3 | Asset turnover | total asset turnover
+3 | Price-earnings ratio | pe ratio; p e ratio; price to earnings
+3 | Earnings per share | eps
+4 | Dividend payout ratio | payout ratio
+4 | Book value per share |
+4 | Days payables outstanding | dpo; days in payables
+4 | Days inventory outstanding | dio; days in inventory; days sales in inventory
+4 | Debt ratio | debt to assets; total debt to total assets
+5 | Operating cash flow ratio | cash flow ratio; operating cash flow to current liabilities
+5 | Cash conversion cycle | ccc; operating cycle
+5 | Fixed charge coverage | fixed charge coverage ratio
+5* | Debt service coverage ratio | dscr; debt service coverage | Cash available for debt service divided by required principal and interest.
+6 | Dividend yield |
+6 | Free cash flow yield | fcf yield
+
+## far-lease | FAR | Name an input to a lessee's lease liability or ROU asset
+1 | Fixed lease payments | lease payments; fixed payments
+1 | Lease term |
+2 | Incremental borrowing rate | ibr; discount rate
+3 | Rate implicit in the lease | implicit rate; implicit interest rate
+3 | Renewal options reasonably certain to be exercised | renewal option; renewal options; extension options
+3 | Purchase option reasonably certain to be exercised | purchase option; bargain purchase option
+3 | Initial direct costs | idc | Added to the ROU asset, not the liability.
+4 | Variable payments based on an index or rate | index based payments; cpi payments; variable payments based on an index; index or rate payments | Measured using the index or rate at commencement.
+4 | Residual value guarantee | residual value guarantees; guaranteed residual value | Only the amount probable of being owed is included.
+6* | Termination penalties | termination penalty | Included when the lease term assumes the lessee will terminate.
+4 | Prepaid lease payments | prepaid rent | Increase the ROU asset.
+4 | Lease incentives received | lease incentives; tenant improvement allowance | Reduce the ROU asset.
+5 | Risk-free rate (private company election) | risk free rate | Private companies can elect it by asset class instead of the IBR.
+
+## far-subsequent | FAR | Name an example of a nonrecognized (Type II) subsequent event
+1 | Fire or casualty loss after year-end | fire; casualty loss; natural disaster; flood; hurricane
+2 | Issuing stock after year-end | stock issuance; issuance of stock; issuing stock
+2 | Issuing debt after year-end | issuance of bonds; bond issuance; issuing debt; new borrowing
+2 | Business combination after year-end | acquisition; business combination; merger
+3 | Lawsuit from events after year-end | new lawsuit; litigation arising after year end
+3 | Selling a business segment | sale of a segment; sale of a division; disposal of a segment
+3 | Decline in investment values after year-end | change in fair value of investments; market decline; stock market decline
+4 | Foreign exchange rate changes | exchange rate changes; currency fluctuations
+4 | Entering significant commitments | significant commitments; new contracts; major purchase commitment
+4 | Announcing a major restructuring | restructuring; plant closing; layoffs
+5 | Loss of a customer from a post-year-end event | customer lost after year end; customer bankruptcy from post year end event | Contrast: a customer whose shaky finances existed at year-end is a Type I event.
+5 | Government expropriation | expropriation; nationalization; seizure of assets
+6* | Dividend declared after year-end | dividend declaration; declaring a dividend | Disclosed, not accrued: the liability arises on declaration.
+
+## far-nfp | FAR | Name a statement, classification or concept in not-for-profit reporting
+1 | Statement of financial position |
+1 | Statement of activities |
+2 | Net assets with donor restrictions | with donor restrictions; donor restricted net assets; restricted net assets
+2 | Net assets without donor restrictions | without donor restrictions; unrestricted net assets
+2 | Statement of cash flows | cash flow statement
+3 | Statement of functional expenses | functional expenses | Required for all NFPs, in a statement or the notes.
+3 | Program services | program expenses
+3 | Management and general | management and general expenses; administrative expenses
+3 | Fundraising | fundraising expenses
+4 | Board-designated net assets | board designated; quasi endowment | Still without donor restrictions: the board can undo it.
+4 | Endowment | endowments; permanent endowment
+4 | Contributed services | in kind contributions; donated services; gifts in kind; contributed nonfinancial assets
+4 | Released from restriction | net assets released from restrictions; release of restrictions
+5 | Conditional promise to give | conditional pledge; conditional contribution | Not recognized until the barrier is overcome.
+5 | Agency transaction | agency transactions; pass through contributions | The NFP is an intermediary, not the donee.
+6* | Split-interest agreement | split interest; charitable remainder trust; charitable lead trust | The NFP shares benefits with other beneficiaries, like a charitable remainder trust.
+
+## far-gov-report | FAR | Name a statement or section of a government's annual comprehensive financial report
+1 | Statement of net position |
+1 | Statement of activities |
+2 | Governmental funds balance sheet | balance sheet governmental funds; fund balance sheet
+2 | Statement of revenues, expenditures and changes in fund balances | statement of revenues expenditures and changes in fund balances; operating statement
+2 | MD&A | management discussion and analysis; md and a; mdna
+2 | Notes to the financial statements | notes; footnotes
+3 | Budgetary comparison schedule | budget to actual; budgetary comparison
+4 | Reconciliation to government-wide statements | reconciliation; fund to government wide reconciliation
+4 | Proprietary fund statement of cash flows | statement of cash flows; proprietary cash flows
+4 | Statement of fiduciary net position | fiduciary net position; statement of changes in fiduciary net position
+5 | Statistical section | statistical
+5 | Introductory section | letter of transmittal; transmittal letter
+5 | Pension and OPEB schedules (RSI) | required supplementary information; rsi; pension schedules; opeb schedules
+5 | Combining statements | combining financial statements; nonmajor fund statements
+6* | Modified approach for infrastructure | modified approach; infrastructure modified approach | Skip depreciation if infrastructure is maintained at a set condition level, with assessments in RSI.
+
+## far-cf-invfin | FAR | Name a cash flow reported in investing or financing activities
+1 | Buying equipment | purchase of equipment; capital expenditures; capex; purchase of ppe
+1 | Issuing stock | issuance of stock; proceeds from stock
+1 | Paying dividends | dividends paid; dividends
+1 | Repaying debt | repayment of debt; principal payments; repayment of loans
+2 | Selling PP&E | sale of ppe; sale of equipment; proceeds from sale of equipment
+2 | Buying investments | purchase of investments; purchase of securities
+2 | Borrowing | proceeds from borrowing; proceeds from loans; issuance of bonds
+3 | Buying treasury stock | treasury stock; repurchase of stock; stock buyback; share repurchase
+3 | Lending to others | loans made; making loans; loans to others
+3 | Collecting loan principal | collection of loans; collection of notes receivable
+4 | Finance lease principal payments | finance lease payments; capital lease payments | Financing activities; the interest portion is operating.
+4 | Acquiring a business | acquisition; business combination; acquisition net of cash acquired
+5 | Debt issuance costs paid | debt issuance costs; bond issue costs
+5 | Insurance proceeds for PP&E | insurance proceeds; insurance recovery | Proceeds tied to damaged PP&E are investing.
+5 | Distributions to noncontrolling interests | distributions to nci; dividends to noncontrolling interests
+6* | Contingent consideration paid after an acquisition | contingent consideration; earnout payments; earn out | Paid soon after the deal: investing. Later, up to the acquisition-date amount: financing; any excess: operating.
+6 | Debt prepayment penalties | prepayment penalties; debt extinguishment costs | Financing outflows under ASU 2016-15.
+
+## far-fv | FAR | Name a valuation technique or concept in fair value measurement
+1 | Market approach |
+1 | Income approach |
+1 | Level 1 inputs | level 1; level one
+2 | Cost approach |
+2 | Level 2 inputs | level 2; level two
+2 | Level 3 inputs | level 3; level three
+2 | Discounted cash flow | dcf; present value
+3 | Exit price | | Fair value is the price to sell an asset or transfer a liability, not to buy it.
+3 | Quoted prices in active markets | quoted prices; active market
+3 | Observable inputs |
+3 | Unobservable inputs |
+3 | Replacement cost | current replacement cost
+4 | Principal market |
+4 | Most advantageous market |
+4 | Option pricing models | black scholes; black scholes merton; binomial model; lattice model
+4 | Market multiples | multiples; comparable companies; trading multiples
+5 | Highest and best use | | Applies only to nonfinancial assets.
+5 | Market participants | market participant assumptions
+5 | Orderly transaction | not a forced sale
+6* | Practical expedient using NAV | nav; net asset value; nav practical expedient | Investments in funds can use NAV per share and skip the hierarchy table.
+
+## far-changes | FAR | Name a type of accounting change or error correction concept
+1 | Change in accounting principle | change in principle
+1 | Change in accounting estimate | change in estimate
+1 | Correction of an error | error correction; correction of errors
+2 | Prior period adjustment | prior period adjustments
+2 | Restatement | restatements; restate
+2 | Change in useful life | useful life change
+3 | Change in reporting entity | reporting entity change | Retrospective, such as changing which subsidiaries are consolidated.
+3 | Change in salvage value | change in residual value
+3 | Change in bad debt estimate | change in credit loss estimate
+3 | Change from LIFO to FIFO | lifo to fifo | Retrospective, like most principle changes.
+4 | Change in depreciation method | depreciation method change | A change in estimate effected by a change in principle: prospective.
+4 | Switching from cash basis to accrual | cash to accrual; cash basis to accrual | Moving from a non-GAAP method is an error correction.
+4 | Retrospective application | retrospective; retrospectively
+4 | Prospective application | prospective; prospectively
+5 | Change to LIFO | adopting lifo; switching to lifo; change to lifo | Usually prospective: base-year layers can't be rebuilt.
+5 | Revision restatement (little r) | little r; little r restatement; revision restatement | Immaterial errors corrected in comparative periods without reissuing.
+5 | Reissuance restatement (Big R) | big r; big r restatement; reissuance restatement | Material errors: reissue prior statements and file a non-reliance 8-K.
+6* | Impracticability exception | impracticable; impracticability | Skip retrospective application if period-specific effects can't be determined.
+
+## far-debt | FAR | Name a feature or term of a bond or debt instrument
+1 | Stated (coupon) rate | coupon rate; stated rate; coupon; nominal rate
+1 | Maturity date | maturity
+1 | Face value | par value; principal; face amount
+2 | Discount | bond discount
+2 | Premium | bond premium
+2 | Market (effective) rate | market rate; effective rate; yield; effective interest rate
+3 | Callable | call feature; call provision; call option
+3 | Convertible | conversion feature; convertible bonds
+3 | Covenants | debt covenants; covenant
+3 | Secured by collateral | secured; collateral; mortgage bonds
+4 | Sinking fund | sinking fund provision
+4 | Serial bonds | serial
+4 | Term bonds | term bond
+4 | Debentures | debenture; unsecured bonds
+4 | Zero-coupon | zero coupon; deep discount bonds
+4 | Debt issuance costs | issue costs; issuance costs
+5 | Detachable warrants | warrants; bonds with warrants | Proceeds are split between the bonds and the warrants by relative fair value.
+5 | Indenture | bond indenture; trust indenture
+5 | Put option | putable; puttable; put feature
+5 | Subordinated | subordination; junior debt
+6* | Payment-in-kind interest | pik; pik interest; payment in kind | Interest paid by adding to principal instead of in cash.
+
+## far-business-combo | FAR | Name an item recognized or measured in a business combination
+1 | Goodwill |
+2 | Identifiable intangible assets | intangible assets; identifiable intangibles
+2 | Noncontrolling interest | nci; minority interest
+2 | Assets and liabilities at fair value | fair value of net assets; fair value of assets acquired
+3 | Bargain purchase gain | bargain purchase; negative goodwill
+3 | Contingent consideration | earnout; earn out
+3 | Acquisition costs expensed | acquisition costs; transaction costs; deal costs | Expensed as incurred, not capitalized.
+4 | Deferred taxes | deferred tax liabilities; deferred tax assets
+4 | Contingent liabilities | assumed contingencies; contingencies
+5 | Acquired IPR&D | in process research and development; iprd; ipr and d
+5 | Measurement period adjustments | measurement period | Up to one year to finalize provisional amounts.
+5 | Remeasurement of a previously held interest | step acquisition; previously held equity interest; remeasurement gain | In a step acquisition, the old stake is remeasured to fair value through earnings.
+5 | Assets held for sale | held for sale | Measured at fair value less costs to sell.
+6* | Reacquired rights | reacquired right | A right the acquiree had to use the acquirer's assets, like a franchise, recognized as an intangible.
+6 | Indemnification assets | indemnification asset | The seller's promise to cover a liability, measured on the same basis as that liability.
+
+## far-impairment | FAR | Name an indicator that a long-lived asset may be impaired
+1 | Significant decline in market price | decline in market value; drop in market price; market value decline
+2 | Physical damage | damage; damaged asset
+2 | Obsolescence | obsolete; technological obsolescence
+2 | Operating or cash flow losses | operating losses; cash flow losses; history of losses
+3 | Adverse change in how the asset is used | change in use; adverse change in use; idle asset
+3 | Adverse legal or business climate | legal factors; business climate; adverse business climate
+3 | Regulatory changes | regulation; new regulations
+4 | Expected sale well before end of useful life | expected early disposal; plan to sell early; more likely than not to be sold
+4 | Construction cost overruns | cost overruns; costs exceeding budget; construction costs exceed expectations
+4 | Loss of a major customer | lost customer; loss of key customer
+5 | Market capitalization below book value | market cap below book; market capitalization below carrying amount | A classic goodwill impairment trigger.
+6* | Adverse action by a regulator | regulator action; adverse regulatory action; adverse assessment by regulator | A specific trigger named in the guidance, beyond general regulatory change.
